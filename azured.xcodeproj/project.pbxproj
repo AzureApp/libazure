@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F2AB3C0B17C29F6700606A8E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2AB3C0A17C29F6700606A8E /* main.cpp */; };
+		F2AB3C1617C2A0A900606A8E /* MemoryEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2AB3C1417C2A0A900606A8E /* MemoryEngine.cpp */; };
+		F2AB3C1917C2A22000606A8E /* CommsEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2AB3C1717C2A22000606A8E /* CommsEngine.cpp */; };
+		F2AB3C1F17C2A30200606A8E /* Azure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2AB3C1D17C2A30200606A8E /* Azure.cpp */; };
+		F2AB3C2217C2A92E00606A8E /* NumberEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2AB3C2017C2A92E00606A8E /* NumberEngine.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +21,15 @@
 		F2AB3C0617C29F6700606A8E /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
 		F2AB3C0917C29F6700606A8E /* 0xdeadfa11 */ = {isa = PBXFileReference; lastKnownFileType = text; name = 0xdeadfa11; path = Package/usr/bin/0xdeadfa11; sourceTree = "<group>"; };
 		F2AB3C0A17C29F6700606A8E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F2AB3C1417C2A0A900606A8E /* MemoryEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryEngine.cpp; sourceTree = "<group>"; };
+		F2AB3C1517C2A0A900606A8E /* MemoryEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryEngine.h; sourceTree = "<group>"; };
+		F2AB3C1717C2A22000606A8E /* CommsEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommsEngine.cpp; sourceTree = "<group>"; };
+		F2AB3C1817C2A22000606A8E /* CommsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommsEngine.h; sourceTree = "<group>"; };
+		F2AB3C1D17C2A30200606A8E /* Azure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Azure.cpp; sourceTree = "<group>"; };
+		F2AB3C1E17C2A30200606A8E /* Azure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Azure.h; sourceTree = "<group>"; };
+		F2AB3C2017C2A92E00606A8E /* NumberEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberEngine.cpp; sourceTree = "<group>"; };
+		F2AB3C2117C2A92E00606A8E /* NumberEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberEngine.h; sourceTree = "<group>"; };
+		F2C273F417C6B2CA00337E78 /* Combined.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Combined.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +46,15 @@
 		F2AB3BF517C29F6700606A8E = {
 			isa = PBXGroup;
 			children = (
+				F2C273F417C6B2CA00337E78 /* Combined.h */,
+				F2AB3C1D17C2A30200606A8E /* Azure.cpp */,
+				F2AB3C1E17C2A30200606A8E /* Azure.h */,
+				F2AB3C2017C2A92E00606A8E /* NumberEngine.cpp */,
+				F2AB3C2117C2A92E00606A8E /* NumberEngine.h */,
+				F2AB3C1417C2A0A900606A8E /* MemoryEngine.cpp */,
+				F2AB3C1517C2A0A900606A8E /* MemoryEngine.h */,
+				F2AB3C1717C2A22000606A8E /* CommsEngine.cpp */,
+				F2AB3C1817C2A22000606A8E /* CommsEngine.h */,
 				F2AB3C0017C29F6700606A8E /* azured */,
 				F2AB3BFF17C29F6700606A8E /* Products */,
 			);
@@ -124,6 +146,7 @@
 		F2AB3BF617C29F6700606A8E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = AZ;
 				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = F2AB3BF917C29F6700606A8E /* Build configuration list for PBXProject "azured" */;
@@ -165,6 +188,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2AB3C0B17C29F6700606A8E /* main.cpp in Sources */,
+				F2AB3C1F17C2A30200606A8E /* Azure.cpp in Sources */,
+				F2AB3C1917C2A22000606A8E /* CommsEngine.cpp in Sources */,
+				F2AB3C1617C2A0A900606A8E /* MemoryEngine.cpp in Sources */,
+				F2AB3C2217C2A92E00606A8E /* NumberEngine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +202,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(iOSOpenDevPath)/frameworks/**",
@@ -188,16 +216,20 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
+				VALID_ARCHS = armv7;
 				iOSOpenDevPath = /opt/iOSOpenDev;
 			};
 			name = Debug;
@@ -206,21 +238,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = NO;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(iOSOpenDevPath)/frameworks/**",
 					"$(SDKROOT)/System/Library/PrivateFrameworks",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LD_NO_PIE = YES;
 				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 				iOSOpenDevPath = /opt/iOSOpenDev;
 			};
 			name = Release;
@@ -228,9 +265,15 @@
 		F2AB3C0F17C29F6700606A8E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/bin;
+				LD_NO_PIE = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = armv7;
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
 				iOSOpenDevDevice = "";
@@ -244,9 +287,16 @@
 		F2AB3C1017C29F6700606A8E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_USE_REGISTER_FUNCTION_CALLS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/bin;
+				LD_NO_PIE = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = armv7;
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
 				iOSOpenDevDevice = "";
@@ -276,6 +326,7 @@
 				F2AB3C1017C29F6700606A8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
