@@ -7,7 +7,7 @@
 //
 
 #ifndef azured_Combined_h
-#define azured_Combined_h
+#define azured_Combined_h 
 
 #include "Azure.h"
 #include "NumberEngine.h"

@@ -10,7 +10,7 @@
 #include "Azure.h"
 
 int main (int argc, const char * argv[])
-{
+{ 
     Azure azure;
     
     const char * debug = "-d";

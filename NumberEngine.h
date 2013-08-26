@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <sys/types.h>
-#include <vector>
+#include <vector> 
 using namespace std;
 class NumberEngine
 {

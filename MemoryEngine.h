@@ -7,7 +7,7 @@
 //
 
 #ifndef __azured__MemoryEngine__
-#define __azured__MemoryEngine__
+#define __azured__MemoryEngine__ 
 
 #include <iostream>
 #include <stdio.h>

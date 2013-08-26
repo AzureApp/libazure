@@ -132,7 +132,7 @@ kern_return_t MemoryEngine::ReadData(vector<NumberEngine::ReadData> *data, uint 
     //^ make memory readable
         err = vm_read_overwrite(port, i, sizeof(localData) / 4, (vm_address_t)&localData, &readsize);
     //^ read the memory into that data array
-        if ( err != KERN_SUCCESS)
+        if ( err != KERN_SUCCESS) 
         {
 		//Azure::WriteToLog(err)
         }

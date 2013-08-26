@@ -7,7 +7,7 @@
 //
 
 #ifndef __azured__CommsEngine__
-#define __azured__CommsEngine__
+#define __azured__CommsEngine__ 
 
 #include <iostream>
 #include <stdio.h>

@@ -80,7 +80,7 @@ void CommsEngine::ProcessMessage(const char *message)
         i++;
     }
     
-    for(int j = 0; j<10;j++)
+    for(int j = 0; j<10;j++) 
     {
         if(strcmp(messages[j],"") != 0)
         {
