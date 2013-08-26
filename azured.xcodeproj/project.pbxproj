@@ -21,15 +21,15 @@
 		F2AB3C0617C29F6700606A8E /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
 		F2AB3C0917C29F6700606A8E /* 0xdeadfa11 */ = {isa = PBXFileReference; lastKnownFileType = text; name = 0xdeadfa11; path = Package/usr/bin/0xdeadfa11; sourceTree = "<group>"; };
 		F2AB3C0A17C29F6700606A8E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		F2AB3C1417C2A0A900606A8E /* MemoryEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryEngine.cpp; sourceTree = "<group>"; };
-		F2AB3C1517C2A0A900606A8E /* MemoryEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryEngine.h; sourceTree = "<group>"; };
-		F2AB3C1717C2A22000606A8E /* CommsEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommsEngine.cpp; sourceTree = "<group>"; };
-		F2AB3C1817C2A22000606A8E /* CommsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommsEngine.h; sourceTree = "<group>"; };
-		F2AB3C1D17C2A30200606A8E /* Azure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Azure.cpp; sourceTree = "<group>"; };
-		F2AB3C1E17C2A30200606A8E /* Azure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Azure.h; sourceTree = "<group>"; };
-		F2AB3C2017C2A92E00606A8E /* NumberEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NumberEngine.cpp; sourceTree = "<group>"; };
-		F2AB3C2117C2A92E00606A8E /* NumberEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberEngine.h; sourceTree = "<group>"; };
-		F2C273F417C6B2CA00337E78 /* Combined.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Combined.h; sourceTree = "<group>"; };
+		F2AB3C1417C2A0A900606A8E /* MemoryEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemoryEngine.cpp; path = ../MemoryEngine.cpp; sourceTree = "<group>"; };
+		F2AB3C1517C2A0A900606A8E /* MemoryEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoryEngine.h; path = ../MemoryEngine.h; sourceTree = "<group>"; };
+		F2AB3C1717C2A22000606A8E /* CommsEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommsEngine.cpp; path = ../CommsEngine.cpp; sourceTree = "<group>"; };
+		F2AB3C1817C2A22000606A8E /* CommsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommsEngine.h; path = ../CommsEngine.h; sourceTree = "<group>"; };
+		F2AB3C1D17C2A30200606A8E /* Azure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Azure.cpp; path = ../Azure.cpp; sourceTree = "<group>"; };
+		F2AB3C1E17C2A30200606A8E /* Azure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Azure.h; path = ../Azure.h; sourceTree = "<group>"; };
+		F2AB3C2017C2A92E00606A8E /* NumberEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NumberEngine.cpp; path = ../NumberEngine.cpp; sourceTree = "<group>"; };
+		F2AB3C2117C2A92E00606A8E /* NumberEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumberEngine.h; path = ../NumberEngine.h; sourceTree = "<group>"; };
+		F2C273F417C6B2CA00337E78 /* Combined.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Combined.h; path = ../Combined.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,15 +46,6 @@
 		F2AB3BF517C29F6700606A8E = {
 			isa = PBXGroup;
 			children = (
-				F2C273F417C6B2CA00337E78 /* Combined.h */,
-				F2AB3C1D17C2A30200606A8E /* Azure.cpp */,
-				F2AB3C1E17C2A30200606A8E /* Azure.h */,
-				F2AB3C2017C2A92E00606A8E /* NumberEngine.cpp */,
-				F2AB3C2117C2A92E00606A8E /* NumberEngine.h */,
-				F2AB3C1417C2A0A900606A8E /* MemoryEngine.cpp */,
-				F2AB3C1517C2A0A900606A8E /* MemoryEngine.h */,
-				F2AB3C1717C2A22000606A8E /* CommsEngine.cpp */,
-				F2AB3C1817C2A22000606A8E /* CommsEngine.h */,
 				F2AB3C0017C29F6700606A8E /* azured */,
 				F2AB3BFF17C29F6700606A8E /* Products */,
 			);
@@ -71,6 +62,15 @@
 		F2AB3C0017C29F6700606A8E /* azured */ = {
 			isa = PBXGroup;
 			children = (
+				F2C273F417C6B2CA00337E78 /* Combined.h */,
+				F2AB3C1D17C2A30200606A8E /* Azure.cpp */,
+				F2AB3C1E17C2A30200606A8E /* Azure.h */,
+				F2AB3C2017C2A92E00606A8E /* NumberEngine.cpp */,
+				F2AB3C2117C2A92E00606A8E /* NumberEngine.h */,
+				F2AB3C1417C2A0A900606A8E /* MemoryEngine.cpp */,
+				F2AB3C1517C2A0A900606A8E /* MemoryEngine.h */,
+				F2AB3C1717C2A22000606A8E /* CommsEngine.cpp */,
+				F2AB3C1817C2A22000606A8E /* CommsEngine.h */,
 				F2AB3C0A17C29F6700606A8E /* main.cpp */,
 				F2AB3C0117C29F6700606A8E /* Package */,
 				F2AB3C0517C29F6700606A8E /* Supporting Files */,
