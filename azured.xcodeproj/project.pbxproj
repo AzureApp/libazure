@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F275749417CB8B5700DFBFF7 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F2AB3BFE17C29F6700606A8E /* azured */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = azured; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2AB3C0317C29F6700606A8E /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
 		F2AB3C0417C29F6700606A8E /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
@@ -46,6 +47,7 @@
 		F2AB3BF517C29F6700606A8E = {
 			isa = PBXGroup;
 			children = (
+				F275749417CB8B5700DFBFF7 /* .gitignore */,
 				F2AB3C0017C29F6700606A8E /* azured */,
 				F2AB3BFF17C29F6700606A8E /* Products */,
 			);
