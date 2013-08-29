@@ -94,6 +94,7 @@ void MemoryEngine::GetPortForProcess(pid_t process)
 
 kern_return_t MemoryEngine::WriteData(uint address, uint data)
 {
+    vm_protect(mach_task_self(), address, sizeof(data) / 4, false, VM_PROT_READ | VM_PROT_WRITE | VM_PROT_COPY);
     kern_return_t err = vm_write(port, address, data, sizeof(data));
     if(err != KERN_SUCCESS)
     {
@@ -104,17 +105,17 @@ kern_return_t MemoryEngine::WriteData(uint address, uint data)
         error += " mach error: ";
         error += mach_error_string(err);
         error += "\n";
-        
         g_azure->WriteToLog(error.c_str());
     }
+    vm_protect(mach_task_self(), address, sizeof(data) / 4, false, VM_PROT_READ | VM_PROT_EXECUTE);
     return err;
 }
 
 
 
-kern_return_t MemoryEngine::ReadData(vector<NumberEngine::ReadData> *data, uint address, uint endaddresss)
+kern_return_t MemoryEngine::ReadData(uint data[], uint addr)
 {
-    if(port == (int)NULL || port == 0)
+    if(port == (int)NULL || port == 0 || data == NULL)
     {
         string s = "Azure error: incorrect port (" ;
         s += (const char*)port;
@@ -125,28 +126,27 @@ kern_return_t MemoryEngine::ReadData(vector<NumberEngine::ReadData> *data, uint 
                            
     vm_size_t readsize = 0; // holds the read amount of memory, not needed here	
 	kern_return_t err; // something to deal with errors
-    for (int i = address; i < endaddresss; i+=0x1000)
-    {
-        int localData[0x1000];
-        err = vm_protect(mach_task_self(), i, sizeof(localData) / 4, false, VM_PROT_READ | VM_PROT_WRITE | VM_PROT_COPY);
+   
+    int localData[settings->chunksize];
+    err = vm_protect(mach_task_self(), addr, sizeof(localData) / 4, false, VM_PROT_READ | VM_PROT_WRITE | VM_PROT_COPY);
     //^ make memory readable
-        err = vm_read_overwrite(port, i, sizeof(localData) / 4, (vm_address_t)&localData, &readsize);
+    err = vm_read_overwrite(port, addr, sizeof(localData) / 4, (vm_address_t)&localData, &readsize);
     //^ read the memory into that data array
         if ( err != KERN_SUCCESS) 
         {
-		//Azure::WriteToLog(err)
+            string s = "Azure error: vm_read failed \n" ;
+            g_azure->WriteToLog(s.c_str());
+            return KERN_FAILURE;
         }
     
-        for (int j = 0; j < readsize / 4; j++)
+        /*for (int j = 0; j < readsize / 4; j++)
         {
             NumberEngine::ReadData tempdata;
             tempdata.address = i+(j*sizeof(localData[j]));
             tempdata.value = localData[j];
             data->push_back(tempdata);
-        }
-        err = vm_protect(mach_task_self(), i, sizeof(localData) / 4,false, VM_PROT_READ | VM_PROT_EXECUTE);
-
-    }
+        }*/
+    err = vm_protect(mach_task_self(), addr, sizeof(localData) / 4,false, VM_PROT_READ | VM_PROT_EXECUTE);
     
     return err;
 }

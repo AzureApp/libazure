@@ -16,7 +16,7 @@ int main (int argc, const char * argv[])
     const char * debug = "-d";
     if(argv[1] == debug)
     {
-        azure.Debug = true;
+        settings->debug = true;
     }
     
     //azure.Initialize

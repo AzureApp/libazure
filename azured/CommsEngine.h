@@ -40,6 +40,7 @@ public:
     char readbuffer[1024];
     
     int Init();
+    CommsEngine();
     ~CommsEngine();
     
     void SendMessage(const char *message);

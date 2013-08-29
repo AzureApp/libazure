@@ -16,13 +16,23 @@ using namespace std;
 class Azure
 {
 public:
-    bool Debug;
+    struct AzureGlobalSettings
+    {
+        bool debug;
+        int startaddr;
+        int endaddr;
+        int chunksize;
+        
+    };
     CommsEngine *m_comm;
     
     Azure();
     ~Azure();
+    void AzureInit();
     void WriteToLog(const char * message);
     int AzureTick();
 };
+extern struct Azure::AzureGlobalSettings *settings;
 extern Azure *g_azure;
+
 #endif /* defined(__azured__Azure__) */

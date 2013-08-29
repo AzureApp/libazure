@@ -6,6 +6,11 @@
 //
 //
 
+/*
+ Needed for now due to smelly linker errors :frowny pants: 
+ Will fix up later
+ */
+
 #ifndef azured_Combined_h
 #define azured_Combined_h 
 

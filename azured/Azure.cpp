@@ -12,17 +12,24 @@ Azure *g_azure = NULL;
 Azure::Azure()
 {
     g_azure = this;
-    Debug = 0;
+    settings = NULL;
     m_comm = new CommsEngine();
 }
 
 Azure::~Azure()
 {
-    
+    delete this;
+}
+
+
+void Azure::AzureInit()
+{   //load azure prefs here
+    settings->debug = true;
 }
 
 int Azure::AzureTick()
 {
+tick:
     const char *buffer;
     buffer = m_comm->ReadMessage();
     m_comm->ProcessMessage(buffer);
@@ -34,12 +41,13 @@ int Azure::AzureTick()
      Send message to  app as response to requests
      begin again
      */
+    goto tick;
 }
 
 
 void Azure::WriteToLog(const char * message)
 {
-    if (!Debug) {
+    if (settings->debug) {
         return;
     }
     FILE *outfile = fopen("/var/mobile/Azure/log.txt", "w");//Place + mode w = write

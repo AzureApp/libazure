@@ -33,7 +33,7 @@ public:
     void Edit(uint address, int value);
     void KillProcess(const char *processName);
     kern_return_t WriteData(uint address, uint data);
-    kern_return_t ReadData(vector<NumberEngine::ReadData > *data, uint address = 0x1000, uint endaddress = 0x7FFFFFF);
+    kern_return_t ReadData(uint data[], uint addr);
 
 
 };

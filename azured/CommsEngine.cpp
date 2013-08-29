@@ -8,6 +8,11 @@
 
 #include "Combined.h"
 
+CommsEngine::CommsEngine()
+{
+    
+}
+
 int CommsEngine::Init()
 {
     portno = 54982;//Random Constant Port
@@ -17,7 +22,7 @@ int CommsEngine::Init()
         g_azure->WriteToLog("Azure error: ERROR opening socket\n");
         return SocketFailed;
     }
-    server = gethostbyname("192.175.5.248");//192.175.5.248 = random private ipaddress CONSTANTa
+    server = gethostbyname("127.0.0.1");// changed to localhost old: 192.175.5.248 = random private ipaddress CONSTANT
     if (server == NULL) {
         g_azure->WriteToLog("Azure error: ERROR, no such host\n");
         return HostFailed;

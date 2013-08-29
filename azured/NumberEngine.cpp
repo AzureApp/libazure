@@ -21,7 +21,16 @@ NumberEngine::~NumberEngine()
 
 int NumberEngine::SearchNumber(int number)
 {
-    
+    for (int i = settings->startaddr; i <= settings->endaddr; i+=settings->chunksize)
+    {
+        uint data[settings->chunksize];
+        int ret = g_memengine->ReadData(data, i); //check for errors
+        for (int j = 0; j <= sizeof(data); j++)
+        {
+            string deleteme = "lol:";
+            //do comparison
+        }
+    }
 }
 
 
