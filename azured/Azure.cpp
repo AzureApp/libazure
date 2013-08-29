@@ -8,11 +8,11 @@
 
 #include "Combined.h" 
 Azure *g_azure = NULL;
-
+Azure::AzureGlobalSettings *settings = NULL;
 Azure::Azure()
 {
     g_azure = this;
-    settings = NULL;
+    
     m_comm = new CommsEngine();
 }
 
