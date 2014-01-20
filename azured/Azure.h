@@ -1,38 +1,38 @@
 //
 //  Azure.h
-//  azured
+//  azure-mac-tests
 //
-//  Created by Callum Taylor on 19/08/2013.
-//
+//  Created by Callum Taylor on 23/12/2013.
+//  Copyright (c) 2013 Callum Taylor. All rights reserved.
 //
 
-#ifndef __azured__Azure__ 
-#define __azured__Azure__
+#ifndef __azure_mac_tests__Azure__
+#define __azure_mac_tests__Azure__
 
 #include <iostream>
-#include <vector>
-class CommsEngine;
-using namespace std;
-class Azure
+#include <cstdio>
+#include <sys/types.h>
+namespace azure
 {
-public:
-    struct AzureGlobalSettings
+    struct GlobalSettings
     {
+        unsigned long long start_addr;
+        unsigned long long end_addr;
+        uint chunk_size;
         bool debug;
-        int startaddr;
-        int endaddr;
-        int chunksize;
-        
+        bool fileWrite;
     };
-    CommsEngine *m_comm;
     
-    Azure();
-    ~Azure();
-    void AzureInit();
-    void WriteToLog(const char * message);
-    int AzureTick();
-};
-extern struct Azure::AzureGlobalSettings *settings;
-extern Azure *g_azure;
-
-#endif /* defined(__azured__Azure__) */
+    class Azure
+    {
+    public:
+        
+        GlobalSettings *azureSettings;
+        Azure();
+        ~Azure();
+        
+        void WriteToLog(const char* msg);
+        int GetPreferences();
+    };
+}
+#endif /* defined(__azure_mac_tests__Azure__) */
