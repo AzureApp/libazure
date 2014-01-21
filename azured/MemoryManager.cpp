@@ -193,7 +193,11 @@ kern_return_t MemoryManager::WriteAddress(uint addr, uint data)
     }
     return status;
 }
-
+void MemoryManager::LockAddress(vm_address_t addr)
+{
+    //validate address
+    lockAddresses.push_back(addr);
+}
 void MemoryManager::FindData_Test(long long data)
 {
     
