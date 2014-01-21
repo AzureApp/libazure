@@ -53,13 +53,14 @@ namespace azure
         task_t currentTask;
         vector<Region> regions;
         ReadData *searchData;
+        vector<uint> lockAddresses;
         
         MemoryManager(task_t task);
         kern_return_t GetRegions();
         kern_return_t BeginSearch(uint bytes, size_t size);
         kern_return_t IterateSearch(uint newval);
         kern_return_t WriteAddress(uint addr, uint data); //to do: support all data types
-        
+        void LockAddress(vm_address_t addr);
         void FindData_Test(long long data);
     };
 }
