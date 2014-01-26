@@ -13,7 +13,11 @@
 #   files that we want to exclude
 #
 #########################
- 
+#########################
+# Global
+*./theos
+*./obj
+*.deb
 #####
 # OS X temporary files that should never be committed
  
