@@ -1,0 +1,11 @@
+Package: com.razzile.azure
+Name: azure
+Depends: 
+Architecture: iphoneos-arm
+Description: An awesome tool of some sort!!
+Maintainer: Razzile
+Author: Razzile
+Section: System
+Tag: role::hacker
+Version: 0.0.1-6
+Installed-Size: 20
