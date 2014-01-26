@@ -15,8 +15,8 @@
 #########################
 #########################
 # Global
-*./theos
-*./obj
+/theos
+/obj
 *.deb
 #####
 # OS X temporary files that should never be committed
