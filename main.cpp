@@ -43,7 +43,7 @@ void *find( char *pat, int m, char *text, int n ) //for string searching, use la
 #define kRED  "\033[1;31m"
 #define kGRN  "\033[1;32m"
 #define CLEAR() printf("\033[0m")
-int main (int argc, const char * argv[])
+int old_main (int argc, const char * argv[])
 {
     
     if(getuid() != 0)

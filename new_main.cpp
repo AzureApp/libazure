@@ -9,49 +9,41 @@
 #include <stdio.h>
 #include <iostream>
 #include <string.h>
+#include "Azure.h"
 
 using namespace std;
-
-#define kRED  "\033[1;31m"
-#define kGRN  "\033[1;32m"
-#define kYEL  "\033[1;33m"
-#define kBLU  "\033[1;34m"
-#define kMAG  "\033[1;35m"
-#define kCYN  "\033[1;36m"
-
-#define kCLR "\033[1;0m"
-
-#define AZGreet \
-"\
-++++++++++++++++++++++\n\
-++Azure Alpha (v0.5)++\n\
-++[--help for usage]++\n\
-++++++++++++++++++++++\n"
+using namespace azure;
 
 int main(int argc, char **argv)
 {
+    GlobalSettings settings = {-1, -1, -1, false, false, false};
     if(argc > 1)
         if(!strcmp(argv[1], "--help"))
         {
             //PrintHelp
         }
-        else if(!strcmp(argv[1], "-list-processes"))
+        else if(!strcmp(argv[1], "--list-processes"))
         {
-            //print all running processes
+            settings.listOnly = true;
         }
-        else if(!strcmp(argv[1], "-attach"))
+        else if(!strcmp(argv[1], "--attach"))
         {
             //attach to argv[2]
         }
-        else if(!strcmp(argv[1], "-debug"))
+        else if(!strcmp(argv[1], "--debug"))
         {
-            //debug mode on
+            settings.debug = true;
         }
         else
         {
             //print help
         }
     cout << kBLU << AZGreet << kCLR;
-    //run menu
+    Azure *az_main = Azure::GetInstance();
+    az_main->SetPreferences(settings);
+    // may be more setup required first? //
+    int ret = az_main->MainLoop();
+    //shouldn't return, deal with return value
+    
     return 0;
 }
