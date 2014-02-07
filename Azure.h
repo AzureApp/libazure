@@ -12,6 +12,9 @@
 #include <iostream>
 #include <cstdio>
 #include <sys/types.h>
+#include "MemoryManager.h"
+#include "ProcessInfo.h"
+#include "SearchObject.h"
 
 #define kRED  "\033[1;31m"
 #define kGRN  "\033[1;32m"
@@ -49,14 +52,17 @@ namespace azure
     {
     public:
         GlobalSettings *azureSettings;
+        static Azure *az_Instance;
+        
         static Azure* GetInstance();
         Azure();
         ~Azure();
-        static Azure *az_Instance;
+        
         void WriteToLog(const char* msg);
         int GetPreferences();
         int SetPreferences(GlobalSettings& settings);
         int MainLoop();
+        
     };
 }
 #endif /* defined(__azure_mac_tests__Azure__) */

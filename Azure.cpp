@@ -43,11 +43,11 @@ int Azure::GetPreferences()
 /* TO DO: Tidy this up */
 int Azure::SetPreferences(GlobalSettings& prefs)
 {
-    if(prefs.start_addr <= -1)
+    if(prefs.start_addr > -1)
         this->azureSettings->start_addr = prefs.start_addr;
-    if(prefs.end_addr <= -1)
+    if(prefs.end_addr > -1)
         this->azureSettings->end_addr = prefs.end_addr;
-    if(prefs.chunk_size <= 0)
+    if(prefs.chunk_size > 0)
         this->azureSettings->chunk_size = prefs.chunk_size;
     this->azureSettings->debug = prefs.debug;
     this->azureSettings->fileWrite = prefs.fileWrite;
@@ -58,6 +58,17 @@ int Azure::SetPreferences(GlobalSettings& prefs)
 
 int Azure::MainLoop()
 {
+    ProcessInfo *p_info = ProcessInfo::GetInstance();
+    bool color = false;
+    int proc;
+    for (proc = 0; proc < p_info->processes->size(); proc++)
+    {
+        printf("%s%d. %s <%d>\n", color ? kRED : kGRN, proc+1, p_info->processes->at(proc).processName, p_info->processes->at(proc).pid);
+        color = !color;
+    }
+    printf(kCYN AZStub);
+    SearchObject *obj = new SearchObject(IntegerSearch);
+    delete obj;
     
 }
 

@@ -35,9 +35,12 @@ namespace azure
         
         vector<Process> *processes;
         Process currentProcess;
+        static ProcessInfo *az_Pinfo;
         
         ProcessInfo();
         int GetAllProcesses();
+        static ProcessInfo* GetInstance();
+        
         pid_t GetProcessByName(const char* name);
         const char* GetNameFromProcess(pid_t process);
         int AttachToProcess(Process& process);

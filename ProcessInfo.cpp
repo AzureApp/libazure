@@ -11,12 +11,18 @@
 using namespace azure;
 
 
-
+ProcessInfo *ProcessInfo::az_Pinfo = NULL;
 ProcessInfo::ProcessInfo()
 {
     processes = new vector<Process>;
 }
 
+ProcessInfo* ProcessInfo::GetInstance()
+{
+    if(!az_Pinfo)
+        az_Pinfo = new ProcessInfo();
+    return az_Pinfo;
+}
 /*AZProcessInfo::GetInstance()
  {
  AZProcessInfo inst;
