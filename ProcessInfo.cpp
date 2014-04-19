@@ -8,7 +8,7 @@
 
 #include "ProcessInfo.h"
 
-using namespace azure;
+
 
 
 ProcessInfo *ProcessInfo::az_Pinfo = NULL;
@@ -17,7 +17,7 @@ ProcessInfo::ProcessInfo()
     processes = new vector<Process>;
 }
 
-ProcessInfo* ProcessInfo::GetInstance()
+ProcessInfo* ProcessInfo::instance()
 {
     if(!az_Pinfo)
         az_Pinfo = new ProcessInfo();
@@ -30,7 +30,7 @@ ProcessInfo* ProcessInfo::GetInstance()
  }*/
 int ProcessInfo::GetAllProcesses()
 {
-    bool testReady = true;
+    bool testReady = true;  //make this read azureSettings
     
     
     int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0};
@@ -121,16 +121,41 @@ int ProcessInfo::GetAllProcesses()
 
 pid_t ProcessInfo::GetProcessByName(const char *name)
 {
-    return 0;
+    this->GetAllProcesses();
+    for (Process process : *processes)
+    {
+        if(strcmp(process.processName, name) == 0)
+            return process.pid;
+    }
+    return -1;
 }
 
 int ProcessInfo::AttachToProcess(Process& process)
 {
     mach_port_t port;
-    if(!task_for_pid(mach_task_self(), process.pid, &port))
+    kern_return_t status;
+    if(process.pid > 0)
     {
-        //azure log
+        status = task_for_pid(mach_task_self(), process.pid, &port);
     }
-    
-    return 0;
+    else if(process.processName != NULL)
+    {
+        pid_t pid = this->GetProcessByName(process.processName);
+        if(pid > 0)
+        {
+            status = task_for_pid(mach_task_self(), pid, &port);
+        }
+    }
+    if(status == KERN_SUCCESS)
+    {
+        assert(port != 0);
+        MemoryManager::instance()->currentTask = port;
+    }
+    else
+    {
+        AZLog("Memory Manager: task_for_pid error: ");
+        AZLog(mach_error_string(status));
+        AZLog("\n");
+    }
+    return status;
 }

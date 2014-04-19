@@ -8,42 +8,54 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <unistd.h>
 #include <string.h>
 #include "Azure.h"
 
 using namespace std;
-using namespace azure;
+
 
 int main(int argc, char **argv)
 {
-    GlobalSettings settings = {-1, -1, -1, false, false, false};
+    if(getuid() != 0)
+    {
+        cout << "please run " << argv[0] << " as root!\n";
+        return -1;
+    }
+    GlobalSettings *settings = Azure::azureSettings;
+    Azure *az_main = Azure::instance();
     if(argc > 1)
-        if(!strcmp(argv[1], "--help"))
+    {
+        if(strcmp(argv[1], "--help") == 0)
         {
-            //PrintHelp
+            Azure::PrintHelp(e_main);
         }
-        else if(!strcmp(argv[1], "--list-processes"))
+        else if(strcmp(argv[1], "--list-processes") == 0)
         {
-            settings.listOnly = true;
+            settings->listOnly = true;
         }
-        else if(!strcmp(argv[1], "--attach"))
+        else if(strcmp(argv[1], "--attach") == 0)
         {
-            //attach to argv[2]
+            Process temp;
+            temp.processName = argv[2];
+            ProcessInfo::instance()->AttachToProcess(temp);
         }
-        else if(!strcmp(argv[1], "--debug"))
+        else if(strcmp(argv[1], "--debug") == 0)
         {
-            settings.debug = true;
+            settings->debug = true;
         }
         else
         {
-            //print help
+            Azure::PrintHelp(e_main);
         }
-    cout << kBLU << AZGreet << kCLR;
-    Azure *az_main = Azure::GetInstance();
-    az_main->SetPreferences(settings);
-    // may be more setup required first? //
-    int ret = az_main->MainLoop();
-    //shouldn't return, deal with return value
+    }
+    cout << kGRN << AZGreet << kCLR;
     
-    return 0;
+    
+    
+    // may be more setup required first? //
+    
+    int ret = az_main->MainLoop(); //shouldn't return, deal with return value
+    
+    return ret;
 }

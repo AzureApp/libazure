@@ -15,6 +15,8 @@
 #include <mach/mach.h>
 #include <stdio.h>
 #include <pthread.h>
+#include "DataObject.h"
+#include "Azure.h"
 
 
 using namespace std;
@@ -33,18 +35,23 @@ namespace Math
         
     }
 }
-namespace azure
-{
-    
+
     struct Region
     {
-        uint start;
-        uint size;
+        int start;
+        int size;
     };
     struct ReadData
     {
-        uint data;
+        ReadData() : data(DataObject(NULL, 0)) {}
+        DataObject data;
         vector<vm_address_t> addresses;
+    };
+    struct LockData //remove?
+    {
+        void* data; //change?
+        int dataCnt;
+        int address;
     };
     
     class MemoryManager
@@ -52,15 +59,23 @@ namespace azure
     public:
         task_t currentTask;
         vector<Region> regions;
+        vector<LockData> *lockData;
         ReadData *searchData;
         
-        MemoryManager(task_t task);
+        static MemoryManager* az_mem;
+        static MemoryManager* instance();
+        MemoryManager();
+        ~MemoryManager();
+        
         kern_return_t GetRegions();
+        kern_return_t Search(SearchObject *);
+        kern_return_t WriteData(WriteObject *);
+        void Lock(WriteObject *);
+        /* DEPRECEATED */
         kern_return_t BeginSearch(uint bytes, size_t size);
         kern_return_t IterateSearch(uint newval);
         kern_return_t WriteAddress(uint addr, uint data); //to do: support all data types
         
-        void FindData_Test(long long data);
     };
-}
+
 #endif /* defined(__azure_mac_tests__MemoryManager__) */

@@ -22,7 +22,7 @@
 #include "ProcessInfo.h"
 
 #define ASIZE 256
-void *find( char *pat, int m, char *text, int n ) //for string searching, use later
+void *find( char *pat, int m, char *text, int n ) //alternate search algorithm
 {
 	int i,j,k,skip[ASIZE];
     if(m==0)
@@ -43,7 +43,7 @@ void *find( char *pat, int m, char *text, int n ) //for string searching, use la
 #define kRED  "\033[1;31m"
 #define kGRN  "\033[1;32m"
 #define CLEAR() printf("\033[0m")
-int old_main (int argc, const char * argv[])
+int old_main (int argc, const char * argv[]) //delete me at some point
 {
     
     if(getuid() != 0)
@@ -52,7 +52,7 @@ int old_main (int argc, const char * argv[])
         return -1;
     }
     
-    azure::ProcessInfo *p_info = new azure::ProcessInfo();
+    ProcessInfo *p_info = ProcessInfo::instance();
     p_info->GetAllProcesses(); //move to constructor
     bool color = false;
     int proc;
@@ -75,7 +75,7 @@ int old_main (int argc, const char * argv[])
         printf("\ntask_for_pid failed, please tell razzile he is stupid!\n");
         return -1;
     }
-    azure::MemoryManager *mgr = new azure::MemoryManager(task);
+    MemoryManager *mgr = MemoryManager::instance();
     //mgr->GetRegions(); //move to constructor
     
     
