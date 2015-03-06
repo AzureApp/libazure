@@ -1,0 +1,75 @@
+//
+//  ProcessUtils.h
+//  Azure Mac V3
+//
+//  Created by callum taylor on 17/06/2014.
+//  Copyright (c) 2014 iOSCheaters. All rights reserved.
+//
+
+#ifndef __Azure_Mac_V3__ProcessUtils__
+#define __Azure_Mac_V3__ProcessUtils__
+
+
+#include <vector>
+#include <mach/mach.h>
+#include <mach/mach_vm.h>
+#include <errno.h>
+#include <unistd.h>
+#include <sys/sysctl.h>
+#include <assert.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <libproc.h>
+
+#include "Message.h"
+
+#pragma mark Process
+
+class Process {
+public:
+    pid_t pid;
+    char name[512];
+    char path[512];
+    task_t task;
+    
+    struct Region {
+        unsigned long long start;
+        unsigned long long size;
+    };
+    
+    Process();
+    Process(pid_t pid);
+    Process(const char* name);
+    Process(msg_process *);
+    ~Process();
+    
+    kern_return_t ReadMemory(vm_address_t address, char *output, size_t size);
+    kern_return_t WriteMemory(vm_address_t address, char *input, size_t size);
+    std::vector<Region> GetRegions();
+    std::vector<Region> GetRegions(vm_prot_t options);
+
+};
+
+#pragma mark ProcessUtils
+
+namespace ProcessUtils {
+    
+    std::vector<Process> GetAllProcesses();
+    
+    pid_t GetPidForName(const char *name);
+    const char *GetNameFromPid(pid_t pid);
+    const char *GetPathForProcess(Process *);
+    const char *GetNameFromPath(const char *path);
+
+    bool ProcessExists(pid_t pid);
+    bool ProcessExists(const char* name);
+    
+    kern_return_t TryAttach(Process *);
+    std::vector<Process::Region> GetRegions(Process *);
+    std::vector<Process::Region> GetRegions(Process *,vm_prot_t options);
+    kern_return_t ReadMemory(Process *, vm_address_t address, char *output, size_t size);
+    kern_return_t WriteMemory(Process *, vm_address_t address, char *input, size_t size);
+
+};
+
+#endif /* defined(__Azure_Mac_V3__ProcessUtils__) */
