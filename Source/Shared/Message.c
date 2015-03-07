@@ -36,3 +36,8 @@ const char* enumToName(enum MessageType type)
             break;
     }
 }
+
+bool messageIsValid(struct Message msg)
+{
+    return ((msg.header.magic == MSG_MAGIC) || enumToName(msg.header.type));
+}

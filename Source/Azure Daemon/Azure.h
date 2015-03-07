@@ -10,6 +10,7 @@
 #define __Azure__Azure__
 
 #include <iostream>
+#include <syslog.h>
 #include "MemoryManager.h"
 #include "ProcessUtils.h"
 #include "DaemonUtils.h"
@@ -36,6 +37,7 @@ public:
     
     static Azure *GetInstance();
     
+    kern_return_t Start();
     kern_return_t Tick();
     static void WriteToLog(const char *fmt, ...);
     void AttachToProcess(Process *);

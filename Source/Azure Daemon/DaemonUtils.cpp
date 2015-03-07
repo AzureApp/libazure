@@ -17,8 +17,8 @@ Daemon::Daemon()
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
     if (socket_desc == -1)
     {
-        AZLog("Could not create socket\n"); //TODO: change to AZLog
-        exit(1);
+        AZLog("Could not create socket\n");
+        return;
     }
     
     server.sin_family = AF_INET;
@@ -32,11 +32,13 @@ void Daemon::Start()
     listen(socket_desc , 5);
     c = sizeof(struct sockaddr_in);
     accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
+    serverReady = true;
 }
 
 void Daemon::OnLostConnection()
 {
     serverReady = false;
+    // maybe destroy and recreate server?
 }
 
 kern_return_t Daemon::ReceivedMessage(Message& message)
@@ -64,7 +66,7 @@ kern_return_t Daemon::ReceivedMessage(Message& message)
                     long bytes = recv(client_sock, data+read_size, chunk_size, 0);
                     if (bytes <= 0)
                     {
-                        OnLostConnection();
+                        this->OnLostConnection();
                         return KERN_FAILURE;
                     }
                     read_size += bytes;
@@ -102,7 +104,7 @@ kern_return_t Daemon::SendMessage(Message& message)
                 long writeval = send(client_sock, data+write_size, chunk_size, 0);
                 if (writeval <= 0)
                 {
-                    OnLostConnection();
+                    this->OnLostConnection();
                     return KERN_FAILURE;
                 }
                 write_size += writeval;

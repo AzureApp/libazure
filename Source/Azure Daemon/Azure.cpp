@@ -22,7 +22,10 @@ Azure::Azure()
     azureDaemon = new DaemonUtils::Daemon();
 }
 
-Azure::~Azure() = default;
+Azure::~Azure()
+{
+    delete azureDaemon;
+}
 
 Azure* Azure::GetInstance()
 {
@@ -32,6 +35,15 @@ Azure* Azure::GetInstance()
         instance = new Azure();
     }
     return instance;
+}
+
+kern_return_t Azure::Start()
+{
+    if (azureDaemon) {
+        azureDaemon->Start();
+        return KERN_SUCCESS;
+    }
+    return KERN_FAILURE;
 }
 
 kern_return_t Azure::Tick()
@@ -72,6 +84,18 @@ void Azure::AttachToProcess(Process *proc)
 
 void Azure::WriteToLog(const char *fmt, ...)
 {
+#ifdef DEBUG
+    openlog("azure", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_USER);
+    char str[1000];
+    
+    va_list arg;
+    va_start(arg, fmt);
+    vsprintf(str, fmt, arg);
+    va_end(arg);
+    
+    syslog(LOG_INFO, str);
+    closelog();
+#else
     if (!strstr(fmt, "\n")) {
         fmt = concat(fmt, "\n");
     }
@@ -90,6 +114,7 @@ void Azure::WriteToLog(const char *fmt, ...)
     
     fclose(log_file);
     return;
+#endif
 }
 
 Daemon* Azure::CurrentDaemon()

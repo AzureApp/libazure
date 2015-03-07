@@ -66,7 +66,7 @@ std::vector<vm_address_t> MemoryManager::Find(void *data, size_t dataCnt)
             return results;
         }
         
-        for (int i = 0; (i+dataCnt) < readsz; i+=4)
+        for (int i = 0; (i+dataCnt) < readsz; i+=4) // i += dataTypeSize
         {
             if (!memcmp(data, buffer+i, dataCnt))
             {

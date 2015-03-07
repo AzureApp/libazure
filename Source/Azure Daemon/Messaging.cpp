@@ -9,70 +9,71 @@
 #include "Messaging.h"
 #include "Azure.h"
 
-kern_return_t Messaging::ProcessMessage(Message& message)
+kern_return_t Messaging::ProcessMessage(Message& message) // maybe need to free message.message after use?
 {
     Azure *azure = Azure::GetInstance();
     MemoryManager *manager = MemoryManager::GetInstance();
-    
-    switch (message.header.type) {
-            
-        case StatusOK:
-        case StatusErr:
-            return KERN_SUCCESS; // not really useful
-            
-        case Attach:
-        {
-            msg_process *procData = (msg_process*)message.message;
-            Process *proc = new Process(procData);
-            kern_return_t status = ProcessUtils::TryAttach(proc);
-            if (status == KERN_SUCCESS)
+    if (messageIsValid(message)) {
+        switch (message.header.type) {
+                
+            case StatusOK:
+            case StatusErr:
+                return KERN_SUCCESS; // not really useful
+                
+            case Attach:
             {
-                azure->AttachToProcess(proc);
-                message = SuccessMessage();
+                msg_process *procData = (msg_process*)message.message;
+                Process *proc = new Process(procData);
+                kern_return_t status = ProcessUtils::TryAttach(proc);
+                if (status == KERN_SUCCESS)
+                {
+                    azure->AttachToProcess(proc);
+                    message = SuccessMessage();
+                }
+                else
+                {
+                    message = FailMessage(NULL);
+                }
+                return status;
             }
-            else
+            case Detach:
+                // TODO
+                break;
+                
+            case NewSearch:
             {
-                message = FailMessage(NULL);
+                void *pattern = message.message;
+                size_t size = message.header.messageSize;
+                std::vector<vm_address_t> addresses = manager->Find(pattern, size);
+                vm_address_t *addressPtr = &addresses[0];
+                message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
+
+                return KERN_SUCCESS;
             }
-            return status;
-        }
-        case Detach:
-            // TODO
-            break;
-            
-        case NewSearch:
-        {
-            void *pattern = message.message;
-            size_t size = message.header.messageSize;
-            std::vector<vm_address_t> addresses = manager->Find(pattern, size);
-            vm_address_t *addressPtr = &addresses[0];
-            message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
+                
+            case IterateSearch:
+            {
+                void *pattern = message.message;
+                size_t size = message.header.messageSize;
+                std::vector<vm_address_t> addresses = manager->Iterate(pattern, size, manager->Results());
+                
+                vm_address_t *addressPtr = &addresses[0];
+                message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
 
-            return KERN_SUCCESS;
-        }
-            
-        case IterateSearch:
-        {
-            void *pattern = message.message;
-            size_t size = message.header.messageSize;
-            std::vector<vm_address_t> addresses = manager->Iterate(pattern, size, manager->Results());
-            
-            vm_address_t *addressPtr = &addresses[0];
-            message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
+                return KERN_SUCCESS;
+            }
+    //
+    //        case IterateSearch:
+    //            return "IterateSearch";
+    //            break;
+    //        case Edit:
+    //            return "Edit";
+    //            break;
+    //        case Lock:
+    //            return "Lock";
+    //            break;
 
-            return KERN_SUCCESS;
         }
-//
-//        case IterateSearch:
-//            return "IterateSearch";
-//            break;
-//        case Edit:
-//            return "Edit";
-//            break;
-//        case Lock:
-//            return "Lock";
-//            break;
-
     }
     return KERN_FAILURE;
 }

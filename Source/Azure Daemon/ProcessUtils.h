@@ -49,8 +49,8 @@ public:
     task_t task;
     
     struct Region {
-        unsigned long long start;
-        unsigned long long size;
+        vm_address_t start;
+        size_t size;
     };
     
     Process();

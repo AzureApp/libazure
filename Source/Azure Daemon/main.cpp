@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <vector>
 #include <mach-o/dyld.h>
+
 #include "ProcessUtils.h"
 #include "Settings.h"
 #include "Azure.h"
@@ -25,6 +26,10 @@ using namespace DaemonUtils;
 int main(int argc, const char **argv)
 {
     Azure *az = Azure::GetInstance();
+    if(az->Start()) {
+        AZLog("failed to initialize azure");
+        return 255;
+    }
     return az->Tick();
 }
 

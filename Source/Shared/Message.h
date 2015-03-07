@@ -42,6 +42,16 @@ struct msg_process {
     pid_t pid;
     char *name;
 };
+
+#if defined __cplusplus
+extern "C" {
+#endif
+    
 const char* enumToName(enum MessageType);
+bool messageIsValid(struct Message);
+    
+#if defined __cplusplus
+};
+#endif
 
 #endif

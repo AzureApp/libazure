@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E1894BA1AABBF5000E7334A /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E526C041AAA362800B62400 /* Message.c */; };
 		6E1B9A8619827C4D006143A4 /* MainMenu.xib in Sources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7F19827C3C006143A4 /* MainMenu.xib */; };
 		6E1B9A8719827C81006143A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7A19827C3C006143A4 /* Credits.rtf */; };
 		6E1B9A8819827C81006143A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7C19827C3C006143A4 /* InfoPlist.strings */; };
@@ -627,11 +628,11 @@
 		6E526BBD1AAA360C00B62400 /* Azure Daemon */ = {
 			isa = PBXGroup;
 			children = (
+				6E526BD21AAA360C00B62400 /* main.cpp */,
 				6E526BCE1AAA360C00B62400 /* Azure.cpp */,
 				6E526BCF1AAA360C00B62400 /* Azure.h */,
 				6E526BD01AAA360C00B62400 /* DaemonUtils.cpp */,
 				6E526BD11AAA360C00B62400 /* DaemonUtils.h */,
-				6E526BD21AAA360C00B62400 /* main.cpp */,
 				6E526BD31AAA360C00B62400 /* MemoryManager.cpp */,
 				6E526BD41AAA360C00B62400 /* MemoryManager.h */,
 				6E526BD51AAA360C00B62400 /* Messaging.cpp */,
@@ -970,6 +971,7 @@
 				6E526CD81AAA482B00B62400 /* DaemonUtils.cpp in Sources */,
 				6E526CDA1AAA483300B62400 /* MemoryManager.cpp in Sources */,
 				6E526CDE1AAA484000B62400 /* Settings.cpp in Sources */,
+				6E1894BA1AABBF5000E7334A /* Message.c in Sources */,
 				6E526CD91AAA482F00B62400 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1340,6 +1342,7 @@
 				6E526CD31AAA47CD00B62400 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6EAEB22A1A1FF821002628DC /* Build configuration list for PBXNativeTarget "Azure iOS UI" */ = {
 			isa = XCConfigurationList;
