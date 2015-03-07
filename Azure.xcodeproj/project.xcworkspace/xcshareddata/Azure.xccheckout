@@ -6,35 +6,31 @@
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>164F6BB9-2559-476D-AEF5-EEA7116B2EA3</string>
-	<key>IDESourceControlProjectName</key>
-	<string>Azure</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>237EB6BD7D75BDEABEA91F7B6D1D506EA6637947</key>
-		<string>github.com:Razzile/Azure.git</string>
+		<key>A5C630BEAF976AD6D3403D984F28248B2E0DCDA5</key>
+		<string>https://github.com/xiekw2010/DXPopover.git</string>
 	</dict>
-	<key>IDESourceControlProjectPath</key>
-	<string>Azure.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>237EB6BD7D75BDEABEA91F7B6D1D506EA6637947</key>
-		<string>../..</string>
+		<key>A5C630BEAF976AD6D3403D984F28248B2E0DCDA5</key>
+		<string>DXPopover/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:Razzile/Azure.git</string>
+	<string>https://github.com/xiekw2010/DXPopover.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>237EB6BD7D75BDEABEA91F7B6D1D506EA6637947</string>
+	<string>A5C630BEAF976AD6D3403D984F28248B2E0DCDA5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>237EB6BD7D75BDEABEA91F7B6D1D506EA6637947</string>
+			<string>A5C630BEAF976AD6D3403D984F28248B2E0DCDA5</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Azure</string>
+			<string>DXPopover</string>
 		</dict>
 	</array>
 </dict>

@@ -134,12 +134,8 @@ vector<Process> ProcessUtils::GetAllProcesses()
                      const char * name = user->pw_name;*/
                     
                     Process temp;
-                    
-                    char pathBuffer[PROC_PIDPATHINFO_MAXSIZE];
-                    proc_pidpath(process[i].kp_proc.p_pid, pathBuffer, sizeof(pathBuffer));
-                    
-                    char nameBuffer[256];
-                    strcpy(nameBuffer, process[i].kp_proc.p_comm);
+                    char nameBuffer[64];
+                    const char *pathBuffer = ProcessUtils::GetPathForProcess(new Process(process[i].kp_proc.p_pid));
                     long position = strlen(pathBuffer);
                     
                     while(position >= 0 && pathBuffer[position] != '/')
@@ -154,7 +150,7 @@ vector<Process> ProcessUtils::GetAllProcesses()
                     
                     strcpy(temp.name, nameBuffer);
                     temp.pid = process[i].kp_proc.p_pid;
-                    proc_pidpath(process[i].kp_proc.p_pid, temp.path, sizeof(temp.path));
+                    
                     
                     local.push_back(temp);
                     
@@ -198,9 +194,38 @@ const char *ProcessUtils::GetNameFromPid(pid_t pid)
 
 const char *ProcessUtils::GetPathForProcess(Process *proc)
 {
-    char *temp = new char[512];
-    proc_pidpath(proc->pid, temp, sizeof(proc->path));
-    return temp;
+    pid_t pid = proc->pid;
+    int mib[3] = {CTL_KERN, KERN_ARGMAX, 0};
+    
+    size_t argmaxsize = sizeof(size_t);
+    size_t size;
+    
+    int ret = sysctl(mib, 2, &size, &argmaxsize, NULL, 0);
+    
+    if (ret != 0) {
+        AZLog("Error '%s' (%d) getting KERN_ARGMAX", strerror(errno), errno);
+        
+        return NULL;
+    }
+    
+    // Then we can get the path information we actually want
+    mib[1] = KERN_PROCARGS2;
+    mib[2] = (int)pid;
+    
+    char *procargv = (char *)malloc(size);
+    
+    ret = sysctl(mib, 3, procargv, &size, NULL, 0);
+    
+    if (ret != 0) {
+        AZLog("Error '%s' (%d) for pid %d", strerror(errno), errno, pid);
+        
+        free(procargv);
+        
+        return NULL;
+    }
+    char *path = procargv + sizeof(int);
+    free (procargv);
+    return path;
 }
 
 const char *ProcessUtils::GetNameFromPath(const char *path)
@@ -315,11 +340,11 @@ vector<Process::Region> ProcessUtils::GetRegions(Process *proc, vm_prot_t option
     while (status == KERN_SUCCESS)
     {
         vm_size_t vmsize;
-        vm_region_basic_info_data_64_t info;
+        vm_region_basic_info_data_xx_t info;
         mach_msg_type_number_t info_count = VM_REGION_BASIC_INFO_COUNT_64;
         memory_object_name_t object;
         
-        status = vm_region_64(proc->task, &address, &vmsize, VM_REGION_BASIC_INFO, (vm_region_info_64_t)&info, &info_count, &object);
+        status = vm_region_xx(proc->task, &address, &vmsize, VM_REGION_BASIC_INFO, (vm_region_info_64_t)&info, &info_count, &object);
         
         if((info.protection == options) && (status == KERN_SUCCESS)) //remember to change vm_prot_default back
         {

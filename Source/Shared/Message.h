@@ -27,7 +27,7 @@ enum MessageType {
 };
 
 struct msg_header {
-    long magic; // used to verify messages integrity
+    uint magic; // used to verify messages integrity
     enum MessageType type;
     size_t messageSize;
     bool shouldPop;

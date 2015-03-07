@@ -9,21 +9,37 @@
 #ifndef __Azure_Mac_V3__ProcessUtils__
 #define __Azure_Mac_V3__ProcessUtils__
 
+#include "TargetConditionals.h"
 
 #include <vector>
 #include <mach/mach.h>
+
+#ifndef TARGET_OS_IPHONE
 #include <mach/mach_vm.h>
+#endif
+
 #include <errno.h>
 #include <unistd.h>
 #include <sys/sysctl.h>
 #include <assert.h>
 #include <sys/types.h>
 #include <pwd.h>
+
+#ifndef TARGET_OS_IPHONE
 #include <libproc.h>
+#endif 
 
 #include "Message.h"
 
 #pragma mark Process
+
+#ifdef __LP64__ // 64 bit functions
+#define vm_region_basic_info_data_xx_t vm_region_basic_info_data_64_t
+#define vm_region_xx vm_region_64
+#else // 32 bit functions
+#define vm_region_basic_info_data_xx_t vm_region_basic_info_data_t
+#define vm_region_xx vm_region
+#endif
 
 class Process {
 public:
@@ -70,6 +86,6 @@ namespace ProcessUtils {
     kern_return_t ReadMemory(Process *, vm_address_t address, char *output, size_t size);
     kern_return_t WriteMemory(Process *, vm_address_t address, char *input, size_t size);
 
-};
+} // ProcessUtils
 
 #endif /* defined(__Azure_Mac_V3__ProcessUtils__) */

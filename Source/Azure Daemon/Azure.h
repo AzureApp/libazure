@@ -20,14 +20,16 @@
 #define AZLog(fmt, ...) Azure::WriteToLog(fmt, ##__VA_ARGS__)
 char* concat(char *s1, char *s2);
 
-
-#define AZ_LOG_LOC "/opt/azure.log" //TEMPORARY
+#ifndef TARGET_OS_IPHONE
+#define AZ_LOG_LOC "/opt/azure.log"
+#else
+#define AZ_LOG_LOC "/Applications/Azure.app/azure.log"
+#endif
 
 using namespace DaemonUtils;
 using namespace ProcessUtils;
 
-class Azure
-{
+class Azure {
 public:
     Azure();
     ~Azure();

@@ -13,6 +13,6 @@
 
 namespace ObjCUtils {
     
-}
+} // ObjCUtils
 
 #endif /* defined(__Azure_Mac_V3__ObjCUtils__) */

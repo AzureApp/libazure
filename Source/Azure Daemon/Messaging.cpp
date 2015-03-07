@@ -9,43 +9,6 @@
 #include "Messaging.h"
 #include "Azure.h"
 
-Messaging::Messaging()
-{
-    
-}
-
-Messaging::~Messaging()
-{
-    
-}
-
-Messaging* Messaging::GetInstance()
-{
-    static Messaging *instance = NULL;
-    if (!instance)
-    {
-        instance = new Messaging();
-    }
-    return instance;
-}
-
-kern_return_t Messaging::Tick()
-{
-    kern_return_t status = KERN_SUCCESS;
-    while (messageStack.size() > 0)
-    {
-        Message msg = messageStack.front();
-        status = ProcessMessage(msg);
-        if (msg.header.shouldPop)
-        {
-            PopMessage(0);
-        }
-        
-        if (status != KERN_SUCCESS) break;
-    }
-    return status;
-}
-
 kern_return_t Messaging::ProcessMessage(Message& message)
 {
     Azure *azure = Azure::GetInstance();
@@ -65,13 +28,11 @@ kern_return_t Messaging::ProcessMessage(Message& message)
             if (status == KERN_SUCCESS)
             {
                 azure->AttachToProcess(proc);
-                Message success = SuccessMessage();
-                azure->CurrentDaemon()->SendMessage(success);
+                message = SuccessMessage();
             }
             else
             {
-                Message fail = FailMessage(NULL);
-                azure->CurrentDaemon()->SendMessage(fail);
+                message = FailMessage(NULL);
             }
             return status;
         }
@@ -85,10 +46,8 @@ kern_return_t Messaging::ProcessMessage(Message& message)
             size_t size = message.header.messageSize;
             std::vector<vm_address_t> addresses = manager->Find(pattern, size);
             vm_address_t *addressPtr = &addresses[0];
-            
-            Message msg = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
-            azure->CurrentDaemon()->SendMessage(msg);
-            
+            message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
+
             return KERN_SUCCESS;
         }
             
@@ -99,9 +58,8 @@ kern_return_t Messaging::ProcessMessage(Message& message)
             std::vector<vm_address_t> addresses = manager->Iterate(pattern, size, manager->Results());
             
             vm_address_t *addressPtr = &addresses[0];
-            Message msg = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
-            azure->CurrentDaemon()->SendMessage(msg);
-            
+            message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
+
             return KERN_SUCCESS;
         }
 //
@@ -117,17 +75,6 @@ kern_return_t Messaging::ProcessMessage(Message& message)
 
     }
     return KERN_FAILURE;
-}
-
-
-void Messaging::PushMessage(Message& message)
-{
-    messageStack.push_back(message);
-}
-
-void Messaging::PopMessage(int pos)
-{
-    messageStack.erase(messageStack.begin()+pos);
 }
 
 Message Messaging::SuccessMessage()
@@ -167,7 +114,3 @@ Message Messaging::MessageFromResults(void *results, size_t size)
     
     return msg;
 }
-
-
-
-

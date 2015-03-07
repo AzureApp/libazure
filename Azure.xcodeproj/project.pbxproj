@@ -73,45 +73,44 @@
 		6E526BBB1AAA35FD00B62400 /* MessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BA11AAA35FD00B62400 /* MessageHandler.m */; };
 		6E526BBC1AAA35FD00B62400 /* ResultsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BA31AAA35FD00B62400 /* ResultsHandler.m */; };
 		6E526BEE1AAA360C00B62400 /* Azure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BCE1AAA360C00B62400 /* Azure.cpp */; };
-		6E526BEF1AAA360C00B62400 /* Azure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BCE1AAA360C00B62400 /* Azure.cpp */; };
 		6E526BF01AAA360C00B62400 /* DaemonUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD01AAA360C00B62400 /* DaemonUtils.cpp */; };
-		6E526BF11AAA360C00B62400 /* DaemonUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD01AAA360C00B62400 /* DaemonUtils.cpp */; };
 		6E526BF21AAA360C00B62400 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD21AAA360C00B62400 /* main.cpp */; };
-		6E526BF31AAA360C00B62400 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD21AAA360C00B62400 /* main.cpp */; };
 		6E526BF41AAA360C00B62400 /* MemoryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD31AAA360C00B62400 /* MemoryManager.cpp */; };
-		6E526BF51AAA360C00B62400 /* MemoryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD31AAA360C00B62400 /* MemoryManager.cpp */; };
 		6E526BF61AAA360C00B62400 /* Messaging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD51AAA360C00B62400 /* Messaging.cpp */; };
-		6E526BF71AAA360C00B62400 /* Messaging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD51AAA360C00B62400 /* Messaging.cpp */; };
 		6E526BF81AAA360C00B62400 /* ObjCUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD71AAA360C00B62400 /* ObjCUtils.cpp */; };
-		6E526BF91AAA360C00B62400 /* ObjCUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD71AAA360C00B62400 /* ObjCUtils.cpp */; };
 		6E526BFA1AAA360C00B62400 /* ProcessUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD91AAA360C00B62400 /* ProcessUtils.cpp */; };
-		6E526BFB1AAA360C00B62400 /* ProcessUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD91AAA360C00B62400 /* ProcessUtils.cpp */; };
 		6E526BFC1AAA360C00B62400 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BDB1AAA360C00B62400 /* Settings.cpp */; };
-		6E526BFD1AAA360C00B62400 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BDB1AAA360C00B62400 /* Settings.cpp */; };
 		6E526C0E1AAA362800B62400 /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E526C041AAA362800B62400 /* Message.c */; };
 		6E526C0F1AAA362800B62400 /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E526C041AAA362800B62400 /* Message.c */; };
 		6E526C101AAA362800B62400 /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E526C041AAA362800B62400 /* Message.c */; };
-		6E526C111AAA362800B62400 /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E526C041AAA362800B62400 /* Message.c */; };
 		6E526C131AAA366400B62400 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C121AAA366400B62400 /* Info.plist */; };
 		6E526C1C1AAA368900B62400 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C191AAA368900B62400 /* Images.xcassets */; };
-		6E526C671AAA428200B62400 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C651AAA428200B62400 /* LaunchScreen.xib */; };
-		6E526C681AAA428200B62400 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C661AAA428200B62400 /* Main.storyboard */; };
-		6E526C791AAA429700B62400 /* Titillium-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C691AAA429700B62400 /* Titillium-Black.otf */; };
-		6E526C7A1AAA429700B62400 /* Titillium-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C6A1AAA429700B62400 /* Titillium-Bold.otf */; };
-		6E526C7B1AAA429700B62400 /* Titillium-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C6B1AAA429700B62400 /* Titillium-BoldItalic.otf */; };
-		6E526C7C1AAA429700B62400 /* Titillium-BoldUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C6C1AAA429700B62400 /* Titillium-BoldUpright.otf */; };
-		6E526C7D1AAA429700B62400 /* Titillium-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C6D1AAA429700B62400 /* Titillium-Light.otf */; };
-		6E526C7E1AAA429700B62400 /* Titillium-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C6E1AAA429700B62400 /* Titillium-LightItalic.otf */; };
-		6E526C7F1AAA429700B62400 /* Titillium-LightUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C6F1AAA429700B62400 /* Titillium-LightUpright.otf */; };
-		6E526C801AAA429700B62400 /* Titillium-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C701AAA429700B62400 /* Titillium-Regular.otf */; };
-		6E526C811AAA429700B62400 /* Titillium-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C711AAA429700B62400 /* Titillium-RegularItalic.otf */; };
-		6E526C821AAA429700B62400 /* Titillium-RegularUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C721AAA429700B62400 /* Titillium-RegularUpright.otf */; };
-		6E526C831AAA429700B62400 /* Titillium-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C731AAA429700B62400 /* Titillium-Semibold.otf */; };
-		6E526C841AAA429700B62400 /* Titillium-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C741AAA429700B62400 /* Titillium-SemiboldItalic.otf */; };
-		6E526C851AAA429700B62400 /* Titillium-SemiboldUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C751AAA429700B62400 /* Titillium-SemiboldUpright.otf */; };
-		6E526C861AAA429700B62400 /* Titillium-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C761AAA429700B62400 /* Titillium-Thin.otf */; };
-		6E526C871AAA429700B62400 /* Titillium-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C771AAA429700B62400 /* Titillium-ThinItalic.otf */; };
-		6E526C881AAA429700B62400 /* Titillium-ThinUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C781AAA429700B62400 /* Titillium-ThinUpright.otf */; };
+		6E526C8B1AAA45BE00B62400 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C891AAA45BE00B62400 /* LaunchScreen.xib */; };
+		6E526C8C1AAA45BE00B62400 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C8A1AAA45BE00B62400 /* Main.storyboard */; };
+		6E526C9D1AAA45D200B62400 /* Titillium-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C8D1AAA45D200B62400 /* Titillium-Black.otf */; };
+		6E526C9E1AAA45D200B62400 /* Titillium-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C8E1AAA45D200B62400 /* Titillium-Bold.otf */; };
+		6E526C9F1AAA45D200B62400 /* Titillium-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C8F1AAA45D200B62400 /* Titillium-BoldItalic.otf */; };
+		6E526CA01AAA45D200B62400 /* Titillium-BoldUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C901AAA45D200B62400 /* Titillium-BoldUpright.otf */; };
+		6E526CA11AAA45D200B62400 /* Titillium-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C911AAA45D200B62400 /* Titillium-Light.otf */; };
+		6E526CA21AAA45D200B62400 /* Titillium-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C921AAA45D200B62400 /* Titillium-LightItalic.otf */; };
+		6E526CA31AAA45D200B62400 /* Titillium-LightUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C931AAA45D200B62400 /* Titillium-LightUpright.otf */; };
+		6E526CA41AAA45D200B62400 /* Titillium-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C941AAA45D200B62400 /* Titillium-Regular.otf */; };
+		6E526CA51AAA45D200B62400 /* Titillium-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C951AAA45D200B62400 /* Titillium-RegularItalic.otf */; };
+		6E526CA61AAA45D200B62400 /* Titillium-RegularUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C961AAA45D200B62400 /* Titillium-RegularUpright.otf */; };
+		6E526CA71AAA45D200B62400 /* Titillium-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C971AAA45D200B62400 /* Titillium-Semibold.otf */; };
+		6E526CA81AAA45D200B62400 /* Titillium-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C981AAA45D200B62400 /* Titillium-SemiboldItalic.otf */; };
+		6E526CA91AAA45D200B62400 /* Titillium-SemiboldUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C991AAA45D200B62400 /* Titillium-SemiboldUpright.otf */; };
+		6E526CAA1AAA45D200B62400 /* Titillium-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C9A1AAA45D200B62400 /* Titillium-Thin.otf */; };
+		6E526CAB1AAA45D200B62400 /* Titillium-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C9B1AAA45D200B62400 /* Titillium-ThinItalic.otf */; };
+		6E526CAC1AAA45D200B62400 /* Titillium-ThinUpright.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E526C9C1AAA45D200B62400 /* Titillium-ThinUpright.otf */; };
+		6E526CD71AAA482800B62400 /* Azure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BCE1AAA360C00B62400 /* Azure.cpp */; };
+		6E526CD81AAA482B00B62400 /* DaemonUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD01AAA360C00B62400 /* DaemonUtils.cpp */; };
+		6E526CD91AAA482F00B62400 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD21AAA360C00B62400 /* main.cpp */; };
+		6E526CDA1AAA483300B62400 /* MemoryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD31AAA360C00B62400 /* MemoryManager.cpp */; };
+		6E526CDB1AAA483600B62400 /* Messaging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD51AAA360C00B62400 /* Messaging.cpp */; };
+		6E526CDC1AAA483900B62400 /* ObjCUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD71AAA360C00B62400 /* ObjCUtils.cpp */; };
+		6E526CDD1AAA483D00B62400 /* ProcessUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD91AAA360C00B62400 /* ProcessUtils.cpp */; };
+		6E526CDE1AAA484000B62400 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BDB1AAA360C00B62400 /* Settings.cpp */; };
 		6EABA50D19908D6200B007E9 /* Log.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EABA50C19908D6200B007E9 /* Log.xib */; };
 		6EB3DE2E196172CE0048E699 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB3DE2D196172CE0048E699 /* Cocoa.framework */; };
 		6EEC56EE1A20FF4E00068D0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */; };
@@ -270,24 +269,36 @@
 		6E526C061AAA362800B62400 /* TargetConditionals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetConditionals.h; sourceTree = "<group>"; };
 		6E526C121AAA366400B62400 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E526C191AAA368900B62400 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Resources/Azure iOS/Images.xcassets"; sourceTree = SOURCE_ROOT; };
-		6E526C651AAA428200B62400 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = "Resources/Azure iOS/LaunchScreen.xib"; sourceTree = SOURCE_ROOT; };
-		6E526C661AAA428200B62400 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "Resources/Azure iOS/Main.storyboard"; sourceTree = SOURCE_ROOT; };
-		6E526C691AAA429700B62400 /* Titillium-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Black.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Black.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C6A1AAA429700B62400 /* Titillium-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Bold.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Bold.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C6B1AAA429700B62400 /* Titillium-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-BoldItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-BoldItalic.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C6C1AAA429700B62400 /* Titillium-BoldUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-BoldUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-BoldUpright.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C6D1AAA429700B62400 /* Titillium-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Light.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Light.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C6E1AAA429700B62400 /* Titillium-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-LightItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-LightItalic.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C6F1AAA429700B62400 /* Titillium-LightUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-LightUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-LightUpright.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C701AAA429700B62400 /* Titillium-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Regular.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Regular.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C711AAA429700B62400 /* Titillium-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-RegularItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-RegularItalic.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C721AAA429700B62400 /* Titillium-RegularUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-RegularUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-RegularUpright.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C731AAA429700B62400 /* Titillium-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Semibold.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Semibold.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C741AAA429700B62400 /* Titillium-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-SemiboldItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-SemiboldItalic.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C751AAA429700B62400 /* Titillium-SemiboldUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-SemiboldUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-SemiboldUpright.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C761AAA429700B62400 /* Titillium-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Thin.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Thin.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C771AAA429700B62400 /* Titillium-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinItalic.otf"; sourceTree = SOURCE_ROOT; };
-		6E526C781AAA429700B62400 /* Titillium-ThinUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinUpright.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C891AAA45BE00B62400 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = "Resources/Azure iOS/LaunchScreen.xib"; sourceTree = SOURCE_ROOT; };
+		6E526C8A1AAA45BE00B62400 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "Resources/Azure iOS/Main.storyboard"; sourceTree = SOURCE_ROOT; };
+		6E526C8D1AAA45D200B62400 /* Titillium-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Black.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Black.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C8E1AAA45D200B62400 /* Titillium-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Bold.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Bold.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C8F1AAA45D200B62400 /* Titillium-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-BoldItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-BoldItalic.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C901AAA45D200B62400 /* Titillium-BoldUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-BoldUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-BoldUpright.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C911AAA45D200B62400 /* Titillium-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Light.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Light.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C921AAA45D200B62400 /* Titillium-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-LightItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-LightItalic.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C931AAA45D200B62400 /* Titillium-LightUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-LightUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-LightUpright.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C941AAA45D200B62400 /* Titillium-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Regular.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Regular.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C951AAA45D200B62400 /* Titillium-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-RegularItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-RegularItalic.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C961AAA45D200B62400 /* Titillium-RegularUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-RegularUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-RegularUpright.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C971AAA45D200B62400 /* Titillium-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Semibold.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Semibold.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C981AAA45D200B62400 /* Titillium-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-SemiboldItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-SemiboldItalic.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C991AAA45D200B62400 /* Titillium-SemiboldUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-SemiboldUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-SemiboldUpright.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C9A1AAA45D200B62400 /* Titillium-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-Thin.otf"; path = "Resources/Azure iOS/Fonts/Titillium-Thin.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C9B1AAA45D200B62400 /* Titillium-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinItalic.otf"; sourceTree = SOURCE_ROOT; };
+		6E526C9C1AAA45D200B62400 /* Titillium-ThinUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinUpright.otf"; sourceTree = SOURCE_ROOT; };
+		6E526CB11AAA47CC00B62400 /* Azure iOS Daemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Azure iOS Daemon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E526CB41AAA47CC00B62400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E526CB51AAA47CC00B62400 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6E526CB71AAA47CC00B62400 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6E526CB81AAA47CC00B62400 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6E526CBA1AAA47CC00B62400 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6E526CBB1AAA47CD00B62400 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6E526CBE1AAA47CD00B62400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E526CC01AAA47CD00B62400 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6E526CC31AAA47CD00B62400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		6E526CCE1AAA47CD00B62400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E526CCF1AAA47CD00B62400 /* Azure_iOS_DaemonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Azure_iOS_DaemonTests.m; sourceTree = "<group>"; };
 		6EABA50C19908D6200B007E9 /* Log.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Log.xib; sourceTree = "<group>"; };
 		6EAEB2071A1FF821002628DC /* Azure iOS UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Azure iOS UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB3DE2A196172CE0048E699 /* Azure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Azure.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,7 +309,6 @@
 		6EB3DE4C196172CF0048E699 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6EB66A311976F63100A0C799 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		6EF9F04D1A51849D00D79532 /* Azure iOS Daemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Azure iOS Daemon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF9F06A1A51849E00D79532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EF9F06B1A51849E00D79532 /* Azure_iOS_DaemonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Azure_iOS_DaemonTests.m; sourceTree = "<group>"; };
 		6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -306,6 +316,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		6E4E316519752E1800790C14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E526CAE1AAA47CC00B62400 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,21 +346,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6EF9F04A1A51849D00D79532 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6E0E17E91A49A59C006D15DD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6E526C651AAA428200B62400 /* LaunchScreen.xib */,
-				6E526C661AAA428200B62400 /* Main.storyboard */,
+				6E526C891AAA45BE00B62400 /* LaunchScreen.xib */,
+				6E526C8A1AAA45BE00B62400 /* Main.storyboard */,
 				6E526C191AAA368900B62400 /* Images.xcassets */,
 				6E0E17EA1A49A5B7006D15DD /* Fonts */,
 			);
@@ -354,22 +364,22 @@
 		6E0E17EA1A49A5B7006D15DD /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				6E526C691AAA429700B62400 /* Titillium-Black.otf */,
-				6E526C6A1AAA429700B62400 /* Titillium-Bold.otf */,
-				6E526C6B1AAA429700B62400 /* Titillium-BoldItalic.otf */,
-				6E526C6C1AAA429700B62400 /* Titillium-BoldUpright.otf */,
-				6E526C6D1AAA429700B62400 /* Titillium-Light.otf */,
-				6E526C6E1AAA429700B62400 /* Titillium-LightItalic.otf */,
-				6E526C6F1AAA429700B62400 /* Titillium-LightUpright.otf */,
-				6E526C701AAA429700B62400 /* Titillium-Regular.otf */,
-				6E526C711AAA429700B62400 /* Titillium-RegularItalic.otf */,
-				6E526C721AAA429700B62400 /* Titillium-RegularUpright.otf */,
-				6E526C731AAA429700B62400 /* Titillium-Semibold.otf */,
-				6E526C741AAA429700B62400 /* Titillium-SemiboldItalic.otf */,
-				6E526C751AAA429700B62400 /* Titillium-SemiboldUpright.otf */,
-				6E526C761AAA429700B62400 /* Titillium-Thin.otf */,
-				6E526C771AAA429700B62400 /* Titillium-ThinItalic.otf */,
-				6E526C781AAA429700B62400 /* Titillium-ThinUpright.otf */,
+				6E526C8D1AAA45D200B62400 /* Titillium-Black.otf */,
+				6E526C8E1AAA45D200B62400 /* Titillium-Bold.otf */,
+				6E526C8F1AAA45D200B62400 /* Titillium-BoldItalic.otf */,
+				6E526C901AAA45D200B62400 /* Titillium-BoldUpright.otf */,
+				6E526C911AAA45D200B62400 /* Titillium-Light.otf */,
+				6E526C921AAA45D200B62400 /* Titillium-LightItalic.otf */,
+				6E526C931AAA45D200B62400 /* Titillium-LightUpright.otf */,
+				6E526C941AAA45D200B62400 /* Titillium-Regular.otf */,
+				6E526C951AAA45D200B62400 /* Titillium-RegularItalic.otf */,
+				6E526C961AAA45D200B62400 /* Titillium-RegularUpright.otf */,
+				6E526C971AAA45D200B62400 /* Titillium-Semibold.otf */,
+				6E526C981AAA45D200B62400 /* Titillium-SemiboldItalic.otf */,
+				6E526C991AAA45D200B62400 /* Titillium-SemiboldUpright.otf */,
+				6E526C9A1AAA45D200B62400 /* Titillium-Thin.otf */,
+				6E526C9B1AAA45D200B62400 /* Titillium-ThinItalic.otf */,
+				6E526C9C1AAA45D200B62400 /* Titillium-ThinUpright.otf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -659,12 +669,55 @@
 			path = Source/Shared;
 			sourceTree = "<group>";
 		};
+		6E526CB21AAA47CC00B62400 /* Azure iOS Daemon */ = {
+			isa = PBXGroup;
+			children = (
+				6E526CB71AAA47CC00B62400 /* AppDelegate.h */,
+				6E526CB81AAA47CC00B62400 /* AppDelegate.m */,
+				6E526CBA1AAA47CC00B62400 /* ViewController.h */,
+				6E526CBB1AAA47CD00B62400 /* ViewController.m */,
+				6E526CBD1AAA47CD00B62400 /* Main.storyboard */,
+				6E526CC01AAA47CD00B62400 /* Images.xcassets */,
+				6E526CC21AAA47CD00B62400 /* LaunchScreen.xib */,
+				6E526CB31AAA47CC00B62400 /* Supporting Files */,
+			);
+			path = "Azure iOS Daemon";
+			sourceTree = "<group>";
+		};
+		6E526CB31AAA47CC00B62400 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E526CB41AAA47CC00B62400 /* Info.plist */,
+				6E526CB51AAA47CC00B62400 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E526CCC1AAA47CD00B62400 /* Azure iOS DaemonTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E526CCF1AAA47CD00B62400 /* Azure_iOS_DaemonTests.m */,
+				6E526CCD1AAA47CD00B62400 /* Supporting Files */,
+			);
+			path = "Azure iOS DaemonTests";
+			sourceTree = "<group>";
+		};
+		6E526CCD1AAA47CD00B62400 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E526CCE1AAA47CD00B62400 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		6EB3DE21196172CE0048E699 = {
 			isa = PBXGroup;
 			children = (
 				6E526BFE1AAA361300B62400 /* Soruce */,
 				6E1B9A7719827C3C006143A4 /* Resources */,
 				6EF9F0681A51849E00D79532 /* Azure iOS DaemonTests */,
+				6E526CB21AAA47CC00B62400 /* Azure iOS Daemon */,
+				6E526CCC1AAA47CD00B62400 /* Azure iOS DaemonTests */,
 				6EB3DE2C196172CE0048E699 /* Frameworks */,
 				6EB3DE2B196172CE0048E699 /* Products */,
 			);
@@ -676,7 +729,7 @@
 				6EB3DE2A196172CE0048E699 /* Azure.app */,
 				6E4E316819752E1800790C14 /* Azure Mac Daemon */,
 				6EAEB2071A1FF821002628DC /* Azure iOS UI.app */,
-				6EF9F04D1A51849D00D79532 /* Azure iOS Daemon.app */,
+				6E526CB11AAA47CC00B62400 /* Azure iOS Daemon.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -742,6 +795,23 @@
 			productReference = 6E4E316819752E1800790C14 /* Azure Mac Daemon */;
 			productType = "com.apple.product-type.tool";
 		};
+		6E526CB01AAA47CC00B62400 /* Azure iOS Daemon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E526CD11AAA47CD00B62400 /* Build configuration list for PBXNativeTarget "Azure iOS Daemon" */;
+			buildPhases = (
+				6E526CAD1AAA47CC00B62400 /* Sources */,
+				6E526CAE1AAA47CC00B62400 /* Frameworks */,
+				6E526CAF1AAA47CC00B62400 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Azure iOS Daemon";
+			productName = "Azure iOS Daemon";
+			productReference = 6E526CB11AAA47CC00B62400 /* Azure iOS Daemon.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6EAEB2061A1FF821002628DC /* Azure iOS UI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EAEB22A1A1FF821002628DC /* Build configuration list for PBXNativeTarget "Azure iOS UI" */;
@@ -776,23 +846,6 @@
 			productReference = 6EB3DE2A196172CE0048E699 /* Azure.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6EF9F04C1A51849D00D79532 /* Azure iOS Daemon */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6EF9F06D1A51849E00D79532 /* Build configuration list for PBXNativeTarget "Azure iOS Daemon" */;
-			buildPhases = (
-				6EF9F0491A51849D00D79532 /* Sources */,
-				6EF9F04A1A51849D00D79532 /* Frameworks */,
-				6EF9F04B1A51849D00D79532 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Azure iOS Daemon";
-			productName = "Azure iOS Daemon";
-			productReference = 6EF9F04D1A51849D00D79532 /* Azure iOS Daemon.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -802,6 +855,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = iOSCheaters;
 				TargetAttributes = {
+					6E526CB01AAA47CC00B62400 = {
+						CreatedOnToolsVersion = 6.1;
+					};
 					6EAEB2061A1FF821002628DC = {
 						CreatedOnToolsVersion = 6.1;
 						SystemCapabilities = {
@@ -809,9 +865,6 @@
 								enabled = 0;
 							};
 						};
-					};
-					6EF9F04C1A51849D00D79532 = {
-						CreatedOnToolsVersion = 6.1;
 					};
 				};
 			};
@@ -831,35 +884,42 @@
 				6EB3DE29196172CE0048E699 /* Azure Mac UI */,
 				6E4E316719752E1800790C14 /* Azure Mac Daemon */,
 				6EAEB2061A1FF821002628DC /* Azure iOS UI */,
-				6EF9F04C1A51849D00D79532 /* Azure iOS Daemon */,
+				6E526CB01AAA47CC00B62400 /* Azure iOS Daemon */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6E526CAF1AAA47CC00B62400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EAEB2051A1FF821002628DC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E526C881AAA429700B62400 /* Titillium-ThinUpright.otf in Resources */,
-				6E526C831AAA429700B62400 /* Titillium-Semibold.otf in Resources */,
-				6E526C801AAA429700B62400 /* Titillium-Regular.otf in Resources */,
-				6E526C841AAA429700B62400 /* Titillium-SemiboldItalic.otf in Resources */,
-				6E526C7D1AAA429700B62400 /* Titillium-Light.otf in Resources */,
-				6E526C7A1AAA429700B62400 /* Titillium-Bold.otf in Resources */,
-				6E526C7B1AAA429700B62400 /* Titillium-BoldItalic.otf in Resources */,
-				6E526C861AAA429700B62400 /* Titillium-Thin.otf in Resources */,
-				6E526C671AAA428200B62400 /* LaunchScreen.xib in Resources */,
-				6E526C851AAA429700B62400 /* Titillium-SemiboldUpright.otf in Resources */,
-				6E526C681AAA428200B62400 /* Main.storyboard in Resources */,
-				6E526C871AAA429700B62400 /* Titillium-ThinItalic.otf in Resources */,
+				6E526C9E1AAA45D200B62400 /* Titillium-Bold.otf in Resources */,
+				6E526CA81AAA45D200B62400 /* Titillium-SemiboldItalic.otf in Resources */,
+				6E526CA91AAA45D200B62400 /* Titillium-SemiboldUpright.otf in Resources */,
+				6E526C9D1AAA45D200B62400 /* Titillium-Black.otf in Resources */,
+				6E526CAB1AAA45D200B62400 /* Titillium-ThinItalic.otf in Resources */,
+				6E526CA01AAA45D200B62400 /* Titillium-BoldUpright.otf in Resources */,
+				6E526CA11AAA45D200B62400 /* Titillium-Light.otf in Resources */,
+				6E526C8C1AAA45BE00B62400 /* Main.storyboard in Resources */,
+				6E526CA51AAA45D200B62400 /* Titillium-RegularItalic.otf in Resources */,
+				6E526C8B1AAA45BE00B62400 /* LaunchScreen.xib in Resources */,
 				6E526C131AAA366400B62400 /* Info.plist in Resources */,
-				6E526C791AAA429700B62400 /* Titillium-Black.otf in Resources */,
-				6E526C7C1AAA429700B62400 /* Titillium-BoldUpright.otf in Resources */,
-				6E526C811AAA429700B62400 /* Titillium-RegularItalic.otf in Resources */,
-				6E526C7E1AAA429700B62400 /* Titillium-LightItalic.otf in Resources */,
-				6E526C7F1AAA429700B62400 /* Titillium-LightUpright.otf in Resources */,
-				6E526C821AAA429700B62400 /* Titillium-RegularUpright.otf in Resources */,
+				6E526CAA1AAA45D200B62400 /* Titillium-Thin.otf in Resources */,
+				6E526CAC1AAA45D200B62400 /* Titillium-ThinUpright.otf in Resources */,
+				6E526CA61AAA45D200B62400 /* Titillium-RegularUpright.otf in Resources */,
+				6E526CA31AAA45D200B62400 /* Titillium-LightUpright.otf in Resources */,
+				6E526CA41AAA45D200B62400 /* Titillium-Regular.otf in Resources */,
+				6E526C9F1AAA45D200B62400 /* Titillium-BoldItalic.otf in Resources */,
+				6E526CA71AAA45D200B62400 /* Titillium-Semibold.otf in Resources */,
+				6E526CA21AAA45D200B62400 /* Titillium-LightItalic.otf in Resources */,
 				6E526C1C1AAA368900B62400 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -880,13 +940,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6EF9F04B1A51849D00D79532 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -903,6 +956,21 @@
 				6E526BF01AAA360C00B62400 /* DaemonUtils.cpp in Sources */,
 				6E526BFC1AAA360C00B62400 /* Settings.cpp in Sources */,
 				6E526BF61AAA360C00B62400 /* Messaging.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E526CAD1AAA47CC00B62400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E526CDB1AAA483600B62400 /* Messaging.cpp in Sources */,
+				6E526CDC1AAA483900B62400 /* ObjCUtils.cpp in Sources */,
+				6E526CDD1AAA483D00B62400 /* ProcessUtils.cpp in Sources */,
+				6E526CD71AAA482800B62400 /* Azure.cpp in Sources */,
+				6E526CD81AAA482B00B62400 /* DaemonUtils.cpp in Sources */,
+				6E526CDA1AAA483300B62400 /* MemoryManager.cpp in Sources */,
+				6E526CDE1AAA484000B62400 /* Settings.cpp in Sources */,
+				6E526CD91AAA482F00B62400 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,22 +1046,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6EF9F0491A51849D00D79532 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6E526BEF1AAA360C00B62400 /* Azure.cpp in Sources */,
-				6E526BFB1AAA360C00B62400 /* ProcessUtils.cpp in Sources */,
-				6E526BF31AAA360C00B62400 /* main.cpp in Sources */,
-				6E526C111AAA362800B62400 /* Message.c in Sources */,
-				6E526BF51AAA360C00B62400 /* MemoryManager.cpp in Sources */,
-				6E526BF91AAA360C00B62400 /* ObjCUtils.cpp in Sources */,
-				6E526BF11AAA360C00B62400 /* DaemonUtils.cpp in Sources */,
-				6E526BFD1AAA360C00B62400 /* Settings.cpp in Sources */,
-				6E526BF71AAA360C00B62400 /* Messaging.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -1013,6 +1065,22 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		6E526CBD1AAA47CD00B62400 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E526CBE1AAA47CD00B62400 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6E526CC21AAA47CD00B62400 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E526CC31AAA47CD00B62400 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1029,6 +1097,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
 			};
 			name = Debug;
 		};
@@ -1040,6 +1109,57 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Release;
+		};
+		6E526CD21AAA47CD00B62400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				DEAD_CODE_STRIPPING = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Azure iOS Daemon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E526CD31AAA47CD00B62400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+				DEAD_CODE_STRIPPING = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Azure iOS Daemon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1201,50 +1321,6 @@
 			};
 			name = Release;
 		};
-		6EF9F06E1A51849E00D79532 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Azure iOS Daemon/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		6EF9F06F1A51849E00D79532 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Azure iOS Daemon/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1256,6 +1332,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6E526CD11AAA47CD00B62400 /* Build configuration list for PBXNativeTarget "Azure iOS Daemon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E526CD21AAA47CD00B62400 /* Debug */,
+				6E526CD31AAA47CD00B62400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		6EAEB22A1A1FF821002628DC /* Build configuration list for PBXNativeTarget "Azure iOS UI" */ = {
 			isa = XCConfigurationList;
@@ -1280,15 +1364,6 @@
 			buildConfigurations = (
 				6EB3DE5C196172CF0048E699 /* Debug */,
 				6EB3DE5D196172CF0048E699 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6EF9F06D1A51849E00D79532 /* Build configuration list for PBXNativeTarget "Azure iOS Daemon" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6EF9F06E1A51849E00D79532 /* Debug */,
-				6EF9F06F1A51849E00D79532 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

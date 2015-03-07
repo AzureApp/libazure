@@ -8,7 +8,7 @@
 
 #include "Azure.h"
 
-char* concat(char *s1, char *s2)
+const char* concat(const char *s1, const char *s2)
 {
     char *result = (char*)malloc(strlen(s1)+strlen(s2)+1);
     strcpy(result, s1);
@@ -22,10 +22,7 @@ Azure::Azure()
     azureDaemon = new DaemonUtils::Daemon();
 }
 
-Azure::~Azure()
-{
-    // TODO
-}
+Azure::~Azure() = default;
 
 Azure* Azure::GetInstance()
 {
@@ -39,12 +36,22 @@ Azure* Azure::GetInstance()
 
 kern_return_t Azure::Tick()
 {
-    Messaging *msgs = Messaging::GetInstance();
     kern_return_t status = KERN_SUCCESS;
     while (status == KERN_SUCCESS)
     {
-        status = azureDaemon->Tick();
-        status = msgs->Tick();
+        Message msg;
+        status = azureDaemon->ReceivedMessage(msg);
+        if (status != KERN_SUCCESS) {
+            AZLog("daemon failed with error %d\n", status);
+            return status;
+        }
+        azureDaemon->SendMessageReceiveSuccess();
+        status = Messaging::ProcessMessage(msg);
+        if (status != KERN_SUCCESS) {
+            AZLog("Messaging failed with error %d\n", status);
+            return status;
+        }
+        status = azureDaemon->SendMessage(msg);
     }
     return status;
 }
@@ -65,6 +72,9 @@ void Azure::AttachToProcess(Process *proc)
 
 void Azure::WriteToLog(const char *fmt, ...)
 {
+    if (!strstr(fmt, "\n")) {
+        fmt = concat(fmt, "\n");
+    }
     const char *logger = "[Azure Daemon] ";
     char result[256];
     
@@ -72,16 +82,12 @@ void Azure::WriteToLog(const char *fmt, ...)
     strcat(result, fmt);
     
     va_list arg;
-    /* Check if the message should be logged */
-//    if (!azureSettings || azureSettings->debug != true)
-//    {
-//        return;
-//    }
     FILE *log_file = fopen(AZ_LOG_LOC, "a+");
-    /* Write the message */
+
     va_start(arg, fmt);
     vfprintf(log_file, fmt, arg);
     va_end(arg);
+    
     fclose(log_file);
     return;
 }

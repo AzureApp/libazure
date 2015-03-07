@@ -30,22 +30,19 @@ class Daemon {
     struct sockaddr_in server , client;
     bool serverReady;
     
+    void OnLostConnection();
+    
 public:
+    static Daemon CurrentDaemon();
     Daemon();
     
     void Start();
-    int Tick();
     
-    int Connect();
+    kern_return_t ReceivedMessage(Message&);
+    kern_return_t SendMessage(Message&);
     
-    void OnLostConnection();
-    void OnNewConnection(int);
-    bool IsConnected();
-    
-    void SendMessage(Message &);
-    void ReceiveMessage();
-
+    void SendMessageReceiveSuccess();
 };
-}
+} // DaemonUtils
 
 #endif /* defined(__Azure_Mac_V3__DaemonUtils__) */

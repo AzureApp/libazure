@@ -171,8 +171,6 @@
 #define TARGET_RT_LITTLE_ENDIAN 1
 #define TARGET_RT_BIG_ENDIAN    0
 #define TARGET_RT_64_BIT        0
-#else
-#error unrecognized GNU C compiler
 #endif
 
 

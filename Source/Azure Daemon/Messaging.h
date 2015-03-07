@@ -15,26 +15,12 @@
 #include "MemoryManager.h"
 #include "Message.h"
 
-
-
-class Messaging {
-public:
-    Messaging();
-    ~Messaging();
-    static Messaging* GetInstance();
-    
-    kern_return_t Tick();
-    
+namespace Messaging {
     kern_return_t ProcessMessage(Message &);
-    
-    void PushMessage(Message &);
-    void PopMessage(int);
-    
-private:
+
     static Message SuccessMessage();
     static Message FailMessage(const char*);
     static Message MessageFromResults(void *, size_t);
-    std::vector<Message> messageStack;
 };
 
 #endif /* defined(__Azure__Messaging__) */
