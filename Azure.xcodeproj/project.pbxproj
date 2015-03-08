@@ -289,17 +289,6 @@
 		6E526C9B1AAA45D200B62400 /* Titillium-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinItalic.otf"; sourceTree = SOURCE_ROOT; };
 		6E526C9C1AAA45D200B62400 /* Titillium-ThinUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinUpright.otf"; sourceTree = SOURCE_ROOT; };
 		6E526CB11AAA47CC00B62400 /* Azure iOS Daemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Azure iOS Daemon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E526CB41AAA47CC00B62400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E526CB51AAA47CC00B62400 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6E526CB71AAA47CC00B62400 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6E526CB81AAA47CC00B62400 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6E526CBA1AAA47CC00B62400 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6E526CBB1AAA47CD00B62400 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6E526CBE1AAA47CD00B62400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6E526CC01AAA47CD00B62400 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6E526CC31AAA47CD00B62400 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		6E526CCE1AAA47CD00B62400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E526CCF1AAA47CD00B62400 /* Azure_iOS_DaemonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Azure_iOS_DaemonTests.m; sourceTree = "<group>"; };
 		6EABA50C19908D6200B007E9 /* Log.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Log.xib; sourceTree = "<group>"; };
 		6EAEB2071A1FF821002628DC /* Azure iOS UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Azure iOS UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB3DE2A196172CE0048E699 /* Azure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Azure.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -310,8 +299,6 @@
 		6EB3DE4C196172CF0048E699 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6EB66A311976F63100A0C799 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		6EF9F06A1A51849E00D79532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6EF9F06B1A51849E00D79532 /* Azure_iOS_DaemonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Azure_iOS_DaemonTests.m; sourceTree = "<group>"; };
 		6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -670,55 +657,11 @@
 			path = Source/Shared;
 			sourceTree = "<group>";
 		};
-		6E526CB21AAA47CC00B62400 /* Azure iOS Daemon */ = {
-			isa = PBXGroup;
-			children = (
-				6E526CB71AAA47CC00B62400 /* AppDelegate.h */,
-				6E526CB81AAA47CC00B62400 /* AppDelegate.m */,
-				6E526CBA1AAA47CC00B62400 /* ViewController.h */,
-				6E526CBB1AAA47CD00B62400 /* ViewController.m */,
-				6E526CBD1AAA47CD00B62400 /* Main.storyboard */,
-				6E526CC01AAA47CD00B62400 /* Images.xcassets */,
-				6E526CC21AAA47CD00B62400 /* LaunchScreen.xib */,
-				6E526CB31AAA47CC00B62400 /* Supporting Files */,
-			);
-			path = "Azure iOS Daemon";
-			sourceTree = "<group>";
-		};
-		6E526CB31AAA47CC00B62400 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6E526CB41AAA47CC00B62400 /* Info.plist */,
-				6E526CB51AAA47CC00B62400 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6E526CCC1AAA47CD00B62400 /* Azure iOS DaemonTests */ = {
-			isa = PBXGroup;
-			children = (
-				6E526CCF1AAA47CD00B62400 /* Azure_iOS_DaemonTests.m */,
-				6E526CCD1AAA47CD00B62400 /* Supporting Files */,
-			);
-			path = "Azure iOS DaemonTests";
-			sourceTree = "<group>";
-		};
-		6E526CCD1AAA47CD00B62400 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6E526CCE1AAA47CD00B62400 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		6EB3DE21196172CE0048E699 = {
 			isa = PBXGroup;
 			children = (
 				6E526BFE1AAA361300B62400 /* Soruce */,
 				6E1B9A7719827C3C006143A4 /* Resources */,
-				6EF9F0681A51849E00D79532 /* Azure iOS DaemonTests */,
-				6E526CB21AAA47CC00B62400 /* Azure iOS Daemon */,
-				6E526CCC1AAA47CD00B62400 /* Azure iOS DaemonTests */,
 				6EB3DE2C196172CE0048E699 /* Frameworks */,
 				6EB3DE2B196172CE0048E699 /* Products */,
 			);
@@ -757,23 +700,6 @@
 				6EB3DE32196172CE0048E699 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		6EF9F0681A51849E00D79532 /* Azure iOS DaemonTests */ = {
-			isa = PBXGroup;
-			children = (
-				6EF9F06B1A51849E00D79532 /* Azure_iOS_DaemonTests.m */,
-				6EF9F0691A51849E00D79532 /* Supporting Files */,
-			);
-			path = "Azure iOS DaemonTests";
-			sourceTree = "<group>";
-		};
-		6EF9F0691A51849E00D79532 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6EF9F06A1A51849E00D79532 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1065,22 +991,6 @@
 				6E1B9A7D19827C3C006143A4 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6E526CBD1AAA47CD00B62400 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E526CBE1AAA47CD00B62400 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6E526CC21AAA47CD00B62400 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E526CC31AAA47CD00B62400 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

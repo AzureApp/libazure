@@ -35,6 +35,7 @@ class Daemon {
 public:
     static Daemon CurrentDaemon();
     Daemon();
+    ~Daemon();
     
     void Start();
     

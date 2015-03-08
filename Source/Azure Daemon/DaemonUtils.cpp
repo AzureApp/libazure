@@ -17,7 +17,7 @@ Daemon::Daemon()
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
     if (socket_desc == -1)
     {
-        AZLog("Could not create socket\n");
+        AZLog("Could not create socket");
         return;
     }
     
@@ -26,13 +26,21 @@ Daemon::Daemon()
     server.sin_port = htons(1248);
 }
 
+Daemon::~Daemon()
+{
+    shutdown(socket_desc, SHUT_RDWR);
+    serverReady = false;
+    AZLog("daemon shutting down");
+}
+
 void Daemon::Start()
 {
+    serverReady = true;
+    AZLog("starting daemon");
     bind(socket_desc, (struct sockaddr *)&server , sizeof(server));
     listen(socket_desc , 5);
     c = sizeof(struct sockaddr_in);
-    accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
-    serverReady = true;
+    client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
 }
 
 void Daemon::OnLostConnection()
@@ -43,11 +51,13 @@ void Daemon::OnLostConnection()
 
 kern_return_t Daemon::ReceivedMessage(Message& message)
 {
+    AZLog("received message");
     long chunk_size = 64;
     if (serverReady)
     {
         msg_header header = header_default;
         long bytes = recv(client_sock, &header, sizeof(msg_header), 0);
+        if (bytes < 0) perror("an error has occured while receiving a message");
         char *data = NULL;
         if (bytes > 0)
         {
@@ -64,7 +74,7 @@ kern_return_t Daemon::ReceivedMessage(Message& message)
                         if (chunk_size == 0) break;
                     }
                     long bytes = recv(client_sock, data+read_size, chunk_size, 0);
-                    if (bytes <= 0)
+                    if (bytes < 0)
                     {
                         this->OnLostConnection();
                         return KERN_FAILURE;
@@ -83,6 +93,7 @@ kern_return_t Daemon::ReceivedMessage(Message& message)
 
 kern_return_t Daemon::SendMessage(Message& message)
 {
+    AZLog("sending message of type %s", enumToName(message.header.type));
     long chunk_size = 64;
     if (serverReady)
     {
@@ -102,7 +113,7 @@ kern_return_t Daemon::SendMessage(Message& message)
                     if (chunk_size == 0) break;
                 }
                 long writeval = send(client_sock, data+write_size, chunk_size, 0);
-                if (writeval <= 0)
+                if (writeval < 0)
                 {
                     this->OnLostConnection();
                     return KERN_FAILURE;
