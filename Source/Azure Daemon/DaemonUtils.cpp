@@ -28,19 +28,19 @@ Daemon::Daemon()
 
 Daemon::~Daemon()
 {
+    AZLog("daemon shutting down");
     shutdown(socket_desc, SHUT_RDWR);
     serverReady = false;
-    AZLog("daemon shutting down");
 }
 
 void Daemon::Start()
 {
-    serverReady = true;
     AZLog("starting daemon");
     bind(socket_desc, (struct sockaddr *)&server , sizeof(server));
     listen(socket_desc , 5);
     c = sizeof(struct sockaddr_in);
     client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
+    serverReady = true;
 }
 
 void Daemon::OnLostConnection()
@@ -51,7 +51,7 @@ void Daemon::OnLostConnection()
 
 kern_return_t Daemon::ReceivedMessage(Message& message)
 {
-    AZLog("received message");
+    AZLog("receiving message");
     long chunk_size = 64;
     if (serverReady)
     {
@@ -84,6 +84,7 @@ kern_return_t Daemon::ReceivedMessage(Message& message)
             }
             message.header = header;
             message.message = data;
+            AZLog("received message of type %s", message.header.type);
             return KERN_SUCCESS;
         }
     }

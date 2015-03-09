@@ -5,34 +5,32 @@ Azure is a experimental iOS memory editor. It is not fully stable (yet)
 
 ## Status
 
-* Most of the code runs.
+* Compiles... That's about it
 * Crashes! Bugs! Weird things!
 
 
-## FAQ
+## Roadmap
 
-### Why did you do X? Why not just use Y? You should use Y. NIH NIH NIH!
+Beta build
+==========
 
-Trust that I either have a good reason for what I did or have absolutely no
-reason for what I did. This is a very large project in which stuff [Compilers, Depricated code, etc etc] has changed over the course of time. Insulting my thinking will only get you ignored
+* Finish daemon by making sure it correctly processes messages, attaches to apps and searches properly
+* Finish iOS UI with the same reasons
+* Make sure that search support for all the current data types works
 
+V1.0
+====
 
-### Hey I'm going to go modify every file in the project, ok?
+* Implement fuzzy search
+* Make adjustments and code optimizations
+* Implement some user settings (both daemon and UI side)
 
-I welcome contributions, but please try to understand that I cannot accept
-changes that radically alter the structure or content of the code, especially
-if they are aesthetic and even more so if they are from someone who has not
-contributed before. This may seem like common sense, but apparently it isn't.
-If a pull request of this nature is denied that doesn't necessarily mean your
-help is not wanted, just that it may need to be more carefully applied.
+Future releases
+===============
 
-
-### (some argument over an unimportant technical choice)
-
-In general: 'I don't care.'
-That means I either really don't care and something is they way it is because
-that was convienient , or that I don't care because it's not material to the goal of the project. There are a million important things that need to be done to get games running and going back and forth about unimportant orthogonal issues does not help. If you really do have a better way of doing something and can show it, do so.
-
-## Known Issues
-
-[Razz add stuff here] 
+* Design Overhaul
+* Implement Speed Hack
+* Implement an in game UI
+* Implement Unrandomizer
+* Implement Variable Searcher
+* Implement remote windows and mac versions (as well as finish mac native)

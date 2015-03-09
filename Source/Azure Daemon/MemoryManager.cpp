@@ -30,12 +30,11 @@ kern_return_t MemoryManager::AttachToProcess(Process *proc)
     if(proc->pid > 0)
     {
         this->currentProcess = proc;
-        return KERN_SUCCESS;
-    }
-    kern_return_t status = ProcessUtils::TryAttach(proc);
-    if(status != KERN_SUCCESS)
-    {
-        // error
+        kern_return_t status = ProcessUtils::TryAttach(proc);
+        if(status != KERN_SUCCESS)
+        {
+            AZLog("an error occured when attaching to process [%s-%d]: %s", proc->name, proc->pid, mach_error_string(status));
+        }
         return status;
     }
     this->currentProcess = NULL;
