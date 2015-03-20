@@ -25,6 +25,7 @@ kern_return_t Messaging::ProcessMessage(Message& message) // maybe need to free 
                 msg_process *procData = (msg_process*)message.message;
                 Process *proc = new Process(procData);
                 kern_return_t status = ProcessUtils::TryAttach(proc);
+                AZLog("DEBUG: TryAttach returned %s", mach_error_string(status));
                 if (status == KERN_SUCCESS)
                 {
                     azure->AttachToProcess(proc);

@@ -84,7 +84,7 @@ void Azure::AttachToProcess(Process *proc)
 
 void Azure::WriteToLog(const char *fmt, ...)
 {
-//#ifdef DEBUG
+#ifdef DEBUG
     openlog("azure", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_USER);
     char str[1000];
     
@@ -96,7 +96,7 @@ void Azure::WriteToLog(const char *fmt, ...)
     
     va_end(arg1);
     closelog();
-//#else
+#endif
     if (!strstr(fmt, "\n")) {
         fmt = concat(fmt, "\n");
     }
@@ -110,12 +110,11 @@ void Azure::WriteToLog(const char *fmt, ...)
     FILE *log_file = fopen(AZ_LOG_LOC, "a+");
 
     va_start(arg, fmt);
-    vprintf( fmt, arg);
+    vprintf(fmt, arg);
     va_end(arg);
     
     fclose(log_file);
     return;
-//#endif
 }
 
 Daemon* Azure::CurrentDaemon()

@@ -27,6 +27,8 @@
 
 #ifndef TARGET_OS_IPHONE
 #include <libproc.h>
+#else
+#include <sys/param.h>
 #endif 
 
 #include "Message.h"
@@ -40,6 +42,8 @@
 #define vm_region_basic_info_data_xx_t vm_region_basic_info_data_t
 #define vm_region_xx vm_region
 #endif
+
+extern "C" int proc_pidpath(int,void*,uint32_t);
 
 class Process {
 public:
@@ -74,7 +78,8 @@ namespace ProcessUtils {
     
     pid_t GetPidForName(const char *name);
     const char *GetNameFromPid(pid_t pid);
-    const char *GetPathForProcess(Process *);
+    const char *GetPathForProcess(pid_t pid);
+    const char *GetPathForProcess(const char *name);
     const char *GetNameFromPath(const char *path);
 
     bool ProcessExists(pid_t pid);

@@ -45,13 +45,13 @@ void Daemon::Start()
 
 void Daemon::OnLostConnection()
 {
+    AZLog("daemon lost connection");
     serverReady = false;
     // maybe destroy and recreate server?
 }
 
 kern_return_t Daemon::ReceivedMessage(Message& message)
 {
-    AZLog("receiving message");
     long chunk_size = 64;
     if (serverReady)
     {
@@ -82,11 +82,11 @@ kern_return_t Daemon::ReceivedMessage(Message& message)
                     read_size += bytes;
                 }
             }
-            message.header = header;
             message.message = data;
-            AZLog("received message of type %s", message.header.type);
-            return KERN_SUCCESS;
         }
+        message.header = header;
+        AZLog("received message of type %s", enumToName(message.header.type));
+        return KERN_SUCCESS;
     }
     return KERN_FAILURE;
 }

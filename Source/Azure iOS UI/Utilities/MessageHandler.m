@@ -87,7 +87,10 @@
 }
 
 - (void)sendMessage:(struct Message)msg {
-    return [[Daemon currentDaemon] sendMessage:msg];
+    if (messageIsValid(msg)) {
+        NSLog(@"Sending message of type %s", enumToName(msg.header.type));
+        return [[Daemon currentDaemon] sendMessage:msg];
+    }
 }
 
 + (struct Message)attachMessageForApp:(App *)app {
@@ -99,7 +102,7 @@
     
     struct msg_process *procData = malloc(sizeof(struct msg_process));
     procData->pid = app.pid;
-    strcpy(procData->name, [app name].UTF8String);
+//    strcpy(procData->name, [app name].UTF8String);
     
     msg.message = procData;
     

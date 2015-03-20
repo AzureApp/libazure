@@ -26,11 +26,13 @@ Process::Process(pid_t pid) : Process()
     {
         this->pid = pid;
         strcpy(this->name, GetNameFromPid(pid));
-        strcpy(this->path, GetPathForProcess(this));
+        strcpy(this->path, GetPathForProcess(pid));
         TryAttach(this);
     }
-
-    // else throw error
+    else
+    {
+        AZLog("no matching process for %d", pid);
+    }
 }
 
 Process::Process(const char *name) : Process()
@@ -40,10 +42,13 @@ Process::Process(const char *name) : Process()
     {
         strcpy(this->name, name);
         this->pid = GetPidForName(name);
-        strcpy(this->path, GetPathForProcess(this));
+        strcpy(this->path, GetPathForProcess(name));
         TryAttach(this);
     }
-    // else throw error
+    else
+    {
+        AZLog("no matching process for %s", name);
+    }
 }
 
 Process::Process(msg_process *processData) : Process()
@@ -51,10 +56,16 @@ Process::Process(msg_process *processData) : Process()
     if (ProcessExists(processData->pid))
     {
         this->pid = processData->pid;
+        strcpy(this->name, GetNameFromPid(this->pid));
+        strcpy(this->path, GetPathForProcess(processData->pid));
+        TryAttach(this);
     }
     else if (ProcessExists(processData->name))
     {
+        this->pid = GetPidForName(processData->name);
         strcpy(this->name, processData->name);
+        strcpy(this->path, GetPathForProcess(processData->name));
+        TryAttach(this);
     }
     else
     {
@@ -133,26 +144,34 @@ vector<Process> ProcessUtils::GetAllProcesses()
                     /*struct passwd *user = getpwuid(process[i].kp_eproc.e_ucred.cr_uid);
                      const char * name = user->pw_name;*/
                     
-                    Process temp;
+                    pid_t pid = process[i].kp_proc.p_pid;
                     char nameBuffer[64];
-                    const char *pathBuffer = ProcessUtils::GetPathForProcess(new Process(process[i].kp_proc.p_pid));
-                    long position = strlen(pathBuffer);
-                    
-                    while(position >= 0 && pathBuffer[position] != '/')
+                    const char *pathBuffer = ProcessUtils::GetPathForProcess(pid);
+                    AZLog("path is: %s", pathBuffer);
+                    if (pathBuffer)
                     {
-                        position--;
+                        long position = strlen(pathBuffer);
+                        
+                        while(position >= 0 && pathBuffer[position] != '/')
+                        {
+                            position--;
+                        }
+                        
+                        if (isalpha(*(pathBuffer+position+1)))
+                        {
+                            strcpy(nameBuffer, pathBuffer + position + 1);
+                        }
                     }
-                    
-                    if (isalpha(*(pathBuffer+position+1)))
+                    // Create a new Process object
                     {
-                        strcpy(nameBuffer, pathBuffer + position + 1);
+                        Process temp;
+                    
+                        if (nameBuffer) strcpy(temp.name, nameBuffer);
+                        if (pathBuffer) strcpy(temp.path, pathBuffer);
+                        temp.pid = process[i].kp_proc.p_pid;
+                        
+                        local.push_back(temp);
                     }
-                    
-                    strcpy(temp.name, nameBuffer);
-                    temp.pid = process[i].kp_proc.p_pid;
-                    
-                    
-                    local.push_back(temp);
                     
                 }
             }
@@ -192,40 +211,25 @@ const char *ProcessUtils::GetNameFromPid(pid_t pid)
     return NULL; // error
 }
 
-const char *ProcessUtils::GetPathForProcess(Process *proc)
+const char *ProcessUtils::GetPathForProcess(pid_t pid)
 {
-    pid_t pid = proc->pid;
-    int mib[3] = {CTL_KERN, KERN_ARGMAX, 0};
-    
-    size_t argmaxsize = sizeof(size_t);
-    size_t size;
-    
-    int ret = sysctl(mib, 2, &size, &argmaxsize, NULL, 0);
-    
-    if (ret != 0) {
-        AZLog("Error '%s' (%d) getting KERN_ARGMAX", strerror(errno), errno);
-        
-        return NULL;
+    char *buf = (char*)malloc(MAXPATHLEN*4);
+    int ret = proc_pidpath(pid, buf, MAXPATHLEN*4);
+    if (ret == 0) {
+        perror("proc_pidpath returned error");
     }
+    return buf;
+}
+
+const char *ProcessUtils::GetPathForProcess(const char *name) {
+    pid_t pid = GetPidForName(name);
     
-    // Then we can get the path information we actually want
-    mib[1] = KERN_PROCARGS2;
-    mib[2] = (int)pid;
-    
-    char *procargv = (char *)malloc(size);
-    
-    ret = sysctl(mib, 3, procargv, &size, NULL, 0);
-    
-    if (ret != 0) {
-        AZLog("Error '%s' (%d) for pid %d", strerror(errno), errno, pid);
-        
-        free(procargv);
-        
-        return NULL;
+    char *buf = (char*)malloc(MAXPATHLEN*4);
+    int ret = proc_pidpath(pid, buf, MAXPATHLEN*4);
+    if (ret == 0) {
+        perror("proc_pidpath returned error");
     }
-    char *path = procargv + sizeof(int);
-    free (procargv);
-    return path;
+    return buf;
 }
 
 const char *ProcessUtils::GetNameFromPath(const char *path)
@@ -265,6 +269,8 @@ bool ProcessUtils::ProcessExists(pid_t pid)
 
 bool ProcessUtils::ProcessExists(const char* name)
 {
+    if (name == NULL) return false;
+    
     long position = strlen(name);
     
     while(position >= 0 && name[position] != '/')
