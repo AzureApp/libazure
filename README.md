@@ -14,7 +14,6 @@ Azure is a experimental iOS memory editor. It is not fully stable (yet)
 Beta build
 ==========
 
-* Finish daemon by making sure it correctly processes messages, attaches to apps and searches properly
 * Finish iOS UI with the same reasons
 * Make sure that search support for all the current data types works
 
