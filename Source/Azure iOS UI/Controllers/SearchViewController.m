@@ -20,11 +20,10 @@
 
 @implementation SearchViewController
 
-@synthesize resultsView, line, settingsButton, searchType;
+@synthesize resultsView, line, settingsButton, searchType, searchNavigationBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 //    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:line.bounds];
 //    line.layer.masksToBounds = NO;
 //    line.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -38,7 +37,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Titillium-Bold" size:14], NSFontAttributeName, nil];
     [searchType setTitleTextAttributes:attributes forState:UIControlStateNormal];
 }
@@ -98,6 +96,10 @@
     return NO;
 }
 
+- (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar {
+    return UIBarPositionTopAttached;
+}
+    
 @end
 
 @implementation NSString (HexAdditions)

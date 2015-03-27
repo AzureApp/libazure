@@ -44,7 +44,7 @@
 		<key>UINavigationBar</key>
 		<dict>
 			<key>Style</key>
-			<string>Titillium-Light.otf</string>
+			<string>Titillium-Regular.otf</string>
 			<key>Translucent</key>
 			<false/>
 		</dict>

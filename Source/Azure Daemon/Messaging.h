@@ -16,7 +16,7 @@
 #include "Message.h"
 
 namespace Messaging {
-    kern_return_t ProcessMessage(Message &);
+    AZ_STATUS ProcessMessage(Message &);
 
     static Message SuccessMessage();
     static Message FailMessage(const char*);

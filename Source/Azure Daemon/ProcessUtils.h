@@ -63,8 +63,8 @@ public:
     Process(msg_process *);
     ~Process();
     
-    kern_return_t ReadMemory(vm_address_t address, char *output, size_t size);
-    kern_return_t WriteMemory(vm_address_t address, char *input, size_t size);
+    AZ_STATUS ReadMemory(vm_address_t address, char *output, size_t size);
+    AZ_STATUS WriteMemory(vm_address_t address, char *input, size_t size);
     std::vector<Region> GetRegions();
     std::vector<Region> GetRegions(vm_prot_t options);
 
@@ -85,11 +85,11 @@ namespace ProcessUtils {
     bool ProcessExists(pid_t pid);
     bool ProcessExists(const char* name);
     
-    kern_return_t TryAttach(Process *);
+    AZ_STATUS TryAttach(Process *);
     std::vector<Process::Region> GetRegions(Process *);
     std::vector<Process::Region> GetRegions(Process *,vm_prot_t options);
-    kern_return_t ReadMemory(Process *, vm_address_t address, char *output, size_t size);
-    kern_return_t WriteMemory(Process *, vm_address_t address, char *input, size_t size);
+    AZ_STATUS ReadMemory(Process *, vm_address_t address, char *output, size_t size);
+    AZ_STATUS WriteMemory(Process *, vm_address_t address, char *input, size_t size);
 
 } // ProcessUtils
 

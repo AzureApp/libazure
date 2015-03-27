@@ -12,52 +12,73 @@
 using namespace DaemonUtils;
 
 Daemon::Daemon()
+: serverReady(false), port(DAEMON_PORT)
 {
-    serverReady = false;
-    socket_desc = socket(AF_INET , SOCK_STREAM , 0);
-    if (socket_desc == -1)
-    {
-        AZLog("Could not create socket");
-        return;
-    }
-    
-    server.sin_family = AF_INET;
-    server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(1248);
+    std::signal(SIGPIPE, SIG_IGN);
 }
 
 Daemon::~Daemon()
 {
-    AZLog("daemon shutting down");
-    shutdown(socket_desc, SHUT_RDWR);
-    serverReady = false;
+    if (serverReady)
+    {
+        this->Close();
+    }
 }
 
-void Daemon::Start()
+AZ_STATUS Daemon::Start()
 {
     AZLog("starting daemon");
+    
+    socket_desc = socket(AF_INET , SOCK_STREAM , 0);
+    if (socket_desc == -1)
+    {
+        AZLog("Could not create socket");
+        return AZ_FAILURE;
+    }
+    int set = 1;
+    setsockopt(socket_desc, SOL_SOCKET, SO_NOSIGPIPE, (void *)&set, sizeof(int));
+    
+    server.sin_family = AF_INET;
+    server.sin_addr.s_addr = INADDR_ANY;
+    server.sin_port = htons(port);
     bind(socket_desc, (struct sockaddr *)&server , sizeof(server));
     listen(socket_desc , 5);
     c = sizeof(struct sockaddr_in);
     client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
+    
     serverReady = true;
+    return AZ_SUCCESS;
+}
+
+void Daemon::Close()
+{
+    AZLog("daemon shutting down");
+    close(socket_desc);
+    client_sock = -1;
+    serverReady = false;
 }
 
 void Daemon::OnLostConnection()
 {
     AZLog("daemon lost connection");
-    serverReady = false;
-    // maybe destroy and recreate server?
+    
+    this->serverReady = false;
+    this->Close();
 }
 
-kern_return_t Daemon::ReceivedMessage(Message& message)
+AZ_STATUS Daemon::ReceivedMessage(Message& message)
 {
     long chunk_size = 64;
     if (serverReady)
     {
         msg_header header = header_default;
         long bytes = recv(client_sock, &header, sizeof(msg_header), 0);
-        if (bytes < 0) perror("an error has occured while receiving a message");
+        if (bytes < 0)
+        {
+            this->OnLostConnection();
+            return AZ_FAILURE;
+        }
+        
         char *data = NULL;
         if (bytes > 0)
         {
@@ -74,10 +95,12 @@ kern_return_t Daemon::ReceivedMessage(Message& message)
                         if (chunk_size == 0) break;
                     }
                     long bytes = recv(client_sock, data+read_size, chunk_size, 0);
+                    AZLog("%d", bytes);
                     if (bytes < 0)
                     {
+                        AZLog("testy mctest");
                         this->OnLostConnection();
-                        return KERN_FAILURE;
+                        return AZ_FAILURE;
                     }
                     read_size += bytes;
                 }
@@ -86,20 +109,26 @@ kern_return_t Daemon::ReceivedMessage(Message& message)
         }
         message.header = header;
         AZLog("received message of type %s", enumToName(message.header.type));
-        return KERN_SUCCESS;
+        return AZ_SUCCESS;
     }
-    return KERN_FAILURE;
+    return AZ_FAILURE;
 }
 
 
-kern_return_t Daemon::SendMessage(Message& message)
+AZ_STATUS Daemon::SendMessage(Message& message)
 {
     AZLog("sending message of type %s", enumToName(message.header.type));
     long chunk_size = 64;
     if (serverReady)
     {
         char *data = (char*)message.message;
-        send(client_sock, &message.header, sizeof(msg_header), 0);
+        long sent = send(client_sock, &message.header, sizeof(msg_header), 0);
+        if (sent < 0)
+        {
+            AZLog("testy mctest 2");
+            this->OnLostConnection();
+            return AZ_FAILURE;
+        }
         
         long msg_size = message.header.messageSize;
         if (msg_size > 0)
@@ -116,15 +145,16 @@ kern_return_t Daemon::SendMessage(Message& message)
                 long writeval = send(client_sock, data+write_size, chunk_size, 0);
                 if (writeval < 0)
                 {
+                    AZLog("testy mctest 2");
                     this->OnLostConnection();
-                    return KERN_FAILURE;
+                    return AZ_FAILURE;
                 }
                 write_size += writeval;
             }
         }
-        return KERN_SUCCESS;
+        return AZ_SUCCESS;
     }
-    return KERN_FAILURE;
+    return AZ_FAILURE;
 }
 
 void Daemon::SendMessageReceiveSuccess()

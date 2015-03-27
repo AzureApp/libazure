@@ -25,20 +25,20 @@ MemoryManager* MemoryManager::GetInstance()
     return manager;
 }
 
-kern_return_t MemoryManager::AttachToProcess(Process *proc)
+AZ_STATUS MemoryManager::AttachToProcess(Process *proc)
 {
     if(proc->pid > 0)
     {
         this->currentProcess = proc;
-        kern_return_t status = ProcessUtils::TryAttach(proc);
-        if(status != KERN_SUCCESS)
+        AZ_STATUS status = ProcessUtils::TryAttach(proc);
+        if(status != AZ_SUCCESS)
         {
             AZLog("an error occured when attaching to process [%s-%d]: %s", proc->name, proc->pid, mach_error_string(status));
         }
         return status;
     }
     this->currentProcess = NULL;
-    return KERN_FAILURE;
+    return AZ_FAILURE;
 }
 
 std::vector<vm_address_t> MemoryManager::Results()
@@ -55,17 +55,16 @@ std::vector<vm_address_t> MemoryManager::Find(void *data, size_t dataCnt)
     for(auto it = regions.begin(); it != regions.end(); ++it)
     {
         Process::Region region = *it;
-        long long readsz = region.size;
-        char *buffer = new char[readsz];
+        char *buffer = new char[region.size];
         
-        kern_return_t status = currentProcess->ReadMemory(region.start, buffer, readsz);
-        if(status != KERN_SUCCESS)
+        AZ_STATUS status = currentProcess->ReadMemory(region.start, buffer, region.size);
+        if(status != AZ_SUCCESS)
         {
             AZLog("read error: %s\n region size: 0x%llx\n", mach_error_string(status), region.size);
             return results;
         }
         
-        for (int i = 0; (i+dataCnt) < readsz; i+=4) // i += dataTypeSize
+        for (int i = 0; (i+dataCnt) < region.size; i+=4) // i += dataTypeSize
         {
             if (!memcmp(data, buffer+i, dataCnt))
             {
@@ -93,10 +92,17 @@ std::vector<vm_address_t> MemoryManager::Iterate(void *data, size_t dataCnt, std
     for (auto it = addresses.begin(); it != addresses.end(); ++it)
     {
         char *temp = (char*)malloc(dataCnt);
-        currentProcess->ReadMemory(*it, temp, dataCnt);
-        if(!memcmp(temp, data, dataCnt))
+        AZ_STATUS status = currentProcess->ReadMemory(*it, temp, dataCnt);
+        if (!status)
         {
-            results.push_back(*it);
+            if(!memcmp(temp, data, dataCnt))
+            {
+                results.push_back(*it);
+            }
+        }
+        else
+        {
+            AZLog("An error occured while iterating saved values");
         }
         free(temp);
     }

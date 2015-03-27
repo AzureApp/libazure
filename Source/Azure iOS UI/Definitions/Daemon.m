@@ -145,7 +145,8 @@
         }
         case NSStreamEventErrorOccurred:
         {
-            NSLog(@"%@",stream.streamError);
+            // daemon not running
+            [self tryLoadDaemon];
             break;
         }
         case NSStreamEventEndEncountered:
@@ -157,4 +158,13 @@
     }
 }
 
+- (void)tryLoadDaemon {
+    pid_t newPid;
+    char *argV[] = {"launchctl", "load /Library/LaunchDaemons/azure.daemon.plist", 0};
+    int status = posix_spawn(&newPid, "launchctl", NULL, NULL, argV, NULL);
+    if (status)
+    {
+        NSLog(@"Failed to load daemon");
+    }
+}
 @end

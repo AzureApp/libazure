@@ -20,7 +20,7 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:49/255.0f green:192/255.0f blue:190/255.0f alpha:1.0]];
     [[UINavigationBar appearance] setTranslucent:YES];
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:49/255.0f green:192/255.0f blue:190/255.0f alpha:1.0]];
-    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    //[application setStatusBarStyle:UIStatusBarStyleLightContent];
     Daemon *daemon = [Daemon currentDaemon]; // move to an - [Azure init] func?
     [daemon start];
     

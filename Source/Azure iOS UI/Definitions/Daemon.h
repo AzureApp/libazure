@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <spawn.h>
 #import "Message.h"
 @interface Daemon : NSObject <NSStreamDelegate> {
     
@@ -20,6 +21,7 @@
 + (instancetype)currentDaemon;
 - (void)start;
 
+- (void)tryLoadDaemon;
 - (void)sendMessage:(struct Message)message;
 
 @end

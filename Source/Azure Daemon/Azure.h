@@ -37,8 +37,8 @@ public:
     
     static Azure *GetInstance();
     
-    kern_return_t Start();
-    kern_return_t Tick();
+    AZ_STATUS Start();
+    AZ_STATUS Tick();
     static void WriteToLog(const char *fmt, ...);
     void AttachToProcess(Process *);
     

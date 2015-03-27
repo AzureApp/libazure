@@ -27,7 +27,7 @@
                                    
     listButton.tintColor = [UIColor whiteColor];
     
-    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@""];
+    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Processes"];
     item.rightBarButtonItems = @[refreshButton/*, listButton*/];
     [processNavigationBar pushNavigationItem:item animated:NO];
     

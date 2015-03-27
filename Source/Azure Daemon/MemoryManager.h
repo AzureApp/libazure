@@ -22,14 +22,14 @@ public:
     static MemoryManager *GetInstance();
     static MemoryManager *manager;
     
-    kern_return_t AttachToProcess(Process *);
+    AZ_STATUS AttachToProcess(Process *);
     
     std::vector<vm_address_t> Results();
     
     std::vector<vm_address_t> Find(void* data, size_t dataCnt);
     std::vector<vm_address_t> Iterate(void *data, size_t dataCnt, std::vector<vm_address_t> addresses);
     
-    kern_return_t Write(vm_address_t addr, void* data, size_t dataCnt);
+    AZ_STATUS Write(vm_address_t addr, void* data, size_t dataCnt);
 private:
     Process *currentProcess;
     std::vector<vm_address_t> savedAddresses;

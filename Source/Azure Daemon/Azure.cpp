@@ -37,41 +37,56 @@ Azure* Azure::GetInstance()
     return instance;
 }
 
-kern_return_t Azure::Start()
+AZ_STATUS Azure::Start()
 {
     if (azureDaemon) {
-        azureDaemon->Start();
-        return KERN_SUCCESS;
+        AZ_STATUS status = azureDaemon->Start();
+        return status;
     }
-    return KERN_FAILURE;
+    AZLog("daemon not initialized");
+    return AZ_FAILURE;
 }
 
-kern_return_t Azure::Tick()
+AZ_STATUS Azure::Tick()
 {
-    kern_return_t status = KERN_SUCCESS;
-    while (status == KERN_SUCCESS)
+    AZ_STATUS status = AZ_SUCCESS;
+    while (status == AZ_SUCCESS)
     {
         Message msg;
         status = azureDaemon->ReceivedMessage(msg);
-        if (status != KERN_SUCCESS) {
+        if (status != AZ_SUCCESS) {
             AZLog("daemon failed with error %d\n", status);
-            return status;
+            AZLog("trying to recreate daemon");
+            if ((status = azureDaemon->Start())) {
+                AZLog("fatal, cannot restart daemon");
+                return status;
+            }
         }
         azureDaemon->SendMessageReceiveSuccess();
+        
         status = Messaging::ProcessMessage(msg);
-        if (status != KERN_SUCCESS) {
+        if (status != AZ_SUCCESS) {
             AZLog("Messaging failed with error %d\n", status);
             return status;
         }
+        
         status = azureDaemon->SendMessage(msg);
+        if (status != AZ_SUCCESS) {
+            AZLog("daemon failed with error %d\n", status);
+            AZLog("trying to recreate daemon");
+            if ((status = azureDaemon->Start())) {
+                AZLog("fatal, cannot restart daemon");
+                return status;
+            }
+        }
     }
     return status;
 }
 
 void Azure::AttachToProcess(Process *proc)
 {
-    kern_return_t status = ProcessUtils::TryAttach(proc);
-    if (status == KERN_SUCCESS)
+    AZ_STATUS status = ProcessUtils::TryAttach(proc);
+    if (status == AZ_SUCCESS)
     {
         MemoryManager *manager = MemoryManager::GetInstance();
         manager->AttachToProcess(proc);

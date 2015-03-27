@@ -14,8 +14,8 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include <pthread.h>
 #include <thread>
+#include <csignal>
 #include <unistd.h>
 #include <sys/socket.h>
 
@@ -26,21 +26,21 @@
 namespace DaemonUtils {
     
 class Daemon {
-    int socket_desc , client_sock , c;
+    int socket_desc , client_sock , c, port;
     struct sockaddr_in server , client;
     bool serverReady;
     
     void OnLostConnection();
     
 public:
-    static Daemon CurrentDaemon();
     Daemon();
     ~Daemon();
     
-    void Start();
+    AZ_STATUS Start();
+    void Close();
     
-    kern_return_t ReceivedMessage(Message&);
-    kern_return_t SendMessage(Message&);
+    AZ_STATUS ReceivedMessage(Message&);
+    AZ_STATUS SendMessage(Message&);
     
     void SendMessageReceiveSuccess();
 };

@@ -88,12 +88,12 @@ vector<Process::Region> Process::GetRegions(vm_prot_t options)
     return ProcessUtils::GetRegions(this, options);
 }
 
-kern_return_t Process::ReadMemory(vm_address_t address, char *output, size_t size)
+AZ_STATUS Process::ReadMemory(vm_address_t address, char *output, size_t size)
 {
     return ProcessUtils::ReadMemory(this, address, output, size);
 }
 
-kern_return_t Process::WriteMemory(vm_address_t address, char *input, size_t size)
+AZ_STATUS Process::WriteMemory(vm_address_t address, char *input, size_t size)
 {
     return ProcessUtils::WriteMemory(this, address, input, size);
 }
@@ -295,9 +295,9 @@ bool ProcessUtils::ProcessExists(const char* name)
     return false;
 }
 
-kern_return_t ProcessUtils::TryAttach(Process *proc)
+AZ_STATUS ProcessUtils::TryAttach(Process *proc)
 {
-    kern_return_t status = KERN_SUCCESS;
+    AZ_STATUS status = AZ_SUCCESS;
     if(proc->pid < 0)
     {
         if(ProcessExists(proc->name))
@@ -330,20 +330,20 @@ vector<Process::Region> ProcessUtils::GetRegions(Process *proc, vm_prot_t option
 {
     vector<Process::Region> regions;
     
-    kern_return_t status = KERN_SUCCESS;
+    AZ_STATUS status = AZ_SUCCESS;
     vm_address_t address = 0x0;
     
     if(!proc->task)
     {
         status = TryAttach(proc);
-        if(status != KERN_SUCCESS)
+        if(status != AZ_SUCCESS)
         {
             // error
             return regions;
         }
     }
     
-    while (status == KERN_SUCCESS)
+    while (status == AZ_SUCCESS)
     {
         vm_size_t vmsize;
         vm_region_basic_info_data_xx_t info;
@@ -352,7 +352,7 @@ vector<Process::Region> ProcessUtils::GetRegions(Process *proc, vm_prot_t option
         
         status = vm_region_xx(proc->task, &address, &vmsize, VM_REGION_BASIC_INFO, (vm_region_info_64_t)&info, &info_count, &object);
         
-        if((info.protection == options) && (status == KERN_SUCCESS)) //remember to change vm_prot_default back
+        if((info.protection == options) && (status == AZ_SUCCESS)) //remember to change vm_prot_default back
         {
             Process::Region temp = {address, vmsize};
             regions.push_back(temp);
@@ -362,13 +362,13 @@ vector<Process::Region> ProcessUtils::GetRegions(Process *proc, vm_prot_t option
     return regions;
 }
 
-kern_return_t ProcessUtils::ReadMemory(Process *proc, vm_address_t address, char *output, size_t size)
+AZ_STATUS ProcessUtils::ReadMemory(Process *proc, vm_address_t address, char *output, size_t size)
 {
-    kern_return_t status = KERN_SUCCESS;
+    AZ_STATUS status = AZ_SUCCESS;
     if(proc->task <= 0)
     {
         status = TryAttach(proc);
-        if(status != KERN_SUCCESS)
+        if(status != AZ_SUCCESS)
         {
             // error
             return status;
@@ -376,7 +376,7 @@ kern_return_t ProcessUtils::ReadMemory(Process *proc, vm_address_t address, char
     }
     vm_size_t sz;
     status = vm_read_overwrite(proc->task, address, size, (vm_address_t)output, &sz);
-    if(status != KERN_SUCCESS)
+    if(status != AZ_SUCCESS)
     {
         // error
         return status;
@@ -385,13 +385,13 @@ kern_return_t ProcessUtils::ReadMemory(Process *proc, vm_address_t address, char
     return status;
 }
 
-kern_return_t ProcessUtils::WriteMemory(Process *proc, vm_address_t address, char *input, size_t size)
+AZ_STATUS ProcessUtils::WriteMemory(Process *proc, vm_address_t address, char *input, size_t size)
 {
-    kern_return_t status = KERN_SUCCESS;
+    AZ_STATUS status = AZ_SUCCESS;
     if(!proc->task)
     {
         status = TryAttach(proc);
-        if(status != KERN_SUCCESS)
+        if(status != AZ_SUCCESS)
         {
             // error
             return status;
@@ -399,7 +399,7 @@ kern_return_t ProcessUtils::WriteMemory(Process *proc, vm_address_t address, cha
     }
     
     status = vm_write(proc->task, address, (vm_address_t)input, size);
-    if(status != KERN_SUCCESS)
+    if(status != AZ_SUCCESS)
     {
         // error
         return status;

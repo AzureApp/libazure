@@ -9,7 +9,7 @@
 #include "Messaging.h"
 #include "Azure.h"
 
-kern_return_t Messaging::ProcessMessage(Message& message) // maybe need to free message.message after use?
+AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free message.message after use?
 {
     Azure *azure = Azure::GetInstance();
     MemoryManager *manager = MemoryManager::GetInstance();
@@ -18,15 +18,15 @@ kern_return_t Messaging::ProcessMessage(Message& message) // maybe need to free 
                 
             case StatusOK:
             case StatusErr:
-                return KERN_SUCCESS; // not really useful
+                return AZ_SUCCESS; // not really useful
                 
             case Attach:
             {
                 msg_process *procData = (msg_process*)message.message;
                 Process *proc = new Process(procData);
-                kern_return_t status = ProcessUtils::TryAttach(proc);
+                AZ_STATUS status = ProcessUtils::TryAttach(proc);
                 AZLog("DEBUG: TryAttach returned %s", mach_error_string(status));
-                if (status == KERN_SUCCESS)
+                if (status == AZ_SUCCESS)
                 {
                     azure->AttachToProcess(proc);
                     message = SuccessMessage();
@@ -49,7 +49,7 @@ kern_return_t Messaging::ProcessMessage(Message& message) // maybe need to free 
                 vm_address_t *addressPtr = &addresses[0];
                 message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
 
-                return KERN_SUCCESS;
+                return AZ_SUCCESS;
             }
                 
             case IterateSearch:
@@ -61,7 +61,7 @@ kern_return_t Messaging::ProcessMessage(Message& message) // maybe need to free 
                 vm_address_t *addressPtr = &addresses[0];
                 message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
 
-                return KERN_SUCCESS;
+                return AZ_SUCCESS;
             }
     //
     //        case IterateSearch:
@@ -76,7 +76,7 @@ kern_return_t Messaging::ProcessMessage(Message& message) // maybe need to free 
 
         }
     }
-    return KERN_FAILURE;
+    return AZ_FAILURE;
 }
 
 Message Messaging::SuccessMessage()

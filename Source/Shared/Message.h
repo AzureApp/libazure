@@ -11,6 +11,9 @@
 
 #include <sys/types.h>
 #include <stdbool.h>
+#include "Status.h"
+
+#define DAEMON_PORT 1248
 
 #define MSG_MAGIC 0xABAD1DEA // dedicated to my favorite virus
 
