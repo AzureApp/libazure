@@ -23,6 +23,10 @@
 - (BOOL)isStringSearch;
 - (BOOL)isNumberSearch;
 - (BOOL)isDecimalNumberSearch;
-- (BOOL)isBytes;
+- (BOOL)isByteSearch;
 
+- (int)getSearchSize;
+- (void*)getRawData;
+
+- (NSString *)toString;
 @end

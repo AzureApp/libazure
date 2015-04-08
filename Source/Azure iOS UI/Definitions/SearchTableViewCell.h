@@ -14,6 +14,4 @@
 @property (nonatomic) IBOutlet UILabel *addressLabel;
 @property (nonatomic) IBOutlet UITextField *valueField;
 
-+ (id)initWithAddress:(NSInteger)address andValue:(NSInteger)value; // to do: all data types (string, hext etc), locking
-
 @end

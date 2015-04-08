@@ -7,6 +7,7 @@
 //
 #undef MSG_MAGIC
 #import "MessageHandler.h"
+#import "ResultsHandler.h"
 
 @implementation MessageHandler
 
@@ -19,7 +20,7 @@
     return inst;
 }
 
-- (BOOL)isMessageValid:(struct Message)msg {
+- (BOOL)isMessageValid:(Message)msg {
     NSLog(@"msg type: %s msg size: %ld", enumToName(msg.header.type), msg.header.messageSize);
     if (msg.header.magic != MSG_MAGIC) return false;
     if(enumToName(msg.header.type))
@@ -30,7 +31,7 @@
     return false;
 }
 
-- (void)processMessage:(struct Message)msg {
+- (void)processMessage:(Message)msg {
     if ([self isMessageValid:msg])
     {
         Daemon *daemon = [Daemon currentDaemon];
@@ -55,18 +56,23 @@
                 return;
             }
                 
-            case Results:
-            {
-                ResultsHandler *results = [ResultsHandler sharedInstance];
-                vm_offset_t *addresses = msg.message;
-                NSMutableArray *arr = [[NSMutableArray alloc] init];
-
-                for (int i = 0; i < msg.header.messageSize/sizeof(vm_offset_t); i++)
-                {
-                    [arr addObject:[NSNumber numberWithLong:addresses[i]]];
-                }
-                results.savedAddresses = [NSArray arrayWithArray:arr];
-            }
+//            case Results:
+//            {
+//                ResultsHandler *results = [ResultsHandler sharedInstance];
+//                vm_offset_t *addresses = msg.message;
+//                NSMutableArray *arr = [[NSMutableArray alloc] init];
+//                int addressCount = msg.header.messageSize/sizeof(vm_address_t);
+//                printf("address count = %d", addressCount);
+//                for (int i = 0; i < addressCount; i++)
+//                {
+//                    [arr addObject:[NSNumber numberWithLong:addresses[i]]];
+//                }
+//                results.savedAddresses = [NSArray arrayWithArray:arr];
+//                results.addressCount = addressCount;
+//                [results onResultsReceived];
+//                
+//                daemon.ready = YES;
+//            }
                 
             case Attach:
             case Detach:
@@ -86,15 +92,15 @@
     }
 }
 
-- (void)sendMessage:(struct Message)msg {
+- (void)sendMessage:(Message)msg {
     if (messageIsValid(msg)) {
         NSLog(@"Sending message of type %s", enumToName(msg.header.type));
         return [[Daemon currentDaemon] sendMessage:msg];
     }
 }
 
-+ (struct Message)attachMessageForApp:(App *)app {
-    struct Message msg;
++ (Message)attachMessageForApp:(App *)app {
+    Message msg;
     msg.header.magic = MSG_MAGIC;
     msg.header.messageSize = sizeof(struct msg_process);
     msg.header.shouldPop = YES;
@@ -102,9 +108,20 @@
     
     struct msg_process *procData = malloc(sizeof(struct msg_process));
     procData->pid = app.pid;
-//    strcpy(procData->name, [app name].UTF8String);
     
     msg.message = procData;
+    
+    return msg;
+}
+
++ (Message)searchMessageForSearchObject:(SearchObject *)obj {
+    Message msg;
+    msg.header.magic = MSG_MAGIC;
+    msg.header.messageSize = obj.getSearchSize;
+    msg.header.shouldPop = YES;
+    msg.header.type = NewSearch;
+    
+    msg.message = [obj getRawData];
     
     return msg;
 }

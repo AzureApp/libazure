@@ -7,19 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#undef MSG_MAGIC
+
 #import "Message.h"
 #import "Daemon.h"
-#import "ResultsHandler.h"
 #import "App.h"
+#import "SearchObject.h"
 
 @interface MessageHandler : NSObject
 
 + (id)sharedInstance;
-- (BOOL)isMessageValid:(struct Message)msg;
-- (void)processMessage:(struct Message)msg;
-- (void)sendMessage:(struct Message)msg;
+- (BOOL)isMessageValid:(Message)msg;
+- (void)processMessage:(Message)msg;
+- (void)sendMessage:(Message)msg;
 
-+ (struct Message)attachMessageForApp:(App *)app;
++ (Message)attachMessageForApp:(App *)app;
++ (Message)searchMessageForSearchObject:(SearchObject *)obj;
 
 - (BOOL)isLawividoInAzureCode;
 @end

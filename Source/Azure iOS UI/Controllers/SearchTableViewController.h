@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchTableViewCell.h"
-@interface SearchTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+#import "ResultsHandler.h"
 
+@interface SearchTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 -(IBAction)toggleLock:(UIButton*)sender;
 @end

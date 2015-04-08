@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SearchObject.h"
+#import "Message.h"
+#import "Daemon.h"
+#import "MessageHandler.h"
 
 enum SearchType {
     Int,
@@ -20,9 +22,12 @@ enum SearchType {
 
 +(instancetype)sharedInstance;
 - (void)beginSearch;
+- (void)onResultsReceived;
+- (BOOL)hasResults;
 
 @property enum SearchType currentSearchType;
 @property (strong) NSArray *savedAddresses; // strong to copy?
+@property int addressCount;
 @property (strong) SearchObject *currentSearchObject;
 
 @end

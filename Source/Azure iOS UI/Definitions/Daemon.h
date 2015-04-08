@@ -22,6 +22,6 @@
 - (void)start;
 
 - (void)tryLoadDaemon;
-- (void)sendMessage:(struct Message)message;
+- (void)sendMessage:(Message)message;
 
 @end

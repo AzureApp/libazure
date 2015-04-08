@@ -145,7 +145,7 @@ AZ_STATUS Daemon::SendMessage(Message& message)
                 long writeval = send(client_sock, data+write_size, chunk_size, 0);
                 if (writeval < 0)
                 {
-                    AZLog("testy mctest 2");
+                    AZLog("testy mctest 2.5");
                     this->OnLostConnection();
                     return AZ_FAILURE;
                 }

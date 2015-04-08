@@ -46,8 +46,72 @@
     return (self.asDecimalNumber != nil);
 }
 
-- (BOOL)isBytes {
+- (BOOL)isByteSearch {
     return (self.asBytes != nil);
+}
+
+- (int)getSearchSize {
+    if ([self isNumberSearch]) {
+        return sizeof(int); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
+    }
+    if ([self isDecimalNumberSearch]) {
+        return sizeof(float); // TODO: change to float, double, quad ... etc
+    }
+    if ([self isByteSearch]) {
+        return [[self asBytes] length];
+    }
+    if ([self isStringSearch]) {
+        return [[self asString] length]; // may have to adjust for trailing byte
+    }
+    return 0;
+}
+
+- (void*)getRawData {
+    int size = [self getSearchSize];
+    void *data = malloc(size);
+    
+    if ([self isNumberSearch]) {
+        int val = [[self asNumber] intValue];
+        memcpy(data, &val, size); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
+    }
+    if ([self isDecimalNumberSearch]) {
+        float val = [[self asDecimalNumber] floatValue];
+        memcpy(data, &val, size); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
+
+    }
+    if ([self isByteSearch]) {
+        const void *val = [[self asBytes] bytes];
+        memcpy(data, val, size); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
+    }
+    if ([self isStringSearch]) {
+        const char *val = [[self asString] UTF8String];
+        memcpy(data, val, size);
+    }
+    return data;
+}
+
+- (NSString *)toString {
+    if ([self isNumberSearch]) {
+        return [NSString stringWithFormat:@"%d", [[self asNumber] intValue]];
+    }
+    if ([self isDecimalNumberSearch]) {
+        return [NSString stringWithFormat:@"%f", [[self asNumber] floatValue]];
+    }
+    if ([self isByteSearch]) {
+        NSData *data = [self asBytes];
+        NSMutableString *hex = [NSMutableString new];
+        char *byteData = malloc(data.length);
+        memcpy(byteData, data.bytes, data.length);
+        for (int i = 0; i < data.length; i++) {
+            [hex appendFormat:@"%02x", byteData[i]];
+        }
+        free(byteData);
+        return [NSString stringWithString:hex];
+    }
+    if ([self isStringSearch]) {
+        return [self asString];
+    }
+    return [NSString new];
 }
 
 @end

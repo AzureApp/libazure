@@ -40,6 +40,7 @@ struct Message {
     struct msg_header header;
     void *message;
 };
+typedef struct Message Message;
 
 struct msg_process {
     pid_t pid;

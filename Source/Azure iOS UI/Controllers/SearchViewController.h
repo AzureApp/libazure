@@ -19,8 +19,10 @@
 @property (nonatomic, strong) IBOutlet UISegmentedControl *searchType;
 @property (nonatomic, strong) UINavigationController *passedController;
 @property (nonatomic, strong) IBOutlet UINavigationBar *searchNavigationBar;
-    
-- (IBAction)switchTest:(id)sender;
+@property (nonatomic, strong) IBOutlet UITextField *searchField;
+
+- (void)switchContainer:(id)sender;
+- (void)onRseultsReceived;
 - (IBAction)onSearchTypeChanged:(id)sender;
 @end
 

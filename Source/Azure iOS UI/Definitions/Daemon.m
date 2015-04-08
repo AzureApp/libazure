@@ -25,7 +25,7 @@
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
     
-    CFStreamCreatePairWithSocketToHost(NULL,(CFStringRef)@"localhost",1248 ,&readStream ,&writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL,(CFStringRef)@"localhost", DAEMON_PORT, &readStream, &writeStream);
     
     self.inputStream = (__bridge NSInputStream *)readStream;
     self.outputStream = (__bridge NSOutputStream *)writeStream;
@@ -45,7 +45,7 @@
 }
 
 
-- (void)sendMessage:(struct Message)message {
+- (void)sendMessage:(Message)message {
     long chunk_size = 64;
     if (self.ready) {
         if ([self.outputStream hasSpaceAvailable]) {
@@ -75,7 +75,8 @@
     }
 }
 
-- (void)receiveMessage:(struct Message)message {
+- (void)receiveMessage:(Message)message {
+    NSLog(@"received message of type %s (size %ld)", enumToName(message.header.type), message.header.messageSize);
     MessageHandler *handler = [MessageHandler sharedInstance];
     [handler processMessage:message];
 }
@@ -101,11 +102,12 @@
                     struct msg_header header;
                     long bytes = [self.inputStream read:(unsigned char*)&header maxLength:sizeof(struct msg_header)];
                     MessageHandler *handler = [MessageHandler sharedInstance];
-                    if ([handler isMessageValid:*(struct Message*)&header])
+                    if ([handler isMessageValid:*(Message*)&header])
                     {
                         if (bytes > 0)
                         {
                             long msg_size = header.messageSize;
+                            printf("msg size = %ld", msg_size);
                             unsigned char *data = NULL;
                             if (msg_size > 0) {
                                 long read_size = 0;
@@ -127,7 +129,7 @@
                                     read_size += bytes;
                                 }
                             }
-                            struct Message msg;
+                            Message msg;
                             msg.header = header;
                             msg.message = malloc(msg_size);
                             memcpy(msg.message, data, msg_size);

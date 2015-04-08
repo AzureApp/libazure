@@ -45,10 +45,12 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
             {
                 void *pattern = message.message;
                 size_t size = message.header.messageSize;
+                AZLog("pattern = %x, size = %d", *(int*)pattern, size);
+                
                 std::vector<vm_address_t> addresses = manager->Find(pattern, size);
                 vm_address_t *addressPtr = &addresses[0];
                 message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
-
+                
                 return AZ_SUCCESS;
             }
                 
@@ -63,16 +65,12 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
 
                 return AZ_SUCCESS;
             }
-    //
-    //        case IterateSearch:
-    //            return "IterateSearch";
-    //            break;
-    //        case Edit:
-    //            return "Edit";
-    //            break;
-    //        case Lock:
-    //            return "Lock";
-    //            break;
+            case Edit:
+                
+                break;
+            case Lock:
+                
+                break;
 
         }
     }

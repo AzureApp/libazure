@@ -42,7 +42,7 @@ public:
     static void WriteToLog(const char *fmt, ...);
     void AttachToProcess(Process *);
     
-    Daemon *CurrentDaemon();
+    Daemon *CurrentDaemon() const;
     
 private:
     Daemon *azureDaemon;

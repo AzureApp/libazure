@@ -82,7 +82,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tabBarController setSelectedIndex:1];
-    struct Message msg = [MessageHandler attachMessageForApp:[runningApps objectAtIndex:indexPath.row]];
+    Message msg = [MessageHandler attachMessageForApp:[runningApps objectAtIndex:indexPath.row]];
     [[MessageHandler sharedInstance] sendMessage:msg];
 }
 

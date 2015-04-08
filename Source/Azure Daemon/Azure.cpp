@@ -56,7 +56,7 @@ AZ_STATUS Azure::Tick()
         status = azureDaemon->ReceivedMessage(msg);
         if (status != AZ_SUCCESS) {
             AZLog("daemon failed with error %d\n", status);
-            AZLog("trying to recreate daemon");
+            AZLog("trying to restart daemon");
             if ((status = azureDaemon->Start())) {
                 AZLog("fatal, cannot restart daemon");
                 return status;
@@ -73,7 +73,7 @@ AZ_STATUS Azure::Tick()
         status = azureDaemon->SendMessage(msg);
         if (status != AZ_SUCCESS) {
             AZLog("daemon failed with error %d\n", status);
-            AZLog("trying to recreate daemon");
+            AZLog("trying to restart daemon");
             if ((status = azureDaemon->Start())) {
                 AZLog("fatal, cannot restart daemon");
                 return status;
@@ -132,7 +132,7 @@ void Azure::WriteToLog(const char *fmt, ...)
     return;
 }
 
-Daemon* Azure::CurrentDaemon()
+Daemon* Azure::CurrentDaemon() const
 {
     return azureDaemon;
 }

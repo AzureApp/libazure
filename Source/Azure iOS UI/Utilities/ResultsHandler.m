@@ -14,7 +14,7 @@
 
 @implementation ResultsHandler
 
-@synthesize currentSearchType;
+@synthesize currentSearchType, currentSearchObject, savedAddresses, addressCount;
 
 + (id)sharedInstance {
     static id inst = nil;
@@ -26,7 +26,20 @@
 }
 
 - (void)beginSearch {
-    // TODO: send daemon message
+    Message msg = [MessageHandler searchMessageForSearchObject:currentSearchObject];
+    Daemon *daemon = [Daemon currentDaemon];
+    
+    [daemon sendMessage:msg];
+}
+
+- (void)onResultsReceived {
+    [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"ReceivedResults"
+         object:nil];
+}
+
+- (BOOL)hasResults {
+    return savedAddresses.count > 0;
 }
 
 - (void)rawData:(char *)data ofSize:(size_t *)size fromSearchObject:(SearchObject *)obj {
@@ -46,7 +59,7 @@
             memcpy(data, chr, [obj.asString length]); // TODO: adjust for terminating byte
             *size = [obj.asString length];
         }
-        else if ([obj isBytes]) {
+        else if ([obj isByteSearch]) {
             const void *bytes = [obj.asBytes bytes];
             memcpy(data, bytes, [obj.asBytes length]);
             *size = [obj.asBytes length];

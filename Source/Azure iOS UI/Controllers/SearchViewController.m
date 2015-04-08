@@ -20,19 +20,14 @@
 
 @implementation SearchViewController
 
-@synthesize resultsView, line, settingsButton, searchType, searchNavigationBar;
+@synthesize resultsView, line, settingsButton, searchType, searchNavigationBar, searchField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:line.bounds];
-//    line.layer.masksToBounds = NO;
-//    line.layer.shadowColor = [UIColor blackColor].CGColor;
-//    line.layer.shadowRadius = 5.0f;
-//    line.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
-//    line.layer.shadowOpacity = 0.5f;
-//    line.layer.shadowPath = shadowPath.CGPath;
-    //resultsView.layer.shadowPath = [UIBezierPath bezierPathWithRect:line.bounds].CGPath;
-    //[line setNeedsLayout];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(onResultsReceived)
+        name:@"ReceivedResults"
+        object:nil];
 
 }
 
@@ -41,11 +36,18 @@
     [searchType setTitleTextAttributes:attributes forState:UIControlStateNormal];
 }
 
-- (IBAction)switchTest:(id)sender {
+- (void)onRseultsReceived {
+    if (![[ResultsHandler sharedInstance] hasResults]) {
+        [self switchContainer:nil];
+    }
+}
+
+- (void)switchContainer:(id)sender {
     [self.containerViewController swapViewControllers];
 }
 
 - (IBAction)onSearchTypeChanged:(UISegmentedControl *)sender {
+    [searchField setText:@""];
     ResultsHandler *handler = [ResultsHandler sharedInstance];
     handler.currentSearchType = sender.selectedSegmentIndex;
     NSLog(@"%d", handler.currentSearchType);
@@ -63,10 +65,43 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string  {
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
+    NSString *chars;
+    switch (handler.currentSearchType) {
+        case Int: {
+            chars = @"0123456789";
+            break;
+        }
+        case Float: {
+            chars = @"0123456789.";
+            break;
+        }
+        case Hex: {
+            chars = @"0123456789ABCDEFabcdefxX ";
+            break;
+        }
+        case String: {
+            return YES;
+        }
+            
+    }
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSArray  *arrayOfString = [newString componentsSeparatedByString:@"."];
+    
+    if ([arrayOfString count] > 2 ) {
+        return NO;
+    }
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:chars] invertedSet];
+    
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     NSString *contents = [textField text];
-    NSLog(@"%@", contents);
+    NSLog(@"test %@", contents);
     
     ResultsHandler *handler = [ResultsHandler sharedInstance];
     switch (handler.currentSearchType) {
@@ -93,6 +128,7 @@
             break;
         }
     }
+    [[ResultsHandler sharedInstance] beginSearch];
     return NO;
 }
 
