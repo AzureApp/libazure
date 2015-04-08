@@ -333,32 +333,40 @@ vector<Process::Region> ProcessUtils::GetRegions(Process *proc, vm_prot_t option
     AZ_STATUS status = AZ_SUCCESS;
     vm_address_t address = 0x0;
     
-    if(!proc->task)
+    if(proc->task <= 0)
     {
         status = TryAttach(proc);
         if(status != AZ_SUCCESS)
         {
-            // error
+            AZLog("cannot get mach task for %d", proc->pid);
             return regions;
         }
     }
     
-    while (status == AZ_SUCCESS)
+    while (status == KERN_SUCCESS)
     {
         vm_size_t vmsize;
-        vm_region_basic_info_data_xx_t info;
+        vm_region_basic_info_data_64_t info;
         mach_msg_type_number_t info_count = VM_REGION_BASIC_INFO_COUNT_64;
         memory_object_name_t object;
         
-        status = vm_region_xx(proc->task, &address, &vmsize, VM_REGION_BASIC_INFO, (vm_region_info_64_t)&info, &info_count, &object);
+        status = vm_region_64(proc->task, &address, &vmsize, VM_REGION_BASIC_INFO_64, (vm_region_info_64_t)&info, &info_count, &object);
         
-        if((info.protection == options) && (status == AZ_SUCCESS)) //remember to change vm_prot_default back
+        if ((info.protection == options) && (status == AZ_SUCCESS))
         {
+            AZLog("region found at 0x%x",address);
             Process::Region temp = {address, vmsize};
             regions.push_back(temp);
         }
+        else
+        {
+            AZLog("vm_region returned %s", mach_error_string(status));
+        }
         address+=vmsize;
+        AZLog("vmsize is %d", address);
+        if (vmsize <= 0) break;
     }
+    AZLog("found %d regions", regions.size());
     return regions;
 }
 

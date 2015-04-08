@@ -95,7 +95,7 @@
         return [NSString stringWithFormat:@"%d", [[self asNumber] intValue]];
     }
     if ([self isDecimalNumberSearch]) {
-        return [NSString stringWithFormat:@"%f", [[self asNumber] floatValue]];
+        return [NSString stringWithFormat:@"%f", [[self asDecimalNumber] floatValue]];
     }
     if ([self isByteSearch]) {
         NSData *data = [self asBytes];

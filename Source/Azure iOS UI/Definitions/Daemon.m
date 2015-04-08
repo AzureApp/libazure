@@ -107,7 +107,7 @@
                         if (bytes > 0)
                         {
                             long msg_size = header.messageSize;
-                            printf("msg size = %ld", msg_size);
+                            NSLog(@"msg size = %ld", msg_size);
                             unsigned char *data = NULL;
                             if (msg_size > 0) {
                                 long read_size = 0;

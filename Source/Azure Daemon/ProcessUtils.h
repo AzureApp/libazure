@@ -35,13 +35,19 @@
 
 #pragma mark Process
 
-#ifdef __LP64__ // 64 bit functions
-#define vm_region_basic_info_data_xx_t vm_region_basic_info_data_64_t
-#define vm_region_xx vm_region_64
-#else // 32 bit functions
+//#ifdef __LP64__ // 64 bit functions
+//#define vm_region_basic_info_data_xx_t vm_region_basic_info_data_64_t
+//#define vm_region_info_xx_t vm_region_info_64_t
+//#define vm_region_xx vm_region_64
+//#define VM_REGION_BASIC_INFO_XX VM_REGION_BASIC_INFO_64
+//#define VM_REGION_BASIC_INFO_COUNT_XX VM_REGION_BASIC_INFO_COUNT_64
+//#else // 32 bit functions
 #define vm_region_basic_info_data_xx_t vm_region_basic_info_data_t
+#define vm_region_info_xx_t vm_region_info_t
 #define vm_region_xx vm_region
-#endif
+#define VM_REGION_BASIC_INFO_XX VM_REGION_BASIC_INFO
+#define VM_REGION_BASIC_INFO_COUNT_XX VM_REGION_BASIC_INFO_COUNT
+//#endif
 
 extern "C" int proc_pidpath(int,void*,uint32_t);
 

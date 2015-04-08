@@ -56,23 +56,24 @@
                 return;
             }
                 
-//            case Results:
-//            {
-//                ResultsHandler *results = [ResultsHandler sharedInstance];
-//                vm_offset_t *addresses = msg.message;
-//                NSMutableArray *arr = [[NSMutableArray alloc] init];
-//                int addressCount = msg.header.messageSize/sizeof(vm_address_t);
-//                printf("address count = %d", addressCount);
-//                for (int i = 0; i < addressCount; i++)
-//                {
-//                    [arr addObject:[NSNumber numberWithLong:addresses[i]]];
-//                }
-//                results.savedAddresses = [NSArray arrayWithArray:arr];
-//                results.addressCount = addressCount;
-//                [results onResultsReceived];
-//                
-//                daemon.ready = YES;
-//            }
+            case Results:
+            {
+                ResultsHandler *results = [ResultsHandler sharedInstance];
+                vm_offset_t *addresses = msg.message;
+                NSMutableArray *arr = [[NSMutableArray alloc] init];
+                int addressCount = msg.header.messageSize/sizeof(vm_address_t);
+                NSLog(@"address count = %d", addressCount);
+                for (int i = 0; i < addressCount; i++)
+                {
+                    [arr addObject:[NSNumber numberWithInt:addresses[i]]];
+                }
+                results.savedAddresses = [NSArray arrayWithArray:arr];
+                results.addressCount = addressCount;
+                [results onResultsReceived];
+                
+                daemon.ready = YES;
+                return;
+            }
                 
             case Attach:
             case Detach:

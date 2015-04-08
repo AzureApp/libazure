@@ -36,13 +36,15 @@
     [searchType setTitleTextAttributes:attributes forState:UIControlStateNormal];
 }
 
-- (void)onRseultsReceived {
-    if (![[ResultsHandler sharedInstance] hasResults]) {
-        [self switchContainer:nil];
+- (void)onResultsReceived {
+    printf("reached");
+    if ([[ResultsHandler sharedInstance] hasResults]) {
+        printf("reached 2");
+        [self switchContainer];
     }
 }
 
-- (void)switchContainer:(id)sender {
+- (void)switchContainer {
     [self.containerViewController swapViewControllers];
 }
 

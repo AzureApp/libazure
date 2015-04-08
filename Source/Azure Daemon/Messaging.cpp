@@ -48,6 +48,7 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
                 AZLog("pattern = %x, size = %d", *(int*)pattern, size);
                 
                 std::vector<vm_address_t> addresses = manager->Find(pattern, size);
+                AZLog("found %d results", addresses.size());
                 vm_address_t *addressPtr = &addresses[0];
                 message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
                 

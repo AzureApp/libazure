@@ -117,7 +117,7 @@ AZ_STATUS Daemon::ReceivedMessage(Message& message)
 
 AZ_STATUS Daemon::SendMessage(Message& message)
 {
-    AZLog("sending message of type %s", enumToName(message.header.type));
+    AZLog("sending message of type %s [msg size %d]", enumToName(message.header.type), message.header.messageSize);
     long chunk_size = 64;
     if (serverReady)
     {

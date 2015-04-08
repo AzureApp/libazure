@@ -21,8 +21,8 @@
 @property (nonatomic, strong) IBOutlet UINavigationBar *searchNavigationBar;
 @property (nonatomic, strong) IBOutlet UITextField *searchField;
 
-- (void)switchContainer:(id)sender;
-- (void)onRseultsReceived;
+- (void)switchContainer;
+- (void)onResultsReceived;
 - (IBAction)onSearchTypeChanged:(id)sender;
 @end
 

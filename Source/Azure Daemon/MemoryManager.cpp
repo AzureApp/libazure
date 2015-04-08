@@ -52,7 +52,7 @@ std::vector<vm_address_t> MemoryManager::Find(void *data, size_t dataCnt)
     
     std::vector<Process::Region> regions = currentProcess->GetRegions(VM_PROT_READ | VM_PROT_WRITE);
     
-    for(auto it = regions.begin(); it != regions.end(); ++it)
+    for (auto it = regions.begin(); it != regions.end(); ++it)
     {
         Process::Region region = *it;
         char *buffer = new char[region.size];
@@ -68,7 +68,8 @@ std::vector<vm_address_t> MemoryManager::Find(void *data, size_t dataCnt)
         {
             if (!memcmp(data, buffer+i, dataCnt))
             {
-               results.push_back(region.start+i);
+                AZLog("found at 0x%x", region.start+i);
+                results.push_back(region.start+i);
             }
         }
         delete buffer;

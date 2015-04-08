@@ -39,7 +39,7 @@
 }
 
 - (BOOL)hasResults {
-    return savedAddresses.count > 0;
+    return (addressCount > 0);
 }
 
 - (void)rawData:(char *)data ofSize:(size_t *)size fromSearchObject:(SearchObject *)obj {

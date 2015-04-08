@@ -51,20 +51,22 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(SearchTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
+    if (handler.hasResults) {
+        int addr = [[[handler savedAddresses] objectAtIndex:indexPath.row] intValue];
+        
+        cell.addressLabel.text = [NSString stringWithFormat:@"0x%X", addr];
+        cell.valueField.text = [[handler currentSearchObject] toString];
+    }
+}
+
 -(IBAction)toggleLock:(UIButton*)sender {
     sender.selected = !sender.selected;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
     
     NSLog(@"lock button pressed for row %d", indexPath.row);
-}
-    
-- (void)tableView:(UITableView *)tableView willDisplayCell:(SearchTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResultsHandler *handler = [ResultsHandler sharedInstance];
-    if (handler.hasResults) {
-        cell.addressLabel.text = [handler savedAddresses][indexPath.row];
-        cell.valueField.text = [[handler currentSearchObject] toString];
-    }
 }
 
 @end
