@@ -12,7 +12,10 @@
 #import <mach/mach_host.h>
 #import <sys/sysctl.h>
 #import <dlfcn.h>
+#import <sys/param.h>
 #import "App.h"
+
+extern int proc_pidpath(int,void*,uint32_t);
 
 @interface AppHandler : NSObject
 

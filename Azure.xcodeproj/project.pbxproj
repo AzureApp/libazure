@@ -96,6 +96,8 @@
 		6E526CDC1AAA483900B62400 /* ObjCUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD71AAA360C00B62400 /* ObjCUtils.cpp */; };
 		6E526CDD1AAA483D00B62400 /* ProcessUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BD91AAA360C00B62400 /* ProcessUtils.cpp */; };
 		6E526CDE1AAA484000B62400 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E526BDB1AAA360C00B62400 /* Settings.cpp */; };
+		6EA7BF381AD6F93900EE95B9 /* asu_pid.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6EA7BF371AD6F93900EE95B9 /* asu_pid.entitlements */; };
+		6EA7BF391AD6F93900EE95B9 /* asu_pid.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6EA7BF371AD6F93900EE95B9 /* asu_pid.entitlements */; };
 		6EABA50D19908D6200B007E9 /* Log.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EABA50C19908D6200B007E9 /* Log.xib */; };
 		6EB3DE2E196172CE0048E699 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB3DE2D196172CE0048E699 /* Cocoa.framework */; };
 		6EEC56EE1A20FF4E00068D0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */; };
@@ -245,6 +247,7 @@
 		6E526C9B1AAA45D200B62400 /* Titillium-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinItalic.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinItalic.otf"; sourceTree = SOURCE_ROOT; };
 		6E526C9C1AAA45D200B62400 /* Titillium-ThinUpright.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Titillium-ThinUpright.otf"; path = "Resources/Azure iOS/Fonts/Titillium-ThinUpright.otf"; sourceTree = SOURCE_ROOT; };
 		6E526CB11AAA47CC00B62400 /* Azure iOS Daemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Azure iOS Daemon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EA7BF371AD6F93900EE95B9 /* asu_pid.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = asu_pid.entitlements; path = ../../asu_pid.entitlements; sourceTree = "<group>"; };
 		6EABA50C19908D6200B007E9 /* Log.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Log.xib; sourceTree = "<group>"; };
 		6EAEB2071A1FF821002628DC /* Azure iOS UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Azure iOS UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB3DE2A196172CE0048E699 /* Azure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Azure.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +343,7 @@
 		6E1B9A7819827C3C006143A4 /* Azure iOS */ = {
 			isa = PBXGroup;
 			children = (
+				6EA7BF371AD6F93900EE95B9 /* asu_pid.entitlements */,
 				6E526C121AAA366400B62400 /* Info.plist */,
 				6E0E17E91A49A59C006D15DD /* Resources */,
 			);
@@ -751,6 +755,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EA7BF391AD6F93900EE95B9 /* asu_pid.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +779,7 @@
 				6E526CA61AAA45D200B62400 /* Titillium-RegularUpright.otf in Resources */,
 				6E526CA31AAA45D200B62400 /* Titillium-LightUpright.otf in Resources */,
 				6E526CA41AAA45D200B62400 /* Titillium-Regular.otf in Resources */,
+				6EA7BF381AD6F93900EE95B9 /* asu_pid.entitlements in Resources */,
 				6E526C9F1AAA45D200B62400 /* Titillium-BoldItalic.otf in Resources */,
 				6E526CA71AAA45D200B62400 /* Titillium-Semibold.otf in Resources */,
 				6E526CA21AAA45D200B62400 /* Titillium-LightItalic.otf in Resources */,
@@ -808,7 +814,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.11\"\n\n# Verify that the build is for iOS Device and not a Simulator.\nif [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Self sign the build.\n\n# Copy it over.\nscp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/Azure iOS Daemon\" root@$IP:/usr/bin/\n\nssh root@$IP \"ldid -Sent.plist /usr/bin/Azure\\ iOS\\ Daemon\"\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\nfi";
+			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.3\"\n#ldid -S/Users/razzile/Documents/Projects/Azure/ent.plist \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\"\n# Verify that the build is for iOS Device and not a Simulator.\nif [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Self sign the build.\n\n# Copy it over.\nscp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/Azure iOS Daemon\" root@$IP:/usr/bin/\n\nssh root@$IP \"ldid -Sent.plist /usr/bin/Azure\\ iOS\\ Daemon\" # change me\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\nfi";
 		};
 		6E3D53081ABCC6C600ADA0DF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -821,7 +827,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.11\"\n\n# Verify that the build is for iOS Device and not a Simulator.\nif [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Kill any running instances and remove the app folder.\nssh root@$IP \"killall ${TARGETNAME}; rm -rf /Applications/${WRAPPER_NAME}\"\n# Self sign the build.\nldid -S $BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\n# Copy it over.\nscp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}\" root@$IP:/Applications/\nssh root@$IP \"su -c uicache mobile\"\n\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\nfi";
+			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.3\"\n\n# Verify that the build is for iOS Device and not a Simulator.\nif [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Kill any running instances and remove the app folder.\nssh root@$IP \"killall ${TARGETNAME}; rm -rf /Applications/${WRAPPER_NAME}\"\n# Self sign the build.\n#ldid -S $BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\n# Copy it over.\nscp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}\" root@$IP:/Applications/\n#ssh root@$IP \"su -c uicache mobile\"\n\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -971,10 +977,11 @@
 		6E526CD21AAA47CD00B62400 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = /Users/razzile/Documents/Projects/Azure/asu_pid.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				DEAD_CODE_STRIPPING = NO;
@@ -989,7 +996,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1002,6 +1009,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = /Users/razzile/Documents/Projects/Azure/asu_pid.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				DEAD_CODE_STRIPPING = NO;
@@ -1023,10 +1031,11 @@
 		6EAEB22B1A1FF821002628DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = /Users/razzile/Documents/Projects/Azure/asu_pid.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1039,7 +1048,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1049,10 +1058,11 @@
 		6EAEB22C1A1FF821002628DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = /Users/razzile/Documents/Projects/Azure/asu_pid.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1061,7 +1071,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

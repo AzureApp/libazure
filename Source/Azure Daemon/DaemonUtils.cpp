@@ -68,7 +68,7 @@ void Daemon::OnLostConnection()
 
 AZ_STATUS Daemon::ReceivedMessage(Message& message)
 {
-    long chunk_size = 64;
+    size_t chunk_size = 64;
     if (serverReady)
     {
         msg_header header = header_default;
@@ -82,10 +82,12 @@ AZ_STATUS Daemon::ReceivedMessage(Message& message)
         char *data = NULL;
         if (bytes > 0)
         {
-            long msg_size = header.messageSize;
+            size_t msg_size = header.messageSize;
+            
+            AZLog("msg size: %ld", msg_size);
             if (msg_size > 0)
             {
-                long read_size = 0;
+                size_t read_size = 0;
                 data = (char*)malloc(msg_size);
                 while (read_size <= msg_size)
                 {
@@ -117,8 +119,8 @@ AZ_STATUS Daemon::ReceivedMessage(Message& message)
 
 AZ_STATUS Daemon::SendMessage(Message& message)
 {
-    AZLog("sending message of type %s [msg size %d]", enumToName(message.header.type), message.header.messageSize);
-    long chunk_size = 64;
+    AZLog("sending message of type %s [msg size %ld]", enumToName(message.header.type), message.header.messageSize);
+    size_t chunk_size = 64;
     if (serverReady)
     {
         char *data = (char*)message.message;
@@ -130,10 +132,10 @@ AZ_STATUS Daemon::SendMessage(Message& message)
             return AZ_FAILURE;
         }
         
-        long msg_size = message.header.messageSize;
+        size_t msg_size = message.header.messageSize;
         if (msg_size > 0)
         {
-            long write_size = 0;
+            size_t write_size = 0;
             
             while (write_size <= msg_size)
             {
@@ -145,12 +147,14 @@ AZ_STATUS Daemon::SendMessage(Message& message)
                 long writeval = send(client_sock, data+write_size, chunk_size, 0);
                 if (writeval < 0)
                 {
-                    AZLog("testy mctest 2.5");
+                    perror("write failed");
+                    AZLog("data = %p, data itr = %p, msg_size = %d, write_size = %d, chunk_size = %d", data, data+write_size, msg_size, write_size, chunk_size);
                     this->OnLostConnection();
                     return AZ_FAILURE;
                 }
                 write_size += writeval;
             }
+            //free(tempArray);
         }
         return AZ_SUCCESS;
     }

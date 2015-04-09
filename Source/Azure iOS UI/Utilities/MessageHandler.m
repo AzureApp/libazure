@@ -61,11 +61,11 @@
                 ResultsHandler *results = [ResultsHandler sharedInstance];
                 vm_offset_t *addresses = msg.message;
                 NSMutableArray *arr = [[NSMutableArray alloc] init];
-                int addressCount = msg.header.messageSize/sizeof(vm_address_t);
+                vm_address_t addressCount = msg.header.messageSize/sizeof(vm_address_t);
                 NSLog(@"address count = %d", addressCount);
                 for (int i = 0; i < addressCount; i++)
                 {
-                    [arr addObject:[NSNumber numberWithInt:addresses[i]]];
+                    [arr addObject:[NSNumber numberWithUnsignedInteger:addresses[i]]];
                 }
                 results.savedAddresses = [NSArray arrayWithArray:arr];
                 results.addressCount = addressCount;
@@ -101,9 +101,10 @@
 }
 
 + (Message)attachMessageForApp:(App *)app {
+    size_t size = sizeof(struct msg_process);
     Message msg;
     msg.header.magic = MSG_MAGIC;
-    msg.header.messageSize = sizeof(struct msg_process);
+    msg.header.messageSize = size;
     msg.header.shouldPop = YES;
     msg.header.type = Attach;
     

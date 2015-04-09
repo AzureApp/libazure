@@ -88,35 +88,12 @@
 }
 
 - (NSString *)pathForPID:(int)pid {
-    int mib[3] = {CTL_KERN, KERN_ARGMAX, 0};
-    
-    size_t argmaxsize = sizeof(size_t);
-    size_t size;
-    
-    int ret = sysctl(mib, 2, &size, &argmaxsize, NULL, 0);
-    
-    if (ret != 0) {
-        return NULL;
+    char *buf = (char*)malloc(MAXPATHLEN*4);
+    int ret = proc_pidpath(pid, buf, MAXPATHLEN*4);
+    if (ret == 0) {
+        perror("proc_pidpath returned error");
     }
-    
-    // Then we can get the path information we actually want
-    mib[1] = KERN_PROCARGS2;
-    mib[2] = (int)pid;
-    
-    char *procargv = (char *)malloc(size);
-    
-    ret = sysctl(mib, 3, procargv, &size, NULL, 0);
-    
-    if (ret != 0) {
-        free(procargv);
-        
-        return NULL;
-    }
-    char *path = procargv + sizeof(int);
-    NSString *str = [NSString stringWithUTF8String:path];
-    free(procargv);
-    
-    return str;
+    return [NSString stringWithUTF8String:buf];
 }
 
 - (void)refreshRunningApps {

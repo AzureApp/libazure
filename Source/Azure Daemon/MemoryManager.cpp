@@ -13,7 +13,12 @@ MemoryManager* MemoryManager::manager = NULL;
 MemoryManager::MemoryManager():
 currentProcess(0)
 {
+    savedAddresses = new AddressList();
+}
 
+MemoryManager::~MemoryManager()
+{
+    delete savedAddresses;
 }
 
 MemoryManager* MemoryManager::GetInstance()
@@ -41,13 +46,14 @@ AZ_STATUS MemoryManager::AttachToProcess(Process *proc)
     return AZ_FAILURE;
 }
 
-std::vector<vm_address_t> MemoryManager::Results()
+AddressList *MemoryManager::Results()
 {
     return savedAddresses;
 }
 
-std::vector<vm_address_t> MemoryManager::Find(void *data, size_t dataCnt)
+AZ_STATUS MemoryManager::Find(void *data, size_t dataCnt)
 {
+    AZ_STATUS status = AZ_SUCCESS;
     std::vector<vm_address_t> results;
     
     std::vector<Process::Region> regions = currentProcess->GetRegions(VM_PROT_READ | VM_PROT_WRITE);
@@ -61,7 +67,7 @@ std::vector<vm_address_t> MemoryManager::Find(void *data, size_t dataCnt)
         if(status != AZ_SUCCESS)
         {
             AZLog("read error: %s\n region size: 0x%llx\n", mach_error_string(status), region.size);
-            return results;
+            return status;
         }
         
         for (int i = 0; (i+dataCnt) < region.size; i+=4) // i += dataTypeSize
@@ -77,23 +83,24 @@ std::vector<vm_address_t> MemoryManager::Find(void *data, size_t dataCnt)
     if (results.size() > 10000000) {
         results.resize(10000000); // change me later
     }
-    savedAddresses = results;
-    return results;
+    *savedAddresses = results;
+    return status;
 }
 
-std::vector<vm_address_t> MemoryManager::Iterate(void *data, size_t dataCnt, std::vector<vm_address_t> addresses)
+AZ_STATUS MemoryManager::Iterate(void *data, size_t dataCnt, AddressList *addresses)
 {
+    AZ_STATUS status = AZ_SUCCESS;
     std::vector<vm_address_t> results;
-    if (addresses.size() <= 0)
+    if (addresses->size() <= 0)
     {
         AZLog("no saved addresses");
-        return results;
+        return status;
     }
     
-    for (auto it = addresses.begin(); it != addresses.end(); ++it)
+    for (auto it = addresses->begin(); it != addresses->end(); ++it)
     {
         char *temp = (char*)malloc(dataCnt);
-        AZ_STATUS status = currentProcess->ReadMemory(*it, temp, dataCnt);
+        status = currentProcess->ReadMemory(*it, temp, dataCnt);
         if (!status)
         {
             if(!memcmp(temp, data, dataCnt))
@@ -107,8 +114,11 @@ std::vector<vm_address_t> MemoryManager::Iterate(void *data, size_t dataCnt, std
         }
         free(temp);
     }
-    savedAddresses = results;
-    return results;
+    *savedAddresses = results;
+    return status;
 }
 
-
+void MemoryManager::ResetResults()
+{
+    savedAddresses->clear();
+}

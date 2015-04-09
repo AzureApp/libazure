@@ -332,7 +332,7 @@ vector<Process::Region> ProcessUtils::GetRegions(Process *proc, vm_prot_t option
     
     AZ_STATUS status = AZ_SUCCESS;
     vm_address_t address = 0x0;
-    
+    uint32_t depth = 1;
     if(proc->task <= 0)
     {
         status = TryAttach(proc);
@@ -342,29 +342,27 @@ vector<Process::Region> ProcessUtils::GetRegions(Process *proc, vm_prot_t option
             return regions;
         }
     }
-    
-    while (status == KERN_SUCCESS)
+
+    vm_size_t size = 0;
+    while (true)
     {
-        vm_size_t vmsize;
-        vm_region_basic_info_data_64_t info;
-        mach_msg_type_number_t info_count = VM_REGION_BASIC_INFO_COUNT_64;
-        memory_object_name_t object;
+        struct vm_region_submap_info_xx info;
+        mach_msg_type_number_t count = VM_REGION_SUBMAP_INFO_COUNT_XX;
+        status = vm_region_recurse_xx(proc->task, &address, &size, &depth, (vm_region_info_xx_t)&info, &count);
+        if (status == KERN_INVALID_ADDRESS)
+            break;
         
-        status = vm_region_64(proc->task, &address, &vmsize, VM_REGION_BASIC_INFO_64, (vm_region_info_64_t)&info, &info_count, &object);
-        
-        if ((info.protection == options) && (status == AZ_SUCCESS))
+        if (info.is_submap)
         {
-            AZLog("region found at 0x%x",address);
-            Process::Region temp = {address, vmsize};
-            regions.push_back(temp);
+            depth++;
+            continue;
         }
-        else
+        else if (info.protection == options)
         {
-            AZLog("vm_region returned %s", mach_error_string(status));
+            Process::Region region = {address, size};
+            regions.push_back(region);
         }
-        address+=vmsize;
-        AZLog("vmsize is %d", address);
-        if (vmsize <= 0) break;
+        address += size;
     }
     AZLog("found %d regions", regions.size());
     return regions;

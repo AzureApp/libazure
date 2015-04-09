@@ -54,7 +54,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(SearchTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     ResultsHandler *handler = [ResultsHandler sharedInstance];
     if (handler.hasResults) {
-        int addr = [[[handler savedAddresses] objectAtIndex:indexPath.row] intValue];
+        vm_address_t addr = [[[handler savedAddresses] objectAtIndex:indexPath.row] integerValue];
         
         cell.addressLabel.text = [NSString stringWithFormat:@"0x%X", addr];
         cell.valueField.text = [[handler currentSearchObject] toString];

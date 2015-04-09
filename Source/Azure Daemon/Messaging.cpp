@@ -43,14 +43,19 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
                 
             case NewSearch:
             {
+                manager->ResetResults();
                 void *pattern = message.message;
                 size_t size = message.header.messageSize;
                 AZLog("pattern = %x, size = %d", *(int*)pattern, size);
                 
-                std::vector<vm_address_t> addresses = manager->Find(pattern, size);
-                AZLog("found %d results", addresses.size());
-                vm_address_t *addressPtr = &addresses[0];
-                message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
+                AZ_STATUS status = manager->Find(pattern, size);
+                if (status != AZ_SUCCESS)
+                {
+                    AZLog("an error has occured finding addresses: %s", mach_error_string(status));
+                }
+                AddressList *addresses = manager->Results();
+                AZLog("found %d results", addresses->size());
+                message = MessageFromResults(addresses->data(), addresses->size()*sizeof(vm_address_t));
                 
                 return AZ_SUCCESS;
             }
@@ -59,11 +64,15 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
             {
                 void *pattern = message.message;
                 size_t size = message.header.messageSize;
-                std::vector<vm_address_t> addresses = manager->Iterate(pattern, size, manager->Results());
+                AZ_STATUS status = manager->Iterate(pattern, size, manager->Results());
+                if (status != AZ_SUCCESS)
+                {
+                    AZLog("an error has occured finding addresses: %s", mach_error_string(status));
+                }
+                AddressList *addresses = manager->Results();
+                AZLog("found %d results", addresses->size());
+                message = MessageFromResults(addresses->data(), addresses->size()*sizeof(vm_address_t));
                 
-                vm_address_t *addressPtr = &addresses[0];
-                message = MessageFromResults(addressPtr, addresses.size()*sizeof(vm_address_t));
-
                 return AZ_SUCCESS;
             }
             case Edit:

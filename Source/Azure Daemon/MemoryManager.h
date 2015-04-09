@@ -13,6 +13,8 @@
 #include <vector>
 #include "ProcessUtils.h"
 
+typedef std::vector<vm_address_t> AddressList;
+
 class MemoryManager {
 public:
     
@@ -24,15 +26,16 @@ public:
     
     AZ_STATUS AttachToProcess(Process *);
     
-    std::vector<vm_address_t> Results();
+    AddressList *Results();
     
-    std::vector<vm_address_t> Find(void* data, size_t dataCnt);
-    std::vector<vm_address_t> Iterate(void *data, size_t dataCnt, std::vector<vm_address_t> addresses);
+    AZ_STATUS Find(void* data, size_t dataCnt);
+    AZ_STATUS Iterate(void *data, size_t dataCnt, AddressList *addresses);
     
     AZ_STATUS Write(vm_address_t addr, void* data, size_t dataCnt);
+    void ResetResults();
 private:
     Process *currentProcess;
-    std::vector<vm_address_t> savedAddresses;
+    AddressList *savedAddresses;
 };
 
 #endif /* defined(__Azure_Mac_V3__AzureEngine__) */
