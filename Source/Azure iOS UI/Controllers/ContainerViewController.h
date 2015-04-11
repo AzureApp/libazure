@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchTableViewController.h"
+#import "SearchStatusViewController.h"
 
 @interface ContainerViewController : UIViewController
 
-- (void)swapViewControllers;
+@property (strong, nonatomic) NSString *currentSegueIdentifier;
+@property (strong, nonatomic) SearchTableViewController *secondViewController;
+@property (strong, nonatomic) SearchStatusViewController *firstViewController;
+@property BOOL showProgress;
+@property int results;
 
+- (void)swapViewControllers;
 @end

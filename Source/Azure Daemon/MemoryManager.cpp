@@ -74,7 +74,6 @@ AZ_STATUS MemoryManager::Find(void *data, size_t dataCnt)
         {
             if (!memcmp(data, buffer+i, dataCnt))
             {
-                AZLog("found at 0x%x", region.start+i);
                 results.push_back(region.start+i);
             }
         }

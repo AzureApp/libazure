@@ -100,6 +100,24 @@
 		6EA7BF391AD6F93900EE95B9 /* asu_pid.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6EA7BF371AD6F93900EE95B9 /* asu_pid.entitlements */; };
 		6EABA50D19908D6200B007E9 /* Log.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EABA50C19908D6200B007E9 /* Log.xib */; };
 		6EB3DE2E196172CE0048E699 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB3DE2D196172CE0048E699 /* Cocoa.framework */; };
+		6ED5C0F21AD887FE0082165B /* M13ProgressConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0CC1AD887FE0082165B /* M13ProgressConsole.m */; };
+		6ED5C0F31AD887FE0082165B /* M13ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0CF1AD887FE0082165B /* M13ProgressHUD.m */; };
+		6ED5C0F41AD887FE0082165B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0D11AD887FE0082165B /* UIImage+ImageEffects.m */; };
+		6ED5C0F51AD887FE0082165B /* UINavigationController+M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0D41AD887FE0082165B /* UINavigationController+M13ProgressViewBar.m */; };
+		6ED5C0F61AD887FE0082165B /* M13ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0D71AD887FE0082165B /* M13ProgressView.m */; };
+		6ED5C0F71AD887FE0082165B /* M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0D91AD887FE0082165B /* M13ProgressViewBar.m */; };
+		6ED5C0F81AD887FE0082165B /* M13ProgressViewBorderedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0DB1AD887FE0082165B /* M13ProgressViewBorderedBar.m */; };
+		6ED5C0F91AD887FE0082165B /* M13ProgressViewFilteredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0DD1AD887FE0082165B /* M13ProgressViewFilteredImage.m */; };
+		6ED5C0FA1AD887FE0082165B /* M13ProgressViewImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0DF1AD887FE0082165B /* M13ProgressViewImage.m */; };
+		6ED5C0FB1AD887FE0082165B /* M13ProgressViewLetterpress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0E11AD887FE0082165B /* M13ProgressViewLetterpress.m */; };
+		6ED5C0FC1AD887FE0082165B /* M13ProgressViewMetro.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0E31AD887FE0082165B /* M13ProgressViewMetro.m */; };
+		6ED5C0FD1AD887FE0082165B /* M13ProgressViewMetroDotPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0E51AD887FE0082165B /* M13ProgressViewMetroDotPolygon.m */; };
+		6ED5C0FE1AD887FE0082165B /* M13ProgressViewPie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0E71AD887FE0082165B /* M13ProgressViewPie.m */; };
+		6ED5C0FF1AD887FE0082165B /* M13ProgressViewRadiative.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0E91AD887FE0082165B /* M13ProgressViewRadiative.m */; };
+		6ED5C1001AD887FE0082165B /* M13ProgressViewRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0EB1AD887FE0082165B /* M13ProgressViewRing.m */; };
+		6ED5C1011AD887FE0082165B /* M13ProgressViewSegmentedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0ED1AD887FE0082165B /* M13ProgressViewSegmentedBar.m */; };
+		6ED5C1021AD887FE0082165B /* M13ProgressViewSegmentedRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0EF1AD887FE0082165B /* M13ProgressViewSegmentedRing.m */; };
+		6ED5C1031AD887FE0082165B /* M13ProgressViewStripedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0F11AD887FE0082165B /* M13ProgressViewStripedBar.m */; };
 		6EEC56EE1A20FF4E00068D0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -257,6 +275,42 @@
 		6EB3DE32196172CE0048E699 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6EB3DE4C196172CF0048E699 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6EB66A311976F63100A0C799 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6ED5C0CB1AD887FE0082165B /* M13ProgressConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressConsole.h; sourceTree = "<group>"; };
+		6ED5C0CC1AD887FE0082165B /* M13ProgressConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressConsole.m; sourceTree = "<group>"; };
+		6ED5C0CE1AD887FE0082165B /* M13ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressHUD.h; sourceTree = "<group>"; };
+		6ED5C0CF1AD887FE0082165B /* M13ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressHUD.m; sourceTree = "<group>"; };
+		6ED5C0D01AD887FE0082165B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		6ED5C0D11AD887FE0082165B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		6ED5C0D31AD887FE0082165B /* UINavigationController+M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+M13ProgressViewBar.h"; sourceTree = "<group>"; };
+		6ED5C0D41AD887FE0082165B /* UINavigationController+M13ProgressViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+M13ProgressViewBar.m"; sourceTree = "<group>"; };
+		6ED5C0D61AD887FE0082165B /* M13ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressView.h; sourceTree = "<group>"; };
+		6ED5C0D71AD887FE0082165B /* M13ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressView.m; sourceTree = "<group>"; };
+		6ED5C0D81AD887FE0082165B /* M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewBar.h; sourceTree = "<group>"; };
+		6ED5C0D91AD887FE0082165B /* M13ProgressViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewBar.m; sourceTree = "<group>"; };
+		6ED5C0DA1AD887FE0082165B /* M13ProgressViewBorderedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewBorderedBar.h; sourceTree = "<group>"; };
+		6ED5C0DB1AD887FE0082165B /* M13ProgressViewBorderedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewBorderedBar.m; sourceTree = "<group>"; };
+		6ED5C0DC1AD887FE0082165B /* M13ProgressViewFilteredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewFilteredImage.h; sourceTree = "<group>"; };
+		6ED5C0DD1AD887FE0082165B /* M13ProgressViewFilteredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewFilteredImage.m; sourceTree = "<group>"; };
+		6ED5C0DE1AD887FE0082165B /* M13ProgressViewImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewImage.h; sourceTree = "<group>"; };
+		6ED5C0DF1AD887FE0082165B /* M13ProgressViewImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewImage.m; sourceTree = "<group>"; };
+		6ED5C0E01AD887FE0082165B /* M13ProgressViewLetterpress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewLetterpress.h; sourceTree = "<group>"; };
+		6ED5C0E11AD887FE0082165B /* M13ProgressViewLetterpress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewLetterpress.m; sourceTree = "<group>"; };
+		6ED5C0E21AD887FE0082165B /* M13ProgressViewMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewMetro.h; sourceTree = "<group>"; };
+		6ED5C0E31AD887FE0082165B /* M13ProgressViewMetro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewMetro.m; sourceTree = "<group>"; };
+		6ED5C0E41AD887FE0082165B /* M13ProgressViewMetroDotPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewMetroDotPolygon.h; sourceTree = "<group>"; };
+		6ED5C0E51AD887FE0082165B /* M13ProgressViewMetroDotPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewMetroDotPolygon.m; sourceTree = "<group>"; };
+		6ED5C0E61AD887FE0082165B /* M13ProgressViewPie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewPie.h; sourceTree = "<group>"; };
+		6ED5C0E71AD887FE0082165B /* M13ProgressViewPie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewPie.m; sourceTree = "<group>"; };
+		6ED5C0E81AD887FE0082165B /* M13ProgressViewRadiative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewRadiative.h; sourceTree = "<group>"; };
+		6ED5C0E91AD887FE0082165B /* M13ProgressViewRadiative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewRadiative.m; sourceTree = "<group>"; };
+		6ED5C0EA1AD887FE0082165B /* M13ProgressViewRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewRing.h; sourceTree = "<group>"; };
+		6ED5C0EB1AD887FE0082165B /* M13ProgressViewRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewRing.m; sourceTree = "<group>"; };
+		6ED5C0EC1AD887FE0082165B /* M13ProgressViewSegmentedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedBar.h; sourceTree = "<group>"; };
+		6ED5C0ED1AD887FE0082165B /* M13ProgressViewSegmentedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedBar.m; sourceTree = "<group>"; };
+		6ED5C0EE1AD887FE0082165B /* M13ProgressViewSegmentedRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedRing.h; sourceTree = "<group>"; };
+		6ED5C0EF1AD887FE0082165B /* M13ProgressViewSegmentedRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedRing.m; sourceTree = "<group>"; };
+		6ED5C0F01AD887FE0082165B /* M13ProgressViewStripedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewStripedBar.h; sourceTree = "<group>"; };
+		6ED5C0F11AD887FE0082165B /* M13ProgressViewStripedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewStripedBar.m; sourceTree = "<group>"; };
 		6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -516,6 +570,7 @@
 		6E526B991AAA35FD00B62400 /* third-party */ = {
 			isa = PBXGroup;
 			children = (
+				6ED5C0C91AD887E80082165B /* M13ProgressSuite */,
 				6E526B9A1AAA35FD00B62400 /* DXPopover */,
 			);
 			path = "third-party";
@@ -632,6 +687,81 @@
 				6EB3DE32196172CE0048E699 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		6ED5C0C91AD887E80082165B /* M13ProgressSuite */ = {
+			isa = PBXGroup;
+			children = (
+				6ED5C0CA1AD887FE0082165B /* Console */,
+				6ED5C0CD1AD887FE0082165B /* HUD */,
+				6ED5C0D21AD887FE0082165B /* NavigationController */,
+				6ED5C0D51AD887FE0082165B /* ProgressViews */,
+			);
+			name = M13ProgressSuite;
+			sourceTree = "<group>";
+		};
+		6ED5C0CA1AD887FE0082165B /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				6ED5C0CB1AD887FE0082165B /* M13ProgressConsole.h */,
+				6ED5C0CC1AD887FE0082165B /* M13ProgressConsole.m */,
+			);
+			path = Console;
+			sourceTree = "<group>";
+		};
+		6ED5C0CD1AD887FE0082165B /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				6ED5C0CE1AD887FE0082165B /* M13ProgressHUD.h */,
+				6ED5C0CF1AD887FE0082165B /* M13ProgressHUD.m */,
+				6ED5C0D01AD887FE0082165B /* UIImage+ImageEffects.h */,
+				6ED5C0D11AD887FE0082165B /* UIImage+ImageEffects.m */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		6ED5C0D21AD887FE0082165B /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				6ED5C0D31AD887FE0082165B /* UINavigationController+M13ProgressViewBar.h */,
+				6ED5C0D41AD887FE0082165B /* UINavigationController+M13ProgressViewBar.m */,
+			);
+			path = NavigationController;
+			sourceTree = "<group>";
+		};
+		6ED5C0D51AD887FE0082165B /* ProgressViews */ = {
+			isa = PBXGroup;
+			children = (
+				6ED5C0D61AD887FE0082165B /* M13ProgressView.h */,
+				6ED5C0D71AD887FE0082165B /* M13ProgressView.m */,
+				6ED5C0D81AD887FE0082165B /* M13ProgressViewBar.h */,
+				6ED5C0D91AD887FE0082165B /* M13ProgressViewBar.m */,
+				6ED5C0DA1AD887FE0082165B /* M13ProgressViewBorderedBar.h */,
+				6ED5C0DB1AD887FE0082165B /* M13ProgressViewBorderedBar.m */,
+				6ED5C0DC1AD887FE0082165B /* M13ProgressViewFilteredImage.h */,
+				6ED5C0DD1AD887FE0082165B /* M13ProgressViewFilteredImage.m */,
+				6ED5C0DE1AD887FE0082165B /* M13ProgressViewImage.h */,
+				6ED5C0DF1AD887FE0082165B /* M13ProgressViewImage.m */,
+				6ED5C0E01AD887FE0082165B /* M13ProgressViewLetterpress.h */,
+				6ED5C0E11AD887FE0082165B /* M13ProgressViewLetterpress.m */,
+				6ED5C0E21AD887FE0082165B /* M13ProgressViewMetro.h */,
+				6ED5C0E31AD887FE0082165B /* M13ProgressViewMetro.m */,
+				6ED5C0E41AD887FE0082165B /* M13ProgressViewMetroDotPolygon.h */,
+				6ED5C0E51AD887FE0082165B /* M13ProgressViewMetroDotPolygon.m */,
+				6ED5C0E61AD887FE0082165B /* M13ProgressViewPie.h */,
+				6ED5C0E71AD887FE0082165B /* M13ProgressViewPie.m */,
+				6ED5C0E81AD887FE0082165B /* M13ProgressViewRadiative.h */,
+				6ED5C0E91AD887FE0082165B /* M13ProgressViewRadiative.m */,
+				6ED5C0EA1AD887FE0082165B /* M13ProgressViewRing.h */,
+				6ED5C0EB1AD887FE0082165B /* M13ProgressViewRing.m */,
+				6ED5C0EC1AD887FE0082165B /* M13ProgressViewSegmentedBar.h */,
+				6ED5C0ED1AD887FE0082165B /* M13ProgressViewSegmentedBar.m */,
+				6ED5C0EE1AD887FE0082165B /* M13ProgressViewSegmentedRing.h */,
+				6ED5C0EF1AD887FE0082165B /* M13ProgressViewSegmentedRing.m */,
+				6ED5C0F01AD887FE0082165B /* M13ProgressViewStripedBar.h */,
+				6ED5C0F11AD887FE0082165B /* M13ProgressViewStripedBar.m */,
+			);
+			path = ProgressViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -871,29 +1001,47 @@
 				6E526BAE1AAA35FD00B62400 /* App.m in Sources */,
 				6E526BAC1AAA35FD00B62400 /* SecondViewController.m in Sources */,
 				6E526BB11AAA35FD00B62400 /* Icon.m in Sources */,
+				6ED5C1031AD887FE0082165B /* M13ProgressViewStripedBar.m in Sources */,
 				6E526BAA1AAA35FD00B62400 /* SearchTableViewController.m in Sources */,
 				6E526BB71AAA35FD00B62400 /* AppDelegate.m in Sources */,
+				6ED5C0FB1AD887FE0082165B /* M13ProgressViewLetterpress.m in Sources */,
+				6ED5C0F71AD887FE0082165B /* M13ProgressViewBar.m in Sources */,
+				6ED5C0F91AD887FE0082165B /* M13ProgressViewFilteredImage.m in Sources */,
 				6E526BAF1AAA35FD00B62400 /* Daemon.m in Sources */,
 				6E526BB51AAA35FD00B62400 /* SearchTableViewCell.m in Sources */,
+				6ED5C1001AD887FE0082165B /* M13ProgressViewRing.m in Sources */,
+				6ED5C0FC1AD887FE0082165B /* M13ProgressViewMetro.m in Sources */,
+				6ED5C1011AD887FE0082165B /* M13ProgressViewSegmentedBar.m in Sources */,
 				6E526BB61AAA35FD00B62400 /* SearchView.m in Sources */,
+				6ED5C0FD1AD887FE0082165B /* M13ProgressViewMetroDotPolygon.m in Sources */,
 				6E526BB01AAA35FD00B62400 /* EmptySegue.m in Sources */,
 				6E526BA61AAA35FD00B62400 /* ModelController.m in Sources */,
 				6E526BA51AAA35FD00B62400 /* DataViewController.m in Sources */,
 				6E526BB41AAA35FD00B62400 /* SearchObject.m in Sources */,
 				6E526BB31AAA35FD00B62400 /* ProcessCollectionViewFlowLayout.m in Sources */,
+				6ED5C1021AD887FE0082165B /* M13ProgressViewSegmentedRing.m in Sources */,
 				6E526BA71AAA35FD00B62400 /* ProcessCollectionViewController.m in Sources */,
+				6ED5C0F61AD887FE0082165B /* M13ProgressView.m in Sources */,
+				6ED5C0F41AD887FE0082165B /* UIImage+ImageEffects.m in Sources */,
 				6E526BA41AAA35FD00B62400 /* ContainerViewController.m in Sources */,
 				6E526C101AAA362800B62400 /* Message.c in Sources */,
 				6E526BA91AAA35FD00B62400 /* SearchStatusViewController.m in Sources */,
 				6E526BB21AAA35FD00B62400 /* ProcessBarButtonItem.m in Sources */,
+				6ED5C0F31AD887FE0082165B /* M13ProgressHUD.m in Sources */,
 				6E526BB91AAA35FD00B62400 /* DXPopover.m in Sources */,
+				6ED5C0F51AD887FE0082165B /* UINavigationController+M13ProgressViewBar.m in Sources */,
+				6ED5C0F21AD887FE0082165B /* M13ProgressConsole.m in Sources */,
 				6E526BAD1AAA35FD00B62400 /* SettingsViewController.m in Sources */,
 				6E526BBC1AAA35FD00B62400 /* ResultsHandler.m in Sources */,
+				6ED5C0FF1AD887FE0082165B /* M13ProgressViewRadiative.m in Sources */,
+				6ED5C0FA1AD887FE0082165B /* M13ProgressViewImage.m in Sources */,
 				6E526BAB1AAA35FD00B62400 /* SearchViewController.m in Sources */,
 				6E526BB81AAA35FD00B62400 /* main.m in Sources */,
 				6E526BA81AAA35FD00B62400 /* RootViewController.m in Sources */,
 				6E526BBB1AAA35FD00B62400 /* MessageHandler.m in Sources */,
+				6ED5C0FE1AD887FE0082165B /* M13ProgressViewPie.m in Sources */,
 				6E526BBA1AAA35FD00B62400 /* AppHandler.m in Sources */,
+				6ED5C0F81AD887FE0082165B /* M13ProgressViewBorderedBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

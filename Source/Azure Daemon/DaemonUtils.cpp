@@ -154,7 +154,6 @@ AZ_STATUS Daemon::SendMessage(Message& message)
                 }
                 write_size += writeval;
             }
-            //free(tempArray);
         }
         return AZ_SUCCESS;
     }

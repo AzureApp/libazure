@@ -72,12 +72,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </navigationBar>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-dE-NzF">
-                                <rect key="frame" x="0.0" y="165" width="600" height="378"/>
-                                <connections>
-                                    <segue destination="NL4-JP-HSm" kind="embed" identifier="embedContainer" id="yCj-wN-Do6"/>
-                                </connections>
-                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-QG-0o4">
                                 <rect key="frame" x="554" y="70" width="30" height="30"/>
                                 <constraints>
@@ -90,6 +84,12 @@
                                     <segue destination="YFz-0k-3HY" kind="presentation" modalPresentationStyle="formSheet" id="n7u-gl-ySb"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-dE-NzF">
+                                <rect key="frame" x="0.0" y="165" width="600" height="378"/>
+                                <connections>
+                                    <segue destination="NL4-JP-HSm" kind="embed" identifier="embedContainer" id="yCj-wN-Do6"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -378,22 +378,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cC-MY-938">
-                                <rect key="frame" x="289" y="146" width="22" height="22"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="No Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w43-qq-aag">
-                                <rect key="frame" x="116" y="54" width="368" height="114"/>
+                                <rect key="frame" x="116" y="20" width="368" height="114"/>
                                 <fontDescription key="fontDescription" name="Titillium-Bold" family="Titillium" pointSize="45"/>
                                 <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="0.76000000000000001" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="1" height="1"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQ7-KA-BFM">
+                                <rect key="frame" x="245" y="116" width="110" height="30"/>
+                                <state key="normal" title="Show Results">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9g-xy-cpm" customClass="M13ProgressViewSegmentedBar">
+                                <rect key="frame" x="174" y="116" width="252" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8cC-MY-938" firstAttribute="top" secondItem="w43-qq-aag" secondAttribute="bottom" constant="-22" id="8gK-Bn-E8J"/>
-                            <constraint firstAttribute="centerX" secondItem="8cC-MY-938" secondAttribute="centerX" id="AUd-Bq-JVq"/>
+                            <constraint firstItem="eQ7-KA-BFM" firstAttribute="top" secondItem="w43-qq-aag" secondAttribute="bottom" constant="-18" id="RYC-DD-Sk5"/>
+                            <constraint firstItem="H9g-xy-cpm" firstAttribute="top" secondItem="w43-qq-aag" secondAttribute="bottom" constant="-18" id="hoX-FP-AOt"/>
+                            <constraint firstItem="H9g-xy-cpm" firstAttribute="width" secondItem="w43-qq-aag" secondAttribute="width" id="l53-7Z-BYg"/>
+                            <constraint firstAttribute="centerX" secondItem="H9g-xy-cpm" secondAttribute="centerX" id="mrA-HS-Nl4"/>
+                            <constraint firstAttribute="centerX" secondItem="eQ7-KA-BFM" secondAttribute="centerX" id="qPb-Ke-aeu"/>
                             <constraint firstAttribute="centerX" secondItem="w43-qq-aag" secondAttribute="centerX" id="sQm-aG-Hhl"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -404,6 +414,11 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="3"/>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="progressView" destination="H9g-xy-cpm" id="pde-qm-XWN"/>
+                        <outlet property="resultsButton" destination="eQ7-KA-BFM" id="88y-kV-Jgc"/>
+                        <outlet property="resultsLabel" destination="w43-qq-aag" id="nAC-vm-EOb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5k-HW-3Pi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -37,6 +37,7 @@ public:
     ~Daemon();
     
     AZ_STATUS Start();
+    //AZ_STATUS Tick();
     void Close();
     
     AZ_STATUS ReceivedMessage(Message&);

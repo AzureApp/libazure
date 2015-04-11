@@ -28,7 +28,7 @@
         selector:@selector(onResultsReceived)
         name:@"ReceivedResults"
         object:nil];
-
+    NSLog(@"children : %@", self.childViewControllers);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -37,14 +37,18 @@
 }
 
 - (void)onResultsReceived {
-    printf("reached");
-    if ([[ResultsHandler sharedInstance] hasResults]) {
-        printf("reached 2");
+    [self.containerViewController.secondViewController.tableView reloadData];
+    if ([ResultsHandler sharedInstance].addressCount < 100 && [self.containerViewController.currentSegueIdentifier isEqualToString:@"embedFirst"]) {
         [self switchContainer];
+    }
+    else {
+        self.containerViewController.showProgress = NO;
+        [self.containerViewController.firstViewController showDefaultUI];
     }
 }
 
 - (void)switchContainer {
+    self.containerViewController.results = [ResultsHandler sharedInstance].addressCount;
     [self.containerViewController swapViewControllers];
 }
 
@@ -64,6 +68,7 @@
 {
     if ([segue.identifier isEqualToString:@"embedContainer"]) {
         self.containerViewController = segue.destinationViewController;
+        
     }
 }
 
@@ -131,6 +136,11 @@
         }
     }
     [[ResultsHandler sharedInstance] beginSearch];
+    self.containerViewController.showProgress = YES;
+    if ([self.containerViewController.currentSegueIdentifier isEqualToString:@"embedSecond"]) {
+        [self switchContainer];
+    }
+    [self.containerViewController.firstViewController showProgressUI];
     return NO;
 }
 

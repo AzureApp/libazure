@@ -44,21 +44,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
     SearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID" forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[SearchTableViewCell alloc] init];
     }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(SearchTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResultsHandler *handler = [ResultsHandler sharedInstance];
-    if (handler.hasResults) {
+    if (handler.hasResults && indexPath.row <= handler.addressCount) {
         vm_address_t addr = [[[handler savedAddresses] objectAtIndex:indexPath.row] integerValue];
         
-        cell.addressLabel.text = [NSString stringWithFormat:@"0x%X", addr];
+        cell.addressLabel.text = [NSString stringWithFormat:@"0x%lX", addr];
         cell.valueField.text = [[handler currentSearchObject] toString];
     }
+    return cell;
 }
 
 -(IBAction)toggleLock:(UIButton*)sender {

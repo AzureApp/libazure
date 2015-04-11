@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "M13ProgressViewSegmentedBar.h"
+#import "ResultsHandler.h"
 
 @interface SearchStatusViewController : UIViewController
+
+@property (nonatomic, retain) IBOutlet M13ProgressViewSegmentedBar *progressView;
+@property (nonatomic, retain) IBOutlet UILabel *resultsLabel;
+@property (nonatomic, retain) IBOutlet UIButton *resultsButton;
+@property BOOL showProgress;
+
+- (void)initProgress;
+
+- (void)showDefaultUI;
+- (void)showProgressUI;
 
 @end

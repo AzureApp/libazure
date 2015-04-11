@@ -1,15 +1,11 @@
 #import "ContainerViewController.h"
-#import "SearchTableViewController.h"
-#import "SearchStatusViewController.h"
+
 
 #define SegueIdentifierFirst @"embedFirst"
 #define SegueIdentifierSecond @"embedSecond"
 
 @interface ContainerViewController ()
 
-@property (strong, nonatomic) NSString *currentSegueIdentifier;
-@property (strong, nonatomic) SearchTableViewController *firstViewController;
-@property (strong, nonatomic) SearchStatusViewController *secondViewController;
 @property (assign, nonatomic) BOOL transitionInProgress;
 
 @end
@@ -38,6 +34,9 @@
     
     if ([segue.identifier isEqualToString:SegueIdentifierSecond]) {
         self.secondViewController = segue.destinationViewController;
+        if (self.showProgress) {
+            self.firstViewController.showProgress = YES;
+        }
     }
     
     // If we're going to the first view controller.
@@ -73,7 +72,7 @@
     [fromViewController willMoveToParentViewController:nil];
     [self addChildViewController:toViewController];
     
-    [self transitionFromViewController:fromViewController toViewController:toViewController duration:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
+    [self transitionFromViewController:fromViewController toViewController:toViewController duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
         [fromViewController removeFromParentViewController];
         [toViewController didMoveToParentViewController:self];
         self.transitionInProgress = NO;
