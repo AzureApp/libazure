@@ -20,7 +20,8 @@ namespace Messaging {
 
     static Message SuccessMessage();
     static Message FailMessage(const char*);
-    static Message MessageFromResults(void * ptr, size_t size);
+    static Message MessageFromResults(void *ptr, size_t size);
+    static Message MessageFromDataList(void *ptr, size_t size);
 };
 
 #endif /* defined(__Azure__Messaging__) */

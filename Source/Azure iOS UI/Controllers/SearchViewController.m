@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #import "ContainerViewController.h"
 #import "ResultsHandler.h"
+#import "AppHandler.h"
 
 @interface SearchViewController ()
 @property (nonatomic, weak) ContainerViewController *containerViewController;
@@ -20,31 +21,41 @@
 
 @implementation SearchViewController
 
-@synthesize resultsView, line, settingsButton, searchType, searchNavigationBar, searchField;
+@synthesize processLabel, line, settingsButton, searchType, searchNavigationBar, searchField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(onResultsReceived)
-        name:@"ReceivedResults"
-        object:nil];
+                                             selector:@selector(onResultsReceived)
+                                                 name:@"ReceivedResults"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onResultsReceived)
+                                                 name:@"ReceivedValues"
+                                               object:nil];
     NSLog(@"children : %@", self.childViewControllers);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Titillium-Bold" size:14], NSFontAttributeName, nil];
     [searchType setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    processLabel.text = [NSString stringWithFormat:@"Current Process: %@", [[AppHandler sharedInstance] currentApp].name];
 }
 
 - (void)onResultsReceived {
-    [self.containerViewController.secondViewController.tableView reloadData];
-    if ([ResultsHandler sharedInstance].addressCount < 100 && [self.containerViewController.currentSegueIdentifier isEqualToString:@"embedFirst"]) {
+    NSInteger count = [ResultsHandler sharedInstance].addressCount;
+    self.containerViewController.firstViewController.showProgress = NO;
+    if (count < 100 && count > 0 && [self.containerViewController.currentSegueIdentifier isEqualToString:@"embedFirst"]) {
         [self switchContainer];
     }
     else {
-        self.containerViewController.showProgress = NO;
         [self.containerViewController.firstViewController showDefaultUI];
     }
+    [self.containerViewController.secondViewController.tableView reloadData];
+}
+
+- (void)onValuesReceived {
+    [self.containerViewController.secondViewController.tableView reloadData];
 }
 
 - (void)switchContainer {
@@ -135,12 +146,12 @@
             break;
         }
     }
-    [[ResultsHandler sharedInstance] beginSearch];
-    self.containerViewController.showProgress = YES;
     if ([self.containerViewController.currentSegueIdentifier isEqualToString:@"embedSecond"]) {
         [self switchContainer];
     }
+    self.containerViewController.firstViewController.showProgress = YES;
     [self.containerViewController.firstViewController showProgressUI];
+    [[ResultsHandler sharedInstance] beginSearch];
     return NO;
 }
 

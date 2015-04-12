@@ -14,7 +14,7 @@
 
 @implementation ResultsHandler
 
-@synthesize currentSearchType, currentSearchObject, savedAddresses, addressCount;
+@synthesize currentSearchType, currentSearchObject, savedAddresses, addressCount, searchObjects;
 
 + (id)sharedInstance {
     static id inst = nil;
@@ -27,9 +27,7 @@
 
 - (void)beginSearch {
     Message msg = [MessageHandler searchMessageForSearchObject:currentSearchObject];
-    Daemon *daemon = [Daemon currentDaemon];
-    
-    [daemon sendMessage:msg];
+    [[MessageHandler sharedInstance] sendMessage:msg];
 }
 
 - (void)onResultsReceived {
@@ -38,8 +36,21 @@
          object:nil];
 }
 
+- (void)onValuesReceived {
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:@"ReceivedValues"
+        object:nil];
+}
+
 - (BOOL)hasResults {
     return (addressCount > 0);
+}
+
+- (SearchObject *)searchObjectAtIndex:(NSInteger)index {
+    if (searchObjects.count > 0) {
+        return [searchObjects objectAtIndex:index];
+    }
+    return currentSearchObject;
 }
 
 - (void)rawData:(char *)data ofSize:(size_t *)size fromSearchObject:(SearchObject *)obj {

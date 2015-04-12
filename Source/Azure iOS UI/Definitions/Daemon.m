@@ -32,12 +32,17 @@
     
     [self.inputStream setDelegate:self];
     [self.outputStream setDelegate:self];
-    
-    [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    [self.inputStream open];
-    [self.outputStream open];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(queue, ^ {
+        [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        
+        [self.inputStream open];
+        [self.outputStream open];
+        // here: start the loop
+        [[NSRunLoop currentRunLoop] run];
+        // note: all code below this line won't be executed, because the above method NEVER returns.
+    });
     
     self.ready = YES;
     
@@ -46,7 +51,7 @@
 
 
 - (void)sendMessage:(Message)message {
-    long chunk_size = 64;
+    long chunk_size = CHUNK_SIZE;
     if (self.ready) {
         if ([self.outputStream hasSpaceAvailable]) {
             unsigned char *data = (unsigned char*)message.message;
@@ -98,7 +103,7 @@
             {
                 while ([self.inputStream hasBytesAvailable])
                 {
-                    long chunk_size = 64;
+                    long chunk_size = CHUNK_SIZE;
                     struct msg_header header;
                     long bytes = [self.inputStream read:(unsigned char*)&header maxLength:sizeof(struct msg_header)];
                     MessageHandler *handler = [MessageHandler sharedInstance];

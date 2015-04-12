@@ -8,6 +8,7 @@
         <mutableArray key="Titillium-Bold.otf">
             <string>Titillium-Bold</string>
             <string>Titillium-Bold</string>
+            <string>Titillium-Bold</string>
         </mutableArray>
         <mutableArray key="Titillium-Light.otf">
             <string>Titillium-Light</string>
@@ -30,14 +31,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TZP-EB-Q5D">
-                                <rect key="frame" x="0.0" y="164" width="624" height="1"/>
+                                <rect key="frame" x="0.0" y="183" width="624" height="1"/>
                                 <color key="backgroundColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Tho-e5-4UW"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OrU-qb-fNy">
-                                <rect key="frame" x="16" y="70" width="530" height="30"/>
+                                <rect key="frame" x="16" y="89" width="530" height="30"/>
                                 <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Titillium-Light" family="Titillium" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
@@ -46,7 +47,7 @@
                                 </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hZm-HK-6Pc">
-                                <rect key="frame" x="197" y="126" width="206" height="29"/>
+                                <rect key="frame" x="197" y="145" width="206" height="29"/>
                                 <segments>
                                     <segment title="Int"/>
                                     <segment title="Float"/>
@@ -73,7 +74,7 @@
                                 </userDefinedRuntimeAttributes>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-QG-0o4">
-                                <rect key="frame" x="554" y="70" width="30" height="30"/>
+                                <rect key="frame" x="554" y="89" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="L8V-9p-91P"/>
                                 </constraints>
@@ -85,23 +86,31 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-dE-NzF">
-                                <rect key="frame" x="0.0" y="165" width="600" height="378"/>
+                                <rect key="frame" x="0.0" y="188" width="600" height="363"/>
                                 <connections>
                                     <segue destination="NL4-JP-HSm" kind="embed" identifier="embedContainer" id="yCj-wN-Do6"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Current Process: None" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh2-a0-qGP">
+                                <rect key="frame" x="173" y="60" width="255" height="21"/>
+                                <fontDescription key="fontDescription" name="Titillium-Bold" family="Titillium" pointSize="13"/>
+                                <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cJM-dE-NzF" firstAttribute="top" secondItem="TZP-EB-Q5D" secondAttribute="bottom" id="2uQ-En-pTp"/>
                             <constraint firstItem="aCK-QG-0o4" firstAttribute="leading" secondItem="OrU-qb-fNy" secondAttribute="trailing" constant="8" symbolic="YES" id="3Ib-jC-ZVM"/>
+                            <constraint firstAttribute="centerX" secondItem="hh2-a0-qGP" secondAttribute="centerX" constant="-0.5" id="Ac2-az-23o"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="cJM-dE-NzF" secondAttribute="bottom" constant="8" id="Hfg-d3-BiB"/>
                             <constraint firstItem="cJM-dE-NzF" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="VEg-Yv-rOw"/>
                             <constraint firstItem="aCK-QG-0o4" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="WP0-np-D1U"/>
                             <constraint firstItem="cJM-dE-NzF" firstAttribute="top" secondItem="hZm-HK-6Pc" secondAttribute="bottom" constant="19" id="a8D-oy-TQ2"/>
                             <constraint firstItem="OrU-qb-fNy" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="asg-9w-IDa"/>
                             <constraint firstItem="hZm-HK-6Pc" firstAttribute="top" secondItem="OrU-qb-fNy" secondAttribute="bottom" constant="26" id="bC6-SE-mdF"/>
+                            <constraint firstItem="OrU-qb-fNy" firstAttribute="top" secondItem="hh2-a0-qGP" secondAttribute="bottom" constant="8" id="eEB-6M-BeE"/>
                             <constraint firstItem="Vev-fw-bUe" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="imM-nr-mFb"/>
                             <constraint firstItem="hZm-HK-6Pc" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="tNb-GI-kto"/>
                             <constraint firstItem="OrU-qb-fNy" firstAttribute="top" secondItem="aCK-QG-0o4" secondAttribute="top" id="vPg-nZ-GKG"/>
@@ -111,6 +120,7 @@
                     <tabBarItem key="tabBarItem" title="Search" image="search" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="line" destination="TZP-EB-Q5D" id="j2d-dW-AQp"/>
+                        <outlet property="processLabel" destination="hh2-a0-qGP" id="sFO-Rd-NwE"/>
                         <outlet property="searchField" destination="OrU-qb-fNy" id="dqd-GH-Vbs"/>
                         <outlet property="searchNavigationBar" destination="Vev-fw-bUe" id="Scr-Hl-29s"/>
                         <outlet property="searchType" destination="hZm-HK-6Pc" id="fSA-PQ-giK"/>
@@ -378,14 +388,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="No Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w43-qq-aag">
-                                <rect key="frame" x="116" y="20" width="368" height="114"/>
-                                <fontDescription key="fontDescription" name="Titillium-Bold" family="Titillium" pointSize="45"/>
-                                <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="0.76000000000000001" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQ7-KA-BFM">
                                 <rect key="frame" x="245" y="116" width="110" height="30"/>
                                 <state key="normal" title="Show Results">
@@ -396,13 +398,21 @@
                                 <rect key="frame" x="174" y="116" width="252" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="No Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w43-qq-aag">
+                                <rect key="frame" x="116" y="20" width="368" height="114"/>
+                                <fontDescription key="fontDescription" name="Titillium-Bold" family="Titillium" pointSize="45"/>
+                                <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="0.76000000000000001" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="w43-qq-aag" firstAttribute="centerX" secondItem="H9g-xy-cpm" secondAttribute="centerX" id="FOB-tv-qRY"/>
                             <constraint firstItem="eQ7-KA-BFM" firstAttribute="top" secondItem="w43-qq-aag" secondAttribute="bottom" constant="-18" id="RYC-DD-Sk5"/>
                             <constraint firstItem="H9g-xy-cpm" firstAttribute="top" secondItem="w43-qq-aag" secondAttribute="bottom" constant="-18" id="hoX-FP-AOt"/>
                             <constraint firstItem="H9g-xy-cpm" firstAttribute="width" secondItem="w43-qq-aag" secondAttribute="width" id="l53-7Z-BYg"/>
-                            <constraint firstAttribute="centerX" secondItem="H9g-xy-cpm" secondAttribute="centerX" id="mrA-HS-Nl4"/>
                             <constraint firstAttribute="centerX" secondItem="eQ7-KA-BFM" secondAttribute="centerX" id="qPb-Ke-aeu"/>
                             <constraint firstAttribute="centerX" secondItem="w43-qq-aag" secondAttribute="centerX" id="sQm-aG-Hhl"/>
                         </constraints>
@@ -433,7 +443,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Utc-C3-4aE"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QB8-xV-poC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="378"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="363"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

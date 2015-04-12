@@ -53,12 +53,12 @@
         vm_address_t addr = [[[handler savedAddresses] objectAtIndex:indexPath.row] integerValue];
         
         cell.addressLabel.text = [NSString stringWithFormat:@"0x%lX", addr];
-        cell.valueField.text = [[handler currentSearchObject] toString];
+        cell.valueField.text = [[handler searchObjectAtIndex:indexPath.row] toString];
     }
     return cell;
 }
 
--(IBAction)toggleLock:(UIButton*)sender {
+-(IBAction)toggleLock:(UIButton *)sender {
     sender.selected = !sender.selected;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];

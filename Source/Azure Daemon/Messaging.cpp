@@ -37,9 +37,13 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
                 }
                 return status;
             }
+                
             case Detach:
-                // TODO
-                break;
+            {
+                azure->DetachFromProcess();
+                
+                return AZ_SUCCESS;
+            }
                 
             case NewSearch:
             {
@@ -72,6 +76,25 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
                 AddressList *addresses = manager->Results();
                 AZLog("found %d results", addresses->size());
                 message = MessageFromResults(addresses->data(), addresses->size()*sizeof(vm_address_t));
+                
+                return AZ_SUCCESS;
+            }
+                
+            case Results:
+            {
+                
+            }
+                
+            case Values:
+            {
+                AZ_STATUS status = manager->FetchUpdatedResults();
+                if (status != AZ_SUCCESS)
+                {
+                    AZLog("an error has occured updating results: %s", mach_error_string(status));
+                }
+                DataList *dataList = manager->DataList();
+                AZLog("found %d values", dataList->size());
+                message = MessageFromDataList(dataList->data(), dataList->size()*sizeof(manager->DataSize()));
                 
                 return AZ_SUCCESS;
             }
@@ -121,6 +144,17 @@ Message Messaging::MessageFromResults(void *results, size_t size)
     msg.header.messageSize = size;
     msg.header.type = Results;
     msg.message = results;
+    
+    return msg;
+}
+
+Message Messaging::MessageFromDataList(void *values, size_t size)
+{
+    Message msg;
+    msg.header = header_default;
+    msg.header.messageSize = size;
+    msg.header.type = Values;
+    msg.message = values;
     
     return msg;
 }

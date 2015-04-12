@@ -13,7 +13,7 @@
 
 @interface SearchViewController : UIViewController <UITextFieldDelegate, UIBarPositioningDelegate>
 
-@property (nonatomic, strong) IBOutlet UITableView *resultsView;
+@property (nonatomic, strong) IBOutlet UILabel *processLabel;
 @property (nonatomic, strong) IBOutlet UIView *line;
 @property (nonatomic, strong) IBOutlet UIButton *settingsButton;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *searchType;

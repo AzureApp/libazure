@@ -15,6 +15,8 @@
 
 @implementation AppHandler
 
+@synthesize currentApp;
+
 + (id)sharedInstance {
     static id inst = nil;
     static dispatch_once_t onceToken;

@@ -14,6 +14,7 @@
 #include "Status.h"
 
 #define DAEMON_PORT 1248
+#define CHUNK_SIZE 16384
 
 #define MSG_MAGIC 0xABAD1DEA // dedicated to my favorite virus
 
@@ -26,7 +27,8 @@ enum MessageType {
     IterateSearch,
     Edit,
     Lock,
-    Results
+    Results,
+    Values
 };
 
 struct msg_header {

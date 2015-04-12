@@ -9,12 +9,11 @@
 #include "DaemonUtils.h"
 #include "Azure.h"
 
-using namespace DaemonUtils;
 
 Daemon::Daemon()
 : serverReady(false), port(DAEMON_PORT)
 {
-    std::signal(SIGPIPE, SIG_IGN);
+    signal(SIGPIPE, SIG_IGN);
 }
 
 Daemon::~Daemon()
@@ -50,6 +49,24 @@ AZ_STATUS Daemon::Start()
     return AZ_SUCCESS;
 }
 
+bool Daemon::HasDataAvailable()
+{
+    struct timeval tv;
+    tv.tv_sec = 0;
+    tv.tv_usec = 100000;
+    
+    fd_set readset;
+    FD_ZERO(&readset);
+    FD_SET(client_sock, &readset);
+    int result = select(client_sock + 1, &readset, NULL, NULL, &tv);
+    if (result < 0) {
+        AZLog("Azure daemon failed reading socket");
+        perror(NULL);
+        return false;
+    }
+    return (result >= 0 && FD_ISSET(client_sock, &readset));
+}
+
 void Daemon::Close()
 {
     AZLog("daemon shutting down");
@@ -68,7 +85,7 @@ void Daemon::OnLostConnection()
 
 AZ_STATUS Daemon::ReceivedMessage(Message& message)
 {
-    size_t chunk_size = 64;
+    size_t chunk_size = CHUNK_SIZE;
     if (serverReady)
     {
         msg_header header = header_default;
@@ -120,13 +137,14 @@ AZ_STATUS Daemon::ReceivedMessage(Message& message)
 AZ_STATUS Daemon::SendMessage(Message& message)
 {
     AZLog("sending message of type %s [msg size %ld]", enumToName(message.header.type), message.header.messageSize);
-    size_t chunk_size = 64;
+    size_t chunk_size = CHUNK_SIZE;
     if (serverReady)
     {
         char *data = (char*)message.message;
         long sent = send(client_sock, &message.header, sizeof(msg_header), 0);
         if (sent < 0)
         {
+            perror(NULL);
             AZLog("testy mctest 2");
             this->OnLostConnection();
             return AZ_FAILURE;

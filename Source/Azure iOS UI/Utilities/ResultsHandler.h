@@ -23,11 +23,14 @@ enum SearchType {
 +(instancetype)sharedInstance;
 - (void)beginSearch;
 - (void)onResultsReceived;
+- (void)onValuesReceived;
 - (BOOL)hasResults;
+- (SearchObject *)searchObjectAtIndex:(NSInteger)index;
 
 @property enum SearchType currentSearchType;
 @property (strong) NSArray *savedAddresses; // strong to copy?
-@property int addressCount;
+@property size_t addressCount;
 @property (strong) SearchObject *currentSearchObject;
+@property (strong) NSArray *searchObjects;
 
 @end

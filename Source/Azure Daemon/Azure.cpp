@@ -19,7 +19,7 @@ const char* concat(const char *s1, const char *s2)
 
 Azure::Azure()
 {
-    azureDaemon = new DaemonUtils::Daemon();
+    azureDaemon = new Daemon();
 }
 
 Azure::~Azure()
@@ -52,31 +52,34 @@ AZ_STATUS Azure::Tick()
     AZ_STATUS status = AZ_SUCCESS;
     while (status == AZ_SUCCESS)
     {
-        Message msg;
-        status = azureDaemon->ReceivedMessage(msg);
-        if (status != AZ_SUCCESS) {
-            AZLog("daemon failed with error %d\n", status);
-            AZLog("trying to restart daemon");
-            if ((status = azureDaemon->Start())) {
-                AZLog("fatal, cannot restart daemon");
+        if (azureDaemon->HasDataAvailable())
+        {
+            Message msg;
+            status = azureDaemon->ReceivedMessage(msg);
+            if (status != AZ_SUCCESS) {
+                AZLog("daemon failed with error %d\n", status);
+                AZLog("trying to restart daemon");
+                if ((status = azureDaemon->Start())) {
+                    AZLog("fatal, cannot restart daemon");
+                    return status;
+                }
+            }
+            azureDaemon->SendMessageReceiveSuccess();
+            
+            status = Messaging::ProcessMessage(msg);
+            if (status != AZ_SUCCESS) {
+                AZLog("Messaging failed with error %d\n", status);
                 return status;
             }
-        }
-        azureDaemon->SendMessageReceiveSuccess();
-        
-        status = Messaging::ProcessMessage(msg);
-        if (status != AZ_SUCCESS) {
-            AZLog("Messaging failed with error %d\n", status);
-            return status;
-        }
-        
-        status = azureDaemon->SendMessage(msg);
-        if (status != AZ_SUCCESS) {
-            AZLog("daemon failed with error %d\n", status);
-            AZLog("trying to restart daemon");
-            if ((status = azureDaemon->Start())) {
-                AZLog("fatal, cannot restart daemon");
-                return status;
+            
+            status = azureDaemon->SendMessage(msg);
+            if (status != AZ_SUCCESS) {
+                AZLog("daemon failed with error %d\n", status);
+                AZLog("trying to restart daemon");
+                if ((status = azureDaemon->Start())) {
+                    AZLog("fatal, cannot restart daemon");
+                    return status;
+                }
             }
         }
     }
@@ -95,6 +98,12 @@ void Azure::AttachToProcess(Process *proc)
     {
         AZLog("could not attach to process: [%s-%d]", proc->name, proc->pid);
     }
+}
+
+void Azure::DetachFromProcess()
+{
+    MemoryManager *manager = MemoryManager::GetInstance();
+    manager->DetachFromProcess();
 }
 
 void Azure::WriteToLog(const char *fmt, ...)

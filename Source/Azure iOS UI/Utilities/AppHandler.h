@@ -19,6 +19,8 @@ extern int proc_pidpath(int,void*,uint32_t);
 
 @interface AppHandler : NSObject
 
+@property (nonatomic, strong) App *currentApp;
+
 + (instancetype)sharedInstance;
 - (NSArray *)allRunningApps;
 - (void)refreshRunningApps;

@@ -27,7 +27,6 @@ char* concat(char *s1, char *s2);
 #define AZ_LOG_LOC "/Applications/Azure.app/azure.log"
 #endif
 
-using namespace DaemonUtils;
 using namespace ProcessUtils;
 
 class Azure {
@@ -41,6 +40,7 @@ public:
     AZ_STATUS Tick();
     static void WriteToLog(const char *fmt, ...);
     void AttachToProcess(Process *);
+    void DetachFromProcess();
     
     Daemon *CurrentDaemon() const;
     

@@ -81,6 +81,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [AppHandler sharedInstance].currentApp = [runningApps objectAtIndex:indexPath.row];
     [self.tabBarController setSelectedIndex:1];
     Message msg = [MessageHandler attachMessageForApp:[runningApps objectAtIndex:indexPath.row]];
     [[MessageHandler sharedInstance] sendMessage:msg];

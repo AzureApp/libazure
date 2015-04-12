@@ -31,6 +31,9 @@ const char* enumToName(enum MessageType type)
         case Results:
             return "Results";
             break;
+        case Values:
+            return "Values";
+            break;
         default:
             return 0;
             break;

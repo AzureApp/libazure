@@ -73,10 +73,7 @@ Process::Process(msg_process *processData) : Process()
     }
 }
 
-Process::~Process()
-{
-    
-}
+Process::~Process() = default;
 
 vector<Process::Region> Process::GetRegions()
 {

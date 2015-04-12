@@ -28,17 +28,15 @@
     // Instead of creating new VCs on each seque we want to hang on to existing
     // instances if we have it. Remove the second condition of the following
     // two if statements to get new VC instances instead.
+    
     if ([segue.identifier isEqualToString:SegueIdentifierFirst]) {
         self.firstViewController = segue.destinationViewController;
     }
     
     if ([segue.identifier isEqualToString:SegueIdentifierSecond]) {
         self.secondViewController = segue.destinationViewController;
-        if (self.showProgress) {
-            self.firstViewController.showProgress = YES;
-        }
     }
-    
+    self.firstViewController.showProgress = self.showProgress;
     // If we're going to the first view controller.
     if ([segue.identifier isEqualToString:SegueIdentifierFirst]) {
         // If this is not the first time we're loading this.

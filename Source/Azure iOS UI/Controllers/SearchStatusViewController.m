@@ -9,6 +9,8 @@
 #import "SearchStatusViewController.h"
 #import "ContainerViewController.h"
 
+static float count = 0;
+
 @interface SearchStatusViewController ()
 
 - (void)showDefaultUI;
@@ -32,6 +34,10 @@
     resultsButton.layer.borderColor = [UIColor colorWithRed:49/255.0f green:192/255.0f blue:190/255.0f alpha:1.0].CGColor;
     resultsButton.layer.cornerRadius = 6;
     [resultsButton addTarget:self action:@selector(showResults) forControlEvents:UIControlEventTouchUpInside];
+    self.progressView.numberOfSegments = 4;
+    self.progressView.primaryColor = [UIColor colorWithRed:49/255.0f green:192/255.0f blue:190/255.0f alpha:1.0];
+    self.progressView.segmentShape = M13ProgressViewSegmentedBarSegmentShapeCircle;
+    [self.view addSubview:self.progressView];
     if (self.showProgress)
         [self showProgressUI];
     else
@@ -42,6 +48,12 @@
     resultsButton.hidden = YES;
     resultsLabel.text = @"Searching...";
     self.progressView.hidden = NO;
+    count = 0;
+    [self.progressView setProgress:count animated:NO];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self performSelector:@selector(progressUpdate) withObject:nil afterDelay:0.1];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,22 +75,16 @@
 
 - (void)showProgressUI {
     [self initProgress];
-    self.progressView.numberOfSegments = 4;
-    self.progressView.primaryColor = [UIColor colorWithRed:49/255.0f green:192/255.0f blue:190/255.0f alpha:1.0];
-    self.progressView.segmentShape = M13ProgressViewSegmentedBarSegmentShapeCircle;
-    [self.view addSubview:self.progressView];
-    [self performSelector:@selector(progressUpdate) withObject:nil afterDelay:0.1];
+    self.progressView.hidden = NO;
 }
 
 - (void)showResults {
     ContainerViewController *container = (ContainerViewController *)self.parentViewController;
-    [container.secondViewController.tableView reloadData];
     [container swapViewControllers];
 }
 
 - (void)progressUpdate {
     if (self.showProgress) {
-        static float count = 0;
         float amount = 0.25;
         float total = count+amount;
         if (count+amount > 1.25) {
@@ -90,8 +96,17 @@
         else {
             [self.progressView setProgress:total animated:YES];
             count += amount;
-            [self performSelector:@selector(progressUpdate) withObject:nil afterDelay:0.33];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.33 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self progressUpdate];
+            });
         }
+    }
+    else {
+        count = 0;
+        [self.progressView setProgress:count animated:NO];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.33 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self progressUpdate];
+        });
     }
 }
 

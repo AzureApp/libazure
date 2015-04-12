@@ -25,7 +25,7 @@
 - (BOOL)isDecimalNumberSearch;
 - (BOOL)isByteSearch;
 
-- (int)getSearchSize;
+- (NSInteger)getSearchSize;
 - (void*)getRawData;
 
 - (NSString *)toString;

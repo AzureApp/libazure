@@ -50,7 +50,7 @@
     return (self.asBytes != nil);
 }
 
-- (int)getSearchSize {
+- (NSInteger)getSearchSize {
     if ([self isNumberSearch]) {
         return sizeof(int); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
     }
@@ -67,7 +67,7 @@
 }
 
 - (void*)getRawData {
-    int size = [self getSearchSize];
+    NSInteger size = [self getSearchSize];
     void *data = malloc(size);
     
     if ([self isNumberSearch]) {

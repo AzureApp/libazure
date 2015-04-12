@@ -65,8 +65,10 @@
                 NSLog(@"address count = %d", addressCount);
                 for (int i = 0; i < addressCount; i++)
                 {
-                    [arr addObject:[NSNumber numberWithUnsignedInteger:addresses[i]]];
+                    NSNumber *addr = [NSNumber numberWithUnsignedInteger:addresses[i]];
+                    [arr addObject:addr];
                 }
+                free(msg.message);
                 results.savedAddresses = [NSArray arrayWithArray:arr];
                 results.addressCount = addressCount;
                 [results onResultsReceived];
@@ -74,7 +76,41 @@
                 daemon.ready = YES;
                 return;
             }
+            
+            case Values:
+            {
+                ResultsHandler *results = [ResultsHandler sharedInstance];
+                void *data = msg.message;
+                NSMutableArray *arr = [[NSMutableArray alloc] init];
+                NSInteger objCount = msg.header.messageSize/[results currentSearchObject].getSearchSize;
+                NSLog(@"address count = %ld", (long)objCount);
+                for (int i = 0; i < objCount; i++)
+                {
+                    SearchObject *obj;
+                    if ([results currentSearchObject].isNumberSearch) {
+                        obj = [SearchObject searchWithNumber:[NSNumber numberWithInt:*(int*)data]];
+                        
+                    }
+                    if ([results currentSearchObject].isDecimalNumberSearch) {
+                        obj = [SearchObject searchWithNumber:[NSNumber numberWithFloat:*(float*)data]];
+                    }
+                    if ([results currentSearchObject].isByteSearch) {
+                        obj = [SearchObject searchWithBytes:[NSData dataWithBytes:data length:[results currentSearchObject].getSearchSize]];
+                    }
+                    if ([results currentSearchObject].isStringSearch) {
+                        obj = [SearchObject searchWithString:[NSString stringWithUTF8String:data]];
+                    }
+    
+                    [arr addObject:obj];
+                    data += [results currentSearchObject].getSearchSize;
+                }
+                free(msg.message);
+                results.searchObjects = [NSArray arrayWithArray:arr];
+                [results onValuesReceived];
                 
+                daemon.ready = YES;
+                return;
+            }
             case Attach:
             case Detach:
             case NewSearch:
@@ -121,7 +157,13 @@
     msg.header.magic = MSG_MAGIC;
     msg.header.messageSize = obj.getSearchSize;
     msg.header.shouldPop = YES;
-    msg.header.type = NewSearch;
+    
+    if ([[ResultsHandler sharedInstance] hasResults]) {
+        msg.header.type = IterateSearch;
+    }
+    else {
+        msg.header.type = NewSearch;
+    }
     
     msg.message = [obj getRawData];
     

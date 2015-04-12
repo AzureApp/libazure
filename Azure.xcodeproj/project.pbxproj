@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E0E23E81ADB0CEA0095BC82 /* ProcessBarButtonItem.h in Sources */ = {isa = PBXBuildFile; fileRef = 6E526B8B1AAA35FD00B62400 /* ProcessBarButtonItem.h */; };
+		6E0E23F21ADB0D180095BC82 /* Azure.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BCF1AAA360C00B62400 /* Azure.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E0E23F31ADB0D1B0095BC82 /* DaemonUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BD11AAA360C00B62400 /* DaemonUtils.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E0E23F41ADB0D210095BC82 /* MemoryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BD41AAA360C00B62400 /* MemoryManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E0E23F51ADB0D250095BC82 /* Messaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BD61AAA360C00B62400 /* Messaging.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E0E23F61ADB0D280095BC82 /* ObjCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BD81AAA360C00B62400 /* ObjCUtils.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E0E23F71ADB0D2C0095BC82 /* ProcessUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BDA1AAA360C00B62400 /* ProcessUtils.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E0E23F81ADB0D2D0095BC82 /* Settings.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BDC1AAA360C00B62400 /* Settings.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6E1894BA1AABBF5000E7334A /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E526C041AAA362800B62400 /* Message.c */; };
 		6E1B9A8619827C4D006143A4 /* MainMenu.xib in Sources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7F19827C3C006143A4 /* MainMenu.xib */; };
 		6E1B9A8719827C81006143A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7A19827C3C006143A4 /* Credits.rtf */; };
@@ -766,6 +774,30 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		6E0E23D81ADB0CA30095BC82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E0E23F11ADB0D120095BC82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E0E23F21ADB0D180095BC82 /* Azure.h in Headers */,
+				6E0E23F61ADB0D280095BC82 /* ObjCUtils.h in Headers */,
+				6E0E23F31ADB0D1B0095BC82 /* DaemonUtils.h in Headers */,
+				6E0E23F81ADB0D2D0095BC82 /* Settings.h in Headers */,
+				6E0E23F71ADB0D2C0095BC82 /* ProcessUtils.h in Headers */,
+				6E0E23F41ADB0D210095BC82 /* MemoryManager.h in Headers */,
+				6E0E23F51ADB0D250095BC82 /* Messaging.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		6E4E316719752E1800790C14 /* Azure Mac Daemon */ = {
 			isa = PBXNativeTarget;
@@ -788,6 +820,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E526CD11AAA47CD00B62400 /* Build configuration list for PBXNativeTarget "Azure iOS Daemon" */;
 			buildPhases = (
+				6E0E23F11ADB0D120095BC82 /* Headers */,
 				6E526CAD1AAA47CC00B62400 /* Sources */,
 				6E526CAE1AAA47CC00B62400 /* Frameworks */,
 				6E526CAF1AAA47CC00B62400 /* Resources */,
@@ -806,6 +839,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EAEB22A1A1FF821002628DC /* Build configuration list for PBXNativeTarget "Azure iOS UI" */;
 			buildPhases = (
+				6E0E23D81ADB0CA30095BC82 /* Headers */,
 				6EAEB2031A1FF821002628DC /* Sources */,
 				6EAEB2041A1FF821002628DC /* Frameworks */,
 				6EAEB2051A1FF821002628DC /* Resources */,
@@ -957,7 +991,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.3\"\n\n# Verify that the build is for iOS Device and not a Simulator.\nif [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Kill any running instances and remove the app folder.\nssh root@$IP \"killall ${TARGETNAME}; rm -rf /Applications/${WRAPPER_NAME}\"\n# Self sign the build.\n#ldid -S $BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\n# Copy it over.\nscp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}\" root@$IP:/Applications/\n#ssh root@$IP \"su -c uicache mobile\"\n\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\nfi";
+			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.4\"\n\n# Verify that the build is for iOS Device and not a Simulator.\n#if [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Kill any running instances and remove the app folder.\n#ssh root@$IP \"killall ${TARGETNAME}; rm -rf /Applications/${WRAPPER_NAME}\"\n# Self sign the build.\n#ldid -S $BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\n# Copy it over.\n#scp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}\" root@$IP:/Applications/\n#ssh root@$IP \"su -c uicache mobile\"\n\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\n#fi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -998,6 +1032,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E0E23E81ADB0CEA0095BC82 /* ProcessBarButtonItem.h in Sources */,
 				6E526BAE1AAA35FD00B62400 /* App.m in Sources */,
 				6E526BAC1AAA35FD00B62400 /* SecondViewController.m in Sources */,
 				6E526BB11AAA35FD00B62400 /* Icon.m in Sources */,
@@ -1142,6 +1177,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Azure iOS Daemon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_NO_PIE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1166,6 +1202,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Azure iOS Daemon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_NO_PIE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
