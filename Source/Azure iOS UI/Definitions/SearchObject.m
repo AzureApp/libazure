@@ -126,4 +126,24 @@
     return [NSString new];
 }
 
+- (void)modifyData:(NSString *)data {
+    if ([self isNumberSearch]) {
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber *num = [f numberFromString:data];
+        self.asNumber = num;
+    }
+    else if ([self isDecimalNumberSearch]) {
+        NSDecimalNumber *num = [NSDecimalNumber decimalNumberWithString:data];
+        self.asDecimalNumber = num;
+    }
+    else if ([self isByteSearch]) {
+        NSData *byteData = [data dataFromHexString];
+        self.asBytes = byteData;
+    }
+    else if ([self isStringSearch]) {
+        self.asString = data;
+    }
+}
+
 @end

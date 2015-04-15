@@ -16,6 +16,9 @@
         <mutableArray key="Titillium-Regular.otf">
             <string>Titillium-Regular</string>
         </mutableArray>
+        <mutableArray key="Titillium-Semibold.otf">
+            <string>Titillium-Semibold</string>
+        </mutableArray>
     </customFonts>
     <scenes>
         <!--Search-->
@@ -35,6 +38,13 @@
                                 <color key="backgroundColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Tho-e5-4UW"/>
+                                </constraints>
+                            </view>
+                            <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gDq-6O-05q">
+                                <rect key="frame" x="-4" y="523" width="624" height="1"/>
+                                <color key="backgroundColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="VYN-ZS-tH4"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OrU-qb-fNy">
@@ -70,18 +80,6 @@
                                     <segue destination="YFz-0k-3HY" kind="presentation" modalPresentationStyle="formSheet" id="n7u-gl-ySb"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-dE-NzF">
-                                <rect key="frame" x="0.0" y="188" width="600" height="363"/>
-                                <connections>
-                                    <segue destination="NL4-JP-HSm" kind="embed" identifier="embedContainer" id="yCj-wN-Do6"/>
-                                </connections>
-                            </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Current Process: None" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh2-a0-qGP">
-                                <rect key="frame" x="173" y="60" width="255" height="21"/>
-                                <fontDescription key="fontDescription" name="Titillium-Bold" family="Titillium" pointSize="13"/>
-                                <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vev-fw-bUe">
                                 <rect key="frame" x="0.0" y="10" width="600" height="44"/>
                                 <textAttributes key="titleTextAttributes">
@@ -97,20 +95,46 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZZ-bM-u27">
+                                <rect key="frame" x="270" y="521" width="60" height="30"/>
+                                <fontDescription key="fontDescription" name="Titillium-Bold" family="Titillium" pointSize="15"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axF-K8-aWZ">
+                                <rect key="frame" x="104" y="54" width="392" height="30"/>
+                                <fontDescription key="fontDescription" name="Titillium-Semibold" family="Titillium" pointSize="14"/>
+                                <state key="normal" title="Currrent Process: None">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="processSeleced:" destination="9pv-A4-QxB" eventType="touchUpInside" id="srf-91-3hi"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-dE-NzF">
+                                <rect key="frame" x="0.0" y="192" width="600" height="331"/>
+                                <connections>
+                                    <segue destination="NL4-JP-HSm" kind="embed" identifier="embedContainer" id="yCj-wN-Do6"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="RZZ-bM-u27" secondAttribute="bottom" id="2tu-9I-aXX"/>
                             <constraint firstItem="cJM-dE-NzF" firstAttribute="top" secondItem="TZP-EB-Q5D" secondAttribute="bottom" id="2uQ-En-pTp"/>
                             <constraint firstItem="aCK-QG-0o4" firstAttribute="leading" secondItem="OrU-qb-fNy" secondAttribute="trailing" constant="8" symbolic="YES" id="3Ib-jC-ZVM"/>
-                            <constraint firstAttribute="centerX" secondItem="hh2-a0-qGP" secondAttribute="centerX" constant="-0.5" id="Ac2-az-23o"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="cJM-dE-NzF" secondAttribute="bottom" constant="8" id="Hfg-d3-BiB"/>
+                            <constraint firstAttribute="centerX" secondItem="RZZ-bM-u27" secondAttribute="centerX" id="5P5-x6-zaj"/>
+                            <constraint firstItem="axF-K8-aWZ" firstAttribute="top" secondItem="Vev-fw-bUe" secondAttribute="bottom" id="8MP-ez-Hpl"/>
+                            <constraint firstAttribute="centerX" secondItem="axF-K8-aWZ" secondAttribute="centerX" id="Jyl-kJ-lLu"/>
                             <constraint firstItem="cJM-dE-NzF" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="VEg-Yv-rOw"/>
                             <constraint firstItem="aCK-QG-0o4" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="WP0-np-D1U"/>
                             <constraint firstItem="cJM-dE-NzF" firstAttribute="top" secondItem="hZm-HK-6Pc" secondAttribute="bottom" constant="19" id="a8D-oy-TQ2"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="cJM-dE-NzF" secondAttribute="bottom" constant="28" id="aNW-sq-lcl"/>
                             <constraint firstItem="OrU-qb-fNy" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="asg-9w-IDa"/>
                             <constraint firstItem="hZm-HK-6Pc" firstAttribute="top" secondItem="OrU-qb-fNy" secondAttribute="bottom" constant="26" id="bC6-SE-mdF"/>
-                            <constraint firstItem="OrU-qb-fNy" firstAttribute="top" secondItem="hh2-a0-qGP" secondAttribute="bottom" constant="8" id="eEB-6M-BeE"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="gDq-6O-05q" secondAttribute="bottom" constant="27" id="goz-2d-x1T"/>
                             <constraint firstItem="Vev-fw-bUe" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="imM-nr-mFb"/>
                             <constraint firstItem="hZm-HK-6Pc" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="tNb-GI-kto"/>
                             <constraint firstItem="OrU-qb-fNy" firstAttribute="top" secondItem="aCK-QG-0o4" secondAttribute="top" id="vPg-nZ-GKG"/>
@@ -120,7 +144,7 @@
                     <tabBarItem key="tabBarItem" title="Search" image="search" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="line" destination="TZP-EB-Q5D" id="j2d-dW-AQp"/>
-                        <outlet property="processLabel" destination="hh2-a0-qGP" id="sFO-Rd-NwE"/>
+                        <outlet property="processButton" destination="axF-K8-aWZ" id="1m1-Kz-nXn"/>
                         <outlet property="searchField" destination="OrU-qb-fNy" id="dqd-GH-Vbs"/>
                         <outlet property="searchNavigationBar" destination="Vev-fw-bUe" id="Scr-Hl-29s"/>
                         <outlet property="searchType" destination="hZm-HK-6Pc" id="fSA-PQ-giK"/>
@@ -173,12 +197,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Me-vg-jh3">
-                                <rect key="frame" x="0.0" y="64" width="600" height="479"/>
-                                <connections>
-                                    <segue destination="JvK-6O-E3i" kind="embed" id="XN0-Yh-TCp"/>
-                                </connections>
-                            </containerView>
                             <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w31-HT-mao">
                                 <rect key="frame" x="0.0" y="10" width="600" height="44"/>
                                 <textAttributes key="titleTextAttributes">
@@ -191,6 +209,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </navigationBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Me-vg-jh3">
+                                <rect key="frame" x="0.0" y="64" width="600" height="479"/>
+                                <connections>
+                                    <segue destination="JvK-6O-E3i" kind="embed" id="XN0-Yh-TCp"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -377,6 +401,9 @@
                                             <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="Titillium-Regular" family="Titillium" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="0fT-SH-ttM" id="WU9-yr-gTM"/>
+                                            </connections>
                                         </textField>
                                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXz-Px-42J">
                                             <rect key="frame" x="440" y="0.0" width="1" height="44"/>
@@ -483,7 +510,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Utc-C3-4aE"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QB8-xV-poC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="363"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="331"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

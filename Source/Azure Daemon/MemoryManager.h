@@ -44,7 +44,7 @@ struct SearchSettings {
     
     DataObject searchObj;
     
-    bool Match(DataObject raw);
+    inline bool Match(DataObject raw);
 };
 
 typedef std::vector<DataObject> ResultsList;
@@ -62,18 +62,21 @@ public:
     void DetachFromProcess();
     
     ResultsList *Results() const;
+    ResultsList *LockedResults() const;
     int DataSize() const { return this->initialDataSize; }
     
     AZ_STATUS Find(SearchSettings& settings);
     AZ_STATUS Iterate(SearchSettings& settings);
     AZ_STATUS FetchUpdatedResults(int start, int count);
     
-    AZ_STATUS Write(vm_address_t addr, DataObject obj); // TODO
+    AZ_STATUS Write(DataObject obj); // TODO
+    AZ_STATUS Lock(DataObject obj);
     void ResetResults();
 private:
     Process *currentProcess;
     int initialDataSize;
     ResultsList *savedResults;
+    ResultsList *lockedResults;
 };
 
 #endif /* defined(__Azure_Mac_V3__AzureEngine__) */

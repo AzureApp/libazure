@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#include <mach/mach.h>
+#import <mach/mach.h>
+#import "NSString+HexAdditions.h"
 
 enum SearchType {
     Int,
@@ -47,4 +48,7 @@ struct DataObject {
 - (void*)getRawData;
 
 - (NSString *)toString;
+
+- (void)modifyData:(NSString *)data;
+
 @end

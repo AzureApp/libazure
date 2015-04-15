@@ -43,12 +43,9 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    if ([[ResultsHandler sharedInstance] hasResults]) {
-        Message msg;
-        msg.header = header_default;
-        msg.header.type = Values;
-        [[MessageHandler sharedInstance] sendMessage:msg];
-    }
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"RetrieveUpdatedValues"
+     object:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

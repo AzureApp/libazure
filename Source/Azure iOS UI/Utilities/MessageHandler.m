@@ -132,7 +132,10 @@
     memcpy(data.data, [obj getRawData], [obj getSearchSize]);
     NSLog(@"%p", data.data);
     data.dataLen = (int)[obj getSearchSize];
-    data.dataType = 0; // (obj.isNumberSearch + (obj.isDecimalNumberSearch + 1) + (obj.isByteSearch + 2) + (obj.isStringSearch + 3));
+    if ([obj isNumberSearch]) data.dataType = Int;
+    if ([obj isDecimalNumberSearch]) data.dataType = Float;
+    if ([obj isByteSearch]) data.dataType = Hex;
+    if ([obj isStringSearch]) data.dataType = String;
     
     SearchSettings *settings = malloc(sizeof(SearchSettings));
     settings->fuzzySearch = NO;
@@ -151,6 +154,44 @@
     }
     
     msg.message = settings;
+    return msg;
+}
+
++ (Message)writeMessageForSearchObject:(SearchObject *)obj {
+    DataObject *data = malloc(sizeof(DataObject));
+    memcpy(data->data, [obj getRawData], [obj getSearchSize]);
+    data->dataLen = (int)[obj getSearchSize];
+    if ([obj isNumberSearch]) data->dataType = Int;
+    if ([obj isDecimalNumberSearch]) data->dataType = Float;
+    if ([obj isByteSearch]) data->dataType = Hex;
+    if ([obj isStringSearch]) data->dataType = String;
+    data->address = obj.address;
+    
+    Message msg;
+    msg.header = header_default;
+    msg.header.type = Edit;
+    msg.header.messageSize = sizeof(DataObject);
+    msg.message = data;
+    
+    return msg;
+}
+
++ (Message)lockMessageForSearchObject:(SearchObject *)obj {
+    DataObject *data = malloc(sizeof(DataObject));
+    memcpy(data->data, [obj getRawData], [obj getSearchSize]);
+    data->dataLen = (int)[obj getSearchSize];
+    if ([obj isNumberSearch]) data->dataType = Int;
+    if ([obj isDecimalNumberSearch]) data->dataType = Float;
+    if ([obj isByteSearch]) data->dataType = Hex;
+    if ([obj isStringSearch]) data->dataType = String;
+    data->address = obj.address;
+    
+    Message msg;
+    msg.header = header_default;
+    msg.header.type = Lock;
+    msg.header.messageSize = sizeof(DataObject);
+    msg.message = data;
+    
     return msg;
 }
 

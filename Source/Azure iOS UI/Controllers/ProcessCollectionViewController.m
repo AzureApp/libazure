@@ -32,9 +32,6 @@ static NSString * const reuseIdentifier = @"Cell";
                                              selector:@selector(refresh)
                                                  name:@"RefreshProcesses"
                                                object:nil];
-
-   
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,7 +72,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     cell.label.text = app.name;
     cell.iconView.image = [AppHandler appIconForBundleID:app.bundleID];
-    //cell.iconView =
+
     return cell;
 }
 

@@ -73,11 +73,13 @@ MemoryManager::MemoryManager()
 : currentProcess(0)
 {
     savedResults = new ResultsList();
+    lockedResults = new ResultsList();
 }
 
 MemoryManager::~MemoryManager()
 {
     delete savedResults;
+    delete lockedResults;
 }
 
 MemoryManager* MemoryManager::GetInstance()
@@ -109,11 +111,17 @@ AZ_STATUS MemoryManager::AttachToProcess(Process *proc)
 void MemoryManager::DetachFromProcess()
 {
     delete this->currentProcess;
+    this->ResetResults();
 }
 
 ResultsList *MemoryManager::Results() const
 {
     return savedResults;
+}
+
+ResultsList *MemoryManager::LockedResults() const
+{
+    return lockedResults;
 }
 
 AZ_STATUS MemoryManager::Find(SearchSettings& settings)
@@ -175,6 +183,7 @@ AZ_STATUS MemoryManager::Iterate(SearchSettings& settings)
         if (status == AZ_SUCCESS)
         {
             if (settings.Match(temp)) {
+                temp.address = it->address;
                 newResults.push_back(temp);
             }
         }
@@ -205,7 +214,19 @@ AZ_STATUS MemoryManager::FetchUpdatedResults(int start, int count)
     return status;
 }
 
+AZ_STATUS MemoryManager::Write(DataObject obj)
+{
+    return currentProcess->WriteMemory(obj.address, obj.data, obj.dataLen);
+}
+
+AZ_STATUS MemoryManager::Lock(DataObject obj)
+{
+    lockedResults->push_back(obj);
+    return AZ_SUCCESS;
+}
+
 void MemoryManager::ResetResults()
 {
     savedResults->clear();
+    lockedResults->clear();
 }

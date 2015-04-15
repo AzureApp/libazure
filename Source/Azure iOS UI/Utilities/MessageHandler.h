@@ -40,6 +40,8 @@ typedef struct SearchSettings SearchSettings;
 
 + (Message)attachMessageForApp:(App *)app;
 + (Message)searchMessageForSearchObject:(SearchObject *)obj;
++ (Message)writeMessageForSearchObject:(SearchObject *)obj;
++ (Message)lockMessageForSearchObject:(SearchObject *)obj;
 
 - (BOOL)isLawividoInAzureCode;
 @end

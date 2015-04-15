@@ -11,18 +11,21 @@
 #import "SearchTableViewCell.h"
 
 
-@interface SearchViewController : UIViewController <UITextFieldDelegate, UIBarPositioningDelegate>
+@interface SearchViewController : UIViewController <UITextFieldDelegate, UIBarPositioningDelegate, UIActionSheetDelegate>
 
-@property (nonatomic, strong) IBOutlet UILabel *processLabel;
 @property (nonatomic, strong) IBOutlet UIView *line;
 @property (nonatomic, strong) IBOutlet UIButton *settingsButton;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *searchType;
 @property (nonatomic, strong) UINavigationController *passedController;
 @property (nonatomic, strong) IBOutlet UINavigationBar *searchNavigationBar;
 @property (nonatomic, strong) IBOutlet UITextField *searchField;
+@property (nonatomic, strong) IBOutlet UIButton *processButton;
+@property (nonatomic, retain) IBOutlet UIButton *clearButton;
 
 - (void)switchContainer;
 - (void)onResultsReceived;
 - (IBAction)onSearchTypeChanged:(id)sender;
+- (IBAction)clear:(id)sender;
+- (IBAction)processSeleced:(id)sender;
 @end
 

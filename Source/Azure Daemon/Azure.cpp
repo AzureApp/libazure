@@ -49,6 +49,7 @@ AZ_STATUS Azure::Start()
 
 AZ_STATUS Azure::Tick()
 {
+    MemoryManager *manager = MemoryManager::GetInstance();
     AZ_STATUS status = AZ_SUCCESS;
     while (status == AZ_SUCCESS)
     {
@@ -59,6 +60,7 @@ AZ_STATUS Azure::Tick()
             if (status != AZ_SUCCESS) {
                 AZLog("daemon failed with error %d\n", status);
                 AZLog("trying to restart daemon");
+                manager->DetachFromProcess();
                 if ((status = azureDaemon->Start())) {
                     AZLog("fatal, cannot restart daemon");
                     return status;
@@ -80,6 +82,12 @@ AZ_STATUS Azure::Tick()
                     AZLog("fatal, cannot restart daemon");
                     return status;
                 }
+            }
+        }
+        if (manager->LockedResults()->size() > 0) {
+            for (DataObject it : *manager->LockedResults())
+            {
+                manager->Write(it);
             }
         }
     }

@@ -127,6 +127,8 @@
 		6ED5C1021AD887FE0082165B /* M13ProgressViewSegmentedRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0EF1AD887FE0082165B /* M13ProgressViewSegmentedRing.m */; };
 		6ED5C1031AD887FE0082165B /* M13ProgressViewStripedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5C0F11AD887FE0082165B /* M13ProgressViewStripedBar.m */; };
 		6EEC56EE1A20FF4E00068D0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */; };
+		6EF7F8661ADEDB36000FD8A3 /* NSString+HexAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */; };
+		6EF7F8671ADEDB36000FD8A3 /* NSString+HexAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -320,6 +322,8 @@
 		6ED5C0F01AD887FE0082165B /* M13ProgressViewStripedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewStripedBar.h; sourceTree = "<group>"; };
 		6ED5C0F11AD887FE0082165B /* M13ProgressViewStripedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewStripedBar.m; sourceTree = "<group>"; };
 		6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HexAdditions.h"; sourceTree = "<group>"; };
+		6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HexAdditions.m"; sourceTree = "<group>"; };
 		6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -602,6 +606,8 @@
 				6E526BA11AAA35FD00B62400 /* MessageHandler.m */,
 				6E526BA21AAA35FD00B62400 /* ResultsHandler.h */,
 				6E526BA31AAA35FD00B62400 /* ResultsHandler.m */,
+				6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */,
+				6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -779,6 +785,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EF7F8661ADEDB36000FD8A3 /* NSString+HexAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,6 +1064,7 @@
 				6ED5C1021AD887FE0082165B /* M13ProgressViewSegmentedRing.m in Sources */,
 				6E526BA71AAA35FD00B62400 /* ProcessCollectionViewController.m in Sources */,
 				6ED5C0F61AD887FE0082165B /* M13ProgressView.m in Sources */,
+				6EF7F8671ADEDB36000FD8A3 /* NSString+HexAdditions.m in Sources */,
 				6ED5C0F41AD887FE0082165B /* UIImage+ImageEffects.m in Sources */,
 				6E526BA41AAA35FD00B62400 /* ContainerViewController.m in Sources */,
 				6E526C101AAA362800B62400 /* Message.c in Sources */,
@@ -1224,6 +1232,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1251,6 +1260,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Azure iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

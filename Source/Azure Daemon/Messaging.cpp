@@ -18,10 +18,12 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
                 
             case StatusOK:
             case StatusErr:
+            case Results:
                 return AZ_SUCCESS; // not really useful
                 
             case Attach:
             {
+                azure->DetachFromProcess();
                 msg_process *procData = (msg_process*)message.message;
                 Process *proc = new Process(procData);
                 AZ_STATUS status = ProcessUtils::TryAttach(proc);
@@ -42,6 +44,7 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
             {
                 azure->DetachFromProcess();
                 
+                message = SuccessMessage();
                 return AZ_SUCCESS;
             }
                 
@@ -91,12 +94,26 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
                 return AZ_SUCCESS;
             }
             case Edit:
+            {
+                DataObject *obj = (DataObject *)message.message;
+                AZ_STATUS status = manager->Write(*obj);
+                if (status != AZ_SUCCESS)
+                {
+                    AZLog("failed to write to address 0x%x", obj->address);
+                }
                 
-                break;
-            case Lock:
-                
-                break;
+                message = SuccessMessage();
+                return AZ_SUCCESS;
+            }
 
+            case Lock:
+            {
+                DataObject *obj = (DataObject *)message.message;
+                manager->Lock(*obj);
+                
+                message = SuccessMessage();
+                return AZ_SUCCESS;
+            }
         }
     }
     return AZ_FAILURE;

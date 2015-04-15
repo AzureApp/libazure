@@ -17,7 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,18 +59,70 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     ResultsHandler *handler = [ResultsHandler sharedInstance];
-    if (indexPath.row == [handler.searchObjects count] - 1 && indexPath.row < handler.addressCount)
+    if (indexPath.row == [handler.searchObjects count] - 1 && indexPath.row < handler.addressCount - 1)
     {
         int count = (handler.addressCount - indexPath.row < 100) ? handler.addressCount - indexPath.row : 100;
-        [handler requestResultsFromStart:indexPath.row forCount:count];
+        [handler requestResultsFromStart:indexPath.row + 1 forCount:count];
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string  {
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
+    NSString *chars;
+    switch (handler.currentSearchType) {
+        case Int: {
+            chars = @"0123456789";
+            break;
+        }
+        case Float: {
+            chars = @"0123456789.";
+            break;
+        }
+        case Hex: {
+            chars = @"0123456789ABCDEFabcdefxX ";
+            break;
+        }
+        case String: {
+            return YES;
+        }
+            
+    }
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSArray  *arrayOfString = [newString componentsSeparatedByString:@"."];
+    
+    if ([arrayOfString count] > 2 ) {
+        return NO;
+    }
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:chars] invertedSet];
+    
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    NSString *contents = [textField text];
+    NSLog(@"test %@", contents);
+    CGPoint buttonPosition = [textField convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
+    SearchObject *obj = [handler searchObjectAtIndex:indexPath.row];
+    NSLog(@"address = %x", obj.address);
+    [obj modifyData:textField.text];
+    Message msg = [MessageHandler writeMessageForSearchObject:obj];
+    [[MessageHandler sharedInstance] sendMessage:msg];
+    return NO;
 }
 
 -(IBAction)toggleLock:(UIButton *)sender {
     sender.selected = !sender.selected;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-    
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
+    SearchObject *obj = [handler searchObjectAtIndex:indexPath.row];
+    Message msg = [MessageHandler lockMessageForSearchObject:obj];
+    [[MessageHandler sharedInstance] sendMessage:msg];
     NSLog(@"lock button pressed for row %d", indexPath.row);
 }
 
