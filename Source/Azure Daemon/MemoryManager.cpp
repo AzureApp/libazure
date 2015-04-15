@@ -8,22 +8,81 @@
 
 #include "MemoryManager.h"
 #include "Azure.h"
-MemoryManager* MemoryManager::manager = NULL;
 
-MemoryManager::MemoryManager():
-currentProcess(0)
+
+#pragma mark DataObject
+
+bool DataObject::operator==(DataObject& other) const {
+    switch (other.dataType) {
+        case Int:    return *(int*)data == *(int*)other.data;
+        case Float:  return *(float*)data == *(float*)other.data;
+        case Hex:    return !memcmp(data, other.data, dataLen);
+        case String: return !memcmp(data, other.data, dataLen);
+        default:     return false;
+    }
+}
+
+bool DataObject::operator!=(DataObject& other) const {
+    switch (other.dataType) {
+        case Int:    return *(int*)data != *(int*)other.data;
+        case Float:  return *(float*)data != *(float*)other.data;
+        case Hex:    return memcmp(data, other.data, dataLen);
+        case String: return memcmp(data, other.data, dataLen);
+        default:     return false;
+    }
+}
+
+bool DataObject::operator>(DataObject& other) const {
+    switch (other.dataType) {
+        case Int:    return *(int*)data > *(int*)other.data;
+        case Float:  return *(float*)data > *(float*)other.data;
+        case Hex:    return false; // can't do arithmetic on hex and string types
+        case String: return false;
+        default: return false;
+    }
+}
+bool DataObject::operator<(DataObject& other) const {
+    switch (other.dataType) {
+        case Int:    return *(int*)data < *(int*)other.data;
+        case Float:  return *(float*)data < *(float*)other.data;
+        case Hex:    return false; // can't do arithmetic on hex and string types
+        case String: return false;
+        default: return false;
+    }
+}
+
+#pragma mark SearchSettings
+
+bool SearchSettings::Match(DataObject raw)
 {
-    savedAddresses = new ::AddressList();
-    savedDataList = new ::DataList();
+    if (fuzzySearch) {
+        switch (fuzzySettings) {
+            case FuzzyNew:      return true;
+            case FuzzyExact:    return searchObj == raw;
+            case FuzzyNotEqual: return searchObj != raw;
+            case FuzzyGreater:  return searchObj > raw;
+            case FuzzySmaller:  return searchObj < raw;
+        }
+    }
+    return searchObj == raw;
+}
+
+#pragma mark MemoryManager
+
+MemoryManager::MemoryManager()
+: currentProcess(0)
+{
+    savedResults = new ResultsList();
 }
 
 MemoryManager::~MemoryManager()
 {
-    delete savedAddresses;
+    delete savedResults;
 }
 
 MemoryManager* MemoryManager::GetInstance()
 {
+    static MemoryManager *manager = NULL;
     if(!manager)
     {
         manager = new MemoryManager();
@@ -52,22 +111,19 @@ void MemoryManager::DetachFromProcess()
     delete this->currentProcess;
 }
 
-AddressList *MemoryManager::Results() const
+ResultsList *MemoryManager::Results() const
 {
-    return savedAddresses;
+    return savedResults;
 }
 
-DataList *MemoryManager::DataList() const
+AZ_STATUS MemoryManager::Find(SearchSettings& settings)
 {
-    return savedDataList;
-}
-
-AZ_STATUS MemoryManager::Find(void *data, size_t dataCnt)
-{
-    AZLog("data size: %d", dataCnt);
-    this->initialDataSize = dataCnt;
+    DataObject obj = settings.searchObj;
+    AZLog("data size: %d", obj.dataLen);
+    this->initialDataSize = obj.dataLen;
+    
     AZ_STATUS status = AZ_SUCCESS;
-    std::vector<vm_address_t> results;
+    ResultsList results = ResultsList();
     
     std::vector<Process::Region> regions = currentProcess->GetRegions(VM_PROT_READ | VM_PROT_WRITE);
     
@@ -82,87 +138,74 @@ AZ_STATUS MemoryManager::Find(void *data, size_t dataCnt)
             AZLog("read error: %s\n region size: 0x%llx\n", mach_error_string(status), region.size);
             return status;
         }
-        
-        for (int i = 0; (i+dataCnt) < region.size; i+=4) // i += dataTypeSize
+
+        for (int i = 0; (i+obj.dataLen) < region.size; i+=4) // i += dataTypeSize
         {
-            if (!memcmp(data, buffer+i, dataCnt))
-            {
-                results.push_back(region.start+i);
+            DataObject temp = obj;
+            memcpy(temp.data, buffer+i, temp.dataLen);
+            
+            if (settings.Match(temp)) {
+                temp.address = region.start+i;
+                results.push_back(temp);
             }
         }
+        
         delete buffer;
     }
-    if (results.size() > 10000000) {
-        results.resize(10000000); // change me later
-    }
-    *savedAddresses = results;
+    *savedResults = results;
     return status;
 }
 
-AZ_STATUS MemoryManager::Iterate(void *data, size_t dataCnt, AddressList *addresses)
+AZ_STATUS MemoryManager::Iterate(SearchSettings& settings)
 {
+    DataObject obj = settings.searchObj;
+    
     AZ_STATUS status = AZ_SUCCESS;
-    AddressList results;
-    if (addresses->size() <= 0)
+    ResultsList newResults;
+    if (savedResults->size() <= 0)
     {
         AZLog("no saved addresses");
         return status;
     }
     
-    for (auto it = addresses->begin(); it != addresses->end(); ++it)
+    for (auto it = savedResults->begin(); it != savedResults->end(); ++it)
     {
-        char *temp = (char*)malloc(dataCnt);
-        status = currentProcess->ReadMemory(*it, temp, dataCnt);
+        DataObject temp = obj;
+        status = currentProcess->ReadMemory(it->address, temp.data, obj.dataLen);
         if (status == AZ_SUCCESS)
         {
-            if(!memcmp(temp, data, dataCnt))
-            {
-                results.push_back(*it);
+            if (settings.Match(temp)) {
+                newResults.push_back(temp);
             }
         }
         else
         {
             AZLog("An error occured while iterating saved values: %s", mach_error_string(status));
         }
-        free(temp);
     }
-    *savedAddresses = results;
+    savedResults->clear();
+    *savedResults=newResults;
     return status;
 }
 
-AZ_STATUS MemoryManager::FetchUpdatedResults()
+AZ_STATUS MemoryManager::FetchUpdatedResults(int start, int count)
 {
-    ::DataList dataList;
     AZ_STATUS status = AZ_SUCCESS;
-    std::vector<vm_address_t> results;
-    if (savedAddresses->size() <= 0)
+    for (auto it = savedResults->begin()+start; it != savedResults->begin()+start+count; ++it)
     {
-        AZLog("no saved addresses");
-        return status;
-    }
-    
-    for (auto it = savedAddresses->begin(); it != savedAddresses->end(); ++it)
-    {
-        char *temp = (char*)malloc(initialDataSize);
-        status = currentProcess->ReadMemory(*it, temp, initialDataSize);
+        DataObject temp;
+        temp.dataLen = initialDataSize;
+        
+        status = currentProcess->ReadMemory(it->address, temp.data, temp.dataLen);
         if (status == AZ_SUCCESS)
         {
-            DataItem *item = new DataItem;
-            memcpy(item, temp, initialDataSize);
-            dataList.push_back(*item);
+            memcpy(it->data, temp.data, temp.dataLen);
         }
-        else
-        {
-            AZLog("An error occured while fetching current values: %s", mach_error_string(status));
-        }
-        free(temp);
     }
-    *savedDataList = dataList;
     return status;
 }
 
 void MemoryManager::ResetResults()
 {
-    savedAddresses->clear();
-    savedDataList->clear();
+    savedResults->clear();
 }

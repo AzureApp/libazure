@@ -30,6 +30,19 @@
     [[MessageHandler sharedInstance] sendMessage:msg];
 }
 
+- (void)requestResultsFromStart:(int)start forCount:(int)count {
+    Message msg;
+    msg.header = header_default;
+    msg.header.type = Values;
+    msg.header.messageSize = sizeof(msg_values);
+    msg_values *vals = malloc(sizeof(msg_values));
+    vals->start = start;
+    vals->count = count;
+    
+    msg.message = vals;
+    [[MessageHandler sharedInstance] sendMessage:msg];
+}
+
 - (void)onResultsReceived {
     [[NSNotificationCenter defaultCenter]
          postNotificationName:@"ReceivedResults"

@@ -11,17 +11,11 @@
 #import "Daemon.h"
 #import "MessageHandler.h"
 
-enum SearchType {
-    Int,
-    Float,
-    Hex,
-    String
-};
-
 @interface ResultsHandler : NSObject
 
 +(instancetype)sharedInstance;
 - (void)beginSearch;
+- (void)requestResultsFromStart:(int)start forCount:(int)count;
 - (void)onResultsReceived;
 - (void)onValuesReceived;
 - (BOOL)hasResults;
@@ -29,7 +23,7 @@ enum SearchType {
 
 @property enum SearchType currentSearchType;
 @property (strong) NSArray *savedAddresses; // strong to copy?
-@property size_t addressCount;
+@property int addressCount;
 @property (strong) SearchObject *currentSearchObject;
 @property (strong) NSArray *searchObjects;
 

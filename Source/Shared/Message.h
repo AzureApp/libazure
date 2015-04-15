@@ -49,6 +49,12 @@ struct msg_process {
     char *name;
 };
 
+struct msg_values {
+    int start;
+    int count;
+};
+typedef struct msg_values msg_values;
+
 #if defined __cplusplus
 extern "C" {
 #endif

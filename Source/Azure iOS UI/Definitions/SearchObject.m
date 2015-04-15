@@ -34,6 +34,18 @@
     return obj;
 }
 
++ (instancetype)objectFromDataObject:(struct DataObject)obj {
+    SearchObject *so = [SearchObject new];
+    switch (obj.dataType) {
+        case Int: so.asNumber = [NSNumber numberWithInt:*(int*)obj.data];
+        case Float: so.asDecimalNumber = [NSNumber numberWithFloat:*(float*)obj.data];
+        case Hex: so.asBytes = [NSData dataWithBytes:obj.data length:obj.dataLen];
+        case String: so.asString = [NSString stringWithUTF8String:obj.data];
+    }
+    so.address = obj.address;
+    return so;
+}
+
 - (BOOL)isStringSearch {
     return (self.asString != nil);
 }
@@ -74,16 +86,16 @@
         int val = [[self asNumber] intValue];
         memcpy(data, &val, size); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
     }
-    if ([self isDecimalNumberSearch]) {
-        float val = [[self asDecimalNumber] floatValue];
+    else if ([self isDecimalNumberSearch]) {
+    float val = [[self asDecimalNumber] floatValue];
         memcpy(data, &val, size); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
 
     }
-    if ([self isByteSearch]) {
+    else if ([self isByteSearch]) {
         const void *val = [[self asBytes] bytes];
         memcpy(data, val, size); // TODO: change to 1 byte, 2 bytes, 4 bytes ... etc
     }
-    if ([self isStringSearch]) {
+    else if ([self isStringSearch]) {
         const char *val = [[self asString] UTF8String];
         memcpy(data, val, size);
     }

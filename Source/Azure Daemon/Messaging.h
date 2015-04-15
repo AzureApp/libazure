@@ -18,10 +18,10 @@
 namespace Messaging {
     AZ_STATUS ProcessMessage(Message &);
 
-    static Message SuccessMessage();
-    static Message FailMessage(const char*);
-    static Message MessageFromResults(void *ptr, size_t size);
-    static Message MessageFromDataList(void *ptr, size_t size);
+    Message __attribute__((noinline)) SuccessMessage();
+    Message __attribute__((noinline)) FailMessage(const char*);
+    Message __attribute__((noinline)) MessageFromData(ResultsList *results, int start, int count);
+    Message __attribute__((noinline)) MessageFromResults(ResultsList *results);
 };
 
 #endif /* defined(__Azure__Messaging__) */

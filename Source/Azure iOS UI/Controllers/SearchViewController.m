@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 iOSCheaters. All rights reserved.
 //
 
+#import "UINavigationController+M13ProgressViewBar.h"
 #import "SearchViewController.h"
 #import "ContainerViewController.h"
 #import "ResultsHandler.h"
@@ -30,7 +31,7 @@
                                                  name:@"ReceivedResults"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onResultsReceived)
+                                             selector:@selector(onValuesReceived)
                                                  name:@"ReceivedValues"
                                                object:nil];
     NSLog(@"children : %@", self.childViewControllers);
@@ -43,10 +44,11 @@
 }
 
 - (void)onResultsReceived {
-    NSInteger count = [ResultsHandler sharedInstance].addressCount;
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
+    int count = (handler.addressCount < 100) ? handler.addressCount : 100;
     self.containerViewController.firstViewController.showProgress = NO;
     if (count < 100 && count > 0 && [self.containerViewController.currentSegueIdentifier isEqualToString:@"embedFirst"]) {
-        [self switchContainer];
+        [[ResultsHandler sharedInstance] requestResultsFromStart:0 forCount:count];
     }
     else {
         [self.containerViewController.firstViewController showDefaultUI];
@@ -56,6 +58,9 @@
 
 - (void)onValuesReceived {
     [self.containerViewController.secondViewController.tableView reloadData];
+    if ([self.containerViewController.currentSegueIdentifier isEqualToString:@"embedFirst"]) {
+        [self switchContainer];
+    }
 }
 
 - (void)switchContainer {
@@ -148,6 +153,14 @@
     }
     if ([self.containerViewController.currentSegueIdentifier isEqualToString:@"embedSecond"]) {
         [self switchContainer];
+    }
+    if ([handler hasResults]) {
+        UITableView *resultsView = self.containerViewController.secondViewController.tableView;
+        [resultsView setContentOffset:CGPointZero animated:YES];
+    }
+    else {
+        handler.searchObjects = nil;
+        handler.addressCount = 0;
     }
     self.containerViewController.firstViewController.showProgress = YES;
     [self.containerViewController.firstViewController showProgressUI];

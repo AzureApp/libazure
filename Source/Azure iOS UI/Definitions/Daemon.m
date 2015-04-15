@@ -145,6 +145,8 @@
                     else
                     {
                         NSLog(@"u dun goofd razz");
+                        [self.inputStream close];
+                        [self.outputStream close];
                     }
                 }
             }

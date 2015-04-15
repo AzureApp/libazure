@@ -14,6 +14,23 @@
 #import "App.h"
 #import "SearchObject.h"
 
+struct SearchSettings {
+    bool fuzzySearch;
+    
+    enum FuzzySettings {
+        FuzzyNew,
+        FuzzyGreater,
+        FuzzySmaller,
+        FuzzyExact,
+        FuzzyNotEqual
+    } fuzzySettings;
+    
+    struct DataObject searchObj;
+};
+
+typedef struct DataObject DataObject;
+typedef struct SearchSettings SearchSettings;
+
 @interface MessageHandler : NSObject
 
 + (id)sharedInstance;

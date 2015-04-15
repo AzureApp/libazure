@@ -48,53 +48,45 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
             case NewSearch:
             {
                 manager->ResetResults();
-                void *pattern = message.message;
-                size_t size = message.header.messageSize;
-                AZLog("pattern = %x, size = %d", *(int*)pattern, size);
-                
-                AZ_STATUS status = manager->Find(pattern, size);
+                SearchSettings *settings = (SearchSettings *)message.message;
+                AZLog("settings type %d, data type %d, data value %d", settings->fuzzySettings, settings->searchObj.dataType, *(int*)settings->searchObj.data);
+                AZ_STATUS status = manager->Find(*settings);
                 if (status != AZ_SUCCESS)
                 {
                     AZLog("an error has occured finding addresses: %s", mach_error_string(status));
                 }
-                AddressList *addresses = manager->Results();
-                AZLog("found %d results", addresses->size());
-                message = MessageFromResults(addresses->data(), addresses->size()*sizeof(vm_address_t));
+                AZLog("found %d addresses", manager->Results()->size());
+                message = MessageFromResults(manager->Results());
                 
                 return AZ_SUCCESS;
             }
                 
             case IterateSearch:
             {
-                void *pattern = message.message;
-                size_t size = message.header.messageSize;
-                AZ_STATUS status = manager->Iterate(pattern, size, manager->Results());
+                SearchSettings *settings = (SearchSettings *)message.message;
+                
+                AZ_STATUS status = manager->Iterate(*settings);
                 if (status != AZ_SUCCESS)
                 {
                     AZLog("an error has occured finding addresses: %s", mach_error_string(status));
                 }
-                AddressList *addresses = manager->Results();
-                AZLog("found %d results", addresses->size());
-                message = MessageFromResults(addresses->data(), addresses->size()*sizeof(vm_address_t));
+                AZLog("found %d addresses", manager->Results()->size());
+                message = MessageFromResults(manager->Results());
                 
                 return AZ_SUCCESS;
             }
                 
-            case Results:
-            {
-                
-            }
-                
             case Values:
             {
-                AZ_STATUS status = manager->FetchUpdatedResults();
+                msg_values vals = *(msg_values*)message.message;
+                AZ_STATUS status = manager->FetchUpdatedResults(vals.start, vals.count);
                 if (status != AZ_SUCCESS)
                 {
                     AZLog("an error has occured updating results: %s", mach_error_string(status));
                 }
-                DataList *dataList = manager->DataList();
-                AZLog("found %d values", dataList->size());
-                message = MessageFromDataList(dataList->data(), dataList->size()*sizeof(manager->DataSize()));
+                ResultsList *results = manager->Results();
+                AZLog("found %d values", results->size());
+                message = MessageFromData(results, vals.start, vals.count);
                 
                 return AZ_SUCCESS;
             }
@@ -137,24 +129,27 @@ Message Messaging::FailMessage(const char *err)
     return msg;
 }
 
-Message Messaging::MessageFromResults(void *results, size_t size)
+Message Messaging::MessageFromData(ResultsList *results, int start, int count)
 {
     Message msg;
     msg.header = header_default;
-    msg.header.messageSize = size;
-    msg.header.type = Results;
-    msg.message = results;
+    msg.header.type = Values;
+    msg.header.messageSize = count*sizeof(DataObject);
+    msg.message = results->data()+start;
     
     return msg;
 }
 
-Message Messaging::MessageFromDataList(void *values, size_t size)
+Message Messaging::MessageFromResults(ResultsList *results)
 {
     Message msg;
     msg.header = header_default;
-    msg.header.messageSize = size;
-    msg.header.type = Values;
-    msg.message = values;
+    msg.header.type = Results;
+    msg.header.messageSize = sizeof(vm_address_t);
+    
+    vm_address_t *count = new vm_address_t;
+    *count = results->size();
+    msg.message = count;
     
     return msg;
 }

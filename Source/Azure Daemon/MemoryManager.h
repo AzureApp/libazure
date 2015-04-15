@@ -13,11 +13,41 @@
 #include <vector>
 #include "ProcessUtils.h"
 
+struct DataObject {
+    enum SearchType {
+        Int,
+        Float,
+        Hex,
+        String,
+    } dataType;
+    
+    vm_address_t address;
+    int dataLen;
+    char data[16];
+    
+    bool operator==(DataObject& other) const;
+    bool operator!=(DataObject& other) const;
+    bool operator>(DataObject& other) const;
+    bool operator<(DataObject& other) const;
+};
 
-typedef void* DataItem;
+struct SearchSettings {
+    bool fuzzySearch;
+    
+    enum FuzzySettings {
+        FuzzyNew,
+        FuzzyGreater,
+        FuzzySmaller,
+        FuzzyExact,
+        FuzzyNotEqual
+    } fuzzySettings;
+    
+    DataObject searchObj;
+    
+    bool Match(DataObject raw);
+};
 
-typedef std::vector<vm_address_t> AddressList;
-typedef std::vector<DataItem> DataList;
+typedef std::vector<DataObject> ResultsList;
 
 class MemoryManager {
 public:
@@ -31,21 +61,19 @@ public:
     AZ_STATUS AttachToProcess(Process *);
     void DetachFromProcess();
     
-    AddressList *Results() const;
-    DataList *DataList() const;
+    ResultsList *Results() const;
     int DataSize() const { return this->initialDataSize; }
     
-    AZ_STATUS Find(void* data, size_t dataCnt);
-    AZ_STATUS Iterate(void *data, size_t dataCnt, AddressList *addresses);
-    AZ_STATUS FetchUpdatedResults();
+    AZ_STATUS Find(SearchSettings& settings);
+    AZ_STATUS Iterate(SearchSettings& settings);
+    AZ_STATUS FetchUpdatedResults(int start, int count);
     
-    AZ_STATUS Write(vm_address_t addr, void* data, size_t dataCnt);
+    AZ_STATUS Write(vm_address_t addr, DataObject obj); // TODO
     void ResetResults();
 private:
     Process *currentProcess;
     int initialDataSize;
-    ::AddressList *savedAddresses;
-    ::DataList *savedDataList;
+    ResultsList *savedResults;
 };
 
 #endif /* defined(__Azure_Mac_V3__AzureEngine__) */

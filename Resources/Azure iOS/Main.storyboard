@@ -58,21 +58,6 @@
                                     <action selector="onSearchTypeChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="qig-xh-o5h"/>
                                 </connections>
                             </segmentedControl>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vev-fw-bUe">
-                                <rect key="frame" x="0.0" y="10" width="600" height="44"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="Titillium-Regular" family="Titillium" pointSize="18"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Title" id="8Gw-Sc-jWg"/>
-                                </items>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-QG-0o4">
                                 <rect key="frame" x="554" y="89" width="30" height="30"/>
                                 <constraints>
@@ -97,6 +82,21 @@
                                 <color key="textColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vev-fw-bUe">
+                                <rect key="frame" x="0.0" y="10" width="600" height="44"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Titillium-Regular" family="Titillium" pointSize="18"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Title" id="8Gw-Sc-jWg"/>
+                                </items>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.19215686269999999" green="0.75294117650000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -239,6 +239,25 @@
             </objects>
             <point key="canvasLocation" x="1468" y="614.5"/>
         </scene>
+        <!--About-->
+        <scene sceneID="EcK-Cm-KOz">
+            <objects>
+                <viewController id="e2u-R6-slC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dQc-PO-fvK"/>
+                        <viewControllerLayoutGuide type="bottom" id="7sb-gy-WYe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ni8-F4-AUN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="About" image="info" id="lnM-gl-je0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XQd-4w-FX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="-730"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -252,11 +271,32 @@
                     <connections>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="aHf-zq-fJq"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="ZAU-8z-i3y"/>
+                        <segue destination="wfr-sa-odC" kind="relationship" relationship="viewControllers" id="box-j3-AyC"/>
+                        <segue destination="e2u-R6-slC" kind="relationship" relationship="viewControllers" id="FoK-Gn-4OK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="63F-sH-BPE">
+            <objects>
+                <viewController id="wfr-sa-odC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wVh-Au-omH"/>
+                        <viewControllerLayoutGuide type="bottom" id="xMH-yr-7AA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ITe-d4-3jy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="cog-green" id="gVC-h4-4da"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VeQ-rV-5nv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="753"/>
         </scene>
         <!--Search Table View Controller-->
         <scene sceneID="7F6-aQ-5Gw">
@@ -461,6 +501,7 @@
     <resources>
         <image name="app" width="30" height="30"/>
         <image name="cog-green" width="30" height="30"/>
+        <image name="info" width="30" height="30"/>
         <image name="lock-off" width="30" height="30"/>
         <image name="lock-on" width="30" height="30"/>
         <image name="search" width="30" height="30"/>

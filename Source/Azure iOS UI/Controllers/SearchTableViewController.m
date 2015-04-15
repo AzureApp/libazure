@@ -40,7 +40,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[ResultsHandler sharedInstance] addressCount];
+    return [[ResultsHandler sharedInstance].searchObjects count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -49,13 +49,22 @@
     if (cell == nil) {
         cell = [[SearchTableViewCell alloc] init];
     }
-    if (handler.hasResults && indexPath.row <= handler.addressCount) {
-        vm_address_t addr = [[[handler savedAddresses] objectAtIndex:indexPath.row] integerValue];
+    if (handler.hasResults && indexPath.row < handler.addressCount) {
+        SearchObject *obj = [handler searchObjectAtIndex:indexPath.row];
         
-        cell.addressLabel.text = [NSString stringWithFormat:@"0x%lX", addr];
-        cell.valueField.text = [[handler searchObjectAtIndex:indexPath.row] toString];
+        cell.addressLabel.text = [NSString stringWithFormat:@"0x%lX", obj.address];
+        cell.valueField.text = [obj toString];
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    ResultsHandler *handler = [ResultsHandler sharedInstance];
+    if (indexPath.row == [handler.searchObjects count] - 1 && indexPath.row < handler.addressCount)
+    {
+        int count = (handler.addressCount - indexPath.row < 100) ? handler.addressCount - indexPath.row : 100;
+        [handler requestResultsFromStart:indexPath.row forCount:count];
+    }
 }
 
 -(IBAction)toggleLock:(UIButton *)sender {

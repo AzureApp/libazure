@@ -59,20 +59,10 @@
             case Results:
             {
                 ResultsHandler *results = [ResultsHandler sharedInstance];
-                vm_offset_t *addresses = msg.message;
-                NSMutableArray *arr = [[NSMutableArray alloc] init];
-                vm_address_t addressCount = msg.header.messageSize/sizeof(vm_address_t);
-                NSLog(@"address count = %d", addressCount);
-                for (int i = 0; i < addressCount; i++)
-                {
-                    NSNumber *addr = [NSNumber numberWithUnsignedInteger:addresses[i]];
-                    [arr addObject:addr];
-                }
-                free(msg.message);
-                results.savedAddresses = [NSArray arrayWithArray:arr];
-                results.addressCount = addressCount;
-                [results onResultsReceived];
+                int count = *(int*)msg.message;
                 
+                results.addressCount = count;
+                [results onResultsReceived];
                 daemon.ready = YES;
                 return;
             }
@@ -80,32 +70,17 @@
             case Values:
             {
                 ResultsHandler *results = [ResultsHandler sharedInstance];
-                void *data = msg.message;
-                NSMutableArray *arr = [[NSMutableArray alloc] init];
-                NSInteger objCount = msg.header.messageSize/[results currentSearchObject].getSearchSize;
-                NSLog(@"address count = %ld", (long)objCount);
+                DataObject *data = msg.message;
+                int objCount = msg.header.messageSize/sizeof(DataObject);
+                NSMutableArray *arr = (results.searchObjects.count > 0) ? [results.searchObjects mutableCopy] : [NSMutableArray new];
                 for (int i = 0; i < objCount; i++)
                 {
-                    SearchObject *obj;
-                    if ([results currentSearchObject].isNumberSearch) {
-                        obj = [SearchObject searchWithNumber:[NSNumber numberWithInt:*(int*)data]];
-                        
-                    }
-                    if ([results currentSearchObject].isDecimalNumberSearch) {
-                        obj = [SearchObject searchWithNumber:[NSNumber numberWithFloat:*(float*)data]];
-                    }
-                    if ([results currentSearchObject].isByteSearch) {
-                        obj = [SearchObject searchWithBytes:[NSData dataWithBytes:data length:[results currentSearchObject].getSearchSize]];
-                    }
-                    if ([results currentSearchObject].isStringSearch) {
-                        obj = [SearchObject searchWithString:[NSString stringWithUTF8String:data]];
-                    }
-    
+                    SearchObject *obj = [SearchObject objectFromDataObject:data[i]];
                     [arr addObject:obj];
-                    data += [results currentSearchObject].getSearchSize;
                 }
-                free(msg.message);
                 results.searchObjects = [NSArray arrayWithArray:arr];
+                NSLog(@"results size: %d", results.searchObjects.count);
+                free(data);
                 [results onValuesReceived];
                 
                 daemon.ready = YES;
@@ -131,7 +106,7 @@
 
 - (void)sendMessage:(Message)msg {
     if (messageIsValid(msg)) {
-        NSLog(@"Sending message of type %s", enumToName(msg.header.type));
+        NSLog(@"Sending message of type %s [size %d]", enumToName(msg.header.type), msg.header.messageSize);
         return [[Daemon currentDaemon] sendMessage:msg];
     }
 }
@@ -153,9 +128,19 @@
 }
 
 + (Message)searchMessageForSearchObject:(SearchObject *)obj {
+    DataObject data;
+    memcpy(data.data, [obj getRawData], [obj getSearchSize]);
+    NSLog(@"%p", data.data);
+    data.dataLen = (int)[obj getSearchSize];
+    data.dataType = 0; // (obj.isNumberSearch + (obj.isDecimalNumberSearch + 1) + (obj.isByteSearch + 2) + (obj.isStringSearch + 3));
+    
+    SearchSettings *settings = malloc(sizeof(SearchSettings));
+    settings->fuzzySearch = NO;
+    settings->searchObj = data;
+    
     Message msg;
     msg.header.magic = MSG_MAGIC;
-    msg.header.messageSize = obj.getSearchSize;
+    msg.header.messageSize = sizeof(SearchSettings);
     msg.header.shouldPop = YES;
     
     if ([[ResultsHandler sharedInstance] hasResults]) {
@@ -165,8 +150,7 @@
         msg.header.type = NewSearch;
     }
     
-    msg.message = [obj getRawData];
-    
+    msg.message = settings;
     return msg;
 }
 

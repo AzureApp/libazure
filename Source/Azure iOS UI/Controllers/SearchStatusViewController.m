@@ -79,8 +79,9 @@ static float count = 0;
 }
 
 - (void)showResults {
-    ContainerViewController *container = (ContainerViewController *)self.parentViewController;
-    [container swapViewControllers];
+    [[ResultsHandler sharedInstance] requestResultsFromStart:0 forCount:100];
+    [self showProgressUI];
+    resultsLabel.text = @"Loading Results...";
 }
 
 - (void)progressUpdate {
