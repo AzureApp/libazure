@@ -15,6 +15,12 @@
 		6E0E23F61ADB0D280095BC82 /* ObjCUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BD81AAA360C00B62400 /* ObjCUtils.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6E0E23F71ADB0D2C0095BC82 /* ProcessUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BDA1AAA360C00B62400 /* ProcessUtils.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6E0E23F81ADB0D2D0095BC82 /* Settings.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E526BDC1AAA360C00B62400 /* Settings.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E11F9BA1AE04A3B006F7523 /* SettingsTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E11F9B81AE04A3B006F7523 /* SettingsTableViewCell.h */; };
+		6E11F9BB1AE04A3B006F7523 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E11F9B91AE04A3B006F7523 /* SettingsTableViewCell.m */; };
+		6E11F9BF1AE04EBC006F7523 /* THSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E11F9BD1AE04EBC006F7523 /* THSegmentedControl.h */; };
+		6E11F9C01AE04EBC006F7523 /* THSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E11F9BE1AE04EBC006F7523 /* THSegmentedControl.m */; };
+		6E11F9C31AE05071006F7523 /* AzureSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E11F9C11AE05071006F7523 /* AzureSettings.h */; };
+		6E11F9C41AE05071006F7523 /* AzureSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E11F9C21AE05071006F7523 /* AzureSettings.m */; };
 		6E1894BA1AABBF5000E7334A /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E526C041AAA362800B62400 /* Message.c */; };
 		6E1B9A8619827C4D006143A4 /* MainMenu.xib in Sources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7F19827C3C006143A4 /* MainMenu.xib */; };
 		6E1B9A8719827C81006143A4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7A19827C3C006143A4 /* Credits.rtf */; };
@@ -23,6 +29,13 @@
 		6E1B9A8A19827C81006143A4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B9A7F19827C3C006143A4 /* MainMenu.xib */; };
 		6E1B9A8B19827C81006143A4 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B9A8019827C3C006143A4 /* Settings.xib */; };
 		6E2708C61A29126C0094BE07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2708C51A29126C0094BE07 /* UIKit.framework */; };
+		6E3782441AE300D000238664 /* AboutViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E3782421AE300D000238664 /* AboutViewController.h */; };
+		6E3782451AE300D000238664 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3782431AE300D000238664 /* AboutViewController.m */; };
+		6E3782481AE3108900238664 /* SettingsTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E3782461AE3108900238664 /* SettingsTableViewController.h */; };
+		6E3782491AE3108900238664 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3782471AE3108900238664 /* SettingsTableViewController.m */; };
+		6E37824B1AE320CA00238664 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E37824A1AE320CA00238664 /* CoreFoundation.framework */; };
+		6E37824D1AE32B6800238664 /* stupid_unused_shit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E37824C1AE32B6800238664 /* stupid_unused_shit.cpp */; };
+		6E37824E1AE32B6800238664 /* stupid_unused_shit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E37824C1AE32B6800238664 /* stupid_unused_shit.cpp */; settings = {COMPILER_FLAGS = "-O0"; }; };
 		6E526B511AAA35F000B62400 /* ComponentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E526B0C1AAA35F000B62400 /* ComponentController.m */; };
 		6E526B521AAA35F000B62400 /* GlobalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E526B0E1AAA35F000B62400 /* GlobalController.m */; };
 		6E526B531AAA35F000B62400 /* ProcessListTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E526B101AAA35F000B62400 /* ProcessListTableController.m */; };
@@ -145,12 +158,24 @@
 
 /* Begin PBXFileReference section */
 		6E0DB81219825B8400131D2B /* Azure-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Azure-Info.plist"; path = "../../Source/Azure Mac UI/Azure-Info.plist"; sourceTree = "<group>"; };
+		6E11F9B81AE04A3B006F7523 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
+		6E11F9B91AE04A3B006F7523 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
+		6E11F9BD1AE04EBC006F7523 /* THSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSegmentedControl.h; sourceTree = "<group>"; };
+		6E11F9BE1AE04EBC006F7523 /* THSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSegmentedControl.m; sourceTree = "<group>"; };
+		6E11F9C11AE05071006F7523 /* AzureSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzureSettings.h; sourceTree = "<group>"; };
+		6E11F9C21AE05071006F7523 /* AzureSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AzureSettings.m; sourceTree = "<group>"; };
 		6E1B9A7B19827C3C006143A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		6E1B9A7D19827C3C006143A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6E1B9A7E19827C3C006143A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6E1B9A7F19827C3C006143A4 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		6E1B9A8019827C3C006143A4 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
 		6E2708C51A29126C0094BE07 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		6E3782421AE300D000238664 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		6E3782431AE300D000238664 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		6E3782461AE3108900238664 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		6E3782471AE3108900238664 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		6E37824A1AE320CA00238664 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		6E37824C1AE32B6800238664 /* stupid_unused_shit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stupid_unused_shit.cpp; sourceTree = "<group>"; };
 		6E447BA11AC60E9B00F7FE83 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		6E4E316819752E1800790C14 /* Azure Mac Daemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Azure Mac Daemon"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E526B0B1AAA35F000B62400 /* ComponentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentController.h; sourceTree = "<group>"; };
@@ -322,8 +347,8 @@
 		6ED5C0F01AD887FE0082165B /* M13ProgressViewStripedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewStripedBar.h; sourceTree = "<group>"; };
 		6ED5C0F11AD887FE0082165B /* M13ProgressViewStripedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewStripedBar.m; sourceTree = "<group>"; };
 		6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HexAdditions.h"; sourceTree = "<group>"; };
-		6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HexAdditions.m"; sourceTree = "<group>"; };
+		6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+HexAdditions.h"; path = "../Utilities/NSString+HexAdditions.h"; sourceTree = "<group>"; };
+		6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+HexAdditions.m"; path = "../Utilities/NSString+HexAdditions.m"; sourceTree = "<group>"; };
 		6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -339,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E37824B1AE320CA00238664 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +421,15 @@
 				6E526C9C1AAA45D200B62400 /* Titillium-ThinUpright.otf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		6E11F9BC1AE04EBC006F7523 /* THSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				6E11F9BD1AE04EBC006F7523 /* THSegmentedControl.h */,
+				6E11F9BE1AE04EBC006F7523 /* THSegmentedControl.m */,
+			);
+			path = THSegmentedControl;
 			sourceTree = "<group>";
 		};
 		6E1B9A7719827C3C006143A4 /* Resources */ = {
@@ -540,6 +575,10 @@
 				6E526B7F1AAA35FD00B62400 /* SecondViewController.m */,
 				6E526B801AAA35FD00B62400 /* SettingsViewController.h */,
 				6E526B811AAA35FD00B62400 /* SettingsViewController.m */,
+				6E3782421AE300D000238664 /* AboutViewController.h */,
+				6E3782431AE300D000238664 /* AboutViewController.m */,
+				6E3782461AE3108900238664 /* SettingsTableViewController.h */,
+				6E3782471AE3108900238664 /* SettingsTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -547,6 +586,8 @@
 		6E526B821AAA35FD00B62400 /* Definitions */ = {
 			isa = PBXGroup;
 			children = (
+				6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */,
+				6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */,
 				6E526B831AAA35FD00B62400 /* App.h */,
 				6E526B841AAA35FD00B62400 /* App.m */,
 				6E526B851AAA35FD00B62400 /* Daemon.h */,
@@ -565,6 +606,8 @@
 				6E526B921AAA35FD00B62400 /* SearchTableViewCell.m */,
 				6E526B931AAA35FD00B62400 /* SearchView.h */,
 				6E526B941AAA35FD00B62400 /* SearchView.m */,
+				6E11F9B81AE04A3B006F7523 /* SettingsTableViewCell.h */,
+				6E11F9B91AE04A3B006F7523 /* SettingsTableViewCell.m */,
 			);
 			path = Definitions;
 			sourceTree = "<group>";
@@ -582,6 +625,7 @@
 		6E526B991AAA35FD00B62400 /* third-party */ = {
 			isa = PBXGroup;
 			children = (
+				6E11F9BC1AE04EBC006F7523 /* THSegmentedControl */,
 				6ED5C0C91AD887E80082165B /* M13ProgressSuite */,
 				6E526B9A1AAA35FD00B62400 /* DXPopover */,
 			);
@@ -606,8 +650,8 @@
 				6E526BA11AAA35FD00B62400 /* MessageHandler.m */,
 				6E526BA21AAA35FD00B62400 /* ResultsHandler.h */,
 				6E526BA31AAA35FD00B62400 /* ResultsHandler.m */,
-				6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */,
-				6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */,
+				6E11F9C11AE05071006F7523 /* AzureSettings.h */,
+				6E11F9C21AE05071006F7523 /* AzureSettings.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -630,6 +674,7 @@
 				6E526BDA1AAA360C00B62400 /* ProcessUtils.h */,
 				6E526BDB1AAA360C00B62400 /* Settings.cpp */,
 				6E526BDC1AAA360C00B62400 /* Settings.h */,
+				6E37824C1AE32B6800238664 /* stupid_unused_shit.cpp */,
 			);
 			name = "Azure Daemon";
 			path = "Source/Azure Daemon";
@@ -682,6 +727,7 @@
 		6EB3DE2C196172CE0048E699 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E37824A1AE320CA00238664 /* CoreFoundation.framework */,
 				6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */,
 				6E2708C51A29126C0094BE07 /* UIKit.framework */,
 				6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */,
@@ -786,6 +832,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF7F8661ADEDB36000FD8A3 /* NSString+HexAdditions.h in Headers */,
+				6E3782441AE300D000238664 /* AboutViewController.h in Headers */,
+				6E11F9C31AE05071006F7523 /* AzureSettings.h in Headers */,
+				6E3782481AE3108900238664 /* SettingsTableViewController.h in Headers */,
+				6E11F9BF1AE04EBC006F7523 /* THSegmentedControl.h in Headers */,
+				6E11F9BA1AE04A3B006F7523 /* SettingsTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -998,7 +1049,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.4\"\n\n# Verify that the build is for iOS Device and not a Simulator.\n#if [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Kill any running instances and remove the app folder.\n#ssh root@$IP \"killall ${TARGETNAME}; rm -rf /Applications/${WRAPPER_NAME}\"\n# Self sign the build.\n#ldid -S $BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\n# Copy it over.\n#scp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}\" root@$IP:/Applications/\n#ssh root@$IP \"su -c uicache mobile\"\n\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\n#fi";
+			shellScript = "#!/bin/sh\n\n# Modify this to your device's IP address.\nIP=\"192.168.0.5\"\n\n# Verify that the build is for iOS Device and not a Simulator.\n#if [[ \"$NATIVE_ARCH\" != \"i386\" && \"$NATIVE_ARCH\" != \"x86_64\" ]]; then\n# Kill any running instances and remove the app folder.\n#ssh root@$IP \"killall ${TARGETNAME}; rm -rf /Applications/${WRAPPER_NAME}\"\n# Self sign the build.\n#ldid -S $BUILT_PRODUCTS_DIR/${WRAPPER_NAME}/$TARGETNAME\n# Copy it over.\n#scp -r \"$BUILT_PRODUCTS_DIR/${WRAPPER_NAME}\" root@$IP:/Applications/\n#ssh root@$IP \"su -c uicache mobile\"\n\n# This part just creates create an OS X notification to let you know that the process is done.\n# You can get terminal-notifier from https://github.com/alloy/terminal-notifier.\n# You can remove this line if you want.\n#/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title \"Build Complete\" -message \"${WRAPPER_NAME} installed on ${IP}\"\n#fi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1013,6 +1064,7 @@
 				6E526C0F1AAA362800B62400 /* Message.c in Sources */,
 				6E526BF41AAA360C00B62400 /* MemoryManager.cpp in Sources */,
 				6E526BF81AAA360C00B62400 /* ObjCUtils.cpp in Sources */,
+				6E37824D1AE32B6800238664 /* stupid_unused_shit.cpp in Sources */,
 				6E526BF01AAA360C00B62400 /* DaemonUtils.cpp in Sources */,
 				6E526BFC1AAA360C00B62400 /* Settings.cpp in Sources */,
 				6E526BF61AAA360C00B62400 /* Messaging.cpp in Sources */,
@@ -1029,6 +1081,7 @@
 				6E526CD71AAA482800B62400 /* Azure.cpp in Sources */,
 				6E526CD81AAA482B00B62400 /* DaemonUtils.cpp in Sources */,
 				6E526CDA1AAA483300B62400 /* MemoryManager.cpp in Sources */,
+				6E37824E1AE32B6800238664 /* stupid_unused_shit.cpp in Sources */,
 				6E526CDE1AAA484000B62400 /* Settings.cpp in Sources */,
 				6E1894BA1AABBF5000E7334A /* Message.c in Sources */,
 				6E526CD91AAA482F00B62400 /* main.cpp in Sources */,
@@ -1047,6 +1100,7 @@
 				6E526BAA1AAA35FD00B62400 /* SearchTableViewController.m in Sources */,
 				6E526BB71AAA35FD00B62400 /* AppDelegate.m in Sources */,
 				6ED5C0FB1AD887FE0082165B /* M13ProgressViewLetterpress.m in Sources */,
+				6E11F9C01AE04EBC006F7523 /* THSegmentedControl.m in Sources */,
 				6ED5C0F71AD887FE0082165B /* M13ProgressViewBar.m in Sources */,
 				6ED5C0F91AD887FE0082165B /* M13ProgressViewFilteredImage.m in Sources */,
 				6E526BAF1AAA35FD00B62400 /* Daemon.m in Sources */,
@@ -1068,14 +1122,18 @@
 				6ED5C0F41AD887FE0082165B /* UIImage+ImageEffects.m in Sources */,
 				6E526BA41AAA35FD00B62400 /* ContainerViewController.m in Sources */,
 				6E526C101AAA362800B62400 /* Message.c in Sources */,
+				6E3782491AE3108900238664 /* SettingsTableViewController.m in Sources */,
 				6E526BA91AAA35FD00B62400 /* SearchStatusViewController.m in Sources */,
 				6E526BB21AAA35FD00B62400 /* ProcessBarButtonItem.m in Sources */,
 				6ED5C0F31AD887FE0082165B /* M13ProgressHUD.m in Sources */,
 				6E526BB91AAA35FD00B62400 /* DXPopover.m in Sources */,
+				6E11F9BB1AE04A3B006F7523 /* SettingsTableViewCell.m in Sources */,
 				6ED5C0F51AD887FE0082165B /* UINavigationController+M13ProgressViewBar.m in Sources */,
+				6E3782451AE300D000238664 /* AboutViewController.m in Sources */,
 				6ED5C0F21AD887FE0082165B /* M13ProgressConsole.m in Sources */,
 				6E526BAD1AAA35FD00B62400 /* SettingsViewController.m in Sources */,
 				6E526BBC1AAA35FD00B62400 /* ResultsHandler.m in Sources */,
+				6E11F9C41AE05071006F7523 /* AzureSettings.m in Sources */,
 				6ED5C0FF1AD887FE0082165B /* M13ProgressViewRadiative.m in Sources */,
 				6ED5C0FA1AD887FE0082165B /* M13ProgressViewImage.m in Sources */,
 				6E526BAB1AAA35FD00B62400 /* SearchViewController.m in Sources */,
@@ -1177,6 +1235,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1206,6 +1265,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				DEAD_CODE_STRIPPING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "Azure iOS Daemon/Info.plist";

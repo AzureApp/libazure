@@ -28,7 +28,9 @@ enum MessageType {
     Edit,
     Lock,
     Results,
-    Values
+    Values,
+    Clear,
+    Prefs
 };
 
 struct msg_header {

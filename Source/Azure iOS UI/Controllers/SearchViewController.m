@@ -40,6 +40,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Titillium-Bold" size:14], NSFontAttributeName, nil];
     [searchType setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [self loadUI];
+}
+
+- (void)loadUI {
     NSString *name = ([[AppHandler sharedInstance] currentApp]) ? [[AppHandler sharedInstance] currentApp].name : @"None";
     [processButton setTitle:[NSString stringWithFormat:@"Current Process: %@",name] forState:UIControlStateNormal];
     if (![[AppHandler sharedInstance] currentApp]) {
@@ -83,8 +87,8 @@
             msg.header.messageSize = sizeof(msg_values);
             msg_values *vals = malloc(sizeof(msg_values));
             vals->start = 0;
-            vals->count = 100;
-            
+            vals->count = (handler.addressCount < 100) ? handler.addressCount : 100;
+            NSLog(@"count: %d", vals->count);
             msg.message = vals;
             [[MessageHandler sharedInstance] sendMessage:msg];
         }
@@ -123,6 +127,14 @@
         }
     }
     [popup showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+- (IBAction)clear:(id)sender {
+    Message msg;
+    msg.header = header_default;
+    msg.header.type = Clear;
+    
+    [[MessageHandler sharedInstance] sendMessage:msg];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -224,6 +236,10 @@
         msg.header.type = Detach;
         
         [[MessageHandler sharedInstance] sendMessage:msg];
+        [AppHandler sharedInstance].currentApp = nil;
+        [popup dismissWithClickedButtonIndex:0 animated:YES];
+        [self loadUI];
+        [self.tabBarController setSelectedIndex:0];
     }
 }
 

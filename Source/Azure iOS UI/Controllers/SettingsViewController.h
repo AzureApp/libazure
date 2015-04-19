@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsTableViewCell.h"
 
 @interface SettingsViewController : UIViewController
-@property (nonatomic, strong) UINavigationBar *myBar;
+- (IBAction)unwindSettings:(id)sender;
 @end

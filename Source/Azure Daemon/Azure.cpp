@@ -20,11 +20,13 @@ const char* concat(const char *s1, const char *s2)
 Azure::Azure()
 {
     azureDaemon = new Daemon();
+    azureSettings = new Settings();
 }
 
 Azure::~Azure()
 {
     delete azureDaemon;
+    delete azureSettings;
 }
 
 Azure* Azure::GetInstance()
@@ -39,6 +41,8 @@ Azure* Azure::GetInstance()
 
 AZ_STATUS Azure::Start()
 {
+    setuid(0);
+    //azureSettings->LoadSettings();
     if (azureDaemon) {
         AZ_STATUS status = azureDaemon->Start();
         return status;
@@ -94,6 +98,11 @@ AZ_STATUS Azure::Tick()
     return status;
 }
 
+Settings *Azure::GetSettings() const
+{
+    return azureSettings;
+}
+
 void Azure::AttachToProcess(Process *proc)
 {
     AZ_STATUS status = ProcessUtils::TryAttach(proc);
@@ -142,7 +151,7 @@ void Azure::WriteToLog(const char *fmt, ...)
     FILE *log_file = fopen(AZ_LOG_LOC, "a+");
 
     va_start(arg, fmt);
-    vprintf(fmt, arg);
+    vfprintf(log_file, fmt, arg);
     va_end(arg);
     
     fclose(log_file);

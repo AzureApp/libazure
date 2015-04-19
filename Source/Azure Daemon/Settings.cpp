@@ -7,19 +7,33 @@
 //
 
 #include "Settings.h"
+//#include "Azure.h"
 
+extern "C" {
+#include <Foundation/Foundation.h>
+}
+NSDictionary *prefs;
 
-int Settings::GetPrefInt(string key)
+Settings::Settings() = default;
+Settings::~Settings() = default;
+
+void Settings::LoadSettings()
 {
-    return 56;
+    prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Documents/azureSettings.plist"];
 }
 
-bool Settings::GetPrefBool(string key)
+
+int Settings::GetPrefInt(const char* key)
 {
-    return false;
+    return [[prefs objectForKey:[NSString stringWithUTF8String:key]] intValue];
 }
 
-float Settings::GetPrefFloat(string key)
+float Settings::GetPrefFloat(const char* key)
 {
-    return (float)GetPrefInt(key);
+    return [[prefs objectForKey:[NSString stringWithUTF8String:key]] floatValue];
+}
+
+bool Settings::GetPrefBool(const char* key)
+{
+    return [[prefs objectForKey:[NSString stringWithUTF8String:key]] boolValue];
 }

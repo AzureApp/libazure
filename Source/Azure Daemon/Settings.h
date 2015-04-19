@@ -12,43 +12,88 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
-
 class Settings {
 public:
-    static int GetPrefInt(string key);
-    static bool GetPrefBool(string key);
-    static float GetPrefFloat(string key);
+    
+    Settings();
+    ~Settings();
+    
+    void LoadSettings();
+    
+    static int GetPrefInt(const char* key);
+    static float GetPrefFloat(const char* key);
+    static bool GetPrefBool(const char* key);
+    
+    __attribute__((noinline))
+    bool reloadSettings();
     
     class settings_proxy {
     public:
-        string _key;
-        settings_proxy(string key) : _key(key)
-        {
-            
+        char* key;
+        
+        union Value {
+            int asInt;
+            bool asBool;
+            float asFloat;
+        } value;
+        
+        enum ValueType {
+            Int,
+            Bool,
+            Float
+        } valueType;
+        
+        settings_proxy(const char* _key) {
+            key = (char*)malloc(strlen(_key));
+            strcpy(key, _key);
         }
         
+        settings_proxy(int val) {
+            value.asInt = val;
+            valueType = Int;
+        }
+        
+        settings_proxy(float val) {
+            value.asFloat = val;
+            valueType = Float;
+        }
+        
+        settings_proxy(bool val) {
+            value.asBool = val;
+            valueType = Bool;
+        }
+        
+        
+        __attribute__((noinline))
         operator int() {
-            return Settings::GetPrefInt(_key);
+            return Settings::GetPrefInt(key);
         }
         
-        operator bool() {
-            return Settings::GetPrefBool(_key);
-        }
-        
+        __attribute__((noinline))
         operator float() {
-            return Settings::GetPrefFloat(_key);
+            return Settings::GetPrefFloat(key);
+        }
+        
+        __attribute__((noinline))
+        operator bool() {
+            return Settings::GetPrefBool(key);
+        }
+
+        void set(bool value);
+        void set(int value);
+        void set(float value);
+        
+        __attribute__((noinline))
+        ~settings_proxy() {
+            if (key != NULL)
+                free(key);
         }
     };
-
-    
-    settings_proxy operator[] (std::string key) {
-        settings_proxy proxy = settings_proxy(key);
+    __attribute__((noinline))
+    settings_proxy operator[] (const char* key) {
+        settings_proxy proxy(key);
         return proxy;
     }
 };
-
-
 
 #endif /* defined(__Azure_Mac_V3__Settings__) */

@@ -15,8 +15,8 @@
 #include "ProcessUtils.h"
 #include "DaemonUtils.h"
 #include "ObjCUtils.h"
-
-#include "TargetConditionals.h"
+//#include "TargetConditionals.h"
+#include "Settings.h"
 
 #define AZLog(fmt, ...) Azure::WriteToLog(fmt, ##__VA_ARGS__)
 char* concat(char *s1, char *s2);
@@ -35,6 +35,7 @@ public:
     ~Azure();
     
     static Azure *GetInstance();
+    Settings *GetSettings() const;
     
     AZ_STATUS Start();
     AZ_STATUS Tick();
@@ -45,6 +46,7 @@ public:
     Daemon *CurrentDaemon() const;
     
 private:
+    Settings *azureSettings;
     Daemon *azureDaemon;
     Process *currentProcess;
 };

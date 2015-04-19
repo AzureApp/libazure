@@ -23,6 +23,7 @@ Settings azureSettings;
 
 int main(int argc, const char **argv)
 {
+    AZLog("getuid: %d", getuid());
     Azure *az = Azure::GetInstance();
     if(az->Start()) {
         AZLog("failed to initialize azure");

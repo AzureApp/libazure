@@ -114,6 +114,17 @@ AZ_STATUS Messaging::ProcessMessage(Message& message) // maybe need to free mess
                 message = SuccessMessage();
                 return AZ_SUCCESS;
             }
+            case Clear:
+            {
+                manager->ResetResults();
+                message = MessageFromData(manager->Results(), 0, 0);
+                return AZ_SUCCESS;
+            }
+            case Prefs:
+            {
+                //azure->GetSettings()->LoadSettings();
+                return AZ_SUCCESS;
+            }
         }
     }
     return AZ_FAILURE;

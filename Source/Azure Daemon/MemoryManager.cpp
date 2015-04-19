@@ -110,7 +110,7 @@ AZ_STATUS MemoryManager::AttachToProcess(Process *proc)
 
 void MemoryManager::DetachFromProcess()
 {
-    delete this->currentProcess;
+    if (this->currentProcess) delete this->currentProcess;
     this->ResetResults();
 }
 
@@ -126,6 +126,12 @@ ResultsList *MemoryManager::LockedResults() const
 
 AZ_STATUS MemoryManager::Find(SearchSettings& settings)
 {
+//    Settings userSettings = *Azure::GetInstance()->GetSettings();
+//    int align = userSettings["kAlignment"];
+//    int maxResults = userSettings["kMaxResults"];
+//    int regionProtection = userSettings["kRegions"];
+//    AZLog("align = %d, res = %d, region = %d", align, maxResults, regionProtection);
+    int align = 4, maxResults = 1000000, regionProtection = 3;
     DataObject obj = settings.searchObj;
     AZLog("data size: %d", obj.dataLen);
     this->initialDataSize = obj.dataLen;
@@ -133,7 +139,7 @@ AZ_STATUS MemoryManager::Find(SearchSettings& settings)
     AZ_STATUS status = AZ_SUCCESS;
     ResultsList results = ResultsList();
     
-    std::vector<Process::Region> regions = currentProcess->GetRegions(VM_PROT_READ | VM_PROT_WRITE);
+    std::vector<Process::Region> regions = currentProcess->GetRegions(regionProtection);
     
     for (auto it = regions.begin(); it != regions.end(); ++it)
     {
@@ -147,7 +153,7 @@ AZ_STATUS MemoryManager::Find(SearchSettings& settings)
             return status;
         }
 
-        for (int i = 0; (i+obj.dataLen) < region.size; i+=4) // i += dataTypeSize
+        for (int i = 0; (i+obj.dataLen) < region.size; i+=align) // i += dataTypeSize
         {
             DataObject temp = obj;
             memcpy(temp.data, buffer+i, temp.dataLen);
@@ -157,8 +163,11 @@ AZ_STATUS MemoryManager::Find(SearchSettings& settings)
                 results.push_back(temp);
             }
         }
-        
         delete buffer;
+        if (results.size() > maxResults) {
+            results.resize(maxResults);
+            return status;
+        }
     }
     *savedResults = results;
     return status;

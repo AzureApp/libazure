@@ -17,6 +17,7 @@
 @synthesize runningApps;
 
 static NSString * const reuseIdentifier = @"Cell";
+static bool showEasterEgg = false;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +41,15 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)refresh {
+    static int count = 0;
+    count++;
+    if (count == 5) {
+        count = -1;
+        showEasterEgg = YES;
+    }
+    else {
+        showEasterEgg = false;
+    }
     runningApps = [[AppHandler sharedInstance] allRunningApps];
     [self.collectionView reloadData];
 }
@@ -72,7 +82,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     cell.label.text = app.name;
     cell.iconView.image = [AppHandler appIconForBundleID:app.bundleID];
-
+    if (showEasterEgg) {
+        cell.iconView.image = [UIImage imageNamed:@"easteregg3"];
+    }
     return cell;
 }
 

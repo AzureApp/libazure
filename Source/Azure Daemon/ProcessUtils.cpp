@@ -142,8 +142,9 @@ vector<Process> ProcessUtils::GetAllProcesses()
                      const char * name = user->pw_name;*/
                     
                     pid_t pid = process[i].kp_proc.p_pid;
-                    char nameBuffer[64];
+            
                     const char *pathBuffer = ProcessUtils::GetPathForProcess(pid);
+                    char *nameBuffer = new char[strlen(pathBuffer)];
                     AZLog("path is: %s", pathBuffer);
                     if (pathBuffer)
                     {
@@ -169,7 +170,7 @@ vector<Process> ProcessUtils::GetAllProcesses()
                         
                         local.push_back(temp);
                     }
-                    
+                    delete nameBuffer;
                 }
             }
             free(process);
