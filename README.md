@@ -5,17 +5,11 @@ Azure is a experimental iOS memory editor. It is not fully stable (yet)
 
 ## Status
 
-* Compiles... That's about it
-* Crashes! Bugs! Weird things!
+* Beta build works... sometimes
+* No proper error handling so if a problem does occur, shit breaks
 
 
 ## Roadmap
-
-Beta build
-==========
-
-* Finish iOS UI with the same reasons
-* Make sure that search support for all the current data types works
 
 V1.0
 ====
