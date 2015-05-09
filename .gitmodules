@@ -1,0 +1,3 @@
+[submodule "Source/Azure iOS UI/third-party/countly-sdk-ios"]
+	path = Source/Azure iOS UI/third-party/countly-sdk-ios
+	url = https://github.com/Countly/countly-sdk-ios.git

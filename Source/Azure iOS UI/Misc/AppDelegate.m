@@ -10,6 +10,7 @@
 #import "Daemon.h"
 #import "AppHandler.h"
 #import "MessageHandler.h"
+#import "Countly.h"
 #import "ResultsHandler.h"
 
 @interface AppDelegate ()
@@ -20,6 +21,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[Countly sharedInstance] start:@"c21a595fe7c0b884f2efad87eb6887763f6cd73d" withHost:@"http://countly.ioscheaters.com"];
+    
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:49/255.0f green:192/255.0f blue:190/255.0f alpha:1.0]];
     [[UINavigationBar appearance] setTranslucent:YES];
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:49/255.0f green:192/255.0f blue:190/255.0f alpha:1.0]];
