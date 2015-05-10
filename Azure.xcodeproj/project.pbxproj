@@ -142,6 +142,21 @@
 		6EEC56EE1A20FF4E00068D0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEC56ED1A20FF4E00068D0F /* QuartzCore.framework */; };
 		6EF7F8661ADEDB36000FD8A3 /* NSString+HexAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */; };
 		6EF7F8671ADEDB36000FD8A3 /* NSString+HexAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */; };
+		D2E2140E1AFD961A00DE993A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E2140D1AFD961A00DE993A /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D2E214101AFD962200DE993A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E2140F1AFD962200DE993A /* CoreData.framework */; };
+		D2E2141D1AFD96CD00DE993A /* Countly_OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = D2E214141AFD96CD00DE993A /* Countly_OpenUDID.h */; };
+		D2E2141E1AFD96CD00DE993A /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E214151AFD96CD00DE993A /* Countly_OpenUDID.m */; };
+		D2E2141F1AFD96CD00DE993A /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E214151AFD96CD00DE993A /* Countly_OpenUDID.m */; };
+		D2E214201AFD96CD00DE993A /* Countly.h in Headers */ = {isa = PBXBuildFile; fileRef = D2E214161AFD96CD00DE993A /* Countly.h */; };
+		D2E214211AFD96CD00DE993A /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E214171AFD96CD00DE993A /* Countly.m */; };
+		D2E214221AFD96CD00DE993A /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E214171AFD96CD00DE993A /* Countly.m */; };
+		D2E214231AFD96CD00DE993A /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2E214181AFD96CD00DE993A /* Countly.podspec */; };
+		D2E214241AFD96CD00DE993A /* Countly.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2E214181AFD96CD00DE993A /* Countly.podspec */; };
+		D2E214251AFD96CD00DE993A /* Countly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2E214191AFD96CD00DE993A /* Countly.xcdatamodeld */; };
+		D2E214261AFD96CD00DE993A /* Countly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2E214191AFD96CD00DE993A /* Countly.xcdatamodeld */; };
+		D2E214271AFD96CD00DE993A /* CountlyDB.h in Headers */ = {isa = PBXBuildFile; fileRef = D2E2141B1AFD96CD00DE993A /* CountlyDB.h */; };
+		D2E214281AFD96CD00DE993A /* CountlyDB.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E2141C1AFD96CD00DE993A /* CountlyDB.m */; };
+		D2E214291AFD96CD00DE993A /* CountlyDB.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E2141C1AFD96CD00DE993A /* CountlyDB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -350,6 +365,16 @@
 		6EF7F8641ADEDB36000FD8A3 /* NSString+HexAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+HexAdditions.h"; path = "../Utilities/NSString+HexAdditions.h"; sourceTree = "<group>"; };
 		6EF7F8651ADEDB36000FD8A3 /* NSString+HexAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+HexAdditions.m"; path = "../Utilities/NSString+HexAdditions.m"; sourceTree = "<group>"; };
 		6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		D2E2140D1AFD961A00DE993A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		D2E2140F1AFD962200DE993A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.2.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		D2E214141AFD96CD00DE993A /* Countly_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Countly_OpenUDID.h; path = "countly-sdk-ios/Countly_OpenUDID.h"; sourceTree = "<group>"; };
+		D2E214151AFD96CD00DE993A /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Countly_OpenUDID.m; path = "countly-sdk-ios/Countly_OpenUDID.m"; sourceTree = "<group>"; };
+		D2E214161AFD96CD00DE993A /* Countly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Countly.h; path = "countly-sdk-ios/Countly.h"; sourceTree = "<group>"; };
+		D2E214171AFD96CD00DE993A /* Countly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Countly.m; path = "countly-sdk-ios/Countly.m"; sourceTree = "<group>"; };
+		D2E214181AFD96CD00DE993A /* Countly.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Countly.podspec; path = "countly-sdk-ios/Countly.podspec"; sourceTree = "<group>"; };
+		D2E2141A1AFD96CD00DE993A /* Countly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Countly.xcdatamodel; sourceTree = "<group>"; };
+		D2E2141B1AFD96CD00DE993A /* CountlyDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountlyDB.h; path = "countly-sdk-ios/CountlyDB.h"; sourceTree = "<group>"; };
+		D2E2141C1AFD96CD00DE993A /* CountlyDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountlyDB.m; path = "countly-sdk-ios/CountlyDB.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +397,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E214101AFD962200DE993A /* CoreData.framework in Frameworks */,
+				D2E2140E1AFD961A00DE993A /* CoreTelephony.framework in Frameworks */,
 				6E2708C61A29126C0094BE07 /* UIKit.framework in Frameworks */,
 				6EEC56EE1A20FF4E00068D0F /* QuartzCore.framework in Frameworks */,
 			);
@@ -625,6 +652,14 @@
 		6E526B991AAA35FD00B62400 /* third-party */ = {
 			isa = PBXGroup;
 			children = (
+				D2E214141AFD96CD00DE993A /* Countly_OpenUDID.h */,
+				D2E214151AFD96CD00DE993A /* Countly_OpenUDID.m */,
+				D2E214161AFD96CD00DE993A /* Countly.h */,
+				D2E214171AFD96CD00DE993A /* Countly.m */,
+				D2E214181AFD96CD00DE993A /* Countly.podspec */,
+				D2E214191AFD96CD00DE993A /* Countly.xcdatamodeld */,
+				D2E2141B1AFD96CD00DE993A /* CountlyDB.h */,
+				D2E2141C1AFD96CD00DE993A /* CountlyDB.m */,
 				6E11F9BC1AE04EBC006F7523 /* THSegmentedControl */,
 				6ED5C0C91AD887E80082165B /* M13ProgressSuite */,
 				6E526B9A1AAA35FD00B62400 /* DXPopover */,
@@ -727,6 +762,8 @@
 		6EB3DE2C196172CE0048E699 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2E2140F1AFD962200DE993A /* CoreData.framework */,
+				D2E2140D1AFD961A00DE993A /* CoreTelephony.framework */,
 				6E37824A1AE320CA00238664 /* CoreFoundation.framework */,
 				6EFF07991A93F72900ED8A52 /* MobileCoreServices.framework */,
 				6E2708C51A29126C0094BE07 /* UIKit.framework */,
@@ -831,10 +868,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E2141D1AFD96CD00DE993A /* Countly_OpenUDID.h in Headers */,
 				6EF7F8661ADEDB36000FD8A3 /* NSString+HexAdditions.h in Headers */,
 				6E3782441AE300D000238664 /* AboutViewController.h in Headers */,
 				6E11F9C31AE05071006F7523 /* AzureSettings.h in Headers */,
 				6E3782481AE3108900238664 /* SettingsTableViewController.h in Headers */,
+				D2E214271AFD96CD00DE993A /* CountlyDB.h in Headers */,
+				D2E214201AFD96CD00DE993A /* Countly.h in Headers */,
 				6E11F9BF1AE04EBC006F7523 /* THSegmentedControl.h in Headers */,
 				6E11F9BA1AE04A3B006F7523 /* SettingsTableViewCell.h in Headers */,
 			);
@@ -995,6 +1035,7 @@
 				6E526C8C1AAA45BE00B62400 /* Main.storyboard in Resources */,
 				6E526CA51AAA45D200B62400 /* Titillium-RegularItalic.otf in Resources */,
 				6E526C8B1AAA45BE00B62400 /* LaunchScreen.xib in Resources */,
+				D2E214241AFD96CD00DE993A /* Countly.podspec in Resources */,
 				6E526C131AAA366400B62400 /* Info.plist in Resources */,
 				6E526CAA1AAA45D200B62400 /* Titillium-Thin.otf in Resources */,
 				6E526CAC1AAA45D200B62400 /* Titillium-ThinUpright.otf in Resources */,
@@ -1014,6 +1055,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EABA50D19908D6200B007E9 /* Log.xib in Resources */,
+				D2E214231AFD96CD00DE993A /* Countly.podspec in Resources */,
 				6E1B9A8719827C81006143A4 /* Credits.rtf in Resources */,
 				6E1B9A8819827C81006143A4 /* InfoPlist.strings in Resources */,
 				6E1B9A8919827C81006143A4 /* Images.xcassets in Resources */,
@@ -1092,6 +1134,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E214261AFD96CD00DE993A /* Countly.xcdatamodeld in Sources */,
+				D2E214221AFD96CD00DE993A /* Countly.m in Sources */,
 				6E0E23E81ADB0CEA0095BC82 /* ProcessBarButtonItem.h in Sources */,
 				6E526BAE1AAA35FD00B62400 /* App.m in Sources */,
 				6E526BAC1AAA35FD00B62400 /* SecondViewController.m in Sources */,
@@ -1104,12 +1148,14 @@
 				6ED5C0F71AD887FE0082165B /* M13ProgressViewBar.m in Sources */,
 				6ED5C0F91AD887FE0082165B /* M13ProgressViewFilteredImage.m in Sources */,
 				6E526BAF1AAA35FD00B62400 /* Daemon.m in Sources */,
+				D2E214291AFD96CD00DE993A /* CountlyDB.m in Sources */,
 				6E526BB51AAA35FD00B62400 /* SearchTableViewCell.m in Sources */,
 				6ED5C1001AD887FE0082165B /* M13ProgressViewRing.m in Sources */,
 				6ED5C0FC1AD887FE0082165B /* M13ProgressViewMetro.m in Sources */,
 				6ED5C1011AD887FE0082165B /* M13ProgressViewSegmentedBar.m in Sources */,
 				6E526BB61AAA35FD00B62400 /* SearchView.m in Sources */,
 				6ED5C0FD1AD887FE0082165B /* M13ProgressViewMetroDotPolygon.m in Sources */,
+				D2E2141F1AFD96CD00DE993A /* Countly_OpenUDID.m in Sources */,
 				6E526BB01AAA35FD00B62400 /* EmptySegue.m in Sources */,
 				6E526BA61AAA35FD00B62400 /* ModelController.m in Sources */,
 				6E526BA51AAA35FD00B62400 /* DataViewController.m in Sources */,
@@ -1152,7 +1198,9 @@
 			files = (
 				6E526B521AAA35F000B62400 /* GlobalController.m in Sources */,
 				6E526B5C1AAA35F000B62400 /* Result.m in Sources */,
+				D2E2141E1AFD96CD00DE993A /* Countly_OpenUDID.m in Sources */,
 				6E1B9A8619827C4D006143A4 /* MainMenu.xib in Sources */,
+				D2E214251AFD96CD00DE993A /* Countly.xcdatamodeld in Sources */,
 				6E526B531AAA35F000B62400 /* ProcessListTableController.m in Sources */,
 				6E526B5A1AAA35F000B62400 /* Globals.m in Sources */,
 				6E526C0E1AAA362800B62400 /* Message.c in Sources */,
@@ -1166,8 +1214,10 @@
 				6E526B6B1AAA35F000B62400 /* SearchFormatter.m in Sources */,
 				6E526B691AAA35F000B62400 /* ProcessManager.m in Sources */,
 				6E526B681AAA35F000B62400 /* Preferences.m in Sources */,
+				D2E214281AFD96CD00DE993A /* CountlyDB.m in Sources */,
 				6E526B5D1AAA35F000B62400 /* AzureAppDelegate.m in Sources */,
 				6E526B661AAA35F000B62400 /* Daemon.m in Sources */,
+				D2E214211AFD96CD00DE993A /* Countly.m in Sources */,
 				6E526B511AAA35F000B62400 /* ComponentController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1288,7 +1338,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = /Users/razzile/Documents/Projects/Azure/asu_pid.entitlements;
+				CODE_SIGN_ENTITLEMENTS = /users/alucard/Desktop/Azure/asu_pid.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1316,7 +1366,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = /Users/razzile/Documents/Projects/Azure/asu_pid.entitlements;
+				CODE_SIGN_ENTITLEMENTS = /users/alucard/Desktop/Azure/asu_pid.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1492,6 +1542,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D2E214191AFD96CD00DE993A /* Countly.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D2E2141A1AFD96CD00DE993A /* Countly.xcdatamodel */,
+			);
+			currentVersion = D2E2141A1AFD96CD00DE993A /* Countly.xcdatamodel */;
+			name = Countly.xcdatamodeld;
+			path = "countly-sdk-ios/Countly.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6EB3DE22196172CE0048E699 /* Project object */;
 }
