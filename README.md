@@ -1,15 +1,12 @@
 Azure iOS Memory Editor
 =======================
-Azure is a experimental iOS memory editor. It is not fully stable (yet)
+Azure is a experimental iOS memory editor. It is not fully stable (yet) 
 
 
 ## Status
 
 * Beta build works... sometimes
 * No proper error handling so if a problem does occur, shit breaks
-
-## Changes
-Reverted countly code, please use the 'countly' branch until Razz determines it is fit to merge with master.
 
 
 ## Roadmap
