@@ -1,0 +1,6 @@
+[submodule "third_party/MasterLib"]
+	path = third_party/MasterLib
+	url = https://github.com/Ghetto-Solutions-Inc/MasterLib.git
+[submodule "third_party/msgpack-c"]
+	path = third_party/msgpack-c
+	url = https://github.com/msgpack/msgpack-c.git
