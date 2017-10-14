@@ -15,7 +15,8 @@ namespace azure {
 
 class TCPConn {
 public:
-    TCPConn(int sock) : sock_(sock) {}
+    TCPConn(int sock);
+    ~TCPConn();
 
     bool IsConnected();
 

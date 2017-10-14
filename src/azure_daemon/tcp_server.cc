@@ -36,7 +36,7 @@ bool TCPServer::Setup() {
     //memset(&address, 0, sizeof(address));
     address.sin_family = AF_INET;
     address.sin_port = htons(port_);
-    inet_pton(AF_INET, address_.c_str(), &address.sin_addr);
+    address.sin_addr.s_addr = inet_addr(address_.c_str());
 
     int optval = 1;
     setsockopt(sock_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
@@ -45,15 +45,15 @@ bool TCPServer::Setup() {
     int result = ::bind(sock_, (struct sockaddr *) &address, sizeof(address));
     if (result != 0) {
         AZLogE("%s: bind() failed", strerror(errno));
-        return result;
+        return false;
     }
     result = listen(sock_, 10);
     if (result != 0) {
         AZLogE("listen() failed: %s", strerror(errno));
-        return result;
+        return false;
     }
 
-    return result;
+    return true;
 }
 
 bool TCPServer::Run() {
@@ -68,10 +68,8 @@ bool TCPServer::Run() {
             AZLog("Client connected. Spawned client thread");
 
             TCPConn conn(client_sock);
-            while (conn.IsConnected()) {
-                if (!conn.RunLoop()) {
-                    break;
-                }
+            while (conn.RunLoop()) {
+
             }
         }).detach();
     }

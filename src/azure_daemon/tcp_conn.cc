@@ -10,10 +10,19 @@
 
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <sys/socket.h>
 #include "tcp_conn.h"
 #include "logging.h"
 
 namespace azure {
+
+TCPConn::TCPConn(int sock) : sock_(sock) {
+
+}
+
+TCPConn::~TCPConn() {
+    close(sock_);
+}
 
 bool TCPConn::IsConnected() {
     fd_set rfd;
@@ -29,8 +38,15 @@ bool TCPConn::IsConnected() {
 }
 
 bool TCPConn::RunLoop() {
-    AZLog("Running...");
-    return 1;
+    char data[6];
+    strcpy(data, "ping\n");
+    if (send(sock_, data, sizeof(data), 0) != 6) {
+        AZLogE("Failed to send data. Closing socket");
+        return false;
+    }
+    char buf[256];
+    recv(sock_, buf, 256, 0);
+    AZLog("Received data: %s", buf);
 }
 
 }
