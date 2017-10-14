@@ -11,12 +11,20 @@
 #include <iostream>
 #include <vector>
 
+#include "tcp_server.h"
+
 #include "data_objects/data_object.h"
 #include "data_objects/search_object.h"
 
 namespace azure {
 
 extern "C" int main(int argc, char **argv) {
+    TCPServer srv("127.0.0.1", 1248);
+    srv.Setup();
+    srv.Run();
+}
+
+extern "C" int msgpack_main(int argc, char **argv) {
     msgpack::sbuffer buffer;
 
     SearchObject so(0x12345678);

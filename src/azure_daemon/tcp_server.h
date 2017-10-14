@@ -12,14 +12,23 @@
 
 #include <string>
 
+namespace azure {
+
 class TCPServer {
 public:
-    TCPServer(std::string address, short port);
-    int Run();
+    TCPServer(std::string address, short port)
+            : address_(address), port_(htons(port)) {};
+
+    bool Setup();
+
+    bool Run();
+
 private:
     std::string address_;
     short port_;
+    int sock_;
 };
 
+}
 
 #endif //AZURE_TCP_SERVER_H

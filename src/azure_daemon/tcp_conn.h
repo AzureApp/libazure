@@ -11,13 +11,20 @@
 #ifndef AZURE_TCP_CONN_H
 #define AZURE_TCP_CONN_H
 
+namespace azure {
+
 class TCPConn {
 public:
-    TCPConn(int socket_desc);
+    TCPConn(int sock) : sock_(sock) {}
+
+    bool IsConnected();
+
+    bool RunLoop();
 
 private:
-    int socket_desc_;
+    int sock_;
 };
 
+}
 
 #endif //AZURE_TCP_CONN_H
