@@ -19,9 +19,7 @@
 namespace azure {
 
 extern "C" int main(int argc, char **argv) {
-    TCPServer srv("127.0.0.1", 1248);
-    srv.Setup();
-    srv.Run();
+    // TODO: start of daemon (possibly use same source for command line)
 }
 
 extern "C" int msgpack_main(int argc, char **argv) {
