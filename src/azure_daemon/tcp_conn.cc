@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include "tcp_conn.h"
+#include "logging.h"
 
 namespace azure {
 
@@ -28,7 +29,8 @@ bool TCPConn::IsConnected() {
 }
 
 bool TCPConn::RunLoop() {
-    // unused
+    AZLog("Running...");
+    return 1;
 }
 
 }

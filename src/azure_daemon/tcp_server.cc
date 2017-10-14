@@ -9,21 +9,34 @@
  */
 
 #include <arpa/inet.h>
+#include <unistd.h>
 #include <thread>
-#include <memory>
 #include "tcp_server.h"
 #include "tcp_conn.h"
+#include "logging.h"
 
 namespace azure {
 
+TCPServer::TCPServer(std::string address, short port)
+        : address_(address), port_(port) {
+
+}
+
+TCPServer::~TCPServer() {
+    close(sock_);
+    AZLog("Socket %d terminated", sock_);
+}
+
 bool TCPServer::Setup() {
+    AZLog("Creating listen server at %s:%d", address_.c_str(), port_);
+
     sock_ = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in address;
     //memset(&address, 0, sizeof(address));
     address.sin_family = AF_INET;
-    address.sin_port = port_;
-    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(port_);
+    inet_pton(AF_INET, address_.c_str(), &address.sin_addr);
 
     int optval = 1;
     setsockopt(sock_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
@@ -31,12 +44,12 @@ bool TCPServer::Setup() {
 
     int result = ::bind(sock_, (struct sockaddr *) &address, sizeof(address));
     if (result != 0) {
-        perror("bind() failed");
+        AZLogE("%s: bind() failed", strerror(errno));
         return result;
     }
     result = listen(sock_, 10);
     if (result != 0) {
-        //AZLog("listen() failed: %s", strerror(errno));
+        AZLogE("listen() failed: %s", strerror(errno));
         return result;
     }
 
@@ -45,12 +58,15 @@ bool TCPServer::Setup() {
 
 bool TCPServer::Run() {
     while (true) {
+        AZLog("Awaiting client");
         int client_sock = accept(sock_, 0, 0);
         if (client_sock < 0) {
             return false; // error
         }
 
         std::thread([client_sock]() {
+            AZLog("Client connected. Spawned client thread");
+
             TCPConn conn(client_sock);
             while (conn.IsConnected()) {
                 if (!conn.RunLoop()) {

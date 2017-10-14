@@ -16,11 +16,10 @@ namespace azure {
 
 class TCPServer {
 public:
-    TCPServer(std::string address, short port)
-            : address_(address), port_(htons(port)) {};
+    TCPServer(std::string address, short port);
+    ~TCPServer();
 
     bool Setup();
-
     bool Run();
 
 private:
