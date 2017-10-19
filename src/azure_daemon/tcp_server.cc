@@ -61,7 +61,7 @@ bool TCPServer::Run() {
         AZLog("Awaiting client");
         int client_sock = accept(sock_, 0, 0);
         if (client_sock < 0) {
-            AZLogE("Client accept() failed [sock: %d]", sock_);
+            AZLogE("Client accept() failed %s [sock: %d]", strerror(errno), sock_);
             return false; // error
         }
 
