@@ -34,10 +34,10 @@ extern "C" int msgpack_main(int argc, char **argv) {
     msgpack::object obj = oh.get();
     DataObject dataObj = obj.convert();
 
-    std::cout << "type: " << dataObj.type << std::endl;
+    std::cout << "magic: 0x" << std::hex << dataObj.magic << " type: " << dataObj.type << std::endl;
 
     SearchObject so2 = obj.convert();
-    std::cout << "type: " << so2.type << " address: 0x" << std::hex << so2.addr << " " << std::endl;
+    std::cout << "magic: 0x" << std::hex << dataObj.magic << " type: " << so2.type << " address: 0x" << std::hex << so2.addr << " " << std::endl;
 }
 
 extern "C" int main(int argc, char **argv) {

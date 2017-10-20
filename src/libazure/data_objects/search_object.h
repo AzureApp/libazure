@@ -25,7 +25,7 @@ struct SearchObject : DataObject {
     int addr;
     std::vector<uint8_t> data;
 
-    MSGPACK_DEFINE(type, addr, data);
+    MSGPACK_DEFINE(magic, type, addr, data);
 };
 
 }
