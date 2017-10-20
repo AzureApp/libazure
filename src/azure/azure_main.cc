@@ -11,16 +11,17 @@
 #include <iostream>
 #include <vector>
 
-#include "tcp_server.h"
+#include <gflags/gflags.h>
+#include <logging.h>
 
-#include "data_objects/data_object.h"
-#include "data_objects/search_object.h"
+#include <data_objects/data_object.h>
+#include <data_objects/search_object.h>
+#include <daemon.h>
+
+
+DEFINE_bool(daemon, false, "Run azure as a daemon");
 
 namespace azure {
-
-extern "C" int main(int argc, char **argv) {
-    // TODO: start of daemon (possibly use same source for command line)
-}
 
 extern "C" int msgpack_main(int argc, char **argv) {
     msgpack::sbuffer buffer;
@@ -37,6 +38,20 @@ extern "C" int msgpack_main(int argc, char **argv) {
 
     SearchObject so2 = obj.convert();
     std::cout << "type: " << so2.type << " address: 0x" << std::hex << so2.addr << " " << std::endl;
+}
+
+extern "C" int main(int argc, char **argv) {
+    gflags::ParseCommandLineFlags(&argc, &argv, true);
+
+    if (FLAGS_daemon) {
+        AZLog("Starting azure in daemon mode");
+        Daemon daemon(argc, argv);
+        return daemon.Run();
+    } else {
+        AZLog("Starting azure in command-line mode");
+    }
+
+    msgpack_main(argc, argv);
 }
 
 }
