@@ -11,6 +11,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++")
 
+set(LLVM_TARGETS_TO_BUILD "AArch64;ARM;X86" CACHE STRING "keystone architecture support")
+
+set(CAPSTONE_MIPS_SUPPORT OFF CACHE BOOL "MIPS support")
+set(CAPSTONE_PPC_SUPPORT OFF CACHE BOOL "PowerPC support")
+set(CAPSTONE_SPARC_SUPPORT OFF CACHE BOOL "Sparc support")
+set(CAPSTONE_SYSZ_SUPPORT OFF CACHE BOOL "SystemZ support")
+set(CAPSTONE_XCORE_SUPPORT OFF CACHE BOOL "XCore support")
+
 file(GLOB_RECURSE libazure_HEADER_FILES "libazure/*.h")
 file(GLOB_RECURSE libazure_SRC_FILES "libazure/*.cc")
 
@@ -34,10 +42,14 @@ include_directories(libazure)
 include_directories(${CMAKE_SOURCE_DIR}/third_party/masterlib/src)
 include_directories(${CMAKE_SOURCE_DIR}/third_party/msgpack-c/include)
 include_directories(${CMAKE_SOURCE_DIR}/third_party/gflags/src)
+include_directories(${CMAKE_SOURCE_DIR}/third_party/linenoise)
+
+set(linenoise_SRC_FILES "${CMAKE_SOURCE_DIR}/third_party/linenoise/linenoise.c"
+                        "${CMAKE_SOURCE_DIR}/third_party/linenoise/linenoise.h")
 
 add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS})
 
-add_executable(azure ${azure_SRC_FILES} ${azure_HEADER_FILES})
+add_executable(azure ${azure_SRC_FILES} ${azure_HEADER_FILES} ${linenoise_SRC_FILES})
 
 add_executable(server_test tests/test_server.cc)
 add_executable(client_test tests/test_client.cc)

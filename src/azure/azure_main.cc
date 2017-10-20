@@ -12,12 +12,12 @@
 #include <vector>
 
 #include <gflags/gflags.h>
-#include <logging.h>
+#include <linenoise.h>
 
 #include <data_objects/data_object.h>
 #include <data_objects/search_object.h>
 #include <daemon.h>
-
+#include <logging.h>
 
 DEFINE_bool(daemon, false, "Run azure as a daemon");
 
@@ -49,6 +49,11 @@ extern "C" int main(int argc, char **argv) {
         return daemon.Run();
     } else {
         AZLog("Starting azure in command-line mode");
+        char *line;
+        while((line = linenoise("azure> ")) != NULL) {
+          printf("You wrote: %s\n", line);
+          linenoiseFree(line); /* Or just free(line) if you use libc malloc. */
+        }
     }
 
     msgpack_main(argc, argv);
