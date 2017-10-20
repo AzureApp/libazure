@@ -13,6 +13,8 @@
 
 #include <msgpack.hpp>
 
+#define AZ_MAGIC 0xABAD1DEA
+
 namespace azure {
 
 /**
@@ -26,9 +28,10 @@ struct DataObject {
 
     DataObject() {}
     DataObject(Type type) : type(type) {}
+    uint32_t magic = AZ_MAGIC;
     Type type;
 
-    MSGPACK_DEFINE(type);
+    MSGPACK_DEFINE(magic, type);
 };
 
 }
