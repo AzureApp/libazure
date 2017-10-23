@@ -11,14 +11,14 @@
 #ifndef AZURE_SEARCHOBJECT_H
 #define AZURE_SEARCHOBJECT_H
 
-#include "data_object.h"
+#include "meta_object.h"
 
 namespace azure {
 
-struct SearchObject : DataObject {
+struct SearchObject : MetaObject {
     SearchObject() {}
     SearchObject(int address) :
-            DataObject(DataObject::Type::Search),
+            MetaObject(MetaObject::Type::Search),
             addr(address),
             data({0x70, 0x47}) {}
 

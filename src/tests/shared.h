@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../libazure/data_objects/data_object.h"
+#include "data_objects/meta_object.h"
 #include "../libazure/data_objects/search_object.h"
 
 static void PrintDataObject(const azure::DataObject &obj) {

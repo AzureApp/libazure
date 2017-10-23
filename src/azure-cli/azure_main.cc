@@ -14,7 +14,7 @@
 #include <gflags/gflags.h>
 #include <linenoise.h>
 
-#include <data_objects/data_object.h>
+#include <data_objects/meta_object.h>
 #include <data_objects/search_object.h>
 #include <daemon.h>
 #include <logging.h>
@@ -32,7 +32,7 @@ extern "C" int msgpack_main(int argc, char **argv) {
     msgpack::object_handle oh = msgpack::unpack(buffer.data(), buffer.size());
 
     msgpack::object obj = oh.get();
-    DataObject dataObj = obj.convert();
+    MetaObject dataObj = obj.convert();
 
     std::cout << "magic: 0x" << std::hex << dataObj.magic << " type: " << dataObj.type << std::endl;
 

@@ -20,14 +20,14 @@ namespace azure {
 /**
  * Base DataObject type used to define the type of the object
  */
-struct DataObject {
+struct MetaObject {
     enum Type {
         Data,
         Search
     };
 
-    DataObject() {}
-    DataObject(Type type) : type(type) {}
+    MetaObject() {}
+    MetaObject(Type type) : type(type) {}
     uint32_t magic = AZ_MAGIC;
     Type type;
 
@@ -36,6 +36,6 @@ struct DataObject {
 
 }
 
-MSGPACK_ADD_ENUM(azure::DataObject::Type);
+MSGPACK_ADD_ENUM(azure::MetaObject::Type);
 
 #endif //AZURE_DATA_OBJECT_H

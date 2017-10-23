@@ -38,29 +38,29 @@ int main() {
 //        send(clientSocket, "pong\n", 6, 0);
 
         std::vector<char> bytes;
-        bytes.reserve(sizeof(azure::DataObject));
+        bytes.reserve(sizeof(azure::MetaObject));
 
-        recv(clientSocket, &bytes[0], sizeof(azure::DataObject), MSG_PEEK);
+        recv(clientSocket, &bytes[0], sizeof(azure::MetaObject), MSG_PEEK);
 
         msgpack::object_handle handle = msgpack::unpack(bytes.data(), bytes.size());
         msgpack::object msgObj = handle.get();
 
-        azure::DataObject meta = msgObj.convert();
+        azure::MetaObject meta = msgObj.convert();
 
-        if (meta.type == azure::DataObject::Type::Data) {
+        if (meta.type == azure::MetaObject::Type::Data) {
             // should never be reached in production
-            recv(clientSocket, &bytes[0], sizeof(azure::DataObject), 0);
+            recv(clientSocket, &bytes[0], sizeof(azure::MetaObject), 0);
 
             handle = msgpack::unpack(bytes.data(), bytes.size());
             msgObj = handle.get();
 
-            azure::DataObject dataObj = msgObj.convert();
+            azure::MetaObject dataObj = msgObj.convert();
 
             PrintDataObject(dataObj);
-        } else if (meta.type == azure::DataObject::Type::Search) {
+        } else if (meta.type == azure::MetaObject::Type::Search) {
             bytes.resize(sizeof(azure::SearchObject));
 
-            recv(clientSocket, &bytes[0], sizeof(azure::DataObject), 0);
+            recv(clientSocket, &bytes[0], sizeof(azure::MetaObject), 0);
 
             handle = msgpack::unpack(bytes.data(), bytes.size());
             msgObj = handle.get();
@@ -70,7 +70,7 @@ int main() {
             PrintDataObject(searchObj);
         }
 
-        azure::DataObject dataObj2 = azure::DataObject(azure::DataObject::Type::Data);
+        azure::MetaObject dataObj2 = azure::MetaObject(azure::MetaObject::Type::Data);
 
         msgpack::sbuffer buffer;
         msgpack::pack(buffer, dataObj2);
