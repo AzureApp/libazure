@@ -22,8 +22,8 @@ set(CAPSTONE_XCORE_SUPPORT OFF CACHE BOOL "XCore support" FORCE)
 file(GLOB_RECURSE libazure_HEADER_FILES "libazure/*.h")
 file(GLOB_RECURSE libazure_SRC_FILES "libazure/*.cc")
 
-file(GLOB_RECURSE azure_HEADER_FILES "azure/*.h")
-file(GLOB_RECURSE azure_SRC_FILES "azure/*.cc")
+file(GLOB_RECURSE azure_HEADER_FILES "azure-cli/*.h")
+file(GLOB_RECURSE azure_SRC_FILES "azure-cli/*.cc")
 
 # find headers
 set(libazure_INCLUDE_DIRS "")
