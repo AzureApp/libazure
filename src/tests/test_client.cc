@@ -2,7 +2,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>
-
+#include "shared.h"
 
 int main() {
     int clientSocket;
@@ -28,13 +28,53 @@ int main() {
     addr_size = sizeof serverAddr;
     connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
 
-    /*---- Read the message from the server into the buffer ----*/
-    recv(clientSocket, buffer, 1024, 0);
+    while (true) {
+//        /*---- Read the message from the server into the buffer ----*/
+//        recv(clientSocket, buffer, 1024, 0);
+//
+//        /*---- Print the received message ----*/
+//        printf("Data received: %s", buffer);
+//
+//        send(clientSocket, "pong\n", 6, 0);
 
-    /*---- Print the received message ----*/
-    printf("Data received: %s",buffer);
+        std::vector<char> bytes;
+        bytes.reserve(sizeof(azure::DataObject));
 
-    send(clientSocket, "pong\n", 6, 0);
+        recv(clientSocket, &bytes[0], sizeof(azure::DataObject), MSG_PEEK);
 
-    return 0;
+        msgpack::object_handle handle = msgpack::unpack(bytes.data(), bytes.size());
+        msgpack::object msgObj = handle.get();
+
+        azure::DataObject meta = msgObj.convert();
+
+        if (meta.type == azure::DataObject::Type::Data) {
+            // should never be reached in production
+            recv(clientSocket, &bytes[0], sizeof(azure::DataObject), 0);
+
+            handle = msgpack::unpack(bytes.data(), bytes.size());
+            msgObj = handle.get();
+
+            azure::DataObject dataObj = msgObj.convert();
+
+            PrintDataObject(dataObj);
+        } else if (meta.type == azure::DataObject::Type::Search) {
+            bytes.resize(sizeof(azure::SearchObject));
+
+            recv(clientSocket, &bytes[0], sizeof(azure::DataObject), 0);
+
+            handle = msgpack::unpack(bytes.data(), bytes.size());
+            msgObj = handle.get();
+
+            azure::SearchObject searchObj = msgObj.convert();
+
+            PrintDataObject(searchObj);
+        }
+
+        azure::DataObject dataObj2 = azure::DataObject(azure::DataObject::Type::Data);
+
+        msgpack::sbuffer buffer;
+        msgpack::pack(buffer, dataObj2);
+
+        send(clientSocket, buffer.data(), buffer.size(), 0);
+    }
 }
