@@ -29,52 +29,10 @@ int main() {
     connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
 
     while (true) {
-//        /*---- Read the message from the server into the buffer ----*/
-//        recv(clientSocket, buffer, 1024, 0);
-//
-//        /*---- Print the received message ----*/
-//        printf("Data received: %s", buffer);
-//
-//        send(clientSocket, "pong\n", 6, 0);
-
-        std::vector<char> bytes;
-        bytes.reserve(sizeof(azure::MetaObject));
-
-        recv(clientSocket, &bytes[0], sizeof(azure::MetaObject), MSG_PEEK);
-
-        msgpack::object_handle handle = msgpack::unpack(bytes.data(), bytes.size());
-        msgpack::object msgObj = handle.get();
-
-        azure::MetaObject meta = msgObj.convert();
-
-        if (meta.type == azure::MetaObject::Type::Data) {
-            // should never be reached in production
-            recv(clientSocket, &bytes[0], sizeof(azure::MetaObject), 0);
-
-            handle = msgpack::unpack(bytes.data(), bytes.size());
-            msgObj = handle.get();
-
-            azure::MetaObject dataObj = msgObj.convert();
-
-            PrintDataObject(dataObj);
-        } else if (meta.type == azure::MetaObject::Type::Search) {
-            bytes.resize(sizeof(azure::SearchObject));
-
-            recv(clientSocket, &bytes[0], sizeof(azure::MetaObject), 0);
-
-            handle = msgpack::unpack(bytes.data(), bytes.size());
-            msgObj = handle.get();
-
-            azure::SearchObject searchObj = msgObj.convert();
-
-            PrintDataObject(searchObj);
-        }
-
-        azure::MetaObject dataObj2 = azure::MetaObject(azure::MetaObject::Type::Data);
-
-        msgpack::sbuffer buffer;
-        msgpack::pack(buffer, dataObj2);
-
-        send(clientSocket, buffer.data(), buffer.size(), 0);
+        azure::SearchObject obj = RecvObject(clientSocket);
+        PrintDataObject(obj);
+        
+        azure::SearchObject obj2(0x56789);
+        SendObject(clientSocket, obj2);
     }
 }

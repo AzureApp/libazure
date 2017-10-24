@@ -51,8 +51,8 @@ add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS})
 
 add_executable(azure ${azure_SRC_FILES} ${azure_HEADER_FILES} ${linenoise_SRC_FILES})
 
-add_executable(server_test tests/test_server.cc)
-add_executable(client_test tests/test_client.cc)
+add_executable(server_test tests/test_server.cc tests/shared.h)
+add_executable(client_test tests/test_client.cc tests/shared.h)
 
 target_link_libraries(azure_STATIC masterlib_STATIC capstone-static keystone gflags)
 target_link_libraries(azure azure_STATIC)
