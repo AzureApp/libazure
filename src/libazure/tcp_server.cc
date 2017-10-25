@@ -56,7 +56,7 @@ bool TCPServer::Setup() {
     return true;
 }
 
-bool TCPServer::Run() {
+bool TCPServer::AwaitConnections(const ConnectionCallback &conn){
     while (true) {
         AZLog("Awaiting client");
         int client_sock = accept(sock_, 0, 0);
@@ -65,13 +65,9 @@ bool TCPServer::Run() {
             return false; // error
         }
 
-        std::thread([client_sock]() {
+        std::thread([client_sock, conn]() {
             AZLog("Client connected. Spawned client thread");
-
-            TCPConn conn(client_sock);
-            while (conn.RunLoop()) {
-
-            }
+            return conn(client_sock);
         }).detach();
     }
 }

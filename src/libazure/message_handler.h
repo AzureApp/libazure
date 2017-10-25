@@ -1,37 +1,29 @@
 /**
  ******************************************************************************
  * Azure : Open Source iOS Memory Editor                                      *
- * File : daemon.h                                                            *
+ * File : daemon.cc                                                            *
  ******************************************************************************
  * Copyright 2017 Satori. All rights reserved.                                *
  * Released under the BSD license - see LICENSE in the root for more details. *
  ******************************************************************************
  */
 
-#ifndef AZURE_DAEMON_H
-#define AZURE_DAEMON_H
-
-#include <string>
-#include "tcp_server.h"
+#ifndef AZURE_MESSAGE_HANDLER_H
+#define AZURE_MESSAGE_HANDLER_H
 
 namespace azure {
 
-class Daemon {
+class ClientAgent;
+
+class MessageHandler {
 public:
-    Daemon(int argc, char **argv);
-    Daemon(int argc, char **argv, std::string ip, short port);
-    ~Daemon();
+    MessageHandler(ClientAgent *agent) : agent_(agent) {}
 
-    int Run();
-
-    void SpawnAgent(int client_fd);
+    virtual int HandleMessage(const MetaObjectRef &obj) {}
 private:
-    int argc_;
-    char **argv_;
-
-    TCPServer server_;
+    ClientAgent *agent_;
 };
 
 }
 
-#endif //AZURE_DAEMON_H
+#endif //AZURE_MESSAGE_HANDLER_H

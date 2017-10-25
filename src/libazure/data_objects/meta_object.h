@@ -22,7 +22,7 @@ namespace azure {
  */
 struct MetaObject {
     enum Type {
-        Data,
+        Meta,
         Search
     };
 
@@ -34,8 +34,12 @@ struct MetaObject {
     MSGPACK_DEFINE(magic, type);
 };
 
+using MetaObjectRef = std::unique_ptr<MetaObject>;
+
 }
 
 MSGPACK_ADD_ENUM(azure::MetaObject::Type);
+
+#include "search_object.h"
 
 #endif //AZURE_DATA_OBJECT_H

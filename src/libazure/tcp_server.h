@@ -14,13 +14,15 @@
 
 namespace azure {
 
+using ConnectionCallback = std::function<void(int)>;
+
 class TCPServer {
 public:
     TCPServer(std::string address, short port);
     ~TCPServer();
 
     bool Setup();
-    bool Run();
+    bool AwaitConnections(const ConnectionCallback &conn);
 
 private:
     std::string address_;

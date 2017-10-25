@@ -9,13 +9,17 @@
  */
 
 #include <gflags/gflags.h>
+#include <functional>
 #include "logging.h"
 #include "daemon.h"
+#include "client_agent.h"
 
 DEFINE_string(ip, "127.0.0.1", "IP address for TCP server to connect to");
 DEFINE_int32(port, 1248, "Port for TCP server to connect to");
 
 namespace azure {
+
+using namespace std::placeholders;
 
 Daemon::Daemon(int argc, char **argv)
         : argc_(argc), argv_(argv), server_(FLAGS_ip, FLAGS_port) {
@@ -37,7 +41,14 @@ int Daemon::Run() {
         AZLogW("Could not set up TCP server");
         return 255;
     }
-    return server_.Run();
+    return server_.AwaitConnections(std::bind(&Daemon::SpawnAgent, this, _1));
+}
+
+// runs on a seperate thread
+// should probably not run the agent from here
+void Daemon::SpawnAgent(int client_fd) {
+    ClientAgent agent(client_fd);
+    agent.Run();
 }
 
 }
