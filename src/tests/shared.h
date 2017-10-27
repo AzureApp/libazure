@@ -6,7 +6,23 @@
 #include "data_objects/meta_object.h"
 #include "../libazure/data_objects/search_object.h"
 
-static azure::SearchObject RecvObject(int fd) {
+struct Result {
+  uintptr_t address;
+  std::vector<unsigned char> value;
+  MSGPACK_DEFINE(address, value);
+};
+
+struct ResultObject : azure::MetaObject {
+  std::vector<Result> results;
+  ResultObject() {}
+  ResultObject(std::vector<Result> results) : results(results) {
+
+  }
+
+  MSGPACK_DEFINE(magic, type, results);
+};
+
+static ResultObject RecvObject(int fd) {
     std::size_t const try_read_size = 100;
 
     msgpack::unpacker unp;
@@ -29,7 +45,7 @@ static azure::SearchObject RecvObject(int fd) {
 //        // then continue to read addtional message.
 }
 
-static void SendObject(int fd, azure::SearchObject &obj) {
+static void SendObject(int fd, ResultObject &obj) {
     msgpack::sbuffer buffer;
     msgpack::pack(buffer, obj);
 
@@ -43,6 +59,17 @@ static void PrintDataObject(const azure::MetaObject &obj) {
 static void PrintDataObject(const azure::SearchObject &obj) {
     std::cout << "magic: 0x" << std::hex << obj.magic << " type: " << obj.type << " address: 0x" << std::hex << obj.addr
               << " " << std::endl;
+}
+
+static void PrintDataObject(const ResultObject &obj) {
+    PrintDataObject(static_cast<azure::MetaObject>(obj));
+    for (const Result &result : obj.results) {
+      std::cout << "address: 0x" << std::hex << result.address << " data: [";
+      for (int i = 0; i < result.value.size() - 1; i++) {
+        std::cout << std::hex << (int)result.value[i] << ", ";
+      }
+      std::cout << (int)result.value.back() << "]" << std::endl;
+    }
 }
 
 #endif

@@ -29,10 +29,13 @@ int main() {
     connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
 
     while (true) {
-        azure::SearchObject obj = RecvObject(clientSocket);
+        ResultObject obj = RecvObject(clientSocket);
         PrintDataObject(obj);
-        
-        azure::SearchObject obj2(0x56789);
+
+        ResultObject obj2({
+          {0x12345, {0x70, 0x47}},
+          {0x56789, {0x1E, 0xFF, 0x2F, 0xE1}}
+        });
         SendObject(clientSocket, obj2);
     }
 }
