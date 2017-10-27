@@ -53,6 +53,7 @@ extern "C" int main(int argc, char **argv) {
         while((line = linenoise("azure> ")) != NULL) {
           printf("You wrote: %s\n", line);
           linenoiseFree(line); /* Or just free(line) if you use libc malloc. */
+            if (!strcmp(line, "quit")) break;
         }
     }
 
