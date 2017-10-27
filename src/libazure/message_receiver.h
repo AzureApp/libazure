@@ -25,6 +25,7 @@ public:
     MetaObjectRef NextMessage();
 private:
     TCPConn *conn_;
+    msgpack::unpacker unpacker_;
 };
 
 }
