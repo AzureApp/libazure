@@ -41,14 +41,7 @@ int Daemon::Run() {
         AZLogW("Could not set up TCP server");
         return 255;
     }
-    return server_.AwaitConnections(std::bind(&Daemon::SpawnAgent, this, _1));
-}
-
-// runs on a seperate thread
-// should probably not run the agent from here
-void Daemon::SpawnAgent(int client_fd) {
-    ClientAgent agent(client_fd);
-    agent.Run();
+    return server_.AwaitConnections(ClientAgent::SpawnAgent);
 }
 
 }

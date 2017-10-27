@@ -18,6 +18,7 @@ using MessageHandlerPair = std::map<MetaObject::Type, MessageHandler>;
  */
 class ClientAgent {
 public:
+    static void SpawnAgent(int client_fd);
     ClientAgent(int client_fd);
 
     int Run();

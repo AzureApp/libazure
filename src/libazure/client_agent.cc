@@ -10,6 +10,11 @@
 
 namespace azure {
 
+void ClientAgent::SpawnAgent(int client_fd) {
+  ClientAgent agent(client_fd);
+  agent.Run();
+}
+
 ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
     message_handlers_ = {
             {MetaObject::Type::Meta, MetaHandler(this)}

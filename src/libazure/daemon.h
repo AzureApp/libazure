@@ -23,8 +23,6 @@ public:
     ~Daemon();
 
     int Run();
-
-    void SpawnAgent(int client_fd);
 private:
     int argc_;
     char **argv_;
