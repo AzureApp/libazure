@@ -12,6 +12,7 @@
 #define AZURE_TCP_CONN_H
 
 #include <stdint.h>
+#include <sys/types.h>
 
 namespace azure {
 
@@ -76,7 +77,7 @@ template <typename T> T TCPConn::Peek() {
 template <typename T> void TCPConn::Write(T val) {
     WriteBuf(&val, sizeof(T));
 }
-    
+
 }
 
 #endif //AZURE_TCP_CONN_H
