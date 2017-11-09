@@ -22,7 +22,7 @@ class MessageReceiver {
 public:
     MessageReceiver(TCPConn *conn);
 
-    MetaObjectRef NextMessage();
+    MetaObject NextMessage();
 private:
     TCPConn *conn_;
     msgpack::unpacker unpacker_;

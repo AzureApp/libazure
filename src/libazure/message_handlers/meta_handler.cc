@@ -7,7 +7,7 @@
 
 namespace azure {
 
-int MetaHandler::HandleMessage(const MetaObjectRef &obj) {
+int MetaHandler::HandleMessage(const MetaObject &obj) {
     AZLog("Meta handler called");
     return 0;
 }

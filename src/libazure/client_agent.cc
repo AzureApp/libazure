@@ -22,13 +22,9 @@ ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
 }
 
 int ClientAgent::Run() {
-    MetaObjectRef object = receiver_.NextMessage();
-    if (object) {
-        MessageHandler &handler = message_handlers_.find(object->type)->second;
-        handler.HandleMessage(object);
-    } else {
-        return -1;
-    }
+    MetaObject object = receiver_.NextMessage();
+    MessageHandler &handler = message_handlers_.find(object.type)->second;
+    handler.HandleMessage(object);
 }
 
 }

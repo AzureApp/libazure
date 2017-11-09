@@ -16,10 +16,10 @@ MessageReceiver::MessageReceiver(TCPConn *conn) : conn_(conn) {
 
 }
 
-MetaObjectRef MessageReceiver::NextMessage() {
+MetaObject MessageReceiver::NextMessage() {
     msgpack::object_handle result;
     if (unpacker_.next(result)) {
-        std::make_unique<MetaObject>(result.get().convert()); // TODO: this will fail (result is value but unique_ptr expects pointer)
+        return result.get().convert(); 
     } else {
         unpacker_.reserve_buffer(base_size);
         std::size_t actual_read_size = conn_->ReadBuf(unpacker_.buffer(), base_size);

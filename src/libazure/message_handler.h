@@ -14,12 +14,13 @@
 namespace azure {
 
 class ClientAgent;
+class MetaObject;
 
 class MessageHandler {
 public:
     MessageHandler(ClientAgent *agent) : agent_(agent) {}
 
-    virtual int HandleMessage(const MetaObjectRef &obj) {}
+    virtual int HandleMessage(const MetaObject &obj) {}
 private:
     ClientAgent *agent_;
 };
