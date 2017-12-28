@@ -18,7 +18,7 @@ namespace azure {
 struct SearchObject : MetaObject {
     SearchObject() {}
     SearchObject(int address) :
-            MetaObject(MetaObject::Type::Search),
+            MetaObject(ObjectType::Search),
             addr(address),
             data({0x70, 0x47}) {}
 

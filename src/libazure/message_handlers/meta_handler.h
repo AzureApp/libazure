@@ -15,7 +15,7 @@ class MetaHandler : public MessageHandler {
 public:
     MetaHandler(ClientAgent *agent) : MessageHandler(agent) {}
 
-    int HandleMessage(const MetaObject &obj) override;
+    int HandleMessage(const MetaObjectRef &obj) override;
 };
 
 }

@@ -16,10 +16,10 @@ MessageReceiver::MessageReceiver(TCPConn *conn) : conn_(conn) {
 
 }
 
-MetaObject MessageReceiver::NextMessage() {
+MetaObjectRef MessageReceiver::NextMessage() {
     msgpack::object_handle result;
     if (unpacker_.next(result)) {
-        return result.get().convert(); 
+        return LoadMessage(result);
     } else {
         unpacker_.reserve_buffer(base_size);
         std::size_t actual_read_size = conn_->ReadBuf(unpacker_.buffer(), base_size);
@@ -29,6 +29,18 @@ MetaObject MessageReceiver::NextMessage() {
 
         return NextMessage();
     }
+}
+
+MetaObjectRef MessageReceiver::LoadMessage(msgpack::object_handle &handle) {
+    MetaObject temp = handle.get().convert();
+
+    switch (temp.type) {
+        case ObjectType::Meta: {
+            return std::unique_ptr<MetaObject>(new MetaObject(handle.get().as<MetaObject>()));
+            break;
+        }
+    }
+
 }
 
 }

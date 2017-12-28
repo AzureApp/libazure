@@ -2,6 +2,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <cstring>
+#include <strings.h>
 #include "shared.h"
 
 int main() {
@@ -22,20 +24,22 @@ int main() {
     /* Set IP address to localhost */
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
     /* Set all bits of the padding field to 0 */
-    memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
+    bzero(serverAddr.sin_zero, sizeof serverAddr.sin_zero);
 
     /*---- Connect the socket to the server using the address struct ----*/
     addr_size = sizeof serverAddr;
     connect(clientSocket, (struct sockaddr *) &serverAddr, addr_size);
 
-    while (true) {
-        ResultObject obj = RecvObject(clientSocket);
-        PrintDataObject(obj);
-
-        ResultObject obj2({
-          {0x12345, {0x70, 0x47}},
-          {0x56789, {0x1E, 0xFF, 0x2F, 0xE1}}
-        });
-        SendObject(clientSocket, obj2);
-    }
+    azure::MetaObject obj = azure::MetaObject();
+    SendDataObject(clientSocket, obj);
+//    while (true) {
+//        ResultObject obj = RecvObject(clientSocket);
+//        PrintDataObject(obj);
+//
+//        ResultObject obj2({
+//          {0x12345, {0x70, 0x47}},
+//          {0x56789, {0x1E, 0xFF, 0x2F, 0xE1}}
+//        });
+//        SendObject(clientSocket, obj2);
+//    }
 }

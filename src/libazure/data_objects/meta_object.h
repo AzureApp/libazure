@@ -17,19 +17,19 @@
 
 namespace azure {
 
+enum ObjectType {
+    Meta,
+    Search
+};
+
 /**
  * Base DataObject type used to define the type of the object
  */
 struct MetaObject {
-    enum Type {
-        Meta,
-        Search
-    };
-
-    MetaObject() {}
-    MetaObject(Type type) : type(type) {}
+    MetaObject() : type(ObjectType::Meta) {}
+    MetaObject(ObjectType type) : type(type) {}
     uint32_t magic = AZ_MAGIC;
-    Type type;
+    ObjectType type;
 
     MSGPACK_DEFINE(magic, type);
 };
@@ -38,7 +38,7 @@ using MetaObjectRef = std::unique_ptr<MetaObject>;
 
 }
 
-MSGPACK_ADD_ENUM(azure::MetaObject::Type);
+MSGPACK_ADD_ENUM(azure::ObjectType);
 
 #include "search_object.h"
 

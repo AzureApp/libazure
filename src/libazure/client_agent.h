@@ -11,7 +11,7 @@
 
 namespace azure {
 
-using MessageHandlerPair = std::map<MetaObject::Type, MessageHandler>;
+using MessageHandlerPair = std::map<ObjectType, MessageHandlerRef>;
 
 /**
  * Each client agent represents one connection to a client
