@@ -40,7 +40,7 @@ bool TCPServer::Setup() {
 
     int optval = 1;
     setsockopt(sock_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
-    setsockopt(sock_, SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof optval);
+    signal(SIGPIPE, SIG_IGN);
 
     int result = ::bind(sock_, (struct sockaddr *) &address, sizeof(address));
     if (result != 0) {

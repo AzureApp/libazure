@@ -16,15 +16,19 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <TargetConditionals.h>
+#include "targets.h"
 
-#if TARGET_OS_IOS
-#define AZ_LOG_LOC "/var/log/azure.log"
-#elif TARGET_OS_OSX
-#define AZ_LOG_LOC "/Library/Logs/Azure/azure.log"
+#if AZURE_TARGET_IOS
+#define AZURE_LOG_LOC "/var/log/azure.log"
+#elif AZURE_TARGET_MACOS
+#define AZURE_LOG_LOC "/Library/Logs/Azure/azure.log"
 #else
-#define AZ_LOG_LOC "."
+#define AZURE_LOG_LOC "."
 #endif
+
+#define AZ_LOG_INFO 1
+#define AZ_LOG_WARN 2
+#define  AZ_LOG_ERROR 3
 
 #define AZLogE(...) azure::WriteToLog(LOG_ERR, __VA_ARGS__)
 #define AZLogW(...) azure::WriteToLog(LOG_WARNING, __VA_ARGS__)
@@ -39,37 +43,7 @@ static const char* concat(const char *s1, const char *s2) {
     return result;
 }
 
-static void WriteToLog(int level, const char *fmt, ...) {
-    if (fmt == nullptr) return;
-
-    openlog("azure", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_USER);
-
-    va_list args;
-    va_start(args, fmt);
-
-    vsyslog(level, fmt, args);
-
-    va_end(args);
-    closelog();
-
-    if (!strstr(fmt, "\n")) {
-        fmt = concat(fmt, "\n");
-    }
-    const char *logger = "[Azure Daemon] ";
-    char result[256];
-
-    strcpy(result, logger);
-    strcat(result, fmt);
-
-    va_list arg;
-    FILE *log_file = fopen(AZ_LOG_LOC, "a+");
-
-    va_start(arg, fmt);
-    vprintf(result, arg);
-    va_end(arg);
-
-    fclose(log_file);
-}
+extern void WriteToLog(int level, const char *fmt, ...);
 
 }
 
