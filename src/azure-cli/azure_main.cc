@@ -19,7 +19,7 @@
 #include <daemon.h>
 #include <logging.h>
 
-DEFINE_bool(daemon, true, "Run azure as a daemon");
+DEFINE_bool(daemon, false, "Run azure as a daemon");
 
 namespace azure {
 
