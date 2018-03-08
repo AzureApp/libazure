@@ -31,7 +31,7 @@ public:
     uint32_t ReadUInt() const;
     int64_t ReadLong() const;
     uint64_t ReadULong() const;
-    size_t ReadBuf(void *buf, size_t size) const;
+    ssize_t ReadBuf(void *buf, size_t size) const;
 
     int8_t PeekChar() const;
     uint8_t PeekUChar() const;
@@ -41,7 +41,7 @@ public:
     uint32_t PeekUInt() const;
     int64_t PeekLong() const;
     uint64_t PeekULong() const;
-    size_t PeekBuf(void *buf, size_t size) const;
+    ssize_t PeekBuf(void *buf, size_t size) const;
 
     void WriteChar(int8_t c);
     void WriteUChar(uint8_t c);
@@ -51,7 +51,7 @@ public:
     void WriteUInt(uint32_t i);
     void WriteLong(int64_t l);
     void WriteULong(uint64_t l);
-    size_t WriteBuf(void *buf, size_t size);
+    ssize_t WriteBuf(void *buf, size_t size);
 
 
     template <typename T> T Read();

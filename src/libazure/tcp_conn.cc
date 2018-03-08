@@ -63,13 +63,13 @@ uint8_t TCPConn::ReadUChar() const {
 }
 
 int16_t TCPConn::ReadShort() const {
-    short s;
+    int16_t s;
     ReadBuf(&s, sizeof(s));
     return s;
 }
 
 uint16_t TCPConn::ReadUShort() const {
-    int16_t s;
+    uint16_t s;
     ReadBuf(&s, sizeof(s));
     return s;
 }
@@ -98,7 +98,7 @@ uint64_t TCPConn::ReadULong() const {
     return l;
 }
 
-size_t TCPConn::ReadBuf(void *buf, size_t size) const {
+ssize_t TCPConn::ReadBuf(void *buf, size_t size) const {
     return recv(sock_, buf, size, 0);
 }
 
@@ -121,7 +121,7 @@ int16_t TCPConn::PeekShort() const {
 }
 
 uint16_t TCPConn::PeekUShort() const {
-    int16_t s;
+    uint16_t s;
     PeekBuf(&s, sizeof(s));
     return s;
 }
@@ -150,7 +150,7 @@ uint64_t TCPConn::PeekULong() const {
     return l;
 }
 
-size_t TCPConn::PeekBuf(void *buf, size_t size) const {
+ssize_t TCPConn::PeekBuf(void *buf, size_t size) const {
     return recv(sock_, buf, size, MSG_PEEK);
 }
 
@@ -186,7 +186,7 @@ void TCPConn::WriteULong(uint64_t l) {
     WriteBuf(&l, sizeof(l));
 }
 
-size_t TCPConn::WriteBuf(void *buf, size_t size) {
+ssize_t TCPConn::WriteBuf(void *buf, size_t size) {
     return send(sock_, buf, size, 0);
 }
 
