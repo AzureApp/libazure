@@ -23,7 +23,7 @@
 #elif AZURE_TARGET_MACOS
 #define AZURE_LOG_LOC "/Library/Logs/Azure/azure.log"
 #else
-#define AZURE_LOG_LOC "."
+#define AZURE_LOG_LOC "./azure.log"
 #endif
 
 #define AZ_LOG_INFO 1
