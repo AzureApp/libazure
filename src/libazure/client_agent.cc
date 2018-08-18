@@ -20,9 +20,19 @@ ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
 }
 
 int ClientAgent::Run() {
-    MetaObjectRef object = receiver_.NextMessage();
-    const auto &handler = message_handlers_.find(object->type)->second;
-    handler->HandleMessage(object);
+    // TODO: change int return codes to proper errors
+    while (true) {
+        MetaObjectRef object = receiver_.NextMessage();
+        if (object) {
+            const auto &handler = message_handlers_.find(object->type)->second;
+            int result = handler->HandleMessage(object);
+            if (result != 0) {
+                return result;
+            }
+        } else {
+            return 0;
+        }
+    }
 }
 
 }
