@@ -31,7 +31,6 @@ Daemon::Daemon(int argc, char **argv, std::string ip, short port)
 
 }
 
-
 Daemon::~Daemon() {
 
 }

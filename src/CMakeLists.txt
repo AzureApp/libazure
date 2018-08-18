@@ -10,7 +10,8 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE "Debug")
 endif ()
 
-option(AZURE_TARGET_LINUX "Target linux systems" ON)
+option(AZURE_TARGET_ANDROID "Target android systems" ON)
+option(AZURE_TARGET_LINUX "Target linux systems" OFF)
 option(AZURE_TARGET_DARWIN "Target darwin systems" OFF)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -29,14 +30,19 @@ set(CAPSTONE_XCORE_SUPPORT OFF CACHE BOOL "XCore support" FORCE)
 file(GLOB libazure_HEADER_FILES "libazure/*.h" "libazure/data_objects/*.h" "libazure/message_handlers/*.h" "libazure/message_unpackers/*.h")
 file(GLOB libazure_SRC_FILES "libazure/*.cc" "libazure/data_objects/*.cc" "libazure/message_handlers/*.cc" "libazure/message_unpackers/*.cc")
 
+if(AZURE_TARGET_ANDROID)
+    file(GLOB libazure_ANDROID_HEADER_FILES "libazure/android/*.h")
+    file(GLOB libazure_ANDROID_SRC_FILES "libazure/android/*.cc")
+endif()
+
 if(AZURE_TARGET_LINUX) 
     file(GLOB libazure_LINUX_HEADER_FILES "libazure/linux/*.h")
     file(GLOB libazure_LINUX_SRC_FILES "libazure/linux/*.cc")
 endif()
 
 if(AZURE_TARGET_DARWIN) 
-    file(GLOB libazure_LINUX_HEADER_FILES "libazure/darwin/*.h")
-    file(GLOB libazure_LINUX_SRC_FILES "libazure/darwin/*.cc")
+    file(GLOB libazure_DARWIN_HEADER_FILES "libazure/darwin/*.h")
+    file(GLOB libazure_DARWIN_SRC_FILES "libazure/darwin/*.cc")
 endif()
 
 file(GLOB_RECURSE azure_HEADER_FILES "azure-cli/*.h")
@@ -66,9 +72,11 @@ set(linenoise_SRC_FILES "${CMAKE_SOURCE_DIR}/third_party/linenoise/linenoise.c"
 
 if (AZURE_TARGET_DARWIN)                        
     add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS} ${libazure_DARWIN_SRC_FILES} ${libazure_DARWIN_INCLUDE_DIRS})
-elseif (AZURE_TARGET_LINUX)
-    add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS} ${libazure_LINUX_SRC_FILES} ${libazure_LINUX_INCLUDE_DIRS})
+elseif (AZURE_TARGET_ANDROID)
+    add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS} ${libazure_ANDROID_SRC_FILES} ${libazure_ANDROID_INCLUDE_DIRS})
     target_link_libraries(azure_STATIC log android)
+elseif (AZURE_TARGET_LINUX)
+     add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS} ${libazure_LINUX_SRC_FILES} ${libazure_LINUX_INCLUDE_DIRS})
 endif()
 
 add_executable(azure ${azure_SRC_FILES} ${azure_HEADER_FILES} ${linenoise_SRC_FILES})

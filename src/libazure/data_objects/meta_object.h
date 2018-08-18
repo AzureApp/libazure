@@ -12,6 +12,7 @@
 #define AZURE_DATA_OBJECT_H
 
 #include <msgpack.hpp>
+#include <memory>
 
 #define AZ_MAGIC 0xABAD1DEA
 
