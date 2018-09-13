@@ -30,15 +30,15 @@ int main(int argc, char *argv[]) {
     connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
 
     while(1) {
-      ResultObject obj({
-        {0x10000, {0xC0, 0x46}},
-        {0x3FE800, {0x1E, 0xFF, 0x2F, 0xE2}}
-      });
-
-        SendObject(connfd, obj);
-        sleep(1);
-
-        ResultObject meta = RecvObject(connfd);
-        PrintDataObject(meta);
+//      ResultObject obj({
+//        {0x10000, {0xC0, 0x46}},
+//        {0x3FE800, {0x1E, 0xFF, 0x2F, 0xE2}}
+//      });
+//
+//        SendObject(connfd, obj);
+//        sleep(1);
+//
+//        ResultObject meta = RecvObject(connfd);
+//        PrintDataObject(meta);
     }
 }

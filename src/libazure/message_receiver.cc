@@ -8,6 +8,7 @@
  ******************************************************************************
  */
 
+#include "logging.h"
 #include "message_receiver.h"
 
 namespace azure {
@@ -18,29 +19,33 @@ MessageReceiver::MessageReceiver(TCPConn *conn) : conn_(conn) {
 
 MetaObjectRef MessageReceiver::NextMessage() {
     msgpack::object_handle result;
-    if (unpacker_.next(result)) {
-        return LoadMessage(result);
-    } else {
+    while (!unpacker_.next(result)) {
         unpacker_.reserve_buffer(base_size);
-        std::size_t actual_read_size = conn_->ReadBuf(unpacker_.buffer(), base_size);
+        size_t actual_read_size = (size_t)conn_->ReadBuf(unpacker_.buffer(), base_size);
 
         // tell msgpack::unpacker actual consumed size.
         unpacker_.buffer_consumed(actual_read_size);
-
-        return NextMessage();
     }
+    return LoadMessage(result);
 }
 
 MetaObjectRef MessageReceiver::LoadMessage(msgpack::object_handle &handle) {
-    MetaObject temp = handle.get().convert();
+    msgpack::object obj = handle.get();
 
-    switch (temp.type) {
-        case ObjectType::Meta: {
-            return std::unique_ptr<MetaObject>(new MetaObject(handle.get().as<MetaObject>()));
-            break;
+    try {
+        MetaObject temp = handle.get().convert();
+
+        switch (temp.type) {
+            case ObjectType::Meta: {
+                return std::unique_ptr<MetaObject>(new MetaObject(handle.get().as<MetaObject>()));
+                break;
+            }
         }
+    } catch (msgpack::type_error error) {
+        AZLogW("Tried to convert non-msgpack encoded buffer");
+        // TODO: gracefully exit here?
     }
-
+    return nullptr;
 }
 
 }
