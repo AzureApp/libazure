@@ -24,7 +24,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                targets "azure", "azure_STATIC"
+                targets "azure", "azure_STATIC", "server_test", "client_test"
                 // // Passes optional arguments to CMake.
                 arguments "-DANDROID_STL=c++_static", "-DANDROID_TOOLCHAIN=clang"
 
