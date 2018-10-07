@@ -1,3 +1,15 @@
+/**
+ ******************************************************************************
+ * Azure : Open Source Multi-Target Memory Editor                             *
+ * File  : targets.h                                                          *
+ ******************************************************************************
+ * Copyright 2018 Satori. All rights reserved.                                *
+ * Released under the BSD license - see LICENSE in the root for more details. *
+ ******************************************************************************
+ */
+
+// TODO: this needs a lot of work
+
 #if defined(__APPLE__)
 
 #include<TargetConditionals.h>
