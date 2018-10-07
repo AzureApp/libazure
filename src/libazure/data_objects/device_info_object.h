@@ -1,21 +1,27 @@
 /**
  ******************************************************************************
  * Azure : Open Source Multi-Target Memory Editor                             *
- * File  : meta_handler.cc                                                    *
+ * File  : device_info_object.h                                               *
  ******************************************************************************
  * Copyright 2018 Satori. All rights reserved.                                *
  * Released under the BSD license - see LICENSE in the root for more details. *
  ******************************************************************************
  */
 
-#include <logging.h>
-#include "meta_handler.h"
+#ifndef AZURE_DEVICE_INFO_OBJECT_H
+#define AZURE_DEVICE_INFO_OBJECT_H
+
+#ifndef AZURE_AZURE_INFO_OBJECT_H
+#define AZURE_AZURE_INFO_OBJECT_H
+
+#include "meta_object.h"
 
 namespace azure {
 
-int MetaHandler::HandleMessage(const MetaObjectRef &obj) {
-    AZLog("Meta handler called");
-    return 0;
-}
+    struct DeviceInfoObject : MetaObject {
 
-}
+    };
+
+} // namespace azure
+
+#endif //AZURE_DEVICE_INFO_OBJECT_H

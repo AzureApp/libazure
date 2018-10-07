@@ -1,9 +1,9 @@
 /**
  ******************************************************************************
- * Azure : Open Source iOS Memory Editor                                      *
- * File : data_object.h                                                       *
+ * Azure : Open Source Multi-Target Memory Editor                             *
+ * File  : meta_object.h                                                      *
  ******************************************************************************
- * Copyright 2017 Satori. All rights reserved.                                *
+ * Copyright 2018 Satori. All rights reserved.                                *
  * Released under the BSD license - see LICENSE in the root for more details. *
  ******************************************************************************
  */

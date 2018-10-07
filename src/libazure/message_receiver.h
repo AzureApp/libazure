@@ -1,9 +1,9 @@
 /**
  ******************************************************************************
- * Azure : Open Source iOS Memory Editor                                      *
- * File : message_handler.h                                                   *
+ * Azure : Open Source Multi-Target Memory Editor                             *
+ * File  : message_receiver.h                                                 *
  ******************************************************************************
- * Copyright 2017 Satori. All rights reserved.                                *
+ * Copyright 2018 Satori. All rights reserved.                                *
  * Released under the BSD license - see LICENSE in the root for more details. *
  ******************************************************************************
  */

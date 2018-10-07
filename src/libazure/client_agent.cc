@@ -1,11 +1,15 @@
-//
-// Created by satori on 25/10/2017.
-//
+/**
+ ******************************************************************************
+ * Azure : Open Source Multi-Target Memory Editor                             *
+ * File  : client_agent.cc                                                    *
+ ******************************************************************************
+ * Copyright 2018 Satori. All rights reserved.                                *
+ * Released under the BSD license - see LICENSE in the root for more details. *
+ ******************************************************************************
+ */
 
 #include "client_agent.h"
-
 #include "data_objects/meta_object.h"
-
 #include "message_handlers/meta_handler.h"
 
 namespace azure {
