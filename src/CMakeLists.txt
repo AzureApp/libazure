@@ -24,17 +24,12 @@ endforeach ()
 list(REMOVE_DUPLICATES libazure_INCLUDE_DIRS)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/msgpack-c ${CMAKE_CURRENT_BINARY_DIR}/msgpack-c)
-add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/gflags ${CMAKE_CURRENT_BINARY_DIR}/gflags)
 
 include_directories(libazure)
 # third party includes
 include_directories(${CMAKE_SOURCE_DIR}/third_party/msgpack-c/include)
 include_directories(${CMAKE_SOURCE_DIR}/third_party/gflags/src)
 include_directories(${CMAKE_SOURCE_DIR}/third_party/linenoise)
-
-set(linenoise_SRC_FILES "${CMAKE_SOURCE_DIR}/third_party/linenoise/linenoise.c"
-                        "${CMAKE_SOURCE_DIR}/third_party/linenoise/linenoise.h")
-
-                     
+                  
 add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS})
 
