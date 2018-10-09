@@ -31,5 +31,5 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../third_party/msgpack-c/include
                   
 add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS})
 target_include_directories(azure_STATIC PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/msgpack-c/include>
+        $<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/msgpack-c/include>)
