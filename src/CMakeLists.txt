@@ -28,8 +28,6 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/msgpack-c ${CMAKE_CURRENT_BINAR
 include_directories(libazure)
 # third party includes
 include_directories(${CMAKE_SOURCE_DIR}/third_party/msgpack-c/include)
-include_directories(${CMAKE_SOURCE_DIR}/third_party/gflags/src)
-include_directories(${CMAKE_SOURCE_DIR}/third_party/linenoise)
                   
 add_library(azure_STATIC STATIC ${libazure_SRC_FILES} ${libazure_INCLUDE_DIRS})
 
