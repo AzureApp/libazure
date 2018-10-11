@@ -18,11 +18,9 @@ class MetaObject;
 
 class MessageHandler {
 public:
-    MessageHandler(ClientAgent *agent) : agent_(agent) {}
+    MessageHandler() {}
 
     virtual int HandleMessage(const MetaObjectRef &obj) {}
-private:
-    ClientAgent *agent_;
 };
 
 using MessageHandlerRef = std::unique_ptr<MessageHandler>;

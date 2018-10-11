@@ -24,10 +24,18 @@ using MessageHandlerPair = std::map<ObjectType, MessageHandlerRef>;
  */
 class ClientAgent {
 public:
+    enum class RegisterStatus {
+        Success = 0,
+        HandlerIsNull,
+        HandlerIsDefined
+    };
+    
     static void SpawnAgent(int client_fd);
     ClientAgent(int client_fd);
 
     int Run();
+
+    RegisterError RegisterMessageHandler(ObjectType type, MessageHandlerRef &ref);
 private:
     TCPConn conn_;
     MessageReceiver receiver_;

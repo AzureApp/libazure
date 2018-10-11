@@ -20,6 +20,7 @@ void ClientAgent::SpawnAgent(int client_fd) {
 }
 
 ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
+    // setup meta handler
     message_handlers_.emplace(ObjectType::Meta, std::make_unique<MetaHandler>(this));
 }
 
@@ -37,6 +38,19 @@ int ClientAgent::Run() {
             return 0;
         }
     }
+}
+
+int ClientAgent::RegisterMessageHandler(ObjectType type, MessageHandlerRef &ref) {
+    // TODO: change int return codes to proper errors
+    if (ref) {
+        if (message_handlers_.find(type) == message_handlers_.end()) {
+            message_handlers_.emplace(type, std::move(ref));
+
+            return RegisterStatus::Success;
+        }
+        return RegisterStatus::HandlerIsDefined;
+    }
+    return RegisterStatus::HandlerIsNull; 
 }
 
 }
