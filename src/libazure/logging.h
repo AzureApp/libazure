@@ -29,9 +29,9 @@
 #define AZ_LOG_WARN 2
 #define  AZ_LOG_ERROR 3
 
-#define AZLogE(...) azure::WriteToLog(LOG_ERR, __VA_ARGS__)
-#define AZLogW(...) azure::WriteToLog(LOG_WARNING, __VA_ARGS__)
-#define AZLog(...) azure::WriteToLog(LOG_INFO, __VA_ARGS__)
+#define AZLogE(...) azure::WriteToLog(AZ_LOG_ERROR, __VA_ARGS__)
+#define AZLogW(...) azure::WriteToLog(AZ_LOG_WARN, __VA_ARGS__)
+#define AZLog(...) azure::WriteToLog(AZ_LOG_INFO, __VA_ARGS__)
 
 namespace azure {
 

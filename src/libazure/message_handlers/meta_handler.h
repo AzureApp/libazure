@@ -19,7 +19,7 @@ namespace azure {
 
 class MetaHandler : public MessageHandler {
 public:
-    MetaHandler(ClientAgent *agent) : MessageHandler(agent) {}
+    MetaHandler() : MessageHandler() {}
 
     int HandleMessage(const MetaObjectRef &obj) override;
 };

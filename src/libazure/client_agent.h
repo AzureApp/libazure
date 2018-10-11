@@ -35,7 +35,7 @@ public:
 
     int Run();
 
-    RegisterError RegisterMessageHandler(ObjectType type, MessageHandlerRef &ref);
+    RegisterStatus RegisterMessageHandler(ObjectType type, MessageHandlerRef &ref);
 private:
     TCPConn conn_;
     MessageReceiver receiver_;
