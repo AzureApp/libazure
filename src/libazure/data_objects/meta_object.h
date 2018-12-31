@@ -19,6 +19,11 @@
 namespace azure {
 
 enum ObjectType { Meta, Search };
+static const char* ObjectTypeNames[] const = {"MetaObject", "SearchObject"};
+
+static const char* object_type_to_string(ObjectType type) {
+  return ObjectTypeNames[type];
+}
 
 /**
  * Base DataObject type used to define the type of the object

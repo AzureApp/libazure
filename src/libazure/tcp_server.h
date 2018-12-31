@@ -11,6 +11,7 @@
 #ifndef AZURE_TCP_SERVER_H
 #define AZURE_TCP_SERVER_H
 
+#include <functional>
 #include <string>
 
 namespace azure {

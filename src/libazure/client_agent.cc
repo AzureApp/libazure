@@ -10,6 +10,7 @@
 
 #include "client_agent.h"
 #include "data_objects/meta_object.h"
+#include "logging.h"
 #include "message_handlers/meta_handler.h"
 
 namespace azure {
@@ -31,6 +32,9 @@ int ClientAgent::Run() {
   while (true) {
     MetaObjectRef object = receiver_.NextMessage();
     if (object) {
+      AZLogD("[client %d] Received message of type %s", conn_.sock(),
+             object_type_to_string(object->type));
+
       const auto &handler = message_handlers_.find(object->type)->second;
       int result = handler->HandleMessage(object);
       if (result != 0) {

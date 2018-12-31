@@ -60,6 +60,8 @@ class TCPConn {
   template <typename T>
   void Write(T val);
 
+  int sock() const { return sock_; }
+
  private:
   int sock_;
 };
