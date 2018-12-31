@@ -14,20 +14,18 @@
 #include "meta_object.h"
 
 /**
- * ACP (Azure Communication Protocol) version, lets clients know which version of ACP
- * this host uses for compatibility reasons
+ * ACP (Azure Communication Protocol) version, lets clients know which version
+ * of ACP this host uses for compatibility reasons
  */
 #define ACP_VERSION "1.0.0";
 
 namespace azure {
 
-    struct AzureInfoObject : MetaObject {
-        AzureInfoObject() {}
+struct AzureInfoObject : MetaObject {
+  AzureInfoObject() {}
 
-        std::string acp_version;
+  std::string acp_version;
+};
+}  // namespace azure
 
-    };
-} // namespace azure
-
-
-#endif //AZURE_AZURE_INFO_OBJECT_H
+#endif  // AZURE_AZURE_INFO_OBJECT_H

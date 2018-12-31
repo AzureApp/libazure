@@ -17,14 +17,14 @@ class ClientAgent;
 class MetaObject;
 
 class MessageHandler {
-public:
-    MessageHandler() {}
+ public:
+  MessageHandler() {}
 
-    virtual int HandleMessage(const MetaObjectRef &obj) {}
+  virtual int HandleMessage(const MetaObjectRef &obj) {}
 };
 
 using MessageHandlerRef = std::unique_ptr<MessageHandler>;
 
-}
+}  // namespace azure
 
-#endif //AZURE_MESSAGE_HANDLER_H
+#endif  // AZURE_MESSAGE_HANDLER_H

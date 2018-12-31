@@ -16,18 +16,16 @@
 namespace azure {
 
 struct SearchObject : MetaObject {
-    SearchObject() {}
-    SearchObject(int address) :
-            MetaObject(ObjectType::Search),
-            addr(address),
-            data({0x70, 0x47}) {}
+  SearchObject() {}
+  SearchObject(int address)
+      : MetaObject(ObjectType::Search), addr(address), data({0x70, 0x47}) {}
 
-    int addr;
-    std::vector<uint8_t> data;
+  int addr;
+  std::vector<uint8_t> data;
 
-    MSGPACK_DEFINE(magic, type, addr, data);
+  MSGPACK_DEFINE(magic, type, addr, data);
 };
 
-}
+}  // namespace azure
 
-#endif //AZURE_SEARCHOBJECT_H
+#endif  // AZURE_SEARCHOBJECT_H

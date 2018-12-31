@@ -17,18 +17,19 @@
 namespace azure {
 
 class Daemon {
-public:
-    Daemon(int argc, char **argv, std::string ip, short port);
-    ~Daemon();
+ public:
+  Daemon(int argc, char **argv, std::string ip, short port);
+  ~Daemon();
 
-    int Run();
-private:
-    int argc_;
-    char **argv_;
+  int Run();
 
-    TCPServer server_;
+ private:
+  int argc_;
+  char **argv_;
+
+  TCPServer server_;
 };
 
-}
+}  // namespace azure
 
-#endif //AZURE_DAEMON_H
+#endif  // AZURE_DAEMON_H

@@ -18,19 +18,19 @@ namespace azure {
 using ConnectionCallback = std::function<void(int)>;
 
 class TCPServer {
-public:
-    TCPServer(std::string address, short port);
-    ~TCPServer();
+ public:
+  TCPServer(std::string address, short port);
+  ~TCPServer();
 
-    bool Setup();
-    bool AwaitConnections(const ConnectionCallback &conn);
+  bool Setup();
+  bool AwaitConnections(const ConnectionCallback &conn);
 
-private:
-    std::string address_;
-    short port_;
-    int sock_;
+ private:
+  std::string address_;
+  short port_;
+  int sock_;
 };
 
-}
+}  // namespace azure
 
-#endif //AZURE_TCP_SERVER_H
+#endif  // AZURE_TCP_SERVER_H

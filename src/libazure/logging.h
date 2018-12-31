@@ -11,10 +11,10 @@
 #ifndef AZURE_LOGGING_H
 #define AZURE_LOGGING_H
 
-#include <string.h>
-#include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "targets.h"
 
 #if AZURE_TARGET_IOS
@@ -27,7 +27,7 @@
 
 #define AZ_LOG_INFO 1
 #define AZ_LOG_WARN 2
-#define  AZ_LOG_ERROR 3
+#define AZ_LOG_ERROR 3
 
 #define AZLogE(...) azure::WriteToLog(AZ_LOG_ERROR, __VA_ARGS__)
 #define AZLogW(...) azure::WriteToLog(AZ_LOG_WARN, __VA_ARGS__)
@@ -35,15 +35,15 @@
 
 namespace azure {
 
-static const char* concat(const char *s1, const char *s2) {
-    char *result = (char*)malloc(strlen(s1)+strlen(s2)+1);
-    strcpy(result, s1);
-    strcat(result, s2);
-    return result;
+static const char *concat(const char *s1, const char *s2) {
+  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
+  strcpy(result, s1);
+  strcat(result, s2);
+  return result;
 }
 
 extern void WriteToLog(int level, const char *fmt, ...);
 
-}
+}  // namespace azure
 
-#endif //AZURE_LOGGING_H
+#endif  // AZURE_LOGGING_H

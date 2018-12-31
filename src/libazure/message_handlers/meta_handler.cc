@@ -8,14 +8,14 @@
  ******************************************************************************
  */
 
-#include <logging.h>
 #include "meta_handler.h"
+#include <logging.h>
 
 namespace azure {
 
 int MetaHandler::HandleMessage(const MetaObjectRef &obj) {
-    AZLog("Meta handler called");
-    return 0;
+  AZLog("Meta handler called");
+  return 0;
 }
 
-}
+}  // namespace azure

@@ -18,10 +18,8 @@
 
 namespace azure {
 
-    struct DeviceInfoObject : MetaObject {
+struct DeviceInfoObject : MetaObject {};
 
-    };
+}  // namespace azure
 
-} // namespace azure
-
-#endif //AZURE_DEVICE_INFO_OBJECT_H
+#endif  // AZURE_DEVICE_INFO_OBJECT_H

@@ -18,12 +18,12 @@
 namespace azure {
 
 class MetaHandler : public MessageHandler {
-public:
-    MetaHandler() : MessageHandler() {}
+ public:
+  MetaHandler() : MessageHandler() {}
 
-    int HandleMessage(const MetaObjectRef &obj) override;
+  int HandleMessage(const MetaObjectRef &obj) override;
 };
 
-}
+}  // namespace azure
 
-#endif //AZURE_META_HANDLER_H
+#endif  // AZURE_META_HANDLER_H

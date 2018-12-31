@@ -11,9 +11,9 @@
 #ifndef AZURE_CLIENT_AGENT_H
 #define AZURE_CLIENT_AGENT_H
 
-#include "tcp_conn.h"
-#include "message_receiver.h"
 #include "message_handler.h"
+#include "message_receiver.h"
+#include "tcp_conn.h"
 
 namespace azure {
 
@@ -23,25 +23,23 @@ using MessageHandlerPair = std::map<ObjectType, MessageHandlerRef>;
  * Each client agent represents one connection to a client
  */
 class ClientAgent {
-public:
-    enum class RegisterStatus {
-        Success = 0,
-        HandlerIsNull,
-        HandlerIsDefined
-    };
-    
-    static void SpawnAgent(int client_fd);
-    ClientAgent(int client_fd);
+ public:
+  enum class RegisterStatus { Success = 0, HandlerIsNull, HandlerIsDefined };
 
-    int Run();
+  static void SpawnAgent(int client_fd);
+  ClientAgent(int client_fd);
 
-    RegisterStatus RegisterMessageHandler(ObjectType type, MessageHandlerRef &ref);
-private:
-    TCPConn conn_;
-    MessageReceiver receiver_;
-    MessageHandlerPair message_handlers_;
+  int Run();
+
+  RegisterStatus RegisterMessageHandler(ObjectType type,
+                                        MessageHandlerRef &ref);
+
+ private:
+  TCPConn conn_;
+  MessageReceiver receiver_;
+  MessageHandlerPair message_handlers_;
 };
 
-}
+}  // namespace azure
 
-#endif //AZURE_CLIENT_AGENT_H
+#endif  // AZURE_CLIENT_AGENT_H

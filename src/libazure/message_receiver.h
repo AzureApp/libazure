@@ -18,19 +18,20 @@ namespace azure {
 
 using MetaObjectRef = std::unique_ptr<MetaObject>;
 
-const int base_size = 128; // read 128 bytes from buffer by default
+const int base_size = 128;  // read 128 bytes from buffer by default
 
 class MessageReceiver {
-public:
-    MessageReceiver(TCPConn *conn);
+ public:
+  MessageReceiver(TCPConn *conn);
 
-    MetaObjectRef NextMessage();
-private:
-    MetaObjectRef LoadMessage(msgpack::object_handle &handle);
-    TCPConn *conn_;
-    msgpack::unpacker unpacker_;
+  MetaObjectRef NextMessage();
+
+ private:
+  MetaObjectRef LoadMessage(msgpack::object_handle &handle);
+  TCPConn *conn_;
+  msgpack::unpacker unpacker_;
 };
 
-}
+}  // namespace azure
 
-#endif //AZURE_MESSAGE_HANDLER_H
+#endif  // AZURE_MESSAGE_HANDLER_H

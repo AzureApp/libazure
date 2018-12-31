@@ -8,28 +8,26 @@
  ******************************************************************************
  */
 
-#include <functional>
-#include "logging.h"
 #include "daemon.h"
+#include <functional>
 #include "client_agent.h"
+#include "logging.h"
 
 namespace azure {
 
 Daemon::Daemon(int argc, char **argv, std::string ip, short port)
-        : argc_(argc), argv_(argv), server_(ip, port) {
-
-}
+    : argc_(argc), argv_(argv), server_(ip, port) {}
 
 Daemon::~Daemon() {
-    // TODO: 
+  // TODO:
 }
 
 int Daemon::Run() {
-    if (!server_.Setup()) {
-        AZLogW("Could not set up TCP server");
-        return 255;
-    }
-    return server_.AwaitConnections(ClientAgent::SpawnAgent);
+  if (!server_.Setup()) {
+    AZLogW("Could not set up TCP server");
+    return 255;
+  }
+  return server_.AwaitConnections(ClientAgent::SpawnAgent);
 }
 
-}
+}  // namespace azure
