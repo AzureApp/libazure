@@ -11,6 +11,9 @@
 #ifndef AZURE_MESSAGE_HANDLER_H
 #define AZURE_MESSAGE_HANDLER_H
 
+#include <memory>
+#include "data_objects/meta_object.h"
+
 namespace azure {
 
 class ClientAgent;

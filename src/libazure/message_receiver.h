@@ -11,7 +11,7 @@
 #ifndef AZURE_MESSAGE_RECEIVER_H
 #define AZURE_MESSAGE_RECEIVER_H
 
-#include <tcp_conn.h>
+#include "tcp_conn.h"
 #include "data_objects/meta_object.h"
 
 namespace azure {

@@ -21,12 +21,6 @@ Daemon::~Daemon() {
   // TODO:
 }
 
-int Daemon::Run() {
-  if (!server_.Setup()) {
-    AZLogW("Could not set up TCP server");
-    return 255;
-  }
-  return server_.AwaitConnections(ClientAgent::SpawnAgent);
-}
+int Daemon::Run() {}
 
 }  // namespace azure
