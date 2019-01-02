@@ -19,7 +19,7 @@
 namespace azure {
 
 enum ObjectType { Meta, Search };
-static const char* ObjectTypeNames[] const = {"MetaObject", "SearchObject"};
+static const char* ObjectTypeNames[] = {"MetaObject", "SearchObject"};
 
 static const char* object_type_to_string(ObjectType type) {
   return ObjectTypeNames[type];
