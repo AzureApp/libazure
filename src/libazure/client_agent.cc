@@ -17,11 +17,6 @@ namespace azure {
 
 using RegisterStatus = ClientAgent::RegisterStatus;
 
-void ClientAgent::SpawnAgent(int client_fd) {
-  ClientAgent agent(client_fd);
-  agent.Run();
-}
-
 ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
   // setup meta handler
   message_handlers_.emplace(ObjectType::Meta, std::make_unique<MetaHandler>());

@@ -15,8 +15,7 @@
 
 namespace azure {
 
-Daemon::Daemon(int argc, char **argv, std::string ip, short port)
-    : argc_(argc), argv_(argv), server_(ip, port) {}
+Daemon::Daemon(std::string ip, short port) : server_(ip, port) {}
 
 Daemon::~Daemon() {
   // TODO:

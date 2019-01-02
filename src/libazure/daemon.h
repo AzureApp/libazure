@@ -18,7 +18,7 @@ namespace azure {
 
 class Daemon {
  public:
-  Daemon(int argc, char **argv, std::string ip, short port);
+  Daemon(std::string ip, short port);
   ~Daemon();
 
   int Run();

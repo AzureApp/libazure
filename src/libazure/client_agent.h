@@ -26,7 +26,6 @@ class ClientAgent {
  public:
   enum class RegisterStatus { Success = 0, HandlerIsNull, HandlerIsDefined };
 
-  static void SpawnAgent(int client_fd);
   ClientAgent(int client_fd);
 
   int Run();
