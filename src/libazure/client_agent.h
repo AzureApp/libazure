@@ -26,7 +26,7 @@ class ClientAgent {
  public:
   enum class RegisterStatus { Success = 0, HandlerIsNull, HandlerIsDefined };
 
-  ClientAgent(int client_fd);
+  explicit ClientAgent(int client_fd);
 
   int Run();
 

@@ -11,7 +11,6 @@
 #include "tcp_server.h"
 #include <arpa/inet.h>
 #include <unistd.h>
-#include <thread>
 #include "logging.h"
 #include "tcp_conn.h"
 
@@ -40,7 +39,7 @@ bool TCPServer::Setup() {
   setsockopt(sock_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
   signal(SIGPIPE, SIG_IGN);
 
-  int result = ::bind(sock_, (struct sockaddr *)&address, sizeof(address));
+  int result = ::bind(sock_, (struct sockaddr*)&address, sizeof(address));
   if (result != 0) {
     AZLogE("%s: bind() failed", strerror(errno));
     return false;
@@ -54,7 +53,7 @@ bool TCPServer::Setup() {
   return true;
 }
 
-bool TCPServer::AwaitConnections(const ConnectionCallback &conn) {
+bool TCPServer::AwaitConnections() {
   while (true) {
     AZLog("Awaiting client");
     int client_sock = accept(sock_, 0, 0);
@@ -62,13 +61,13 @@ bool TCPServer::AwaitConnections(const ConnectionCallback &conn) {
       AZLogE("Client accept() failed %s [sock: %d]", strerror(errno), sock_);
       return false;  // error
     }
-
-    std::thread([client_sock, conn]() {
-      AZLog("Client connected. Spawned client thread");
-      return conn(client_sock);
-    })
-        .detach();
+    // call delegate listeners with new socket descriptor
+    delegate_(client_sock);
   }
+}
+
+void TCPServer::AddCallback(const ConnectionCallback& callback) {
+  delegate_.AddListener(callback);
 }
 
 }  // namespace azure

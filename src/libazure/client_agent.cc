@@ -19,7 +19,7 @@ using RegisterStatus = ClientAgent::RegisterStatus;
 
 ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
   // setup meta handler
-  message_handlers_.emplace(ObjectType::Meta, std::make_unique<MetaHandler>());
+  message_handlers_.emplace(ObjectType::Meta, std::make_unique<MetaHandler>(this));
 }
 
 int ClientAgent::Run() {

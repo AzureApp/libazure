@@ -13,6 +13,7 @@
 
 #include <functional>
 #include <string>
+#include "delegate.h"
 
 namespace azure {
 
@@ -24,12 +25,14 @@ class TCPServer {
   ~TCPServer();
 
   bool Setup();
-  bool AwaitConnections(const ConnectionCallback &conn);
+  bool AwaitConnections();
+  void AddCallback(const ConnectionCallback& callback);
 
  private:
   std::string address_;
   short port_;
   int sock_;
+  Delegate<int> delegate_;
 };
 
 }  // namespace azure
