@@ -9,12 +9,14 @@
  */
 
 #include "meta_handler.h"
-#include <logging.h>
+#include "logging.h"
 
 namespace azure {
 
 int MetaHandler::HandleMessage(const MetaObjectRef &obj) {
-  AZLog("Meta handler called");
+  // ideally this should never be called as meta objects should not be
+  // constructed directly
+  AZLogW("Meta handler called");
   return 0;
 }
 
