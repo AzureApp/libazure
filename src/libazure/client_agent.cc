@@ -19,7 +19,8 @@ using RegisterStatus = ClientAgent::RegisterStatus;
 
 ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
   // setup meta handler
-  message_handlers_.emplace(ObjectType::Meta, std::make_unique<MetaHandler>(this));
+  message_handlers_.emplace(ObjectType::Meta,
+                            std::make_unique<MetaHandler>(this));
 }
 
 int ClientAgent::Run() {
@@ -31,7 +32,7 @@ int ClientAgent::Run() {
              object_type_to_string(object->type));
 
       const auto &handler = message_handlers_.find(object->type)->second;
-      int result = handler->HandleMessage(object);
+      int result = handler->HandleMessage(*object.get());
       if (result != 0) {
         return result;
       }
@@ -42,7 +43,7 @@ int ClientAgent::Run() {
 }
 
 RegisterStatus ClientAgent::RegisterMessageHandler(ObjectType type,
-                                                   MessageHandlerRef &ref) {
+                                                   MessageHandlerRef ref) {
   // TODO: change int return codes to proper errors
   if (ref) {
     if (message_handlers_.find(type) == message_handlers_.end()) {

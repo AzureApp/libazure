@@ -23,7 +23,7 @@ class MessageHandler {
  public:
   MessageHandler(const ClientAgent *agent) : agent_(agent) {}
 
-  virtual int HandleMessage(const MetaObjectRef &obj) {}
+  virtual int HandleMessage(const MetaObject &obj) {}
 
  private:
   const ClientAgent *agent_;

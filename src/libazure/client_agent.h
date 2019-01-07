@@ -30,8 +30,7 @@ class ClientAgent {
 
   int Run();
 
-  RegisterStatus RegisterMessageHandler(ObjectType type,
-                                        MessageHandlerRef &ref);
+  RegisterStatus RegisterMessageHandler(ObjectType type, MessageHandlerRef ref);
 
  private:
   TCPConn conn_;

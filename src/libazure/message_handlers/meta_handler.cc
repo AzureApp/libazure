@@ -13,7 +13,7 @@
 
 namespace azure {
 
-int MetaHandler::HandleMessage(const MetaObjectRef &obj) {
+int MetaHandler::HandleMessage(const MetaObject &obj) {
   // ideally this should never be called as meta objects should not be
   // constructed directly
   AZLogW("Meta handler called");

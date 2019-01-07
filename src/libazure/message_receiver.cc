@@ -40,6 +40,10 @@ MetaObjectRef MessageReceiver::LoadMessage(msgpack::object_handle &handle) {
             new MetaObject(handle.get().as<MetaObject>()));
         break;
       }
+      case ObjectType::Handshake: {
+        return std::unique_ptr<HandshakeObject>(
+            new HandshakeObject(handle.get().as<HandshakeObject>()));
+      }
     }
   } catch (msgpack::type_error error) {
     AZLogW("Tried to convert non-msgpack encoded buffer");
