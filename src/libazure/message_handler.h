@@ -13,6 +13,7 @@
 
 #include <memory>
 #include "data_objects/meta_object.h"
+#include "message_handle.h"
 
 namespace azure {
 
@@ -23,7 +24,7 @@ class MessageHandler {
  public:
   MessageHandler(const ClientAgent *agent) : agent_(agent) {}
 
-  virtual int HandleMessage(const MetaObject &obj) {}
+  virtual int HandleMessage(const MessageHandle &object_handle) {}
 
  private:
   const ClientAgent *agent_;

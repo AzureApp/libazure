@@ -11,8 +11,10 @@
 #ifndef AZURE_MESSAGE_RECEIVER_H
 #define AZURE_MESSAGE_RECEIVER_H
 
-#include "tcp_conn.h"
 #include "data_objects/meta_object.h"
+#include "logging.h"
+#include "message_handle.h"
+#include "tcp_conn.h"
 
 namespace azure {
 
@@ -23,11 +25,9 @@ const int base_size = 128;  // read 128 bytes from buffer by default
 class MessageReceiver {
  public:
   MessageReceiver(TCPConn *conn);
-
-  MetaObjectRef NextMessage();
+  MessageHandle NextMessage();
 
  private:
-  MetaObjectRef LoadMessage(msgpack::object_handle &handle);
   TCPConn *conn_;
   msgpack::unpacker unpacker_;
 };
