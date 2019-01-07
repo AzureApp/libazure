@@ -8,8 +8,8 @@
  ******************************************************************************
  */
 
-#ifndef AZ_DELEGATE_H
-#define AZ_DELEGATE_H
+#ifndef AZURE_DELEGATE_H
+#define AZURE_DELEGATE_H
 
 #include <functional>
 #include <mutex>
