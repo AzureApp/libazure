@@ -23,7 +23,7 @@ struct SearchObject : MetaObject {
   int addr;
   std::vector<uint8_t> data;
 
-  MSGPACK_DEFINE(magic, type, addr, data);
+  MSGPACK_DEFINE(MSGPACK_BASE(MetaObject), addr, data);
 };
 
 }  // namespace azure

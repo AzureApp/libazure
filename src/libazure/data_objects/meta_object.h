@@ -18,13 +18,15 @@
 
 namespace azure {
 
-enum ObjectType { Meta, Search };
+enum class ObjectType { Meta, Handshake, Search };
 
 static const char* object_type_to_string(ObjectType type) {
   switch (type) {
-    case Meta:
+    case ObjectType::Meta:
       return "MetaObject";
-    case Search:
+    case ObjectType::Handshake:
+      return "HandshakeObject";
+    case ObjectType::Search:
       return "SearchObject";
     default:
       return "UNKNOWN_OBJECT_TYPE";
@@ -50,5 +52,6 @@ using MetaObjectRef = std::unique_ptr<MetaObject>;
 MSGPACK_ADD_ENUM(azure::ObjectType);
 
 #include "search_object.h"
+#include "handshake_object.h"
 
 #endif  // AZURE_DATA_OBJECT_H

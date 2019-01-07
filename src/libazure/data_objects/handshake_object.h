@@ -1,31 +1,33 @@
 /**
  ******************************************************************************
  * Azure : Open Source Multi-Target Memory Editor                             *
- * File  : azure_info_object.h                                                *
+ * File  : handshake_object.h                                                 *
  ******************************************************************************
  * Copyright 2018 Satori. All rights reserved.                                *
  * Released under the BSD license - see LICENSE in the root for more details. *
  ******************************************************************************
  */
 
-#ifndef AZURE_AZURE_INFO_OBJECT_H
-#define AZURE_AZURE_INFO_OBJECT_H
+#ifndef AZURE_HANDSHAKE_OBJECT_H
+#define AZURE_HANDSHAKE_OBJECT_H
 
+#include <string>
 #include "meta_object.h"
-
-/**
- * ACP (Azure Communication Protocol) version, lets clients know which version
- * of ACP this host uses for compatibility reasons
- */
-#define ACP_VERSION "1.0.0";
 
 namespace azure {
 
-struct AzureInfoObject : MetaObject {
-  AzureInfoObject() {}
+enum class OperatingSystem { Windows, iOS, macOS, Android, Linux };
 
+struct HandshakeObject : public MetaObject {
+  HandshakeObject() : MetaObject(ObjectType::Handshake) {}
   std::string acp_version;
+  OperatingSystem system;
+
+  MSGPACK_DEFINE(MSGPACK_BASE(MetaObject), acp_version, system);
 };
+
 }  // namespace azure
 
-#endif  // AZURE_AZURE_INFO_OBJECT_H
+MSGPACK_ADD_ENUM(azure::OperatingSystem);
+
+#endif
