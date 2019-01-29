@@ -28,7 +28,7 @@ int ClientAgent::Run() {
   // TODO: change int return codes to proper errors
   while (true) {
     MessageHandle handle = receiver_.NextMessage();
-    if (handle) {
+    if (handle.is_valid()) {
       AZLogD("[client %d] Received message of type %s", conn_.sock(),
              object_type_to_string(handle.type()));
 
