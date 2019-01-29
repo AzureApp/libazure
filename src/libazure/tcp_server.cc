@@ -39,7 +39,7 @@ bool TCPServer::Setup() {
   setsockopt(sock_, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
   signal(SIGPIPE, SIG_IGN);
 
-  int result = ::bind(sock_, (struct sockaddr*)&address, sizeof(address));
+  int result = ::bind(sock_, (struct sockaddr *)&address, sizeof(address));
   if (result != 0) {
     AZLogE("%s: bind() failed", strerror(errno));
     return false;
@@ -61,12 +61,24 @@ bool TCPServer::AwaitConnections() {
       AZLogE("Client accept() failed %s [sock: %d]", strerror(errno), sock_);
       return false;  // error
     }
-    // call delegate listeners with new socket descriptor
+
+    struct sockaddr_in addr;
+    socklen_t addr_size = sizeof(struct sockaddr_in);
+    int res = getpeername(client_sock, (struct sockaddr *)&addr, &addr_size);
+
+    if (res == 0) {
+      char *client_ip = new char[20];
+      strncpy(client_ip, inet_ntoa(addr.sin_addr), 20);
+
+      AZLog("Client connected [%s:%d]", client_ip, addr.sin_port);
+    } else {
+      AZLogW("Falied to get peer info for new connection");
+    }
     delegate_(client_sock);
   }
 }
 
-void TCPServer::AddCallback(const ConnectionCallback& callback) {
+void TCPServer::AddCallback(const ConnectionCallback &callback) {
   delegate_.AddListener(callback);
 }
 
