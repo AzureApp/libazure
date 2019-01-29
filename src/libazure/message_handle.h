@@ -32,10 +32,10 @@ class MessageHandle {
   bool is_valid() const {
     try {
       MetaObject temp = object_.as<MetaObject>();
+      return temp.magic == AZ_MAGIC;
     } catch (msgpack::type_error e) {
       return false;
     }
-    return true;
   }
 
   template <typename T>
