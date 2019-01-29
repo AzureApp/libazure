@@ -22,16 +22,17 @@ namespace azure {
  */
 class MessageHandle {
  public:
-  MessageHandle(msgpack::object object) : object_(object) {}
+  MessageHandle(msgpack::object_handle handle)
+      : object_handle_(std::move(handle)) {}
 
   ObjectType type() const {
-    MetaObject temp = object_.as<MetaObject>();
+    MetaObject temp = object_handle_.get().as<MetaObject>();
     return temp.type;
   }
 
   bool is_valid() const {
     try {
-      MetaObject temp = object_.as<MetaObject>();
+      MetaObject temp = object_handle_.get().as<MetaObject>();
       return temp.magic == AZ_MAGIC;
     } catch (msgpack::type_error e) {
       return false;
@@ -43,18 +44,19 @@ class MessageHandle {
     static_assert(std::is_base_of<MetaObject, T>::value,
                   "T is not an ACP object");
     try {
-      T obj = object_.as<T>();
+      T obj = object_handle_.get().as<T>();
       return obj;
     } catch (msgpack::type_error e) {
-      AZLogE("Received invalid ACP object");
-      exit(1);  // TODO: more graceful here (or try and recover)
+      AZLogE("Failed to decode ACP object");
+      raise(SIGTRAP);  // exit(1);  // TODO: more graceful here (or try and
+                       // recover)
     }
   }
 
   operator bool() const { return is_valid(); }
 
  private:
-  msgpack::object object_;
+  msgpack::object_handle object_handle_;
 };
 
 }  // namespace azure

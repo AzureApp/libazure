@@ -17,15 +17,19 @@ MessageReceiver::MessageReceiver(TCPConn *conn) : conn_(conn) {}
 
 MessageHandle MessageReceiver::NextMessage() {
   msgpack::object_handle result;
-  while (!unpacker_.next(result)) {
-    unpacker_.reserve_buffer(base_size);
-    size_t actual_read_size =
-        (size_t)conn_->ReadBuf(unpacker_.buffer(), base_size);
+  unpacker_.reserve_buffer(base_size);
 
+  size_t actual_read_size;
+  while ((actual_read_size = conn_->ReadBuf(unpacker_.buffer(), base_size)) >
+         0) {
     // tell msgpack::unpacker actual consumed size.
     unpacker_.buffer_consumed(actual_read_size);
+
+    if (unpacker_.next(result)) {
+      break;
+    }
   }
-  return MessageHandle(result.get());
+  return MessageHandle(std::move(result));
 }
 
 }  // namespace azure
