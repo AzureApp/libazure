@@ -23,7 +23,7 @@ struct HandshakeObject : public MetaObject {
   std::string acp_version;
   OperatingSystem system;
 
-  MSGPACK_DEFINE(MSGPACK_BASE(MetaObject), acp_version, system);
+  MSGPACK_DEFINE(magic, type, acp_version, system);
 };
 
 }  // namespace azure

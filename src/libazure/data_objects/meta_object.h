@@ -37,9 +37,9 @@ static const char* object_type_to_string(const ObjectType type) {
  * Base DataObject type used to define the type of the object
  */
 struct MetaObject {
-  MetaObject() : type(ObjectType::Meta) {}
+  explicit MetaObject() : type(ObjectType::Meta) {}
   MetaObject(ObjectType type) : type(type) {}
-  uint32_t magic = AZ_MAGIC;
+  uint32_t magic;
   ObjectType type;
 
   MSGPACK_DEFINE(magic, type);
