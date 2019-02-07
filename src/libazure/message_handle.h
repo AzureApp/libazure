@@ -48,8 +48,7 @@ class MessageHandle {
       return obj;
     } catch (msgpack::type_error e) {
       AZLogE("Failed to decode ACP object");
-      raise(SIGTRAP);  // exit(1);  // TODO: more graceful here (or try and
-                       // recover)
+      throw;  // rethrow exception for caller to handle
     }
   }
 
