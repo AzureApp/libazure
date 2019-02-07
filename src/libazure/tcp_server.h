@@ -25,7 +25,7 @@ class TCPServer {
   ~TCPServer();
 
   bool Setup();
-  bool AwaitConnections();
+  bool AwaitConnections(int timeout_ms = -1);
   void AddCallback(const ConnectionCallback& callback);
 
  private:

@@ -53,9 +53,28 @@ bool TCPServer::Setup() {
   return true;
 }
 
-bool TCPServer::AwaitConnections() {
-  while (true) {
+bool TCPServer::AwaitConnections(int timeout_ms) {
+  fd_set read_set;
+  FD_ZERO(&read_set);
+  FD_SET(sock_, &read_set);
+
+  struct timeval *timeout;
+  if (timeout_ms > 0) {
+    // AZLogD("Awaiting client for %dms", timeout_ms);
+
+    struct timeval tv;
+    tv.tv_sec = timeout_ms / 1000;
+    tv.tv_usec = (timeout_ms % 1000) * 1000;
+
+    timeout = &tv;
+  } else {
     AZLog("Awaiting client");
+  }
+
+  int res = select(sock_ + 1, &read_set, NULL, NULL, timeout);
+
+  // socket has a connection
+  if (res > 0) {
     int client_sock = accept(sock_, 0, 0);
     if (client_sock < 0) {
       AZLogE("Client accept() failed %s [sock: %d]", strerror(errno), sock_);
