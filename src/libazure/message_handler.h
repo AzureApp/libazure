@@ -22,6 +22,8 @@ class MetaObject;
 
 class MessageHandler {
  public:
+  enum MessageResult { Success = 0, InvalidObject, LogicFail };
+
   MessageHandler(const ClientAgent *agent) : agent_(agent) {}
 
   virtual int HandleMessage(const MessageHandle &object_handle) {}
