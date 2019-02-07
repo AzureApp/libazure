@@ -16,7 +16,7 @@
 
 namespace azure {
 
-TCPServer::TCPServer(std::string address, short port)
+TCPServer::TCPServer(const std::string &address, short port)
     : address_(address), port_(port) {}
 
 TCPServer::~TCPServer() {
@@ -58,21 +58,18 @@ bool TCPServer::AwaitConnections(int timeout_ms) {
   FD_ZERO(&read_set);
   FD_SET(sock_, &read_set);
 
-  struct timeval *timeout;
+  struct timeval *timeout = nullptr;
   if (timeout_ms > 0) {
-    // AZLogD("Awaiting client for %dms", timeout_ms);
-
-    struct timeval tv;
-    tv.tv_sec = timeout_ms / 1000;
-    tv.tv_usec = (timeout_ms % 1000) * 1000;
-
-    timeout = &tv;
+    timeout = new struct timeval;
+    timeout->tv_sec = timeout_ms / 1000;
+    timeout->tv_usec = (timeout_ms % 1000) * 1000;
   } else {
     AZLog("Awaiting client");
   }
 
   int res = select(sock_ + 1, &read_set, NULL, NULL, timeout);
 
+  delete timeout;
   // socket has a connection
   if (res > 0) {
     int client_sock = accept(sock_, 0, 0);
@@ -90,11 +87,13 @@ bool TCPServer::AwaitConnections(int timeout_ms) {
       strncpy(client_ip, inet_ntoa(addr.sin_addr), 20);
 
       AZLog("Client connected [%s:%d]", client_ip, addr.sin_port);
+
     } else {
       AZLogW("Falied to get peer info for new connection");
     }
     delegate_(client_sock);
   }
+  return true;
 }
 
 void TCPServer::AddCallback(const ConnectionCallback &callback) {

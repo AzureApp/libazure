@@ -21,12 +21,16 @@ using ConnectionCallback = std::function<void(int)>;
 
 class TCPServer {
  public:
-  TCPServer(std::string address, short port);
+  TCPServer(const std::string& address, short port);
   ~TCPServer();
 
   bool Setup();
   bool AwaitConnections(int timeout_ms = -1);
   void AddCallback(const ConnectionCallback& callback);
+
+  const std::string& address() const { return address_; }
+  short port() const { return port_; }
+  int sock() const { return sock_; }
 
  private:
   std::string address_;

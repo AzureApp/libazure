@@ -26,7 +26,9 @@ class MessageHandler {
 
   MessageHandler(const ClientAgent *agent) : agent_(agent) {}
 
-  virtual int HandleMessage(const MessageHandle &object_handle) {}
+  virtual int HandleMessage(const MessageHandle &object_handle) {
+    throw std::runtime_error("virtual base HandleMessage() called directly");
+  }
 
  private:
   const ClientAgent *agent_;
