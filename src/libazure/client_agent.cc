@@ -18,10 +18,22 @@ namespace azure {
 
 using RegisterStatus = ClientAgent::RegisterStatus;
 
-ClientAgent::ClientAgent(int client_fd) : conn_(client_fd), receiver_(&conn_) {
+ClientAgent::ClientAgent(int client_fd)
+    : conn_(std::make_shared<TCPConn>(client_fd)), receiver_(conn_) {
+  Setup();
+}
+
+ClientAgent::ClientAgent(std::shared_ptr<TCPConn>& conn)
+    : conn_(conn), receiver_(conn_) {
+  Setup();
+}
+
+bool ClientAgent::Setup() {
   // setup meta handler
   message_handlers_.emplace(ObjectType::Meta,
                             std::make_unique<MetaHandler>(this));
+
+  return true;
 }
 
 int ClientAgent::Run() {
@@ -29,10 +41,10 @@ int ClientAgent::Run() {
   while (true) {
     MessageHandle handle = receiver_.NextMessage();
     if (handle.is_valid()) {
-      AZLogD("[client %d] Received message of type %s", conn_.sock(),
+      AZLogD("[client %d] Received message of type %s", conn_->sock(),
              object_type_to_string(handle.type()));
 
-      const auto &handler = message_handlers_.find(handle.type())->second;
+      const auto& handler = message_handlers_.find(handle.type())->second;
       int result = handler->HandleMessage(handle);
       if (result != 0) {
         return result;

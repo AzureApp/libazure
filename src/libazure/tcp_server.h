@@ -12,8 +12,10 @@
 #define AZURE_TCP_SERVER_H
 
 #include <functional>
+#include <memory>
 #include <string>
 #include "delegate.h"
+#include "tcp_conn.h"
 
 namespace azure {
 
@@ -25,8 +27,7 @@ class TCPServer {
   ~TCPServer();
 
   bool Setup();
-  bool AwaitConnections(int timeout_ms = -1);
-  void AddCallback(const ConnectionCallback& callback);
+  std::shared_ptr<TCPConn> AwaitConnection(int timeout_ms = -1);
 
   const std::string& address() const { return address_; }
   short port() const { return port_; }
@@ -36,7 +37,6 @@ class TCPServer {
   std::string address_;
   short port_;
   int sock_;
-  Delegate<int> delegate_;
 };
 
 }  // namespace azure

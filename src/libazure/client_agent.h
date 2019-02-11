@@ -11,6 +11,7 @@
 #ifndef AZURE_CLIENT_AGENT_H
 #define AZURE_CLIENT_AGENT_H
 
+#include <memory>
 #include "message_handler.h"
 #include "message_receiver.h"
 #include "tcp_conn.h"
@@ -27,13 +28,15 @@ class ClientAgent {
   enum class RegisterStatus { Success = 0, HandlerIsNull, HandlerIsDefined };
 
   explicit ClientAgent(int client_fd);
+  explicit ClientAgent(std::shared_ptr<TCPConn>& conn);
 
+  bool Setup();
   int Run();
 
   RegisterStatus RegisterMessageHandler(ObjectType type, MessageHandlerRef ref);
 
  private:
-  TCPConn conn_;
+  std::shared_ptr<TCPConn> conn_;
   MessageReceiver receiver_;
   MessageHandlerPair message_handlers_;
 };

@@ -18,7 +18,10 @@ namespace azure {
 
 TCPConn::TCPConn(int sock) : sock_(sock) {}
 
-TCPConn::~TCPConn() { close(sock_); }
+TCPConn::~TCPConn() {
+  AZLog("Closing connection %d", sock_);
+  close(sock_);
+}
 
 bool TCPConn::IsConnected() const {
   fd_set rfd;

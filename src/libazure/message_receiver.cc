@@ -13,7 +13,7 @@
 
 namespace azure {
 
-MessageReceiver::MessageReceiver(TCPConn *conn) : conn_(conn) {}
+MessageReceiver::MessageReceiver(std::shared_ptr<TCPConn> conn) : conn_(conn) {}
 
 MessageHandle MessageReceiver::NextMessage() {
   msgpack::object_handle result;

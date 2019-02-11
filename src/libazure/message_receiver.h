@@ -24,11 +24,11 @@ const int base_size = 128;  // read 128 bytes from buffer by default
 
 class MessageReceiver {
  public:
-  MessageReceiver(TCPConn *conn);
+  MessageReceiver(std::shared_ptr<TCPConn> conn);
   MessageHandle NextMessage();
 
  private:
-  TCPConn *conn_;
+  std::shared_ptr<TCPConn> conn_;
   msgpack::unpacker unpacker_;
 };
 

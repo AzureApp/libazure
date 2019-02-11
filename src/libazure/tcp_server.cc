@@ -53,7 +53,7 @@ bool TCPServer::Setup() {
   return true;
 }
 
-bool TCPServer::AwaitConnections(int timeout_ms) {
+std::shared_ptr<TCPConn> TCPServer::AwaitConnection(int timeout_ms) {
   fd_set read_set;
   FD_ZERO(&read_set);
   FD_SET(sock_, &read_set);
@@ -75,7 +75,7 @@ bool TCPServer::AwaitConnections(int timeout_ms) {
     int client_sock = accept(sock_, 0, 0);
     if (client_sock < 0) {
       AZLogE("Client accept() failed %s [sock: %d]", strerror(errno), sock_);
-      return false;  // error
+      throw std::runtime_error("accept() failed");
     }
 
     struct sockaddr_in addr;
@@ -91,13 +91,9 @@ bool TCPServer::AwaitConnections(int timeout_ms) {
     } else {
       AZLogW("Falied to get peer info for new connection");
     }
-    delegate_(client_sock);
+    return std::make_shared<TCPConn>(client_sock);
   }
-  return true;
-}
-
-void TCPServer::AddCallback(const ConnectionCallback &callback) {
-  delegate_.AddListener(callback);
+  return nullptr;
 }
 
 }  // namespace azure
