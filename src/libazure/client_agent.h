@@ -12,6 +12,8 @@
 #define AZURE_CLIENT_AGENT_H
 
 #include <memory>
+#include <msgpack.hpp>
+#include <sstream>
 #include "message_handler.h"
 #include "message_receiver.h"
 #include "tcp_conn.h"
@@ -35,7 +37,31 @@ class ClientAgent {
 
   RegisterStatus RegisterMessageHandler(ObjectType type, MessageHandlerRef ref);
 
+  template <typename T>
+  bool SendObject(const T& object) const {
+    static_assert(std::is_base_of<MetaObject, T>::value,
+                  "T is not a data object");
+
+    msgpack::sbuffer buf;
+
+    msgpack::pack(buf, object);
+
+    size_t size = buf.size();
+
+    std::stringstream ss;
+    azure::hex_dump(buf.data(), size, ss);
+
+    AZLogD("Sent data to client:\n %s", ss.str().c_str());
+
+    return SendData(buf.data(), size);
+  }
+
+  const std::shared_ptr<TCPConn>& conn() const { return conn_; }
+  const MessageReceiver& message_receiver() const { return receiver_; }
+
  private:
+  bool SendData(void* data, size_t size) const;
+
   std::shared_ptr<TCPConn> conn_;
   MessageReceiver receiver_;
   MessageHandlerPair message_handlers_;

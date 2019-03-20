@@ -22,13 +22,15 @@ class MetaObject;
 
 class MessageHandler {
  public:
-  enum MessageResult { Success = 0, InvalidObject, LogicFail };
+  enum MessageResult { Success = 0, InvalidObject, LogicFail, SendFailure };
 
   MessageHandler(const ClientAgent *agent) : agent_(agent) {}
 
   virtual int HandleMessage(const MessageHandle &object_handle) {
     throw std::runtime_error("virtual base HandleMessage() called directly");
   }
+
+  const ClientAgent *client_agent() const { return agent_; }
 
  private:
   const ClientAgent *agent_;

@@ -10,7 +10,6 @@
 
 #include "client_agent.h"
 #include "data_objects/meta_object.h"
-#include "logging.h"
 #include "message_handle.h"
 #include "message_handlers/meta_handler.h"
 
@@ -67,6 +66,12 @@ RegisterStatus ClientAgent::RegisterMessageHandler(ObjectType type,
     return RegisterStatus::HandlerIsDefined;
   }
   return RegisterStatus::HandlerIsNull;
+}
+
+bool ClientAgent::SendData(void* data, size_t size) const {
+  size_t sent_size = conn_->WriteBuf(data, size);
+
+  return size == sent_size;
 }
 
 }  // namespace azure
