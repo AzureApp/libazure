@@ -38,7 +38,7 @@ static const char* object_type_to_string(const ObjectType type) {
  */
 struct MetaObject {
   explicit MetaObject() : type(ObjectType::Meta) {}
-  MetaObject(ObjectType type) : type(type) {}
+  MetaObject(ObjectType type) : type(type), magic(AZ_MAGIC) {}
   uint32_t magic;
   ObjectType type;
 
