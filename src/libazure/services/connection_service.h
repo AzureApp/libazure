@@ -14,12 +14,13 @@ class ConnectionServiceImpl final : public proto::ConnectionService::Service {
   // if client is on an incompatible version of azure, this rpc will return an
   // error instead
   Status Connect(ServerContext* context, const proto::Handshake* request,
-                 proto::Handshake* response);
+                 proto::Handshake* response) override;
   // *
   // Disconnect from connected server.
   // This rpc should not return if a kill/restart operation is also provided
-  Status Disconnect(ServerContext* context, proto::DisconnectRequest* request,
-                    proto::DisconnectResponse* response);
+  Status Disconnect(ServerContext* context,
+                    const proto::DisconnectRequest* request,
+                    proto::DisconnectResponse* response) override;
 };
 
 }  // namespace azure
