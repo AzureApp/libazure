@@ -8,9 +8,9 @@ Status ConnectionServiceImpl::Connect(ServerContext* context,
   return Status(grpc::StatusCode::DO_NOT_USE, "Unimplemented");
 }
 
-Status ConnectionServiceImpl::Disconnect(ServerContext* context,
-                                         proto::DisconnectRequest* request,
-                                         proto::DisconnectResponse* response) {
+Status ConnectionServiceImpl::Disconnect(
+    ServerContext* context, const proto::DisconnectRequest* request,
+    proto::DisconnectResponse* response) {
   return Status(grpc::StatusCode::DO_NOT_USE, "Unimplemented");
 }
 
