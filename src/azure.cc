@@ -8,7 +8,9 @@ using grpc::ServerContext;
 using grpc::Status;
 
 int main(int argc, char** argv) {
-  std::string server_address("0.0.0.0:50051");
+  std::printf("This is a development executable. Please do not use\n");
+
+  std::string server_address("0.0.0.0:1248");
   azure::ConnectionServiceImpl connection_service;
 
   ServerBuilder builder;
