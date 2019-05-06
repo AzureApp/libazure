@@ -37,14 +37,14 @@ endif()
 # Use lite runtime
 set(gRPC_USE_PROTO_LITE ON CACHE BOOL "Use lite protobuf")
 
-set(GRPC_SRC_DIR "${CMAKE_SOURCE_DIR}/third_party/grpc" CACHE BOOL "Directory of grpc source code")
+set(GRPC_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../third_party/grpc" CACHE BOOL "Directory of grpc source code")
 
-set(GRPC_BUILD_DIR ${CMAKE_SOURCE_DIR}/build/grpc)
+set(GRPC_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/grpc)
 file(MAKE_DIRECTORY ${GRPC_BUILD_DIR})
 
 add_subdirectory(${GRPC_SRC_DIR} ${GRPC_BUILD_DIR})
 
-set(PROTO_SRC_DIR ${CMAKE_SOURCE_DIR}/third_party/proto/src)
+set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/proto/src)
 
 # output directory for generated proto source files
 set(GRPC_PROTO_GENS_DIR ${CMAKE_BINARY_DIR}/gens)
@@ -111,5 +111,5 @@ target_link_libraries(azure_proto_lib
   libprotobuf-lite)
 
 add_library(libazure STATIC ${libazure_HDR_FILES} ${libazure_SRC_FILES})
-
+target_include_directories(libazure PUBLIC "." ${GRPC_PROTO_GENS_DIR})
 target_link_libraries(libazure azure_proto_lib)
