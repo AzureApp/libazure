@@ -113,7 +113,3 @@ target_link_libraries(azure_proto_lib
 add_library(libazure STATIC ${libazure_HDR_FILES} ${libazure_SRC_FILES})
 
 target_link_libraries(libazure azure_proto_lib)
-
-add_executable(azured ${azure_daemon_SRC_FILES})
-target_include_directories(azured PRIVATE ".")
-target_link_libraries(azured libazure)
