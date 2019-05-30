@@ -12,9 +12,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 file(GLOB_RECURSE libazure_HDR_FILES "libazure/*.h")
 file(GLOB_RECURSE libazure_SRC_FILES "libazure/*.cc")
 
-file(GLOB_RECURSE azure_daemon_HDR_FILES "daemon/*.h")
-file(GLOB_RECURSE azure_daemon_SRC_FILES "daemon/*.cc")
-
 if(WIN32)
 set(PROTOC_EXECUTABLE "C:\\Protobuf\\protoc.exe" CACHE STRING "Path to protoc executable")
 set(GRPC_CPP_PLUGIN "C:\\Protobuf\\grpc_cpp_plugin.exe" CACHE STRING "Path to grpc_cpp_plugin executable")
@@ -114,6 +111,3 @@ target_link_libraries(azure_proto_lib
 add_library(libazure STATIC ${libazure_HDR_FILES} ${libazure_SRC_FILES})
 target_include_directories(libazure PUBLIC "." ${GRPC_PROTO_GENS_DIR})
 target_link_libraries(libazure azure_proto_lib)
-
-add_executable(azured ${azure_daemon_HDR_FILES} ${azure_daemon_SRC_FILES})
-target_link_libraries(azured libazure)
