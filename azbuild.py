@@ -9,10 +9,12 @@ import configparser
 import os
 import subprocess
 import sys
+import json
 
 __author__ = "Satori (Razzile) <https://github.com/Razzile>"
 
 config = configparser.ConfigParser()
+
 
 def discover_commands(subparsers):
     """Looks for all commands and returns a dictionary of them.
@@ -24,8 +26,8 @@ def discover_commands(subparsers):
     """
     commands = {
         'setup': SetupCommand(subparsers),
-        }
-    #if sys.platform == 'win32':
+    }
+    # if sys.platform == 'win32':
     #    commands['devenv'] = DevenvCommand(subparsers)
     return commands
 
@@ -38,7 +40,7 @@ def main():
         print(
             "No config file found. please make sure there is a valid config.ini at %s\nError: %s"
             % (os.getcwd(), str(e)))
-        return 1
+        sys.exit(1)
 
     # Setup main argument parser and common arguments.
     parser = argparse.ArgumentParser(prog='azbuild.py')
@@ -73,6 +75,7 @@ def main():
         raise
     sys.exit(return_code)
 
+
 def shell_call(command, throw_on_error=True, stdout_path=None):
     """Executes a shell command.
     Args:
@@ -101,11 +104,11 @@ def shell_call(command, throw_on_error=True, stdout_path=None):
 
 def git_submodule_update():
     shell_call([
-            'git',
-            'submodule',
-            'update',
-            '--init',
-            '--recursive',
+        'git',
+        'submodule',
+        'update',
+        '--init',
+        '--recursive',
     ])
 
 
@@ -163,6 +166,7 @@ class SetupCommand(Command):
         print('')
 
         return 0
+
 
 if __name__ == '__main__':
     main()
